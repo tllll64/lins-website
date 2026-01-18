@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@theme {
+    --color-ds-cararra: #F6F6F2;
+    --color-ds-cod: #1A1A1A;
+    --color-ds-dusty: #999999;
+    --color-ds-black-40: #00000066;
+
+    --font-ds-display: Aboreto, cursive;
+    --font-ds-sans: Inter, sans-serif;
+    --font-ds-mono: Montserrat, monospace;
+}
+
+@layer base {
+    body {
+        background-color: var(--color-ds-cararra);
+        color: var(--color-ds-cod);
+        font-family: var(--font-ds-sans);
+    }
+}
