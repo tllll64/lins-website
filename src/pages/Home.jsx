@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Section } from '../components/Section';
 import { ProjectCard } from '../components/ProjectCard';
 import { GridCard } from '../components/GridCard';
@@ -11,6 +11,30 @@ import { Twitter, Github, Mail } from 'lucide-react';
 
 export const Home = () => {
     const isMobile = useMediaQuery('(max-width: 768px)');
+    const footerRef = useRef(null);
+    const [navTheme, setNavTheme] = useState('light');
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (footerRef.current) {
+                const footerRect = footerRef.current.getBoundingClientRect();
+                // Navbar height approx 72px (top spacing + height). 
+                // We want to switch when footer top reaches the navbar area.
+                // Let's say when footer top is <= 72.
+                if (footerRect.top <= 72) {
+                    setNavTheme('dark');
+                } else {
+                    setNavTheme('light');
+                }
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        // Initial check
+        handleScroll();
+        
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const pageStyle = {
         minHeight: '100vh',
@@ -135,7 +159,7 @@ export const Home = () => {
 
     return (
         <div style={pageStyle}>
-            <Navbar />
+            <Navbar theme={navTheme} />
 
             <header style={heroStyle} id="works">
                 <h1 style={heroTitleStyle}>SELECTED WORKS</h1>
@@ -204,7 +228,7 @@ export const Home = () => {
                 </Section>
             </div>
 
-            <footer style={footerStyle} id="about">
+            <footer style={footerStyle} id="about" ref={footerRef}>
                 <Section title="REFLECTION BLOG" subtitle="AIGC 期间的思考与 HMI 和智能交互设计相关的沉淀" dark className="!py-0 !px-0">
                     <div style={{
                         display: 'grid',

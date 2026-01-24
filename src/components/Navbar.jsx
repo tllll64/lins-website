@@ -1,60 +1,127 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { colors, spacing, typography, fontWeight } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 
-export const Navbar = () => {
+export const Navbar = ({ theme = 'light' }) => {
     const isMobile = useMediaQuery('(max-width: 768px)');
+    const location = useLocation();
+
+    const isDark = theme === 'dark';
+    const textColor = isDark ? colors.white.solid : colors.grey[56];
+    const activeColor = isDark ? colors.white.solid : colors.grey[9];
+    const hoverColor = isDark ? colors.grey[40] : colors.grey[9]; // On dark bg, hover to dim? Or hover to white?
+    // User wants: "In black background... improve readability (change font color)"
+    // Typically on dark bg: Default White, Hover slightly dimmer or accent?
+    // Let's stick to: Default White (high contrast), Active White, Hover Grey.
+    // Wait, on light bg: Default Grey56, Active Grey9 (Darker), Hover Grey9 (Darker).
+    // On dark bg: Default Grey66 (dim), Active White, Hover White?
+    // Let's try: Default White (solid), Hover Grey (dimmer).
+    
+    // Adjusted logic:
+    // Light Theme: Default Grey56, Hover/Active Grey9.
+    // Dark Theme: Default Grey66 (readable on black), Hover/Active White.
+    
+    // Actually user said "improve readability".
+    // Maybe Default White is better for readability on black.
+    // Let's use:
+    // Dark Theme: Default colors.grey[66] (Light Grey), Hover/Active colors.white.solid.
+    
+    const baseColor = isDark ? colors.grey[63] : colors.grey[56];
+    const highlightColor = isDark ? colors.white.solid : colors.grey[9];
 
     const navStyle = {
         position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
+        top: spacing.lg,
+        left: '50%',
+        transform: 'translateX(-50%)',
         zIndex: 50,
-        background: `${colors.grey[98]}E6`,
-        backdropFilter: 'blur(8px)',
-        borderBottom: `1px solid ${colors.grey[92]}`,
-        transition: 'all 0.3s ease'
+        background: isDark ? 'rgba(30, 30, 30, 0.7)' : `${colors.grey[98]}80`, // Slight adjustment for dark mode bg?
+        // User said "restore background transparency". So keep it similar or use the same.
+        // If we use the same light background on black, it looks like a light bar.
+        // If we want it to look "transparent" on black, we should probably use a dark semi-transparent bg.
+        // But let's stick to what the user asked: "Restore background transparency... change font color".
+        // It implies the background was fine before I made it opaque white.
+        // Before, it was `${colors.grey[98]}80`.
+        background: `${colors.grey[98]}80`, 
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : colors.grey[92]}`, // Adjust border for dark mode visibility?
+        borderRadius: '9999px',
+        boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
+        transition: 'all 0.3s ease',
+        width: 'auto',
+        maxWidth: '90%'
     };
 
     const containerStyle = {
-        maxWidth: '1200px',
-        margin: '0 auto',
-        paddingLeft: isMobile ? spacing[32] : spacing[56],
-        paddingRight: isMobile ? spacing[32] : spacing[56],
-        height: '40px',
+        paddingLeft: spacing.xl,
+        paddingRight: spacing.xl,
+        height: '48px',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'flex-end',
-        gap: spacing[32],
+        justifyContent: 'center',
+        gap: spacing.md,
         fontFamily: typography.body.fontFamily,
         fontSize: typography.body.fontSize,
         fontWeight: fontWeight.medium,
-        color: colors.grey[9],
-        letterSpacing: '0.05em'
+        color: baseColor,
+        letterSpacing: '0.05em',
+        transition: 'color 0.3s ease'
     };
 
-    const linkStyle = {
-        color: colors.grey[9],
+    const getLinkStyle = (isActive) => ({
+        color: isActive ? highlightColor : baseColor,
         textDecoration: 'none',
         transition: 'color 0.2s ease',
         cursor: 'pointer'
+    });
+
+    const handleMouseEnter = (e, isActive) => {
+        if (!isActive) e.currentTarget.style.color = highlightColor;
     };
+
+    const handleMouseLeave = (e, isActive) => {
+        if (!isActive) e.currentTarget.style.color = baseColor;
+    };
+
+    const isWorksActive = location.pathname === '/' && location.hash === '';
+    const isResearchActive = location.hash === '#explorations';
+    const isAboutActive = location.pathname === '/about';
 
     return (
         <nav style={navStyle}>
             <div style={containerStyle}>
-                <Link to="/" style={linkStyle} onMouseEnter={(e) => e.currentTarget.style.color = colors.grey[56]} onMouseLeave={(e) => e.currentTarget.style.color = colors.grey[9]}>
+                <Link 
+                    to="/" 
+                    style={getLinkStyle(isWorksActive)} 
+                    onMouseEnter={(e) => handleMouseEnter(e, isWorksActive)} 
+                    onMouseLeave={(e) => handleMouseLeave(e, isWorksActive)}
+                >
                     Works
                 </Link>
-                <a href="/#explorations" style={linkStyle} onMouseEnter={(e) => e.currentTarget.style.color = colors.grey[56]} onMouseLeave={(e) => e.currentTarget.style.color = colors.grey[9]}>
-                    Explorations
+                <a 
+                    href="/#explorations" 
+                    style={getLinkStyle(isResearchActive)} 
+                    onMouseEnter={(e) => handleMouseEnter(e, isResearchActive)} 
+                    onMouseLeave={(e) => handleMouseLeave(e, isResearchActive)}
+                >
+                    Research
                 </a>
-                <Link to="/about" style={linkStyle} onMouseEnter={(e) => e.currentTarget.style.color = colors.grey[56]} onMouseLeave={(e) => e.currentTarget.style.color = colors.grey[9]}>
+                <Link 
+                    to="/about" 
+                    style={getLinkStyle(isAboutActive)} 
+                    onMouseEnter={(e) => handleMouseEnter(e, isAboutActive)} 
+                    onMouseLeave={(e) => handleMouseLeave(e, isAboutActive)}
+                >
                     About
                 </Link>
-                <a href="#" style={linkStyle} onMouseEnter={(e) => e.currentTarget.style.color = colors.grey[56]} onMouseLeave={(e) => e.currentTarget.style.color = colors.grey[9]}>
+                <a 
+                    href="#" 
+                    style={getLinkStyle(false)} 
+                    onMouseEnter={(e) => handleMouseEnter(e, false)} 
+                    onMouseLeave={(e) => handleMouseLeave(e, false)}
+                >
                     Resume
                 </a>
             </div>

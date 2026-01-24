@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Navbar } from '../components/Navbar';
 import { Section } from '../components/Section';
 import { ASSETS } from '../constants/assets';
@@ -8,6 +8,27 @@ import { Twitter, Github, Mail, Phone, MessageCircle } from 'lucide-react';
 
 export const About = () => {
     const isMobile = useMediaQuery('(max-width: 768px)');
+    const footerRef = useRef(null);
+    const [navTheme, setNavTheme] = useState('light');
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (footerRef.current) {
+                const footerRect = footerRef.current.getBoundingClientRect();
+                // Switch when footer reaches navbar area
+                if (footerRect.top <= 72) {
+                    setNavTheme('dark');
+                } else {
+                    setNavTheme('light');
+                }
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Initial check
+        
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const pageStyle = {
         minHeight: '100vh',
@@ -249,8 +270,8 @@ export const About = () => {
 
     return (
         <div style={pageStyle}>
-            <Navbar />
-
+            <Navbar theme={navTheme} />
+            
             <div style={profileContainerStyle}>
                 <div style={profileContentStyle}>
                     <div style={profileTextStyle}>
@@ -349,7 +370,7 @@ export const About = () => {
                 </div>
             </Section>
 
-            <footer style={footerStyle}>
+            <footer style={footerStyle} ref={footerRef}>
                 <div style={footerContainerStyle}>
                     <div>
                         <h2 style={footerTitleStyle}>CONTACT ME</h2>
