@@ -7,8 +7,12 @@ import { DesignSystemPreview } from './pages/DesignSystemPreview';
 import { DesignSystemTest } from './pages/DesignSystemTest';
 
 function App() {
+  // Check if we are in production environment (GitHub Pages)
+  const isProduction = import.meta.env.PROD;
+  const basename = isProduction ? '/lins-website' : '/';
+
   return (
-    <Router>
+    <Router basename={basename}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
