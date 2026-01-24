@@ -1,17 +1,17 @@
 import React from 'react';
-import { colors, spacing, typography } from '../design-system/tokens';
+import { colors, spacing, typography, stackSpacing } from '../design-system/tokens';
 import { ArrowRight } from 'lucide-react';
 
 export const GridCard = ({ title, category, image, className = "" }) => {
     return (
         <div className={`group cursor-pointer ${className}`}>
             <div style={{
-                aspectRatio: '4/3',
+                aspectRatio: '16/9',
                 width: '100%',
                 overflow: 'hidden',
                 borderRadius: '16px',
                 background: colors.grey[95],
-                marginBottom: spacing[16],
+                marginBottom: stackSpacing.md,
                 position: 'relative'
             }}>
                 {image && (
@@ -30,10 +30,10 @@ export const GridCard = ({ title, category, image, className = "" }) => {
                 )}
                 <div style={{
                     position: 'absolute',
-                    bottom: spacing[16],
-                    right: spacing[16],
+                    bottom: spacing.lg,
+                    right: spacing.lg,
                     background: `${colors.white.solid}E6`,
-                    padding: spacing[8],
+                    padding: spacing.xs,
                     borderRadius: '50%',
                     opacity: '0',
                     transition: 'opacity 0.3s ease'

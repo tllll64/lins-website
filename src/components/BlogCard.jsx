@@ -1,16 +1,16 @@
 import React from 'react';
-import { colors, spacing, typography, fontWeight } from '../design-system/tokens';
+import { colors, spacing, typography, fontWeight, stackSpacing } from '../design-system/tokens';
 
 export const BlogCard = ({ title, date, image, className = "" }) => {
     return (
         <div className={`group cursor-pointer ${className}`}>
             <div style={{
-                aspectRatio: '16/9',
+                aspectRatio: '4/3',
                 width: '100%',
                 overflow: 'hidden',
                 borderRadius: '12px',
                 background: colors.grey[16],
-                marginBottom: spacing[16],
+                marginBottom: stackSpacing.md,
                 opacity: '0.8',
                 transition: 'opacity 0.3s ease'
             }} className="group-hover:opacity-100">
@@ -34,7 +34,7 @@ export const BlogCard = ({ title, date, image, className = "" }) => {
                     lineHeight: typography.body.lineHeight,
                     letterSpacing: typography.body.letterSpacing,
                     color: colors.white.solid,
-                    marginBottom: spacing[8],
+                    marginBottom: stackSpacing.xs,
                     transition: 'color 0.2s ease'
                 }} className="group-hover:text-ds-dusty">
                     {title}

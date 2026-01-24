@@ -37,7 +37,7 @@ export const lineHeight = {
 };
 
 export const letterSpacing = {
-  '-4.32': '-4.32px',
+  '-4.32': '-2.16px', // Updated from -4.32px based on user feedback
   '-2.4': '-2.4px',
   '-1.28': '-1.28px',
   '-0.96': '-0.96px',
@@ -53,7 +53,7 @@ export const typography = {
     fontSize: fontSize[72],
     fontWeight: fontWeight.semibold,
     lineHeight: lineHeight[83.52],
-    letterSpacing: letterSpacing['-4.32'],
+    letterSpacing: letterSpacing[0],
   },
 
   heading2: {

@@ -2,7 +2,7 @@ import React from 'react';
 import { Navbar } from '../components/Navbar';
 import { Section } from '../components/Section';
 import { ASSETS } from '../constants/assets';
-import { colors, spacing, typography, fontWeight } from '../design-system/tokens';
+import { colors, spacing, typography, fontWeight, stackSpacing, gridGap, layoutSpacing, componentSpacing, width } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 import { Twitter, Github, Mail, Phone, MessageCircle } from 'lucide-react';
 
@@ -17,24 +17,24 @@ export const About = () => {
     const profileContainerStyle = {
         maxWidth: '1200px',
         margin: '0 auto',
-        paddingLeft: isMobile ? spacing[32] : spacing[56],
-        paddingRight: isMobile ? spacing[32] : spacing[56],
-        paddingTop: isMobile ? spacing[56] : spacing[56],
-        paddingBottom: spacing[56]
+        paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
+        paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
+        paddingTop: layoutSpacing.hero.top,
+        paddingBottom: layoutSpacing.section.xl
     };
 
     const profileContentStyle = {
         display: 'flex',
         flexDirection: isMobile ? 'column-reverse' : 'row',
         alignItems: isMobile ? 'center' : 'flex-start',
-        gap: isMobile ? spacing[32] : spacing[56]
+        gap: isMobile ? stackSpacing.xl : layoutSpacing.section.md
     };
 
     const profileTextStyle = {
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
-        gap: spacing[32]
+        gap: stackSpacing.xl
     };
 
     const profileTitleStyle = {
@@ -49,7 +49,7 @@ export const About = () => {
     const profileBodyStyle = {
         display: 'flex',
         flexDirection: 'column',
-        gap: spacing[32],
+        gap: stackSpacing.lg,
         fontFamily: typography.body.fontFamily,
         fontSize: typography.body.fontSize,
         fontWeight: typography.body.fontWeight,
@@ -60,10 +60,10 @@ export const About = () => {
     };
 
     const contactInfoStyle = {
-        paddingTop: spacing[16],
+        paddingTop: spacing.md,
         display: 'flex',
         flexDirection: 'column',
-        gap: spacing[12]
+        gap: stackSpacing.sm
     };
 
     const contactTitleStyle = {
@@ -77,7 +77,7 @@ export const About = () => {
     const contactLinksStyle = {
         display: 'flex',
         flexWrap: 'wrap',
-        gap: spacing[32],
+        gap: spacing.xl,
         fontSize: typography.body.fontSize,
         color: colors.grey[56]
     };
@@ -85,7 +85,7 @@ export const About = () => {
     const contactLinkStyle = {
         display: 'flex',
         alignItems: 'center',
-        gap: spacing[8]
+        gap: spacing.xs
     };
 
     const avatarContainerStyle = {
@@ -98,19 +98,18 @@ export const About = () => {
     const avatarStyle = {
         position: 'relative',
         width: isMobile ? '256px' : '384px',
-        height: isMobile ? '256px' : '384px',
-        borderRadius: '50%',
+        aspectRatio: '3/4',
+        borderRadius: '16px',
         overflow: 'hidden',
-        border: `4px solid ${colors.white.solid}`,
-        boxShadow: '0 20px 50px rgba(0,0,0,0.15)',
         transform: 'rotate(3deg)',
-        transition: 'transform 0.5s ease'
+        transition: 'transform 0.5s ease',
+        background: colors.grey[95]
     };
 
     const workWithGridStyle = {
         display: 'grid',
         gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
-        gap: spacing[32],
+        gap: gridGap.xl,
         opacity: '0.5',
         transition: 'opacity 0.5s ease'
     };
@@ -128,60 +127,62 @@ export const About = () => {
     const newsContainerStyle = {
         display: 'flex',
         flexDirection: 'column',
-        gap: spacing[32],
-        maxWidth: '768px',
-        margin: '0 auto'
+        gap: stackSpacing.md,
+        width: '100%',
+        height: '320px',
+        overflowY: 'auto',
+        paddingRight: spacing.sm
     };
 
     const newsItemStyle = {
         display: 'flex',
-        gap: spacing[16],
+        gap: spacing.md,
         alignItems: 'flex-start'
     };
 
     const newsDateStyle = {
-        fontFamily: typography.body.fontFamily,
-        fontSize: typography.body.fontSize,
-        fontWeight: fontWeight.semibold,
-        color: colors.grey[9],
+        ...typography.body,
+        color: colors.grey[56],
         whiteSpace: 'nowrap'
     };
 
     const newsTextStyle = {
-        color: colors.black[40],
-        transition: 'color 0.2s ease'
+        ...typography.body,
+        color: colors.grey[9],
+        margin: 0
     };
 
     const photoGridStyle = {
         display: 'grid',
         gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
-        gap: spacing[32]
+        gap: gridGap.md
     };
 
     const photoItemStyle = {
         aspectRatio: '1/1',
         borderRadius: '16px',
         overflow: 'hidden',
-        transition: 'transform 0.3s ease'
+        transition: 'transform 0.3s ease',
+        background: colors.grey[95]
     };
 
     const footerStyle = {
         background: colors.black.solid,
         color: colors.white.solid,
-        paddingTop: spacing[56],
-        paddingBottom: spacing[32]
+        paddingTop: layoutSpacing.section.md,
+        paddingBottom: layoutSpacing.section.lg
     };
 
     const footerContainerStyle = {
         maxWidth: '1200px',
         margin: '0 auto',
-        paddingLeft: isMobile ? spacing[32] : spacing[56],
-        paddingRight: isMobile ? spacing[32] : spacing[56],
+        paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
+        paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
         display: 'flex',
         flexDirection: isMobile ? 'column' : 'row',
         justifyContent: 'space-between',
         alignItems: isMobile ? 'flex-start' : 'center',
-        gap: spacing[32]
+        gap: stackSpacing.xl
     };
 
     const footerTitleStyle = {
@@ -191,7 +192,7 @@ export const About = () => {
         lineHeight: typography.heading1.lineHeight,
         letterSpacing: typography.heading1.letterSpacing,
         color: colors.white.solid,
-        marginBottom: spacing[16]
+        marginBottom: spacing.xs
     };
 
     const footerDescStyle = {
@@ -207,7 +208,7 @@ export const About = () => {
     const footerLinksStyle = {
         display: 'flex',
         flexDirection: 'column',
-        gap: spacing[16],
+        gap: stackSpacing.md,
         fontSize: typography.body.fontSize,
         color: colors.grey[66]
     };
@@ -215,7 +216,7 @@ export const About = () => {
     const footerLinkStyle = {
         display: 'flex',
         alignItems: 'center',
-        gap: spacing[8],
+        gap: spacing.xs,
         color: colors.grey[66],
         transition: 'color 0.2s ease',
         cursor: 'pointer'
@@ -224,9 +225,9 @@ export const About = () => {
     const copyrightStyle = {
         maxWidth: '1200px',
         margin: '0 auto',
-        paddingLeft: isMobile ? spacing[32] : spacing[56],
-        paddingRight: isMobile ? spacing[32] : spacing[56],
-        marginTop: spacing[32],
+        paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
+        paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
+        marginTop: spacing.xl,
         fontSize: '11px',
         color: colors.grey[66],
         opacity: '0.4',
@@ -237,7 +238,11 @@ export const About = () => {
         { date: "[01/2026]", emoji: "✨", text: "My first CHI! 四月份巴黎梦幻见！感谢学术之途的每一位引路人，给世界贡献一份 contribution （本 N 人的终极梦想）正在一步步实现中 ✨" },
         { date: "[11/2025]", emoji: "🎉", text: "CHI 首轮 拿到了 ARR A ARR ARR ！完全超乎预期的成绩～ 持续奋战中 💪" },
         { date: "[11/2025]", emoji: "🔮", text: "本人的毕设研究课题「元设计驱动的生成式设计研究」开动啦！和小前 UIST、CHI 论文一脉相承的研究方向，持续一年半，期待由我主导的、严谨细腻的、为真实世界作出贡献的研究成果..." },
-        { date: "[10/2025]", emoji: "🎵", text: "字节跳动 TikTok AI 业务实习啦，很庆幸自己在过去的一年里积累了很多关于 AI 的知识和思考，能被面试官看到。" }
+        { date: "[10/2025]", emoji: "🎵", text: "字节跳动 TikTok AI 业务实习啦，很庆幸自己在过去的一年里积累了很多关于 AI 的知识和思考，能被面试官看到。" },
+        { date: "[09/2025]", emoji: "🎓", text: "开始在同济大学 D&I 攻读交互设计硕士学位，新的旅程开始！" },
+        { date: "[06/2025]", emoji: "📜", text: "本科毕业啦！感谢所有帮助过我的老师和同学，未来可期！" },
+        { date: "[03/2025]", emoji: "🚀", text: "发布了新的个人作品集网站，基于 React 和 design system 重构，性能提升 200%。" },
+        { date: "[01/2025]", emoji: "💡", text: "参加 Global Game Jam，我们的队伍获得最佳创意奖！" }
     ];
 
     const photoRotations = ['rotate(2deg)', '-rotate(2deg)', 'rotate(1deg)', '-rotate(1deg)', 'rotate(2deg)', '-rotate(2deg)'];
@@ -287,7 +292,7 @@ export const About = () => {
                 </div>
             </div>
 
-            <Section title="WORK WITH" className="text-center">
+            <Section title="WORK WITH" className="text-center" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
                 <div style={workWithGridStyle} onMouseEnter={(e) => e.currentTarget.style.opacity = '1'} onMouseLeave={(e) => e.currentTarget.style.opacity = '0.5'}>
                     <div style={workWithItemStyle}>ByteDance</div>
                     <div style={workWithItemStyle}>Microsoft</div>
@@ -296,12 +301,12 @@ export const About = () => {
                 </div>
             </Section>
 
-            <Section title="LATEST NEWS">
+            <Section title="LATEST NEWS" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
                 <div style={newsContainerStyle}>
                     {newsData.map((item, index) => (
-                        <div key={index} style={newsItemStyle}>
+                        <div key={`${index}-updated`} style={newsItemStyle}>
                             <span style={newsDateStyle}>{item.emoji} {item.date}</span>
-                            <p style={newsTextStyle} onMouseEnter={(e) => e.currentTarget.style.color = colors.grey[9]} onMouseLeave={(e) => e.currentTarget.style.color = colors.black[40]}>
+                            <p style={newsTextStyle}>
                                 {item.text}
                             </p>
                         </div>
@@ -309,7 +314,7 @@ export const About = () => {
                 </div>
             </Section>
 
-            <Section title="EXTRA EXTRA !" subtitle="When I'm not working, you'd find me 🏃 citywalking, 💗 volunteering, 🧘 traveling, 🎵 listening to R&B songs, 🍮 relishing desserts, and 👧 taking care of my nephew (德华带娃).">
+            <Section title="EXTRA EXTRA !" subtitle="When I'm not working, you'd find me 🏃 citywalking, 💗 volunteering, 🧘 traveling, 🎵 listening to R&B songs, 🍮 relishing desserts, and 👧 taking care of my nephew (德华带娃)." style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
                 <div style={photoGridStyle}>
                     {ASSETS.photo1 && (
                         <div style={{...photoItemStyle, transform: photoRotations[0]}} onMouseEnter={(e) => e.currentTarget.style.transform = 'rotate(0deg)'} onMouseLeave={(e) => e.currentTarget.style.transform = photoRotations[0]}>

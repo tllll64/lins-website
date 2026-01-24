@@ -5,7 +5,7 @@ import { GridCard } from '../components/GridCard';
 import { BlogCard } from '../components/BlogCard';
 import { Navbar } from '../components/Navbar';
 import { ASSETS } from '../constants/assets';
-import { colors, spacing, typography } from '../design-system/tokens';
+import { colors, spacing, typography, stackSpacing, gridGap, layoutSpacing, componentSpacing, width } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 import { Twitter, Github, Mail } from 'lucide-react';
 
@@ -18,11 +18,11 @@ export const Home = () => {
     };
 
     const heroStyle = {
-        paddingTop: spacing[56],
-        paddingBottom: spacing[32],
-        paddingLeft: isMobile ? spacing[32] : spacing[56],
-        paddingRight: isMobile ? spacing[32] : spacing[56],
-        maxWidth: '1200px',
+        paddingTop: layoutSpacing.hero.top,
+        paddingBottom: layoutSpacing.hero.bottom,
+        paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
+        paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
+        maxWidth: width.container.xl,
         margin: '0 auto'
     };
 
@@ -31,9 +31,9 @@ export const Home = () => {
         fontSize: isMobile ? '36px' : typography.heading1.fontSize,
         fontWeight: typography.heading1.fontWeight,
         lineHeight: typography.heading1.lineHeight,
-        letterSpacing: typography.heading1.letterSpacing,
+        letterSpacing: '0px',
         color: colors.grey[9],
-        marginBottom: spacing[32]
+        marginBottom: stackSpacing.sm
     };
 
     const heroSubtitleStyle = {
@@ -46,41 +46,41 @@ export const Home = () => {
     };
 
     const worksContainerStyle = {
-        paddingLeft: isMobile ? spacing[32] : spacing[56],
-        paddingRight: isMobile ? spacing[32] : spacing[56],
-        maxWidth: '1200px',
+        paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
+        paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
+        maxWidth: width.container.xl,
         margin: '0 auto',
         display: 'flex',
         flexDirection: 'column',
-        gap: isMobile ? spacing[32] : spacing[56],
-        marginBottom: spacing[56]
+        gap: isMobile ? stackSpacing.xl : layoutSpacing.section.md,
+        marginBottom: layoutSpacing.section.xl
     };
 
     const gridStyle = {
         display: 'grid',
         gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
-        gap: spacing[32]
+        gap: gridGap.xl
     };
 
     const footerStyle = {
         background: colors.black.solid,
         color: colors.white.solid,
-        paddingTop: spacing[56],
-        paddingBottom: spacing[32]
+        paddingTop: layoutSpacing.section.md,
+        paddingBottom: layoutSpacing.section.lg
     };
 
     const contactContainerStyle = {
-        maxWidth: '1200px',
+        maxWidth: width.container.xl,
         margin: '0 auto',
-        paddingLeft: isMobile ? spacing[32] : spacing[56],
-        paddingRight: isMobile ? spacing[32] : spacing[56],
+        paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
+        paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
         borderTop: `1px solid ${colors.white[0.2]}`,
-        paddingTop: spacing[32],
+        paddingTop: stackSpacing.xl,
         display: 'flex',
         flexDirection: isMobile ? 'column' : 'row',
         justifyContent: 'space-between',
         alignItems: isMobile ? 'flex-start' : 'center',
-        gap: spacing[32]
+        gap: stackSpacing.xl
     };
 
     const contactTitleStyle = {
@@ -88,9 +88,9 @@ export const Home = () => {
         fontSize: isMobile ? '24px' : '32px',
         fontWeight: typography.heading1.fontWeight,
         lineHeight: typography.heading1.lineHeight,
-        letterSpacing: typography.heading1.letterSpacing,
+        letterSpacing: '0px',
         color: colors.white.solid,
-        marginBottom: spacing[16]
+        marginBottom: spacing.xs
     };
 
     const contactDescStyle = {
@@ -106,7 +106,7 @@ export const Home = () => {
     const contactLinksStyle = {
         display: 'flex',
         flexDirection: 'column',
-        gap: spacing[16],
+        gap: stackSpacing.md,
         fontSize: typography.body.fontSize,
         color: colors.grey[66]
     };
@@ -114,7 +114,7 @@ export const Home = () => {
     const contactLinkStyle = {
         display: 'flex',
         alignItems: 'center',
-        gap: spacing[8],
+        gap: spacing.xs,
         color: colors.grey[66],
         textDecoration: 'none',
         transition: 'color 0.2s ease',
@@ -122,11 +122,11 @@ export const Home = () => {
     };
 
     const copyrightStyle = {
-        maxWidth: '1200px',
+        maxWidth: width.container.xl,
         margin: '0 auto',
-        paddingLeft: isMobile ? spacing[32] : spacing[56],
-        paddingRight: isMobile ? spacing[32] : spacing[56],
-        marginTop: spacing[32],
+        paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
+        paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
+        marginTop: stackSpacing.xl,
         fontSize: '11px',
         color: colors.grey[66],
         opacity: '0.4',
@@ -163,7 +163,7 @@ export const Home = () => {
             </div>
 
             <div id="explorations">
-                <Section title="AI PROJECTS" subtitle="研究与实践生成式 AI在Web/App界面的应用与落地">
+                <Section title="AI PROJECTS" subtitle="研究与实践生成式 AI在Web/App界面的应用与落地" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
                     <div style={gridStyle}>
                         <GridCard
                             title="AI Creative Tool"
@@ -178,7 +178,7 @@ export const Home = () => {
                     </div>
                 </Section>
 
-                <Section title="DIGITAL PROJECTS" subtitle="多端适配与交互 logic 探究">
+                <Section title="DIGITAL PROJECTS" subtitle="多端适配与交互 logic 探究" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
                     <div style={gridStyle}>
                         <GridCard
                             title="Xiaomi Smart Home"
@@ -209,8 +209,8 @@ export const Home = () => {
                     <div style={{
                         display: 'grid',
                         gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
-                        gap: spacing[32],
-                        marginBottom: spacing[56]
+                        gap: gridGap.xl,
+                        marginBottom: layoutSpacing.section.md
                     }}>
                         <BlogCard
                             title="Reflection on AI Tools"

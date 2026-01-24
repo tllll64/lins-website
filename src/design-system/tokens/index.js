@@ -1,6 +1,20 @@
 // Design tokens - Main export
 export { colors, opacity } from './colors';
-export { spacing, itemSpacing, width, height, radius, strokeWeight } from './spacing';
+export {
+  spacing,
+  itemSpacing,
+  width,
+  height,
+  radius,
+  strokeWeight,
+  componentSpacing,
+  layoutSpacing,
+  gridGap,
+  stackSpacing,
+  getSpacing,
+  responsiveSpacing,
+  BASE_UNIT,
+} from './spacing';
 export {
   fontFamily,
   fontSize,

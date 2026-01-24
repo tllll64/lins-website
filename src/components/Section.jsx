@@ -1,28 +1,29 @@
 import React from 'react';
-import { colors, spacing, typography } from '../design-system/tokens';
+import { colors, spacing, typography, stackSpacing, width, layoutSpacing } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 
-export const Section = ({ title, subtitle, children, className = "", dark = false }) => {
+export const Section = ({ title, subtitle, children, className = "", dark = false, style = {} }) => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     const isTablet = useMediaQuery('(max-width: 1024px)');
 
     const sectionStyle = {
-        paddingTop: spacing[56],
-        paddingBottom: spacing[56],
+        paddingTop: layoutSpacing.section.md,
+        paddingBottom: layoutSpacing.section.md,
         background: dark ? colors.black.solid : 'transparent',
         color: dark ? colors.white.solid : 'inherit',
+        ...style,
         ...(className ? {} : {})
     };
 
     const containerStyle = {
-        maxWidth: '1200px',
+        maxWidth: width.container.xl,
         margin: '0 auto',
-        paddingLeft: isMobile ? spacing[32] : spacing[56],
-        paddingRight: isMobile ? spacing[32] : spacing[56]
+        paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
+        paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop
     };
 
     const headerStyle = {
-        marginBottom: spacing[32]
+        marginBottom: stackSpacing.xl
     };
 
     const titleStyle = {
@@ -30,9 +31,9 @@ export const Section = ({ title, subtitle, children, className = "", dark = fals
         fontSize: isMobile ? '36px' : isTablet ? '48px' : typography.heading1.fontSize,
         fontWeight: typography.heading1.fontWeight,
         lineHeight: typography.heading1.lineHeight,
-        letterSpacing: typography.heading1.letterSpacing,
+        letterSpacing: '0px',
         color: dark ? colors.white.solid : colors.grey[9],
-        marginBottom: spacing[16]
+        marginBottom: stackSpacing.sm
     };
 
     const subtitleStyle = {

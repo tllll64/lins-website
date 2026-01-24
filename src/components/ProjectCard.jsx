@@ -1,12 +1,12 @@
 import React from 'react';
 import { Card } from '../design-system/components';
-import { colors, spacing, typography } from '../design-system/tokens';
+import { colors, spacing, typography, stackSpacing, componentSpacing } from '../design-system/tokens';
 import { ArrowRight } from 'lucide-react';
 
 export const ProjectCard = ({ title, subtitle, image, link, className = "" }) => {
     return (
         <div className={`group relative block w-full ${className}`}>
-            <Card variant="elevated" padding="none" hoverable>
+            <Card variant="outlined" padding="none">
                 <div style={{ position: 'relative' }}>
                     <div style={{
                         aspectRatio: '16/9',
@@ -35,7 +35,7 @@ export const ProjectCard = ({ title, subtitle, image, link, className = "" }) =>
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
-                        padding: spacing[32]
+                        padding: componentSpacing.card.padding.lg
                     }}>
                         <div>
                             <h3 style={{
@@ -45,7 +45,7 @@ export const ProjectCard = ({ title, subtitle, image, link, className = "" }) =>
                                 lineHeight: typography.heading3.lineHeight,
                                 letterSpacing: typography.heading3.letterSpacing,
                                 color: colors.grey[9],
-                                marginBottom: spacing[16]
+                                marginBottom: stackSpacing.md
                             }}>
                                 {title}
                             </h3>
