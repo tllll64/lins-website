@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { Navbar } from '../components/Navbar';
 import { Section } from '../components/Section';
 import { ASSETS } from '../constants/assets';
-import { colors, spacing, typography, fontWeight, stackSpacing, gridGap, layoutSpacing, componentSpacing, width } from '../design-system/tokens';
+import { colors, spacing, typography, fontWeight, stackSpacing, gridGap, layoutSpacing, componentSpacing, width, fontSize } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 import { Twitter, Github, Mail, Phone, MessageCircle } from 'lucide-react';
 
@@ -208,7 +208,7 @@ export const About = () => {
 
     const footerTitleStyle = {
         fontFamily: typography.heading1.fontFamily,
-        fontSize: isMobile ? '24px' : '32px',
+        fontSize: isMobile ? fontSize[24] : fontSize[32],
         fontWeight: typography.heading1.fontWeight,
         lineHeight: typography.heading1.lineHeight,
         letterSpacing: typography.heading1.letterSpacing,
@@ -275,17 +275,17 @@ export const About = () => {
             <div style={profileContainerStyle}>
                 <div style={profileContentStyle}>
                     <div style={profileTextStyle}>
-                        <h1 style={profileTitleStyle}>ABOUT ME</h1>
+                        <h1 style={profileTitleStyle}>About Me</h1>
 
                         <div style={profileBodyStyle}>
                             <p>
-                                Hey, I'm Chloe Tian. I'm a digital designer and AI engineer, dedicated to merging human-centered design with cutting-edge technology.
+                                嗨，我是 Chloe Tian。作为一名数字设计师和 AI 工程师，我致力于将以人为本的设计与前沿技术相融合。
                             </p>
                             <p>
-                                Based in Shanghai, I'm currently studying Interaction Design @ <span style={{ fontWeight: fontWeight.semibold, textDecoration: 'underline', textDecorationThickness: '2px', textDecorationColor: colors.black[40] }}>D&I</span>, with a focus on 🤖 HAI research @ <span style={{ fontWeight: fontWeight.semibold, textDecoration: 'underline', textDecorationThickness: '2px', textDecorationColor: colors.black[40] }}>CDI</span>.
+                                目前在上海，就读于 <span style={{ fontWeight: fontWeight.semibold, textDecoration: 'underline', textDecorationThickness: '2px', textDecorationColor: colors.black[40] }}>同济大学 D&I</span> 交互设计专业，专注于 🤖 人机交互（HAI）研究 @ <span style={{ fontWeight: fontWeight.semibold, textDecoration: 'underline', textDecorationThickness: '2px', textDecorationColor: colors.black[40] }}>CDI</span>。
                             </p>
                             <p>
-                                I'm passionate about redefining way we interact with technology, making it more intuitive, seamless, and integrated into our everyday lives.
+                                我热衷于重新定义我们与技术互动的方式，使其更加直观、流畅，并无缝融入我们的日常生活。
                             </p>
                         </div>
 
@@ -313,16 +313,7 @@ export const About = () => {
                 </div>
             </div>
 
-            <Section title="WORK WITH" className="text-center" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
-                <div style={workWithGridStyle} onMouseEnter={(e) => e.currentTarget.style.opacity = '1'} onMouseLeave={(e) => e.currentTarget.style.opacity = '0.5'}>
-                    <div style={workWithItemStyle}>ByteDance</div>
-                    <div style={workWithItemStyle}>Microsoft</div>
-                    <div style={workWithItemStyle}>NIO</div>
-                    <div style={workWithItemStyle}>Xiaomi</div>
-                </div>
-            </Section>
-
-            <Section title="LATEST NEWS" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
+            <Section title="Latest News" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
                 <div style={newsContainerStyle}>
                     {newsData.map((item, index) => (
                         <div key={`${index}-updated`} style={newsItemStyle}>
@@ -335,7 +326,7 @@ export const About = () => {
                 </div>
             </Section>
 
-            <Section title="EXTRA EXTRA !" subtitle="When I'm not working, you'd find me 🏃 citywalking, 💗 volunteering, 🧘 traveling, 🎵 listening to R&B songs, 🍮 relishing desserts, and 👧 taking care of my nephew (德华带娃)." style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
+            <Section title="Extra Extra !" subtitle="不工作的时候，你会发现我在 🏃 Citywalk，💗 志愿服务，🧘 旅行，🎵 听 R&B 歌曲，🍮 享用甜点，以及 👧 照顾我的小侄子（德华带娃）。" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
                 <div style={photoGridStyle}>
                     {ASSETS.photo1 && (
                         <div style={{...photoItemStyle, transform: photoRotations[0]}} onMouseEnter={(e) => e.currentTarget.style.transform = 'rotate(0deg)'} onMouseLeave={(e) => e.currentTarget.style.transform = photoRotations[0]}>
@@ -373,7 +364,7 @@ export const About = () => {
             <footer style={footerStyle} ref={footerRef}>
                 <div style={footerContainerStyle}>
                     <div>
-                        <h2 style={footerTitleStyle}>CONTACT ME</h2>
+                        <h2 style={footerTitleStyle}>Contact Me</h2>
                         <p style={footerDescStyle}>
                             Thanks for reaching end of page. If you want to learn more, email me or verify what I'm working on, feel free to get in touch!
                         </p>

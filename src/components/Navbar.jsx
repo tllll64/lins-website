@@ -86,7 +86,7 @@ export const Navbar = ({ theme = 'light' }) => {
     };
 
     const isWorksActive = location.pathname === '/' && location.hash === '';
-    const isResearchActive = location.hash === '#explorations';
+    const isResearchActive = location.pathname === '/research';
     const isAboutActive = location.pathname === '/about';
 
     return (
@@ -100,14 +100,14 @@ export const Navbar = ({ theme = 'light' }) => {
                 >
                     Works
                 </Link>
-                <a 
-                    href="/#explorations" 
+                <Link 
+                    to="/research" 
                     style={getLinkStyle(isResearchActive)} 
                     onMouseEnter={(e) => handleMouseEnter(e, isResearchActive)} 
                     onMouseLeave={(e) => handleMouseLeave(e, isResearchActive)}
                 >
                     Research
-                </a>
+                </Link>
                 <Link 
                     to="/about" 
                     style={getLinkStyle(isAboutActive)} 

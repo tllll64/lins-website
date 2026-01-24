@@ -5,7 +5,7 @@ import { GridCard } from '../components/GridCard';
 import { BlogCard } from '../components/BlogCard';
 import { Navbar } from '../components/Navbar';
 import { ASSETS } from '../constants/assets';
-import { colors, spacing, typography, stackSpacing, gridGap, layoutSpacing, componentSpacing, width } from '../design-system/tokens';
+import { colors, spacing, typography, stackSpacing, gridGap, layoutSpacing, componentSpacing, width, fontSize } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 import { Twitter, Github, Mail } from 'lucide-react';
 
@@ -109,7 +109,7 @@ export const Home = () => {
 
     const contactTitleStyle = {
         fontFamily: typography.heading1.fontFamily,
-        fontSize: isMobile ? '24px' : '32px',
+        fontSize: isMobile ? fontSize[24] : fontSize[32],
         fontWeight: typography.heading1.fontWeight,
         lineHeight: typography.heading1.lineHeight,
         letterSpacing: '0px',
@@ -162,7 +162,7 @@ export const Home = () => {
             <Navbar theme={navTheme} />
 
             <header style={heroStyle} id="works">
-                <h1 style={heroTitleStyle}>SELECTED WORKS</h1>
+                <h1 style={heroTitleStyle}>Selected works</h1>
                 <p style={heroSubtitleStyle}>
                     2023-2024年 实习项目产出和复盘思考
                 </p>
@@ -187,7 +187,7 @@ export const Home = () => {
             </div>
 
             <div id="explorations">
-                <Section title="AI PROJECTS" subtitle="研究与实践生成式 AI在Web/App界面的应用与落地" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
+                <Section title="AI projects" subtitle="研究与实践生成式 AI在Web/App界面的应用与落地" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
                     <div style={gridStyle}>
                         <GridCard
                             title="AI Creative Tool"
@@ -202,7 +202,7 @@ export const Home = () => {
                     </div>
                 </Section>
 
-                <Section title="DIGITAL PROJECTS" subtitle="多端适配与交互 logic 探究" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
+                <Section title="Digital Projects" subtitle="多端适配与交互 logic 探究" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
                     <div style={gridStyle}>
                         <GridCard
                             title="Xiaomi Smart Home"
@@ -229,7 +229,7 @@ export const Home = () => {
             </div>
 
             <footer style={footerStyle} id="about" ref={footerRef}>
-                <Section title="REFLECTION BLOG" subtitle="AIGC 期间的思考与 HMI 和智能交互设计相关的沉淀" dark className="!py-0 !px-0">
+                <Section title="Reflection Blog" subtitle="AIGC 期间的思考与 HMI 和智能交互设计相关的沉淀" dark className="!py-0 !px-0">
                     <div style={{
                         display: 'grid',
                         gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
@@ -271,7 +271,7 @@ export const Home = () => {
 
                 <div style={contactContainerStyle}>
                     <div>
-                        <h2 style={contactTitleStyle}>CONTACT ME</h2>
+                        <h2 style={contactTitleStyle}>Contact Me</h2>
                         <p style={contactDescStyle}>
                             Thanks for reaching the end of the page. If you want to learn more, email me or verify what I'm working on, feel free to get in touch!
                         </p>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { colors, spacing, typography, stackSpacing, width, layoutSpacing } from '../design-system/tokens';
+import { colors, spacing, typography, stackSpacing, width, layoutSpacing, fontSize } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 
 export const Section = ({ title, subtitle, children, className = "", dark = false, style = {} }) => {
@@ -28,7 +28,7 @@ export const Section = ({ title, subtitle, children, className = "", dark = fals
 
     const titleStyle = {
         fontFamily: typography.heading1.fontFamily,
-        fontSize: isMobile ? '36px' : isTablet ? '48px' : typography.heading1.fontSize,
+        fontSize: isMobile ? '36px' : isTablet ? fontSize[48] : typography.heading1.fontSize,
         fontWeight: typography.heading1.fontWeight,
         lineHeight: typography.heading1.lineHeight,
         letterSpacing: '0px',
