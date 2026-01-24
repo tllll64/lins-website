@@ -1,20 +1,50 @@
 import React from 'react';
+import { colors, spacing, typography, fontWeight } from '../design-system/tokens';
 
 export const BlogCard = ({ title, date, image, className = "" }) => {
     return (
         <div className={`group cursor-pointer ${className}`}>
-            <div className="aspect-video w-full overflow-hidden rounded-xl bg-ds-white/10 mb-4 opacity-80 group-hover:opacity-100 transition-opacity">
+            <div style={{
+                aspectRatio: '16/9',
+                width: '100%',
+                overflow: 'hidden',
+                borderRadius: '12px',
+                background: colors.grey[16],
+                marginBottom: spacing[16],
+                opacity: '0.8',
+                transition: 'opacity 0.3s ease'
+            }} className="group-hover:opacity-100">
                 {image && (
                     <img
                         src={image}
                         alt={title}
-                        className="h-full w-full object-cover"
+                        style={{
+                            height: '100%',
+                            width: '100%',
+                            objectFit: 'cover'
+                        }}
                     />
                 )}
             </div>
             <div>
-                <h3 className="font-ds-sans font-medium text-ds-white mb-2 group-hover:text-ds-dusty transition-colors">{title}</h3>
-                <span className="text-xs text-ds-dusty">{date}</span>
+                <h3 style={{
+                    fontFamily: typography.body.fontFamily,
+                    fontSize: typography.body.fontSize,
+                    fontWeight: fontWeight.medium,
+                    lineHeight: typography.body.lineHeight,
+                    letterSpacing: typography.body.letterSpacing,
+                    color: colors.white.solid,
+                    marginBottom: spacing[8],
+                    transition: 'color 0.2s ease'
+                }} className="group-hover:text-ds-dusty">
+                    {title}
+                </h3>
+                <span style={{
+                    fontSize: '11px',
+                    color: colors.grey[66]
+                }}>
+                    {date}
+                </span>
             </div>
         </div>
     );
