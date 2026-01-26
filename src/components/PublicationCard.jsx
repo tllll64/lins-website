@@ -36,8 +36,7 @@ export const PublicationCard = ({ title, authors, venue, links, image }) => {
         fontSize: '18px',
         fontWeight: fontWeight.bold,
         lineHeight: '1.4',
-        color: colors.grey[9],
-        marginBottom: spacing.xs
+        color: colors.grey[9]
     };
 
     const authorsStyle = {
@@ -53,15 +52,13 @@ export const PublicationCard = ({ title, authors, venue, links, image }) => {
         fontWeight: fontWeight.bold,
         fontStyle: 'italic',
         lineHeight: '1.5',
-        color: colors.grey[9],
-        marginTop: spacing.xs
+        color: colors.grey[9]
     };
 
     const linksStyle = {
         display: 'flex',
         flexWrap: 'wrap',
-        gap: spacing.md,
-        marginTop: spacing.sm,
+        gap: spacing.xs,
         fontFamily: typography.body.fontFamily,
         fontSize: '14px',
         color: colors.grey[9]
