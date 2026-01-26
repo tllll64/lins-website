@@ -387,8 +387,8 @@ export const About = () => {
                 {isFooterHovered && (
                     <div style={{
                         position: 'absolute',
-                        width: '1080px',
-                        height: '1080px',
+                        width: '720px',
+                        height: '720px',
                         top: '50%',
                         left: '50%',
                         transform: 'translate(-50%, -50%)',
@@ -403,7 +403,7 @@ export const About = () => {
                             waveAmplitude={1.3}
                             particleSize={1.5}
                             lerpSpeed={0.18}
-                            color="#e8e8e8"
+                            color="rgba(232, 232, 232, 0.3)"
                             autoAnimate
                             particleVariance={1}
                             rotationSpeed={0}
