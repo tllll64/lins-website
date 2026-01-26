@@ -129,7 +129,8 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
                                     width: '100%',
                                     objectFit: 'cover',
                                     objectPosition: 'center',
-                                    transition: 'transform 0.7s ease'
+                                    transition: 'transform 0.7s ease',
+                                    cursor: 'inherit'
                                 }}
                                 onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                                 onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}

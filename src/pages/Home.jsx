@@ -9,7 +9,7 @@ import { ASSETS } from '../constants/assets';
 import { colors, spacing, typography, stackSpacing, gridGap, layoutSpacing, componentSpacing, width, fontSize } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 import { Twitter, Github, Mail } from 'lucide-react';
-import xhsCursor from '../assets/cursor/XHS Cursor.png';
+import xhsCursor from '../assets/cursor/xhs-cursor.png';
 
 export const Home = () => {
     const isMobile = useMediaQuery('(max-width: 768px)');
