@@ -37,13 +37,6 @@ export const Navbar = ({ theme = 'light' }) => {
         transform: 'translateX(-50%)',
         zIndex: 50,
         background: isDark ? 'rgba(30, 30, 30, 0.7)' : `${colors.grey[98]}80`, // Slight adjustment for dark mode bg?
-        // User said "restore background transparency". So keep it similar or use the same.
-        // If we use the same light background on black, it looks like a light bar.
-        // If we want it to look "transparent" on black, we should probably use a dark semi-transparent bg.
-        // But let's stick to what the user asked: "Restore background transparency... change font color".
-        // It implies the background was fine before I made it opaque white.
-        // Before, it was `${colors.grey[98]}80`.
-        background: `${colors.grey[98]}80`, 
         backdropFilter: 'blur(16px)',
         WebkitBackdropFilter: 'blur(16px)',
         border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : colors.grey[92]}`, // Adjust border for dark mode visibility?
