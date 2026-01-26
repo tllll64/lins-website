@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Mail, Phone, MessageCircle, Copy, Check } from 'lucide-react';
 import Antigravity from './Antigravity';
+import TextType from './TextType';
 import { colors, spacing, typography, fontWeight, stackSpacing, layoutSpacing, fontSize } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 
@@ -140,7 +141,17 @@ export const ContactSection = () => {
             </div>
             <div style={footerContainerStyle}>
                 <div>
-                    <h2 style={footerTitleStyle}>Contact Me</h2>
+                    <TextType
+                        text="Contact Me"
+                        style={footerTitleStyle}
+                        typingSpeed={100}
+                        initialDelay={500}
+                        pauseDuration={3000}
+                        loop={false}
+                        showCursor={true}
+                        cursorCharacter="|"
+                        startOnVisible={true}
+                    />
                     <p style={footerDescStyle}>
                         Thanks for reaching end of page. If you want to learn more, email me or verify what I'm working on, feel free to get in touch!
                     </p>
