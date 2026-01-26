@@ -9,6 +9,7 @@ export const ContactSection = () => {
     const footerRef = useRef(null);
     const [isFooterHovered, setIsFooterHovered] = useState(false);
     const [copiedField, setCopiedField] = useState(null);
+    const [hoveredField, setHoveredField] = useState(null);
 
     const handleCopy = (text, field) => {
         navigator.clipboard.writeText(text);
@@ -146,36 +147,57 @@ export const ContactSection = () => {
                 </div>
                 <div style={footerLinksStyle}>
                     <div 
-                        style={footerLinkStyle} 
-                        onMouseEnter={(e) => e.currentTarget.style.color = colors.white.solid} 
-                        onMouseLeave={(e) => e.currentTarget.style.color = colors.grey[66]}
+                        style={{
+                            ...footerLinkStyle,
+                            color: hoveredField === 'phone' ? colors.white.solid : colors.grey[66]
+                        }} 
+                        onMouseEnter={() => setHoveredField('phone')}
+                        onMouseLeave={() => setHoveredField(null)}
                         onClick={() => handleCopy('(+86) 15968545540', 'phone')}
                     >
                         <Phone size={16} /> <span>(+86) 15968545540</span>
                         <div style={iconContainerStyle}>
-                            {copiedField === 'phone' ? <Check size={14} color={colors.white.solid} /> : <Copy size={14} style={{ opacity: 0.5 }} />}
+                            {copiedField === 'phone' ? (
+                                <Check size={14} color={colors.white.solid} />
+                            ) : hoveredField === 'phone' ? (
+                                <Copy size={14} style={{ opacity: 0.5 }} />
+                            ) : null}
                         </div>
                     </div>
                     <div 
-                        style={footerLinkStyle} 
-                        onMouseEnter={(e) => e.currentTarget.style.color = colors.white.solid} 
-                        onMouseLeave={(e) => e.currentTarget.style.color = colors.grey[66]}
+                        style={{
+                            ...footerLinkStyle,
+                            color: hoveredField === 'wechat' ? colors.white.solid : colors.grey[66]
+                        }} 
+                        onMouseEnter={() => setHoveredField('wechat')}
+                        onMouseLeave={() => setHoveredField(null)}
                         onClick={() => handleCopy('LittleLionTOP', 'wechat')}
                     >
                         <MessageCircle size={16} /> <span>LittleLionTOP</span>
                         <div style={iconContainerStyle}>
-                            {copiedField === 'wechat' ? <Check size={14} color={colors.white.solid} /> : <Copy size={14} style={{ opacity: 0.5 }} />}
+                            {copiedField === 'wechat' ? (
+                                <Check size={14} color={colors.white.solid} />
+                            ) : hoveredField === 'wechat' ? (
+                                <Copy size={14} style={{ opacity: 0.5 }} />
+                            ) : null}
                         </div>
                     </div>
                     <div 
-                        style={footerLinkStyle} 
-                        onMouseEnter={(e) => e.currentTarget.style.color = colors.white.solid} 
-                        onMouseLeave={(e) => e.currentTarget.style.color = colors.grey[66]}
+                        style={{
+                            ...footerLinkStyle,
+                            color: hoveredField === 'email' ? colors.white.solid : colors.grey[66]
+                        }} 
+                        onMouseEnter={() => setHoveredField('email')}
+                        onMouseLeave={() => setHoveredField(null)}
                         onClick={() => handleCopy('AstronautTL@163.com', 'email')}
                     >
                         <Mail size={16} /> <span>AstronautTL@163.com</span>
                         <div style={iconContainerStyle}>
-                            {copiedField === 'email' ? <Check size={14} color={colors.white.solid} /> : <Copy size={14} style={{ opacity: 0.5 }} />}
+                            {copiedField === 'email' ? (
+                                <Check size={14} color={colors.white.solid} />
+                            ) : hoveredField === 'email' ? (
+                                <Copy size={14} style={{ opacity: 0.5 }} />
+                            ) : null}
                         </div>
                     </div>
                 </div>

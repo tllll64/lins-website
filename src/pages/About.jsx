@@ -5,7 +5,7 @@ import { ContactSection } from '../components/ContactSection';
 import { ASSETS } from '../constants/assets';
 import { colors, spacing, typography, fontWeight, stackSpacing, gridGap, layoutSpacing, componentSpacing, width, fontSize } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
-import { Twitter, Github, Mail, Phone, MessageCircle } from 'lucide-react';
+import { Twitter, Github, Mail, Phone, MessageCircle, Copy, Check } from 'lucide-react';
 
 import profileImage from '../assets/profile.jpg';
 
@@ -13,6 +13,14 @@ export const About = () => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     const footerRef = useRef(null);
     const [navTheme, setNavTheme] = useState('light');
+    const [copiedField, setCopiedField] = useState(null);
+    const [hoveredField, setHoveredField] = useState(null);
+
+    const handleCopy = (text, field) => {
+        navigator.clipboard.writeText(text);
+        setCopiedField(field);
+        setTimeout(() => setCopiedField(null), 2000);
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -108,7 +116,19 @@ export const About = () => {
     const contactLinkStyle = {
         display: 'flex',
         alignItems: 'center',
-        gap: spacing.xs
+        gap: spacing.xs,
+        cursor: 'pointer',
+        transition: 'color 0.2s ease',
+        position: 'relative',
+        paddingRight: '24px' // Space for icon
+    };
+
+    const iconContainerStyle = {
+        position: 'absolute',
+        right: 0,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
     };
 
     const avatarContainerStyle = {
@@ -234,14 +254,59 @@ export const About = () => {
                         <div style={contactInfoStyle}>
                             <h3 style={contactTitleStyle}>寻找 27 届暑期实习中 ✨</h3>
                             <div style={contactLinksStyle}>
-                                <div style={contactLinkStyle}>
+                                <div 
+                                    style={{
+                                        ...contactLinkStyle,
+                                        color: hoveredField === 'phone' ? colors.grey[9] : colors.grey[56]
+                                    }}
+                                    onMouseEnter={() => setHoveredField('phone')}
+                                    onMouseLeave={() => setHoveredField(null)}
+                                    onClick={() => handleCopy('(+86) 15968545540', 'phone')}
+                                >
                                     <Phone size={16} /> <span>(+86) 15968545540</span>
+                                    <div style={iconContainerStyle}>
+                                        {copiedField === 'phone' ? (
+                                            <Check size={14} color={colors.grey[9]} />
+                                        ) : hoveredField === 'phone' ? (
+                                            <Copy size={14} style={{ opacity: 0.5 }} />
+                                        ) : null}
+                                    </div>
                                 </div>
-                                <div style={contactLinkStyle}>
+                                <div 
+                                    style={{
+                                        ...contactLinkStyle,
+                                        color: hoveredField === 'wechat' ? colors.grey[9] : colors.grey[56]
+                                    }}
+                                    onMouseEnter={() => setHoveredField('wechat')}
+                                    onMouseLeave={() => setHoveredField(null)}
+                                    onClick={() => handleCopy('LittleLionTOP', 'wechat')}
+                                >
                                     <MessageCircle size={16} /> <span>LittleLionTOP</span>
+                                    <div style={iconContainerStyle}>
+                                        {copiedField === 'wechat' ? (
+                                            <Check size={14} color={colors.grey[9]} />
+                                        ) : hoveredField === 'wechat' ? (
+                                            <Copy size={14} style={{ opacity: 0.5 }} />
+                                        ) : null}
+                                    </div>
                                 </div>
-                                <div style={contactLinkStyle}>
+                                <div 
+                                    style={{
+                                        ...contactLinkStyle,
+                                        color: hoveredField === 'email' ? colors.grey[9] : colors.grey[56]
+                                    }}
+                                    onMouseEnter={() => setHoveredField('email')}
+                                    onMouseLeave={() => setHoveredField(null)}
+                                    onClick={() => handleCopy('AstronautTL@163.com', 'email')}
+                                >
                                     <Mail size={16} /> <span>AstronautTL@163.com</span>
+                                    <div style={iconContainerStyle}>
+                                        {copiedField === 'email' ? (
+                                            <Check size={14} color={colors.grey[9]} />
+                                        ) : hoveredField === 'email' ? (
+                                            <Copy size={14} style={{ opacity: 0.5 }} />
+                                        ) : null}
+                                    </div>
                                 </div>
                             </div>
                         </div>
