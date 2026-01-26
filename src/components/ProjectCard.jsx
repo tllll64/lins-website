@@ -2,19 +2,125 @@ import React from 'react';
 import { Card } from '../design-system/components';
 import { colors, spacing, typography, stackSpacing, componentSpacing } from '../design-system/tokens';
 import { ArrowRight } from 'lucide-react';
+import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 
-export const ProjectCard = ({ title, subtitle, image, link, className = "" }) => {
+export const ProjectCard = ({ date, title, description, tags, image, link, className = "" }) => {
+    const isMobile = useMediaQuery('(max-width: 768px)');
+
+    const containerStyle = {
+        display: 'flex',
+        flexDirection: isMobile ? 'column-reverse' : 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: spacing.xl,
+        width: '100%',
+        padding: isMobile ? spacing.md : spacing.xl,
+        background: 'transparent',
+        borderRadius: '24px',
+        transition: 'all 0.3s ease'
+    };
+
+    const leftContentStyle = {
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        gap: stackSpacing.md,
+        width: isMobile ? '100%' : '33%'
+    };
+
+    const rightContentStyle = {
+        flex: 2,
+        width: isMobile ? '100%' : '67%',
+        display: 'flex',
+        justifyContent: isMobile ? 'center' : 'flex-end'
+    };
+
+    const imageStyle = {
+        width: '100%',
+        aspectRatio: '16/9',
+        borderRadius: '16px',
+        overflow: 'hidden',
+        background: colors.grey[95],
+        position: 'relative'
+    };
+
+    const dateStyle = {
+        fontFamily: typography.body.fontFamily, // Handwritten style if possible, using body for now or specific token
+        fontSize: '16px',
+        color: '#FF5733', // Example accent color like in screenshot (orange/red)
+        fontStyle: 'italic', // Mimic handwritten feel
+        marginBottom: spacing.xs
+    };
+
+    const titleStyle = {
+        fontFamily: typography.heading2.fontFamily,
+        fontSize: '32px',
+        fontWeight: typography.heading2.fontWeight,
+        lineHeight: typography.heading2.lineHeight,
+        color: colors.grey[9],
+        marginBottom: spacing.xs
+    };
+
+    const descriptionStyle = {
+        fontFamily: typography.body.fontFamily,
+        fontSize: '18px',
+        lineHeight: '1.6',
+        color: colors.grey[56],
+        maxWidth: '480px'
+    };
+
+    const tagsContainerStyle = {
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: spacing.sm,
+        marginTop: spacing.md
+    };
+
+    const tagStyle = {
+        padding: `${spacing.xs} ${spacing.md}`,
+        background: colors.grey[95],
+        borderRadius: '8px',
+        fontFamily: typography.body.fontFamily,
+        fontSize: '14px',
+        color: colors.grey[56]
+    };
+
     return (
         <div className={`group relative block w-full ${className}`}>
-            <Card variant="outlined" padding="none">
-                <div style={{ position: 'relative' }}>
-                    <div style={{
-                        aspectRatio: '16/9',
-                        width: '100%',
-                        overflow: 'hidden',
-                        background: colors.grey[95]
-                    }}>
-                        {image && (
+            <div style={containerStyle}>
+                {/* Left Side: Content */}
+                <div style={leftContentStyle}>
+                    {date && (
+                        <div style={{ display: 'flex', alignItems: 'center', gap: spacing.xs }}>
+                            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#FF5733' }}></span>
+                            <span style={dateStyle}>{date}</span>
+                        </div>
+                    )}
+                    
+                    <h2 style={titleStyle}>{title}</h2>
+                    
+                    {description && (
+                        <p style={descriptionStyle}>
+                            {description}
+                        </p>
+                    )}
+
+                    {tags && tags.length > 0 && (
+                        <div style={tagsContainerStyle}>
+                            {tags.map((tag, index) => (
+                                <span key={index} style={tagStyle}>
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
+                    )}
+                </div>
+
+                {/* Right Side: Image */}
+                <div style={rightContentStyle}>
+                    <div style={imageStyle}>
+                         {image && (
                             <img
                                 src={image}
                                 alt={title}
@@ -30,49 +136,9 @@ export const ProjectCard = ({ title, subtitle, image, link, className = "" }) =>
                             />
                         )}
                     </div>
-
-                    <div style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        padding: componentSpacing.card.padding.lg
-                    }}>
-                        <div>
-                            <h3 style={{
-                                fontFamily: typography.heading3.fontFamily,
-                                fontSize: typography.heading3.fontSize,
-                                fontWeight: typography.heading3.fontWeight,
-                                lineHeight: typography.heading3.lineHeight,
-                                letterSpacing: typography.heading3.letterSpacing,
-                                color: colors.grey[9],
-                                marginBottom: stackSpacing.md
-                            }}>
-                                {title}
-                            </h3>
-                            {subtitle && (
-                                <p style={{
-                                    fontFamily: typography.body.fontFamily,
-                                    fontSize: typography.body.fontSize,
-                                    fontWeight: typography.body.fontWeight,
-                                    lineHeight: typography.body.lineHeight,
-                                    letterSpacing: typography.body.letterSpacing,
-                                    color: colors.grey[56]
-                                }}>
-                                    {subtitle}
-                                </p>
-                            )}
-                        </div>
-
-                        <div style={{
-                            opacity: '0',
-                            transform: 'translateX(-16px)',
-                            transition: 'all 0.3s ease'
-                        }} className="group-hover:opacity-100 group-hover:translate-x-0">
-                            <ArrowRight style={{ color: colors.grey[9] }} />
-                        </div>
-                    </div>
                 </div>
-            </Card>
+            </div>
+
             {link && (
                 <a
                     href={link}

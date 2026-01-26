@@ -107,18 +107,24 @@ export const Home = () => {
 
             <div style={worksContainerStyle}>
                 <ProjectCard
+                    date="June - Aug 2023"
                     title="TikTok ToB Dataviz"
-                    subtitle="数据可视化产品设计实习"
+                    description="Designed data visualization tools for enterprise analytics, improving data readability and decision-making efficiency."
+                    tags={['Data Visualization', 'ToB Product', 'UX Design']}
                     image={ASSETS.tiktok}
                 />
                 <ProjectCard
+                    date="Mar - May 2024"
                     title="Procreate"
-                    subtitle="iOS移动端产品设计复刻"
+                    description="A deep dive into mobile creative tools, analyzing interaction patterns and recreating key workflows for iOS."
+                    tags={['Mobile App', 'Product Analysis', 'iOS Design']}
                     image={ASSETS.pro}
                 />
                 <ProjectCard
+                    date="Jan - Feb 2024"
                     title="Dashboard UI"
-                    subtitle="B端CRM系统界面设计"
+                    description="Comprehensive CRM dashboard system design focusing on information architecture and user efficiency."
+                    tags={['Dashboard', 'CRM System', 'UI Design']}
                     image={ASSETS.dashboard}
                 />
             </div>
