@@ -93,7 +93,6 @@ export const About = () => {
         fontFamily: typography.body.fontFamily,
         fontSize: '18px',
         fontWeight: fontWeight.semibold,
-        fontStyle: 'italic',
         color: colors.grey[9]
     };
 
