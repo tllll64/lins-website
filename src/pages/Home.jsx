@@ -4,6 +4,7 @@ import { ProjectCard } from '../components/ProjectCard';
 import { GridCard } from '../components/GridCard';
 import { BlogCard } from '../components/BlogCard';
 import { Navbar } from '../components/Navbar';
+import { ContactSection } from '../components/ContactSection';
 import { ASSETS } from '../constants/assets';
 import { colors, spacing, typography, stackSpacing, gridGap, layoutSpacing, componentSpacing, width, fontSize } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
@@ -91,70 +92,6 @@ export const Home = () => {
         color: colors.white.solid,
         paddingTop: layoutSpacing.section.md,
         paddingBottom: layoutSpacing.section.lg
-    };
-
-    const contactContainerStyle = {
-        maxWidth: width.container.xl,
-        margin: '0 auto',
-        paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
-        paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
-        borderTop: `1px solid ${colors.white[0.2]}`,
-        paddingTop: stackSpacing.xl,
-        display: 'flex',
-        flexDirection: isMobile ? 'column' : 'row',
-        justifyContent: 'space-between',
-        alignItems: isMobile ? 'flex-start' : 'center',
-        gap: stackSpacing.xl
-    };
-
-    const contactTitleStyle = {
-        fontFamily: typography.heading1.fontFamily,
-        fontSize: isMobile ? fontSize[24] : fontSize[32],
-        fontWeight: typography.heading1.fontWeight,
-        lineHeight: typography.heading1.lineHeight,
-        letterSpacing: '0px',
-        color: colors.white.solid,
-        marginBottom: spacing.xs
-    };
-
-    const contactDescStyle = {
-        fontFamily: typography.body.fontFamily,
-        fontSize: typography.body.fontSize,
-        fontWeight: typography.body.fontWeight,
-        lineHeight: typography.body.lineHeight,
-        letterSpacing: typography.body.letterSpacing,
-        color: colors.grey[66],
-        maxWidth: '400px'
-    };
-
-    const contactLinksStyle = {
-        display: 'flex',
-        flexDirection: 'column',
-        gap: stackSpacing.md,
-        fontSize: typography.body.fontSize,
-        color: colors.grey[66]
-    };
-
-    const contactLinkStyle = {
-        display: 'flex',
-        alignItems: 'center',
-        gap: spacing.xs,
-        color: colors.grey[66],
-        textDecoration: 'none',
-        transition: 'color 0.2s ease',
-        cursor: 'pointer'
-    };
-
-    const copyrightStyle = {
-        maxWidth: width.container.xl,
-        margin: '0 auto',
-        paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
-        paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
-        marginTop: stackSpacing.xl,
-        fontSize: '11px',
-        color: colors.grey[66],
-        opacity: '0.4',
-        textAlign: isMobile ? 'center' : 'left'
     };
 
     return (
@@ -268,30 +205,9 @@ export const Home = () => {
                         />
                     </div>
                 </Section>
-
-                <div style={contactContainerStyle}>
-                    <div>
-                        <h2 style={contactTitleStyle}>Contact Me</h2>
-                        <p style={contactDescStyle}>
-                            Thanks for reaching the end of the page. If you want to learn more, email me or verify what I'm working on, feel free to get in touch!
-                        </p>
-                    </div>
-                    <div style={contactLinksStyle}>
-                        <div style={contactLinkStyle} onMouseEnter={(e) => e.currentTarget.style.color = colors.white.solid} onMouseLeave={(e) => e.currentTarget.style.color = colors.grey[66]}>
-                            <Mail size={16} /> <span>email@example.com</span>
-                        </div>
-                        <div style={contactLinkStyle} onMouseEnter={(e) => e.currentTarget.style.color = colors.white.solid} onMouseLeave={(e) => e.currentTarget.style.color = colors.grey[66]}>
-                            <Twitter size={16} /> <span>@design_handle</span>
-                        </div>
-                        <div style={contactLinkStyle} onMouseEnter={(e) => e.currentTarget.style.color = colors.white.solid} onMouseLeave={(e) => e.currentTarget.style.color = colors.grey[66]}>
-                            <Github size={16} /> <span>/developer-profile</span>
-                        </div>
-                    </div>
-                </div>
-                <div style={copyrightStyle}>
-                    © 2024 Lin's Design. All rights reserved.
-                </div>
             </footer>
+
+            <ContactSection />
 
         </div>
     );

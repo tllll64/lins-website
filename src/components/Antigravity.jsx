@@ -11,6 +11,7 @@ const AntigravityInner = ({
   particleSize = 2,
   lerpSpeed = 0.1,
   color = '#FF9FFC',
+  opacity = 1,
   autoAnimate = false,
   particleVariance = 1,
   rotationSpeed = 0,
@@ -162,7 +163,7 @@ const AntigravityInner = ({
       {particleShape === 'sphere' && <sphereGeometry args={[0.2, 16, 16]} />}
       {particleShape === 'box' && <boxGeometry args={[0.3, 0.3, 0.3]} />}
       {particleShape === 'tetrahedron' && <tetrahedronGeometry args={[0.3]} />}
-      <meshBasicMaterial color={color} />
+      <meshBasicMaterial color={color} transparent={opacity < 1} opacity={opacity} />
     </instancedMesh>
   );
 };

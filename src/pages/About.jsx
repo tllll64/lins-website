@@ -1,11 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Navbar } from '../components/Navbar';
 import { Section } from '../components/Section';
+import { ContactSection } from '../components/ContactSection';
 import { ASSETS } from '../constants/assets';
 import { colors, spacing, typography, fontWeight, stackSpacing, gridGap, layoutSpacing, componentSpacing, width, fontSize } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 import { Twitter, Github, Mail, Phone, MessageCircle } from 'lucide-react';
-import Antigravity from '../components/Antigravity';
 
 import profileImage from '../assets/profile.jpg';
 
@@ -13,7 +13,6 @@ export const About = () => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     const footerRef = useRef(null);
     const [navTheme, setNavTheme] = useState('light');
-    const [isFooterHovered, setIsFooterHovered] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -188,80 +187,6 @@ export const About = () => {
         background: colors.grey[95]
     };
 
-    const footerStyle = {
-        position: 'relative',
-        background: colors.black.solid,
-        color: colors.white.solid,
-        paddingTop: layoutSpacing.section.md,
-        paddingBottom: layoutSpacing.section.lg,
-        overflow: 'hidden'
-    };
-
-    const footerContainerStyle = {
-        position: 'relative',
-        zIndex: 1,
-        maxWidth: '1200px',
-        margin: '0 auto',
-        paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
-        paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
-        display: 'flex',
-        flexDirection: isMobile ? 'column' : 'row',
-        justifyContent: 'space-between',
-        alignItems: isMobile ? 'flex-start' : 'center',
-        gap: stackSpacing.xl
-    };
-
-    const footerTitleStyle = {
-        fontFamily: typography.heading1.fontFamily,
-        fontSize: isMobile ? fontSize[24] : fontSize[32],
-        fontWeight: typography.heading1.fontWeight,
-        lineHeight: typography.heading1.lineHeight,
-        letterSpacing: typography.heading1.letterSpacing,
-        color: colors.white.solid,
-        marginBottom: spacing.xs
-    };
-
-    const footerDescStyle = {
-        fontFamily: typography.body.fontFamily,
-        fontSize: typography.body.fontSize,
-        fontWeight: typography.body.fontWeight,
-        lineHeight: typography.body.lineHeight,
-        letterSpacing: typography.body.letterSpacing,
-        color: colors.grey[66],
-        maxWidth: '400px'
-    };
-
-    const footerLinksStyle = {
-        display: 'flex',
-        flexDirection: 'column',
-        gap: stackSpacing.md,
-        fontSize: typography.body.fontSize,
-        color: colors.grey[66]
-    };
-
-    const footerLinkStyle = {
-        display: 'flex',
-        alignItems: 'center',
-        gap: spacing.xs,
-        color: colors.grey[66],
-        transition: 'color 0.2s ease',
-        cursor: 'pointer'
-    };
-
-    const copyrightStyle = {
-        position: 'relative',
-        zIndex: 1,
-        maxWidth: '1200px',
-        margin: '0 auto',
-        paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
-        paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
-        marginTop: spacing.xl,
-        fontSize: '11px',
-        color: colors.grey[66],
-        opacity: '0.4',
-        textAlign: isMobile ? 'center' : 'left'
-    };
-
     const newsData = [
         { date: "[01/2026]", emoji: "🇪🇸", text: "My first CHI! 四月份西班牙巴塞罗那见！感谢学术之途的每一位引路人，给世界贡献一份 contribution（本 N 人的终极梦想）正在一步步实现中 ✨" },
         { date: "[11/2025]", emoji: "🎉", text: "CHI 首轮拿到了 ARR A ARR ARR！完全超乎预期的成绩～ 持续奋战中 💪" },
@@ -316,7 +241,7 @@ export const About = () => {
                                     <MessageCircle size={16} /> <span>LittleLionTOP</span>
                                 </div>
                                 <div style={contactLinkStyle}>
-                                    <Mail size={16} /> <span>Astronaut7L@163.com</span>
+                                    <Mail size={16} /> <span>AstronautTL@163.com</span>
                                 </div>
                             </div>
                         </div>
@@ -378,65 +303,7 @@ export const About = () => {
                 </div>
             </Section>
 
-            <footer
-                style={footerStyle}
-                ref={footerRef}
-                onMouseEnter={() => setIsFooterHovered(true)}
-                onMouseLeave={() => setIsFooterHovered(false)}
-            >
-                {isFooterHovered && (
-                    <div style={{
-                        position: 'absolute',
-                        width: '720px',
-                        height: '720px',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        pointerEvents: 'none',
-                        zIndex: 0
-                    }}>
-                        <Antigravity
-                            count={480}
-                            magnetRadius={8}
-                            ringRadius={17}
-                            waveSpeed={0.4}
-                            waveAmplitude={1.3}
-                            particleSize={1.5}
-                            lerpSpeed={0.18}
-                            color="rgba(232, 232, 232, 0.3)"
-                            autoAnimate
-                            particleVariance={1}
-                            rotationSpeed={0}
-                            depthFactor={1}
-                            pulseSpeed={3}
-                            particleShape="sphere"
-                            fieldStrength={8}
-                        />
-                    </div>
-                )}
-                <div style={footerContainerStyle}>
-                    <div>
-                        <h2 style={footerTitleStyle}>Contact Me</h2>
-                        <p style={footerDescStyle}>
-                            Thanks for reaching end of page. If you want to learn more, email me or verify what I'm working on, feel free to get in touch!
-                        </p>
-                    </div>
-                    <div style={footerLinksStyle}>
-                        <div style={footerLinkStyle} onMouseEnter={(e) => e.currentTarget.style.color = colors.white.solid} onMouseLeave={(e) => e.currentTarget.style.color = colors.grey[66]}>
-                            <Phone size={16} /> <span>(+86) 15968545540</span>
-                        </div>
-                        <div style={footerLinkStyle} onMouseEnter={(e) => e.currentTarget.style.color = colors.white.solid} onMouseLeave={(e) => e.currentTarget.style.color = colors.grey[66]}>
-                            <MessageCircle size={16} /> <span>LittleLionTOP</span>
-                        </div>
-                        <div style={footerLinkStyle} onMouseEnter={(e) => e.currentTarget.style.color = colors.white.solid} onMouseLeave={(e) => e.currentTarget.style.color = colors.grey[66]}>
-                            <Mail size={16} /> <span>Astronaut7L@163.com</span>
-                        </div>
-                    </div>
-                </div>
-                <div style={copyrightStyle}>
-                    Designed and Coded by Chloe Tian • 2025 · Copyright @ 2025
-                </div>
-            </footer>
+            <ContactSection ref={footerRef} />
         </div>
     );
 };
