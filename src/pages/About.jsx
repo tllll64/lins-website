@@ -6,6 +6,8 @@ import { colors, spacing, typography, fontWeight, stackSpacing, gridGap, layoutS
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 import { Twitter, Github, Mail, Phone, MessageCircle } from 'lucide-react';
 
+import avatarImage from '../assets/avatar.jpg';
+
 export const About = () => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     const footerRef = useRef(null);
