@@ -25,7 +25,7 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-start',
-        gap: stackSpacing.md,
+        gap: spacing[1],
         width: isMobile ? '100%' : '33%'
     };
 

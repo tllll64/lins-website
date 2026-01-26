@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar } from '../components/Navbar';
 import { PublicationCard } from '../components/PublicationCard';
-import { colors, layoutSpacing, width, typography, stackSpacing, fontSize } from '../design-system/tokens';
+import { colors, layoutSpacing, width, typography, stackSpacing, fontSize, gridGap } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 import { ASSETS } from '../constants/assets';
 
@@ -79,6 +79,13 @@ export const Research = () => {
         }
     ];
 
+    const demoItems = [
+        { type: 'placeholder' },
+        { type: 'video', src: 'https://www.youtube.com/embed/5nUYwufk3-U' },
+        { type: 'video', src: 'https://www.youtube.com/embed/dMuGlI-wrhQ' },
+        { type: 'video', src: 'https://www.youtube.com/embed/Cxhs8KX5Kq4' }
+    ];
+
     return (
         <div style={pageStyle}>
             <Navbar theme="light" />
@@ -86,7 +93,7 @@ export const Research = () => {
             <div style={containerStyle}>
                 <h1 style={titleStyle}>Publications</h1>
                 
-                <div>
+                <div style={{ marginBottom: layoutSpacing.section.xl }}>
                     {publicationsData.map((pub, index) => (
                         <PublicationCard
                             key={index}
@@ -96,6 +103,40 @@ export const Research = () => {
                             links={pub.links}
                             image={pub.image}
                         />
+                    ))}
+                </div>
+
+                <h1 style={titleStyle}>Interactive Demos</h1>
+                <div style={{ 
+                    display: 'grid',
+                    gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
+                    gap: gridGap.xl 
+                }}>
+                    {demoItems.map((item, index) => (
+                        <div key={index} style={{
+                            width: '100%',
+                            aspectRatio: '16/9',
+                            background: colors.grey[92],
+                            borderRadius: '12px',
+                            overflow: 'hidden',
+                            position: 'relative'
+                        }}>
+                             {item.type === 'video' ? (
+                                 <iframe 
+                                    width="100%" 
+                                    height="100%" 
+                                    src={item.src}
+                                    title={`Demo Video ${index + 1}`}
+                                    frameBorder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                    referrerPolicy="strict-origin-when-cross-origin" 
+                                    allowFullScreen
+                                    style={{ border: 'none' }}
+                                 ></iframe>
+                             ) : (
+                                 <div style={{ width: '100%', height: '100%', background: colors.grey[92] }}></div>
+                             )}
+                        </div>
                     ))}
                 </div>
             </div>
