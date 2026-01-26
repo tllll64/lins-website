@@ -138,26 +138,26 @@ export const Home = () => {
                     </div>
                 </Section>
 
-                <Section title="Digital Projects" subtitle="多端适配与交互 logic 探究" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
+                <Section title="Digital Projects" subtitle="本科期间在车载 HMI 和智能交互产品设计方向的落地性探索" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
                     <div style={gridStyle}>
                         <GridCard
-                            title="Xiaomi Smart Home"
-                            category="IoT App"
+                            title="小米汽车智驾学堂"
+                            category="小米实习产出 | 已上线"
                             image={ASSETS.digital1}
                         />
                         <GridCard
-                            title="NIO Cockpit"
-                            category="HMI Design"
+                            title="NIO Roam 城市漫游座舱"
+                            category="本科校级&院级优秀毕设"
                             image={ASSETS.digital2}
                         />
                         <GridCard
-                            title="7.23 Event"
-                            category="Campaign"
+                            title="方由: 国学教育玩具设计"
+                            category="智能硬件产品设计"
                             image={ASSETS.digital3}
                         />
                         <GridCard
-                            title="AR Glasses"
-                            category="Hardware Interface"
+                            title="Colean: 未来家务AR游戏"
+                            category="AR 应用研究"
                             image={ASSETS.digital4}
                         />
                     </div>
