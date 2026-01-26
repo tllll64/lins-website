@@ -83,41 +83,63 @@ export const Navbar = ({ theme = 'light' }) => {
     const isAboutActive = location.pathname === '/about';
 
     return (
-        <nav style={navStyle}>
-            <div style={containerStyle}>
-                <Link 
-                    to="/" 
-                    style={getLinkStyle(isWorksActive)} 
-                    onMouseEnter={(e) => handleMouseEnter(e, isWorksActive)} 
-                    onMouseLeave={(e) => handleMouseLeave(e, isWorksActive)}
+        <>
+            <div 
+                className="gradual-blur gradual-blur-fixed" 
+                style={{ 
+                    zIndex: 40, 
+                    bottom: 'auto', 
+                    height: '160px' 
+                }}
+            >
+                <div 
+                    className="gradual-blur-inner" 
+                    style={{ 
+                        backdropFilter: 'blur(12px)', 
+                        WebkitBackdropFilter: 'blur(12px)', 
+                        maskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)', 
+                        WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)' 
+                    }}
                 >
-                    Works
-                </Link>
-                <Link 
-                    to="/research" 
-                    style={getLinkStyle(isResearchActive)} 
-                    onMouseEnter={(e) => handleMouseEnter(e, isResearchActive)} 
-                    onMouseLeave={(e) => handleMouseLeave(e, isResearchActive)}
-                >
-                    Research
-                </Link>
-                <Link 
-                    to="/about" 
-                    style={getLinkStyle(isAboutActive)} 
-                    onMouseEnter={(e) => handleMouseEnter(e, isAboutActive)} 
-                    onMouseLeave={(e) => handleMouseLeave(e, isAboutActive)}
-                >
-                    About
-                </Link>
-                <a 
-                    href="#" 
-                    style={getLinkStyle(false)} 
-                    onMouseEnter={(e) => handleMouseEnter(e, false)} 
-                    onMouseLeave={(e) => handleMouseLeave(e, false)}
-                >
-                    Resume
-                </a>
+                    <div></div>
+                </div>
             </div>
-        </nav>
+            <nav style={navStyle}>
+                <div style={containerStyle}>
+                    <Link 
+                        to="/" 
+                        style={getLinkStyle(isWorksActive)} 
+                        onMouseEnter={(e) => handleMouseEnter(e, isWorksActive)} 
+                        onMouseLeave={(e) => handleMouseLeave(e, isWorksActive)}
+                    >
+                        Works
+                    </Link>
+                    <Link 
+                        to="/research" 
+                        style={getLinkStyle(isResearchActive)} 
+                        onMouseEnter={(e) => handleMouseEnter(e, isResearchActive)} 
+                        onMouseLeave={(e) => handleMouseLeave(e, isResearchActive)}
+                    >
+                        Research
+                    </Link>
+                    <Link 
+                        to="/about" 
+                        style={getLinkStyle(isAboutActive)} 
+                        onMouseEnter={(e) => handleMouseEnter(e, isAboutActive)} 
+                        onMouseLeave={(e) => handleMouseLeave(e, isAboutActive)}
+                    >
+                        About
+                    </Link>
+                    <a 
+                        href="#" 
+                        style={getLinkStyle(false)} 
+                        onMouseEnter={(e) => handleMouseEnter(e, false)} 
+                        onMouseLeave={(e) => handleMouseLeave(e, false)}
+                    >
+                        Resume
+                    </a>
+                </div>
+            </nav>
+        </>
     );
 };

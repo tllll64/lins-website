@@ -77,12 +77,13 @@ const TextType = ({
             setDisplayedText(prev => prev + currentText[currentCharIndex]);
             setCurrentCharIndex(prev => prev + 1);
           }, typingSpeed);
-        } else if (textArray.length > 1) {
-          if (!loop && currentTextIndex === textArray.length - 1) return;
+        } else if (loop && textArray.length >= 1) {
+          // Only loop if loop is true
           timeout = setTimeout(() => {
             setIsDeleting(true);
           }, pauseDuration);
         }
+        // If not looping, just stop here - the text stays displayed
       }
     };
 

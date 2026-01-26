@@ -26,7 +26,7 @@ export const PublicationCard = ({ title, authors, venue, links, image }) => {
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
-        gap: stackSpacing.xs,
+        gap: spacing[1], // Reduced from stackSpacing.xs (8px) to 4px
         justifyContent: 'flex-start',
         paddingTop: isMobile ? 0 : spacing.xs
     };
