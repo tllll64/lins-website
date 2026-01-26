@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 
 const TextType = ({
   text,
+  as = 'div',
   typingSpeed = 50,
   initialDelay = 0,
   pauseDuration = 2000,
@@ -109,12 +110,13 @@ const TextType = ({
   const cursorStyle = {
     display: 'inline-block',
     marginLeft: '2px',
-    animation: 'blink 1s infinite',
-    ...style
+    animation: 'blink 1s infinite'
   };
 
+  const Container = as;
+
   return (
-    <div ref={containerRef} className={className} style={style} {...props}>
+    <Container ref={containerRef} className={className} style={style} {...props}>
       <span style={{ color: getCurrentTextColor() || 'inherit' }}>
         {displayedText}
       </span>
@@ -133,7 +135,7 @@ const TextType = ({
           </span>
         </>
       )}
-    </div>
+    </Container>
   );
 };
 

@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { Navbar } from '../components/Navbar';
 import { Section } from '../components/Section';
 import { ContactSection } from '../components/ContactSection';
+import TextType from '../components/TextType';
 import { ASSETS } from '../constants/assets';
 import { colors, spacing, typography, fontWeight, stackSpacing, gridGap, layoutSpacing, componentSpacing, width, fontSize } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
@@ -237,14 +238,24 @@ export const About = () => {
             <div style={profileContainerStyle}>
                 <div style={profileContentStyle}>
                     <div style={profileTextStyle}>
-                        <h1 style={profileTitleStyle}>About Me</h1>
+                        <TextType
+                            text="About Me"
+                            as="h1"
+                            style={profileTitleStyle}
+                            typingSpeed={120}
+                            initialDelay={300}
+                            loop={false}
+                            showCursor={true}
+                            cursorCharacter="|"
+                            startOnVisible={false}
+                        />
 
                         <div style={profileBodyStyle}>
                             <p>
                                 嗨，我是 Chloe Tian。作为一名数字设计师和 AI 工程师，我致力于将以人为本的设计与前沿技术相融合。
                             </p>
                             <p>
-                                目前在上海，就读于 <span style={{ fontWeight: fontWeight.semibold, textDecoration: 'underline', textDecorationThickness: '2px', textDecorationColor: colors.black[40] }}>同济大学 D&I</span> 交互设计专业，专注于 🤖 人机交互（HAI）研究 @ <span style={{ fontWeight: fontWeight.semibold, textDecoration: 'underline', textDecorationThickness: '2px', textDecorationColor: colors.black[40] }}>CDI</span>。
+                                目前在上海，就读于 <span style={{ fontWeight: fontWeight.semibold }}>同济大学 </span><span style={{ fontWeight: fontWeight.semibold, textDecoration: 'underline', textDecorationThickness: '2px', textDecorationColor: colors.black[40] }}>D&I</span> 交互设计专业，专注于 🤖 人机交互（HAI）研究 @ <span style={{ fontWeight: fontWeight.semibold, textDecoration: 'underline', textDecorationThickness: '2px', textDecorationColor: colors.black[40] }}>CDI</span>。
                             </p>
                             <p>
                                 我热衷于重新定义我们与技术互动的方式，使其更加直观、流畅，并无缝融入我们的日常生活。
