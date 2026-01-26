@@ -5,6 +5,7 @@ import { ASSETS } from '../constants/assets';
 import { colors, spacing, typography, fontWeight, stackSpacing, gridGap, layoutSpacing, componentSpacing, width, fontSize } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 import { Twitter, Github, Mail, Phone, MessageCircle } from 'lucide-react';
+import Antigravity from '../components/Antigravity';
 
 import profileImage from '../assets/profile.jpg';
 
@@ -12,6 +13,7 @@ export const About = () => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     const footerRef = useRef(null);
     const [navTheme, setNavTheme] = useState('light');
+    const [isFooterHovered, setIsFooterHovered] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -187,13 +189,17 @@ export const About = () => {
     };
 
     const footerStyle = {
+        position: 'relative',
         background: colors.black.solid,
         color: colors.white.solid,
         paddingTop: layoutSpacing.section.md,
-        paddingBottom: layoutSpacing.section.lg
+        paddingBottom: layoutSpacing.section.lg,
+        overflow: 'hidden'
     };
 
     const footerContainerStyle = {
+        position: 'relative',
+        zIndex: 1,
         maxWidth: '1200px',
         margin: '0 auto',
         paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
@@ -243,6 +249,8 @@ export const About = () => {
     };
 
     const copyrightStyle = {
+        position: 'relative',
+        zIndex: 1,
         maxWidth: '1200px',
         margin: '0 auto',
         paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
@@ -370,7 +378,42 @@ export const About = () => {
                 </div>
             </Section>
 
-            <footer style={footerStyle} ref={footerRef}>
+            <footer
+                style={footerStyle}
+                ref={footerRef}
+                onMouseEnter={() => setIsFooterHovered(true)}
+                onMouseLeave={() => setIsFooterHovered(false)}
+            >
+                {isFooterHovered && (
+                    <div style={{
+                        position: 'absolute',
+                        width: '1080px',
+                        height: '1080px',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        pointerEvents: 'none',
+                        zIndex: 0
+                    }}>
+                        <Antigravity
+                            count={480}
+                            magnetRadius={8}
+                            ringRadius={17}
+                            waveSpeed={0.4}
+                            waveAmplitude={1.3}
+                            particleSize={1.5}
+                            lerpSpeed={0.18}
+                            color="#e8e8e8"
+                            autoAnimate
+                            particleVariance={1}
+                            rotationSpeed={0}
+                            depthFactor={1}
+                            pulseSpeed={3}
+                            particleShape="sphere"
+                            fieldStrength={8}
+                        />
+                    </div>
+                )}
                 <div style={footerContainerStyle}>
                     <div>
                         <h2 style={footerTitleStyle}>Contact Me</h2>

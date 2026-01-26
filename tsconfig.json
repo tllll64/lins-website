@@ -22,7 +22,13 @@
 
     /* Allow JavaScript files */
     "allowJs": true,
-    "checkJs": false
+    "checkJs": false,
+    
+    /* Path aliases for shadcn */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
