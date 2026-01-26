@@ -4,7 +4,7 @@ import { colors, spacing, typography, stackSpacing, componentSpacing } from '../
 import { ArrowRight } from 'lucide-react';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 
-export const ProjectCard = ({ date, title, description, tags, image, link, className = "" }) => {
+export const ProjectCard = ({ date, title, description, tags, image, link, className = "", customCursor }) => {
     const isMobile = useMediaQuery('(max-width: 768px)');
 
     const containerStyle = {
@@ -42,7 +42,8 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
         borderRadius: '16px',
         overflow: 'hidden',
         background: colors.grey[95],
-        position: 'relative'
+        position: 'relative',
+        cursor: customCursor ? `url("${customCursor}"), auto` : 'default'
     };
 
     const dateStyle = {

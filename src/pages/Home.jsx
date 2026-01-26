@@ -9,6 +9,7 @@ import { ASSETS } from '../constants/assets';
 import { colors, spacing, typography, stackSpacing, gridGap, layoutSpacing, componentSpacing, width, fontSize } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 import { Twitter, Github, Mail } from 'lucide-react';
+import xhsCursor from '../assets/cursor/XHS Cursor.png';
 
 export const Home = () => {
     const isMobile = useMediaQuery('(max-width: 768px)');
@@ -119,6 +120,7 @@ export const Home = () => {
                     description="A deep dive into mobile creative tools, analyzing interaction patterns and recreating key workflows for iOS."
                     tags={['Mobile App', 'Product Analysis']}
                     image={ASSETS.pro}
+                    customCursor={xhsCursor}
                 />
             </div>
 
