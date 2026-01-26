@@ -82,8 +82,8 @@ export const Research = () => {
     const demoItems = [
         { type: 'placeholder' },
         { type: 'video', src: 'https://www.youtube.com/embed/5nUYwufk3-U' },
-        { type: 'video', src: 'https://www.youtube.com/embed/dMuGlI-wrhQ' },
-        { type: 'video', src: 'https://www.youtube.com/embed/Cxhs8KX5Kq4' }
+        { type: 'video', src: 'https://www.youtube.com/embed/Cxhs8KX5Kq4' },
+        { type: 'video', src: 'https://www.youtube.com/embed/dMuGlI-wrhQ' }
     ];
 
     return (
