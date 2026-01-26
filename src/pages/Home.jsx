@@ -110,22 +110,15 @@ export const Home = () => {
                     date="June - Aug 2023"
                     title="TikTok ToB Dataviz"
                     description="Designed data visualization tools for enterprise analytics, improving data readability and decision-making efficiency."
-                    tags={['Data Visualization', 'ToB Product', 'UX Design']}
+                    tags={['Data Visualization', 'ToB Product']}
                     image={ASSETS.tiktok}
                 />
                 <ProjectCard
                     date="Mar - May 2024"
                     title="Procreate"
                     description="A deep dive into mobile creative tools, analyzing interaction patterns and recreating key workflows for iOS."
-                    tags={['Mobile App', 'Product Analysis', 'iOS Design']}
+                    tags={['Mobile App', 'Product Analysis']}
                     image={ASSETS.pro}
-                />
-                <ProjectCard
-                    date="Jan - Feb 2024"
-                    title="Dashboard UI"
-                    description="Comprehensive CRM dashboard system design focusing on information architecture and user efficiency."
-                    tags={['Dashboard', 'CRM System', 'UI Design']}
-                    image={ASSETS.dashboard}
                 />
             </div>
 

@@ -14,7 +14,7 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
         justifyContent: 'space-between',
         gap: spacing.xl,
         width: '100%',
-        padding: isMobile ? spacing.md : spacing.xl,
+        padding: 0,
         background: 'transparent',
         borderRadius: '24px',
         transition: 'all 0.3s ease'
@@ -64,7 +64,7 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
 
     const descriptionStyle = {
         fontFamily: typography.body.fontFamily,
-        fontSize: '18px',
+        fontSize: '16px',
         lineHeight: '1.6',
         color: colors.grey[56],
         maxWidth: '480px'
@@ -93,7 +93,6 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
                 <div style={leftContentStyle}>
                     {date && (
                         <div style={{ display: 'flex', alignItems: 'center', gap: spacing.xs }}>
-                            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#FF5733' }}></span>
                             <span style={dateStyle}>{date}</span>
                         </div>
                     )}
