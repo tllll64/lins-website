@@ -138,6 +138,7 @@ export const Home = () => {
                             title="Generative Music"
                             category="Web Interface"
                             image={ASSETS.ai2}
+                            onClick={() => navigate('/works/zhi-xiao-bao')}
                         />
                     </div>
                 </Section>
@@ -148,7 +149,6 @@ export const Home = () => {
                             title="小米汽车智驾学堂"
                             category="小米实习产出 | 已上线"
                             image={ASSETS.digital1}
-                            onClick={() => navigate('/works/zhi-xiao-bao')}
                         />
                         <GridCard
                             title="NIO Roam 城市漫游座舱"
