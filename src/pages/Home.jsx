@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Section } from '../components/Section';
 import { ProjectCard } from '../components/ProjectCard';
 import { GridCard } from '../components/GridCard';
@@ -12,6 +13,7 @@ import { Twitter, Github, Mail } from 'lucide-react';
 import xhsCursor from '../assets/cursor/xhs-cursor.png';
 
 export const Home = () => {
+    const navigate = useNavigate();
     const isMobile = useMediaQuery('(max-width: 768px)');
     const footerRef = useRef(null);
     const [navTheme, setNavTheme] = useState('light');
@@ -146,6 +148,7 @@ export const Home = () => {
                             title="小米汽车智驾学堂"
                             category="小米实习产出 | 已上线"
                             image={ASSETS.digital1}
+                            onClick={() => navigate('/works/zhi-xiao-bao')}
                         />
                         <GridCard
                             title="NIO Roam 城市漫游座舱"

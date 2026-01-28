@@ -2,9 +2,9 @@ import React from 'react';
 import { colors, spacing, typography, stackSpacing } from '../design-system/tokens';
 import { ArrowRight } from 'lucide-react';
 
-export const GridCard = ({ title, category, image, className = "" }) => {
+export const GridCard = ({ title, category, image, className = "", onClick }) => {
     return (
-        <div className={`group cursor-pointer ${className}`}>
+        <div className={`group cursor-pointer ${className}`} onClick={onClick}>
             <div style={{
                 aspectRatio: '16/9',
                 width: '100%',
