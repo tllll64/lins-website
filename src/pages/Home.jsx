@@ -131,8 +131,7 @@ export const Home = () => {
                     <div style={gridStyle}>
                         <GridCard
                             title="GenFaceUI: Generative Meta-Design Tool"
-                            category="CHI’26 Full Paper"
-                            category="HAI Research |CHI"
+                            category="HAI Research | CHI"
                             image={ASSETS.ai1}
                         />
                         <GridCard

@@ -5,6 +5,13 @@ import { colors, layoutSpacing, width, typography, stackSpacing, fontSize, gridG
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 import { ASSETS } from '../constants/assets';
 
+const RESEARCH_ASSETS = {
+    chi: new URL('../assets/Research/CHI@3x.png', import.meta.url).href,
+    iasdr: new URL('../assets/Research/iasdr@3x.png', import.meta.url).href,
+    uist: new URL('../assets/Research/UIST@3x.png', import.meta.url).href,
+    cscw: new URL('../assets/Research/CSCW@3x.png', import.meta.url).href,
+};
+
 export const Research = () => {
     const isMobile = useMediaQuery('(max-width: 768px)');
 
@@ -43,7 +50,7 @@ export const Research = () => {
                 { label: "Video", url: "#" },
                 { label: "Research Doc", url: "#" }
             ],
-            image: null // Placeholder
+            image: RESEARCH_ASSETS.chi
         },
         {
             title: "Jokeasy: Exploring Human-AI Collaboration in Thematic Joke Generation",
@@ -54,7 +61,7 @@ export const Research = () => {
                 { label: "PDF", url: "#" },
                 { label: "Video", url: "#" }
             ],
-            image: ASSETS.ai1 // Use AI project image as placeholder
+            image: RESEARCH_ASSETS.iasdr
         },
         {
             title: "Exploring Generative Personalized Facial Expression Interfaces for Intelligent Agents",
@@ -65,7 +72,7 @@ export const Research = () => {
                 { label: "PDF", url: "#" },
                 { label: "Video", url: "#" }
             ],
-            image: ASSETS.digital4 // Use Hardware/AR image as placeholder
+            image: RESEARCH_ASSETS.uist
         },
         {
             title: "When Accessibility Becomes a Trap: A User-Centric Characterization of Dark Patterns Arising from Screen Reader Users' Perceived Deception in Mobile Interfaces",
@@ -75,7 +82,7 @@ export const Research = () => {
                 { label: "ACM DL (Coming Soon)", url: "#" },
                 { label: "PDF", url: "#" }
             ],
-            image: ASSETS.digital1 // Use Mobile interface image as placeholder
+            image: RESEARCH_ASSETS.cscw
         }
     ];
 

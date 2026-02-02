@@ -22,6 +22,13 @@ export const PublicationCard = ({ title, authors, venue, links, image }) => {
         background: colors.grey[92]
     };
 
+    const imageStyle = {
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+        display: 'block'
+    };
+
     const contentStyle = {
         flex: 1,
         display: 'flex',
@@ -74,7 +81,7 @@ export const PublicationCard = ({ title, authors, venue, links, image }) => {
     return (
         <div style={containerStyle}>
             <div style={imageContainerStyle}>
-                {/* Image placeholder - always gray block as requested */}
+                {image && <img src={image} alt={title} style={imageStyle} />}
             </div>
             <div style={contentStyle}>
                 <h3 style={titleStyle}>{title}</h3>
