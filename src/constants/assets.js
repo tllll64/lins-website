@@ -5,7 +5,7 @@ export const ASSETS = {
     dashboard: "http://localhost:3845/assets/1c526d7a330a11024fca2fd5c9fff4946e80b9f0.png",
 
     // AI Projects
-    ai1: "http://localhost:3845/assets/9dabb1733ba80f9f6b949671038f0e1e5a42fadd.png", // Creative AI
+    ai1: new URL('../assets/Home/GenFaceUI.png', import.meta.url).href, // Creative AI - GenFaceUI
     ai2: "http://localhost:3845/assets/512929211457157a805739b0a1c65a0657ad2eeb.png", // Music
 
     // Digital Projects

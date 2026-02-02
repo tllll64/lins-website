@@ -127,16 +127,17 @@ export const Home = () => {
             </div>
 
             <div id="explorations">
-                <Section title="AI projects" subtitle="研究与实践生成式 AI在Web/App界面的应用与落地" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
+                <Section title="AI-Driven Projects" subtitle="研究生期间在生成式交互方向上探索的原型与落地作品" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
                     <div style={gridStyle}>
                         <GridCard
-                            title="AI Creative Tool"
-                            category="AI Application"
+                            title="GenFaceUI: Generative Meta-Design Tool"
+                            category="CHI’26 Full Paper"
+                            category="HAI Research |CHI"
                             image={ASSETS.ai1}
                         />
                         <GridCard
-                            title="Generative Music"
-                            category="Web Interface"
+                            title="基于周边出行场景的支小宝 AI 应用创新探索"
+                            category="设计探索"
                             image={ASSETS.ai2}
                             onClick={() => navigate('/works/zhi-xiao-bao')}
                         />
@@ -161,8 +162,8 @@ export const Home = () => {
                             image={ASSETS.digital3}
                         />
                         <GridCard
-                            title="Colean: 未来家务AR游戏"
-                            category="AR 应用研究"
+                            title="Colean: 未来家务 AR 游戏"
+                            category="AR 应用探索"
                             image={ASSETS.digital4}
                         />
                     </div>
