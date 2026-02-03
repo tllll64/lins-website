@@ -178,28 +178,28 @@ export const Home = () => {
                         marginBottom: layoutSpacing.section.md
                     }}>
                         <BlogCard
-                            title="Reflection on AI Tools"
-                            date="2023.10.24"
+                            title="Lynn's 人机协作日志"
+                            date="WIP"
                             image={ASSETS.blog1}
                         />
                         <BlogCard
-                            title="Interface Design Trends"
-                            date="2023.11.15"
+                            title="“AIGC+模板化”融入B端业务实践反思"
+                            date="2025.04"
                             image={ASSETS.blog2}
                         />
                         <BlogCard
-                            title="Design Systems in 2024"
-                            date="2024.01.10"
+                            title="商业化产品引导体系建设调研"
+                            date="2025.06"
                             image={ASSETS.blog1}
                         />
                         <BlogCard
-                            title="The Future of HMI"
-                            date="2024.02.01"
+                            title="B 端 AI 应用设计框架"
+                            date="2025.07"
                             image={ASSETS.blog2}
                         />
                         <BlogCard
-                            title="My Internship Journey"
-                            date="2024.02.15"
+                            title="华为问界智驾教学产品分析"
+                            date="2023.10"
                             image={ASSETS.blog1}
                         />
                         <BlogCard

@@ -181,6 +181,13 @@ export const ZhiXiaoBao = () => {
         <div style={{ background: colors.background, minHeight: '100vh', paddingBottom: '100px' }}>
             <Navbar theme="light" />
 
+            {/* Teaser Section */}
+            <div style={{
+                width: '100%',
+                height: '100vh',
+                background: colors.white.solid
+            }} />
+
             {/* Header Image */}
             <div style={{ width: '100%', marginTop: '60px' }}>
                 <img
