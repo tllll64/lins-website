@@ -102,7 +102,11 @@ export const Home = () => {
         minHeight: blogHeight ? `${blogHeight}px` : undefined,
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundImage: `radial-gradient(${colors.grey[86]} 1px, transparent 1px)`,
+        backgroundSize: '18px 18px',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'repeat'
     };
 
     const teaserTitleStyle = {
