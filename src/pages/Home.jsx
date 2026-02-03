@@ -103,7 +103,7 @@ export const Home = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        backgroundImage: `radial-gradient(${colors.grey[86]} 1px, transparent 1px)`,
+        backgroundImage: `radial-gradient(${colors.grey[92]} 1px, transparent 1px)`,
         backgroundSize: '18px 18px',
         backgroundPosition: 'center',
         backgroundRepeat: 'repeat'
@@ -156,10 +156,7 @@ export const Home = () => {
         <div style={pageStyle}>
             <Navbar theme={navTheme} />
 
-            <section style={teaserStyle}>
-                <h2 style={teaserTitleStyle}>Teaser</h2>
-                <p style={teaserSubtitleStyle}>精选作品与最新思考抢先预览</p>
-            </section>
+            <section style={teaserStyle} />
 
             <header style={heroStyle} id="works">
                 <h1 style={heroTitleStyle}>Selected works</h1>
