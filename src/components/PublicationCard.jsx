@@ -8,6 +8,7 @@ export const PublicationCard = ({ title, authors, venue, links, image }) => {
     const containerStyle = {
         display: 'flex',
         flexDirection: isMobile ? 'column' : 'row',
+        alignItems: 'flex-start',
         gap: spacing.xl,
         width: '100%',
         marginBottom: stackSpacing.xl
@@ -16,7 +17,6 @@ export const PublicationCard = ({ title, authors, venue, links, image }) => {
     const imageContainerStyle = {
         width: isMobile ? '100%' : '280px',
         flexShrink: 0,
-        aspectRatio: '16/9',
         borderRadius: '8px',
         overflow: 'hidden',
         background: colors.grey[92]
@@ -24,8 +24,8 @@ export const PublicationCard = ({ title, authors, venue, links, image }) => {
 
     const imageStyle = {
         width: '100%',
-        height: '100%',
-        objectFit: 'cover',
+        height: 'auto',
+        objectFit: 'contain',
         display: 'block'
     };
 
