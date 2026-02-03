@@ -16,7 +16,9 @@ export const Home = () => {
     const navigate = useNavigate();
     const isMobile = useMediaQuery('(max-width: 768px)');
     const footerRef = useRef(null);
+    const blogSectionRef = useRef(null);
     const [navTheme, setNavTheme] = useState('light');
+    const [blogHeight, setBlogHeight] = useState(null);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -38,6 +40,23 @@ export const Home = () => {
         handleScroll();
         
         return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    useEffect(() => {
+        if (!blogSectionRef.current) {
+            return undefined;
+        }
+
+        const observer = new ResizeObserver((entries) => {
+            const entry = entries[0];
+            if (entry) {
+                setBlogHeight(Math.round(entry.contentRect.height));
+            }
+        });
+
+        observer.observe(blogSectionRef.current);
+
+        return () => observer.disconnect();
     }, []);
 
     const pageStyle = {
@@ -73,6 +92,38 @@ export const Home = () => {
         color: colors.grey[56]
     };
 
+    const teaserStyle = {
+        paddingTop: layoutSpacing.section.md,
+        paddingBottom: layoutSpacing.section.md,
+        paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
+        paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
+        maxWidth: width.container.xl,
+        margin: '0 auto',
+        minHeight: blogHeight ? `${blogHeight}px` : undefined,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center'
+    };
+
+    const teaserTitleStyle = {
+        fontFamily: typography.heading1.fontFamily,
+        fontSize: isMobile ? '28px' : '32px',
+        fontWeight: typography.heading1.fontWeight,
+        lineHeight: typography.heading1.lineHeight,
+        letterSpacing: '0px',
+        color: colors.grey[9],
+        marginBottom: stackSpacing.xs
+    };
+
+    const teaserSubtitleStyle = {
+        fontFamily: typography.body.fontFamily,
+        fontSize: typography.body.fontSize,
+        fontWeight: typography.body.fontWeight,
+        lineHeight: typography.body.lineHeight,
+        letterSpacing: typography.body.letterSpacing,
+        color: colors.grey[56]
+    };
+
     const worksContainerStyle = {
         paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
         paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
@@ -100,6 +151,11 @@ export const Home = () => {
     return (
         <div style={pageStyle}>
             <Navbar theme={navTheme} />
+
+            <section style={teaserStyle}>
+                <h2 style={teaserTitleStyle}>Teaser</h2>
+                <p style={teaserSubtitleStyle}>精选作品与最新思考抢先预览</p>
+            </section>
 
             <header style={heroStyle} id="works">
                 <h1 style={heroTitleStyle}>Selected works</h1>
@@ -170,45 +226,47 @@ export const Home = () => {
             </div>
 
             <footer style={footerStyle} id="about" ref={footerRef}>
-                <Section title="Reflection Blog" subtitle="AIGC 期间的思考与 HMI 和智能交互设计相关的沉淀" dark className="!py-0 !px-0">
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
-                        gap: gridGap.xl,
-                        marginBottom: layoutSpacing.section.md
-                    }}>
-                        <BlogCard
-                            title="Lynn's 人机协作日志"
-                            date="WIP"
-                            image={ASSETS.blog1}
-                        />
-                        <BlogCard
-                            title="“AIGC+模板化”融入B端业务实践反思"
-                            date="2025.04"
-                            image={ASSETS.blog2}
-                        />
-                        <BlogCard
-                            title="商业化产品引导体系建设调研"
-                            date="2025.06"
-                            image={ASSETS.blog1}
-                        />
-                        <BlogCard
-                            title="B 端 AI 应用设计框架"
-                            date="2025.07"
-                            image={ASSETS.blog2}
-                        />
-                        <BlogCard
-                            title="华为问界智驾教学产品分析"
-                            date="2023.10"
-                            image={ASSETS.blog1}
-                        />
-                        <BlogCard
-                            title="Minimalism in 2024"
-                            date="2024.03.01"
-                            image={ASSETS.blog2}
-                        />
-                    </div>
-                </Section>
+                <div ref={blogSectionRef}>
+                    <Section title="Reflection Blog" subtitle="AIGC 期间的思考与 HMI 和智能交互设计相关的沉淀" dark className="!py-0 !px-0">
+                        <div style={{
+                            display: 'grid',
+                            gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
+                            gap: gridGap.xl,
+                            marginBottom: layoutSpacing.section.md
+                        }}>
+                            <BlogCard
+                                title="Lynn's 人机协作日志"
+                                date="WIP"
+                                image={ASSETS.blog1}
+                            />
+                            <BlogCard
+                                title="“AIGC+模板化”融入B端业务实践反思"
+                                date="2025.04"
+                                image={ASSETS.blog2}
+                            />
+                            <BlogCard
+                                title="商业化产品引导体系建设调研"
+                                date="2025.06"
+                                image={ASSETS.blog1}
+                            />
+                            <BlogCard
+                                title="B 端 AI 应用设计框架"
+                                date="2025.07"
+                                image={ASSETS.blog2}
+                            />
+                            <BlogCard
+                                title="华为问界智驾教学产品分析"
+                                date="2023.10"
+                                image={ASSETS.blog1}
+                            />
+                            <BlogCard
+                                title="Minimalism in 2024"
+                                date="2024.03.01"
+                                image={ASSETS.blog2}
+                            />
+                        </div>
+                    </Section>
+                </div>
             </footer>
 
             <ContactSection />
