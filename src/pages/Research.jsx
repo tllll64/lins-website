@@ -97,6 +97,30 @@ export const Research = () => {
         <div style={pageStyle}>
             <Navbar theme="light" />
             
+            {/* Teaser Section */}
+            <div style={{
+                width: '100%',
+                height: '80vh',
+                background: colors.white.solid,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                position: 'relative',
+                overflow: 'hidden'
+            }}>
+                <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    backgroundImage: 'radial-gradient(rgba(0,0,0,0.1) 1px, transparent 1px)',
+                    backgroundSize: '24px 24px',
+                    opacity: 0.5
+                }}></div>
+            </div>
+
             <div style={containerStyle}>
                 <h1 style={titleStyle}>Publications</h1>
                 

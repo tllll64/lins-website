@@ -88,15 +88,6 @@ export const Navbar = ({ theme = 'light' }) => {
         maxWidth: '90%'
     };
 
-    const blurStyle = {
-        zIndex: 40,
-        bottom: 'auto',
-        height: '160px',
-        transform: `translateY(${isHidden ? '-120%' : '0'})`,
-        opacity: isHidden ? 0 : 1,
-        transition: 'transform 0.28s ease, opacity 0.28s ease'
-    };
-
     const containerStyle = {
         paddingLeft: spacing.xl,
         paddingRight: spacing.xl,
@@ -134,22 +125,6 @@ export const Navbar = ({ theme = 'light' }) => {
 
     return (
         <>
-            <div 
-                className="gradual-blur gradual-blur-fixed" 
-                style={blurStyle}
-            >
-                <div 
-                    className="gradual-blur-inner" 
-                    style={{ 
-                        backdropFilter: 'blur(12px)', 
-                        WebkitBackdropFilter: 'blur(12px)', 
-                        maskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)', 
-                        WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)' 
-                    }}
-                >
-                    <div></div>
-                </div>
-            </div>
             <nav style={navStyle}>
                 <div style={containerStyle}>
                     <Link 
