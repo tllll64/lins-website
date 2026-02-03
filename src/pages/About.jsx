@@ -108,8 +108,8 @@ export const About = () => {
 
     const contactLinksStyle = {
         display: 'flex',
-        flexWrap: 'wrap',
-        gap: spacing.xl,
+        flexDirection: 'column',
+        gap: spacing.sm,
         fontSize: typography.body.fontSize,
         color: colors.grey[56]
     };

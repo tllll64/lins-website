@@ -6,6 +6,7 @@ import { GridCard } from '../components/GridCard';
 import { BlogCard } from '../components/BlogCard';
 import { Navbar } from '../components/Navbar';
 import { ContactSection } from '../components/ContactSection';
+import { StickerText } from '../components/StickerText';
 import { ASSETS } from '../constants/assets';
 import { colors, spacing, typography, stackSpacing, gridGap, layoutSpacing, componentSpacing, width, fontSize } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
@@ -156,7 +157,17 @@ export const Home = () => {
         <div style={pageStyle}>
             <Navbar theme={navTheme} />
 
-            <section style={teaserStyle} />
+            <section style={teaserStyle}>
+                <div style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
+                    <StickerText 
+                        as="h1" 
+                        color={colors.azure[48]}
+                        fontSize={isMobile ? '48px' : '80px'}
+                    >
+                        Lynn Tian
+                    </StickerText>
+                </div>
+            </section>
 
             <header style={heroStyle} id="works">
                 <h1 style={heroTitleStyle}>Selected works</h1>
