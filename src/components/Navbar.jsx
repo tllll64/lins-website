@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { colors, spacing, typography, fontWeight } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
@@ -6,6 +6,46 @@ import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 export const Navbar = ({ theme = 'light' }) => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     const location = useLocation();
+    const [isHidden, setIsHidden] = useState(false);
+    const lastScrollYRef = useRef(0);
+    const isHiddenRef = useRef(false);
+
+    useEffect(() => {
+        const hideThreshold = 8;
+        const showThreshold = 8;
+        const topRevealOffset = 80;
+
+        const onScroll = () => {
+            const currentY = window.scrollY;
+            const delta = currentY - lastScrollYRef.current;
+
+            if (currentY < topRevealOffset) {
+                if (isHiddenRef.current) {
+                    isHiddenRef.current = false;
+                    setIsHidden(false);
+                }
+            } else if (delta > hideThreshold) {
+                if (!isHiddenRef.current) {
+                    isHiddenRef.current = true;
+                    setIsHidden(true);
+                }
+            } else if (delta < -showThreshold) {
+                if (isHiddenRef.current) {
+                    isHiddenRef.current = false;
+                    setIsHidden(false);
+                }
+            }
+
+            lastScrollYRef.current = currentY;
+        };
+
+        const onScrollWithRaf = () => {
+            window.requestAnimationFrame(onScroll);
+        };
+
+        window.addEventListener('scroll', onScrollWithRaf, { passive: true });
+        return () => window.removeEventListener('scroll', onScrollWithRaf);
+    }, []);
 
     const isDark = theme === 'dark';
     const textColor = isDark ? colors.white.solid : colors.grey[56];
@@ -34,7 +74,7 @@ export const Navbar = ({ theme = 'light' }) => {
         position: 'fixed',
         top: spacing.lg,
         left: '50%',
-        transform: 'translateX(-50%)',
+        transform: `translate(-50%, ${isHidden ? '-120%' : '0'})`,
         zIndex: 50,
         background: isDark ? 'rgba(30, 30, 30, 0.7)' : `${colors.grey[98]}80`, // Slight adjustment for dark mode bg?
         backdropFilter: 'blur(16px)',
@@ -42,9 +82,19 @@ export const Navbar = ({ theme = 'light' }) => {
         border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : colors.grey[92]}`, // Adjust border for dark mode visibility?
         borderRadius: '9999px',
         boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
-        transition: 'all 0.3s ease',
+        transition: 'transform 0.28s ease, opacity 0.28s ease, background 0.3s ease, border-color 0.3s ease',
+        opacity: isHidden ? 0 : 1,
         width: 'auto',
         maxWidth: '90%'
+    };
+
+    const blurStyle = {
+        zIndex: 40,
+        bottom: 'auto',
+        height: '160px',
+        transform: `translateY(${isHidden ? '-120%' : '0'})`,
+        opacity: isHidden ? 0 : 1,
+        transition: 'transform 0.28s ease, opacity 0.28s ease'
     };
 
     const containerStyle = {
@@ -86,11 +136,7 @@ export const Navbar = ({ theme = 'light' }) => {
         <>
             <div 
                 className="gradual-blur gradual-blur-fixed" 
-                style={{ 
-                    zIndex: 40, 
-                    bottom: 'auto', 
-                    height: '160px' 
-                }}
+                style={blurStyle}
             >
                 <div 
                     className="gradual-blur-inner" 
