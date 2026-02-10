@@ -9,10 +9,10 @@ export const ASSETS = {
     ai2: "http://localhost:3845/assets/512929211457157a805739b0a1c65a0657ad2eeb.png", // Music
 
     // Digital Projects
-    digital1: "http://localhost:3845/assets/b6b65f93cd903acf3af84558f20e13c747a4b56e.png", // Xiaomi 
-    digital2: "http://localhost:3845/assets/c170185fe5385afcd1af65a13bcd3adf0fa5356d.png", // Nio
-    digital3: "http://localhost:3845/assets/965b632fc22a5d6be688ba5186dc0da8e9aec4ee.png", // 7.23
-    digital4: "http://localhost:3845/assets/f97d685a3578405c47d4b8c93d389ba2bf4fb412.png", // Glasses
+    digital1: new URL('../assets/Home/xiaomi.png', import.meta.url).href,
+    digital2: new URL('../assets/Home/Nio.png', import.meta.url).href,
+    digital3: new URL('../assets/Home/fangyou.png', import.meta.url).href,
+    digital4: new URL('../assets/Home/Colean.png', import.meta.url).href,
 
     // Blog
     blog1: "http://localhost:3845/assets/6ca252bd2a7cd546c42c7f46f1235a3f48bb30da.png",

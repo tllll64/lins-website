@@ -19,8 +19,10 @@ export const BlogCard = ({ title, image, className = "" }) => {
                         src={image}
                         alt={title}
                         style={{
+                            aspectRatio: '4 / 3',
                             height: '100%',
                             width: '100%',
+                            display: 'block',
                             objectFit: 'cover'
                         }}
                     />
