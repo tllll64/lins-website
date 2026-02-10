@@ -7,12 +7,8 @@ import { ZhiXiaoBao } from './pages/works/zhi-xiao-bao';
 import { XiaoMi } from './pages/works/xiao-mi';
 
 function App() {
-  // Check if we are in production environment (GitHub Pages)
-  const isProduction = import.meta.env.PROD;
-  const basename = isProduction ? '/lins-website' : '/';
-
   return (
-    <Router basename={basename}>
+    <Router>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />

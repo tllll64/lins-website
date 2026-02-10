@@ -2,7 +2,7 @@
   "name": "lin-website",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://tllll64.github.io/lins-website",
+  "homepage": "https://lynntian.com",
   "type": "module",
   "scripts": {
     "dev": "vite",
