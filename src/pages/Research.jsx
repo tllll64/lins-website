@@ -43,43 +43,39 @@ export const Research = () => {
         {
             title: "Exploring Generative Personalized Facial Expression Interfaces for Intelligent Agents",
             authors: "Yate Ge, Lin Tian, Ge Chen, Shuhan Pan, Weiwei Guo, Xiaohua Sun*",
-            venue: "CHI'26 (Best Full Paper)",
+            venue: "CHI'26 (full paper)",
             links: [
                 { label: "ACM DL", url: "#" },
                 { label: "PDF", url: "#" },
-                { label: "Video", url: "#" },
-                { label: "Research Doc", url: "#" }
             ],
             image: RESEARCH_ASSETS.chi
         },
         {
             title: "Jokeasy: Exploring Human-AI Collaboration in Thematic Joke Generation",
             authors: "Yate Ge, Lin Tian, Chiqian Xu, Luyao Xu, Meiying Li, Yuanda Hu, Weiwei Guo*",
-            venue: "IASDR'25 (Full Paper)",
+            venue: "iasdr'25 (full paper)",
             links: [
                 { label: "xxx", url: "#" },
                 { label: "PDF", url: "#" },
-                { label: "Video", url: "#" }
             ],
             image: RESEARCH_ASSETS.iasdr
         },
         {
             title: "Exploring Generative Personalized Facial Expression Interfaces for Intelligent Agents",
             authors: "Yate Ge, Lin Tian, Ge Chen, Shuhan Pan, Weiwei Guo, Xiaohua Sun*",
-            venue: "UIST'25 (Poster)",
+            venue: "UIST'25 (poster)",
             links: [
                 { label: "ACM DL", url: "#" },
                 { label: "PDF", url: "#" },
-                { label: "Video", url: "#" }
             ],
             image: RESEARCH_ASSETS.uist
         },
         {
             title: "When Accessibility Becomes a Trap: A User-Centric Characterization of Dark Patterns Arising from Screen Reader Users' Perceived Deception in Mobile Interfaces",
             authors: "Dai Shi, Lin Tian, Jiaxun Sun, TOMOMI KAWAKAMI, Nuo Cheng, Shuchang Xu, Guanhong L",
-            venue: "CSCW'25 (Poster)",
+            venue: "CSCW'25 (poster)",
             links: [
-                { label: "ACM DL (Coming Soon)", url: "#" },
+                { label: "ACM DL", url: "#" },
                 { label: "PDF", url: "#" }
             ],
             image: RESEARCH_ASSETS.cscw

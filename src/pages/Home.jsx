@@ -161,8 +161,13 @@ export const Home = () => {
                 <div style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
                     <StickerText 
                         as="h1" 
-                        color={colors.azure[48]}
+                        color={colors.black.solid}
                         fontSize={isMobile ? '48px' : '80px'}
+                        strokeWidth="38px"
+                        style={{ 
+                            filter: 'drop-shadow(0 2px 1px rgba(0, 0, 0, 0.15))',
+                            letterSpacing: '-0.02em'
+                        }}
                     >
                         Lynn Tian
                     </StickerText>
@@ -239,7 +244,7 @@ export const Home = () => {
 
             <footer style={footerStyle} id="about" ref={footerRef}>
                 <div ref={blogSectionRef}>
-                    <Section title="Reflection Blog" subtitle="AIGC 期间的思考与 HMI 和智能交互设计相关的沉淀" dark className="!py-0 !px-0">
+                    <Section title="Reflection Blog" subtitle="从实践中反思沉淀，解构 AI 协作机制" dark className="!py-0 !px-0">
                         <div style={{
                             display: 'grid',
                             gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
@@ -247,33 +252,27 @@ export const Home = () => {
                             marginBottom: layoutSpacing.section.md
                         }}>
                             <BlogCard
-                                title="Lynn's 人机协作日志"
-                                date="WIP"
+                                title="Lynn's 人与 AI 协作日志（日常更新）"
                                 image={ASSETS.blog1}
                             />
                             <BlogCard
                                 title="“AIGC+模板化”融入B端业务实践反思"
-                                date="2025.04"
                                 image={ASSETS.blog2}
                             />
                             <BlogCard
                                 title="商业化产品引导体系建设调研"
-                                date="2025.06"
                                 image={ASSETS.blog1}
                             />
                             <BlogCard
-                                title="B 端 AI 应用设计框架"
-                                date="2025.07"
+                                title="国内外用户 AI 使用差异调研"
                                 image={ASSETS.blog2}
                             />
                             <BlogCard
-                                title="华为问界智驾教学产品分析"
-                                date="2023.10"
+                                title="B 端 AI 应用设计框架调研"
                                 image={ASSETS.blog1}
                             />
                             <BlogCard
-                                title="Minimalism in 2024"
-                                date="2024.03.01"
+                                title="华为问界智驾教学产品分析"
                                 image={ASSETS.blog2}
                             />
                         </div>

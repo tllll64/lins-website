@@ -3,34 +3,58 @@ import { colors, typography } from '../design-system/tokens';
 
 export const StickerText = ({ 
     children, 
-    as: Component = 'h1',
-    color = colors.azure[48], // Default to brand blue
+    color = colors.azure[48],
     strokeColor = colors.white.solid,
     strokeWidth = '8px',
     fontSize = '64px',
-    shadowColor = 'rgba(0, 0, 0, 0.15)',
+    shadowColor = 'rgba(0, 0, 0, 0.1)',
     style = {}
 }) => {
-    const stickerStyle = {
-        fontFamily: typography.heading1?.fontFamily || 'sans-serif',
-        fontWeight: 900,
-        fontSize: fontSize,
-        color: color,
-        // The core sticker effect
-        WebkitTextStroke: `${strokeWidth} ${strokeColor}`,
-        paintOrder: 'stroke fill',
-        // Shadow for the sticker shape
-        filter: `drop-shadow(0 2px 4px ${shadowColor})`,
-        // Reset margin
-        margin: 0,
-        // Ensure it's inline-block or similar if needed, but block is fine for h1
-        lineHeight: 1.1,
-        ...style
-    };
+    // Extract numeric values for calculations
+    const sizeVal = parseInt(fontSize) || 64;
+    const strokeVal = parseInt(strokeWidth) || 8;
+    
+    // Ensure sufficient height for the stroke
+    const height = sizeVal + strokeVal * 2.5;
 
     return (
-        <Component style={stickerStyle}>
-            {children}
-        </Component>
+        <svg 
+            width="100%" 
+            height={height}
+            style={{ 
+                overflow: 'visible',
+                display: 'block',
+                margin: '0 auto',
+                pointerEvents: 'none', // Allow clicks to pass through if needed
+                ...style 
+            }}
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <text
+                x="50%"
+                y="50%"
+                dominantBaseline="central"
+                textAnchor="middle"
+                style={{
+                    fill: color,
+                    stroke: strokeColor,
+                    strokeWidth: strokeWidth,
+                    fontFamily: typography.heading1?.fontFamily || 'sans-serif',
+                    fontWeight: 900,
+                    fontSize: fontSize,
+                    // Key properties for rounded corners
+                    strokeLinejoin: 'round',
+                    strokeLinecap: 'round',
+                    // Paint stroke first, then fill on top
+                    paintOrder: 'stroke',
+                    // Apply shadow
+                    filter: `drop-shadow(0 2px 1px ${shadowColor})`,
+                    // Inherit other styles like letterSpacing
+                    ...style
+                }}
+            >
+                {children}
+            </text>
+        </svg>
     );
 };

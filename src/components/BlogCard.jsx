@@ -1,9 +1,9 @@
 import React from 'react';
 import { colors, spacing, typography, fontWeight, stackSpacing } from '../design-system/tokens';
 
-export const BlogCard = ({ title, date, image, className = "" }) => {
+export const BlogCard = ({ title, image, className = "" }) => {
     return (
-        <div className={`group cursor-pointer ${className}`}>
+        <div className={`group cursor-pointer text-center ${className}`}>
             <div style={{
                 aspectRatio: '4/3',
                 width: '100%',
@@ -39,12 +39,6 @@ export const BlogCard = ({ title, date, image, className = "" }) => {
                 }} className="group-hover:text-ds-dusty">
                     {title}
                 </h3>
-                <span style={{
-                    fontSize: '11px',
-                    color: colors.grey[66]
-                }}>
-                    {date}
-                </span>
             </div>
         </div>
     );
