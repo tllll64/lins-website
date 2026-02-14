@@ -237,6 +237,7 @@ export const Home = () => {
                             title="Colean: 未来家务 AR 游戏"
                             category="AR 应用探索"
                             image={ASSETS.digital4}
+                            onClick={() => navigate('/works/colean')}
                         />
                     </div>
                 </Section>

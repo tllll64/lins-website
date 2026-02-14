@@ -6,6 +6,7 @@ const About = lazy(() => import('./pages/About').then(module => ({ default: modu
 const Research = lazy(() => import('./pages/Research').then(module => ({ default: module.Research })));
 const ZhiXiaoBao = lazy(() => import('./pages/works/zhi-xiao-bao').then(module => ({ default: module.ZhiXiaoBao })));
 const XiaoMi = lazy(() => import('./pages/works/xiao-mi').then(module => ({ default: module.XiaoMi })));
+const ColeanDetail = lazy(() => import('./pages/ColeanDetail').then(module => ({ default: module.ColeanDetail })));
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/research" element={<Research />} />
           <Route path="/works/zhi-xiao-bao" element={<ZhiXiaoBao />} />
           <Route path="/works/xiao-mi" element={<XiaoMi />} />
+          <Route path="/works/colean" element={<ColeanDetail />} />
         </Routes>
       </Suspense>
     </Router>
