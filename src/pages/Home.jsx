@@ -174,29 +174,23 @@ export const Home = () => {
                 </div>
             </section>
 
-            <header style={heroStyle} id="works">
-                <h1 style={heroTitleStyle}>Selected works</h1>
-                <p style={heroSubtitleStyle}>
-                    2023-2024年 实习项目产出和复盘思考
-                </p>
-            </header>
-
-            <div style={worksContainerStyle}>
-                <ProjectCard
-                    date="June - Aug 2023"
-                    title="TikTok ToB Dataviz"
-                    description="Designed data visualization tools for enterprise analytics, improving data readability and decision-making efficiency."
-                    tags={['Data Visualization', 'ToB Product']}
-                    image={ASSETS.tiktok}
-                />
-                <ProjectCard
-                    date="Mar - May 2024"
-                    title="Procreate"
-                    description="A deep dive into mobile creative tools, analyzing interaction patterns and recreating key workflows for iOS."
-                    tags={['Mobile App', 'Product Analysis']}
-                    image={ASSETS.pro}
-                    customCursor={xhsCursor}
-                />
+            <div id="works">
+                <Section title="Selected works" subtitle="2023-2024年 实习项目产出和复盘思考" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
+                    <div style={gridStyle}>
+                        <GridCard
+                            title="TikTok ToB Dataviz"
+                            category="TikTok 实习产出"
+                            image={ASSETS.tiktok}
+                        />
+                        <GridCard
+                            title="Procreate"
+                            category="产品分析"
+                            image={ASSETS.pro}
+                            customCursor={xhsCursor}
+                            onClick={() => {/* Navigate if needed */}}
+                        />
+                    </div>
+                </Section>
             </div>
 
             <div id="explorations">
