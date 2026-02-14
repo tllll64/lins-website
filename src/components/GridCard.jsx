@@ -7,6 +7,7 @@ export const GridCard = ({ title, category, image, className = "", onClick }) =>
         <div className={`group cursor-pointer ${className}`} onClick={onClick}>
             <div style={{
                 width: '100%',
+                aspectRatio: '4 / 3',
                 overflow: 'hidden',
                 borderRadius: '16px',
                 background: colors.grey[95],
@@ -19,7 +20,7 @@ export const GridCard = ({ title, category, image, className = "", onClick }) =>
                         alt={title}
                         style={{
                             width: '100%',
-                            height: 'auto',
+                            height: '100%',
                             display: 'block',
                             objectFit: 'cover',
                             transition: 'transform 0.7s ease'

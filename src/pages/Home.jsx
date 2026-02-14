@@ -203,8 +203,8 @@ export const Home = () => {
                 <Section title="AI-Driven Projects" subtitle="研究生期间在生成式交互方向上探索的原型与落地作品" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
                     <div style={gridStyle}>
                         <GridCard
-                            title="GenFaceUI: Generative Meta-Design Tool"
-                            category="HAI Research | CHI"
+                            title="GenFaceUI: Meta-Design Tool"
+                            category="CHI'26 Full Paper"
                             image={ASSETS.ai1}
                         />
                         <GridCard

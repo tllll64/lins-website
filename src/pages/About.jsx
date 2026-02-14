@@ -276,7 +276,7 @@ export const About = () => {
                                     onMouseLeave={() => setHoveredField(null)}
                                     onClick={() => handleCopy('(+86) 15968545540', 'phone')}
                                 >
-                                    <IconPhone size={16} /> <span>(+86) 15968545540</span>
+                                    <IconPhone style={{ fontSize: '16px' }} /> <span>(+86) 15968545540</span>
                                     <div style={iconContainerStyle}>
                                         {copiedField === 'phone' ? (
                                             <Check size={14} color={colors.grey[9]} />

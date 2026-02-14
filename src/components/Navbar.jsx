@@ -153,7 +153,9 @@ export const Navbar = ({ theme = 'light' }) => {
                         About
                     </Link>
                     <a 
-                        href="#" 
+                        href="https://jq6o8oyx72u.feishu.cn/wiki/R2XrwQooKiYVk1kF4facXBtdnkd" 
+                        target="_blank"
+                        rel="noopener noreferrer"
                         style={{...getLinkStyle(false), display: 'flex', alignItems: 'center', gap: '4px'}} 
                         onMouseEnter={(e) => handleMouseEnter(e, false)} 
                         onMouseLeave={(e) => handleMouseLeave(e, false)}
