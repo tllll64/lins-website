@@ -265,7 +265,7 @@ export const About = () => {
                         </div>
 
                         <div style={contactInfoStyle}>
-                            <h3 style={contactTitleStyle}>寻找 27 届暑期实习中 ✨</h3>
+                            <h3 style={contactTitleStyle}>寻找 27 届暑期实习中，欢迎联系🙋🏻‍♀️</h3>
                             <div style={contactLinksStyle}>
                                 <div 
                                     style={{
@@ -276,7 +276,7 @@ export const About = () => {
                                     onMouseLeave={() => setHoveredField(null)}
                                     onClick={() => handleCopy('(+86) 15968545540', 'phone')}
                                 >
-                                    <IconPhone style={{ fontSize: '16px' }} /> <span>(+86) 15968545540</span>
+                                    <IconPhone size={16} style={{ transform: 'translateY(1px)' }} /> <span>(+86) 15968545540</span>
                                     <div style={iconContainerStyle}>
                                         {copiedField === 'phone' ? (
                                             <Check size={14} color={colors.grey[9]} />
