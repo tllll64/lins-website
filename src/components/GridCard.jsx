@@ -2,11 +2,9 @@ import React from 'react';
 import { colors, spacing, typography, stackSpacing } from '../design-system/tokens';
 import { ArrowRight } from 'lucide-react';
 
-export const GridCard = ({ title, category, image, className = "", onClick, customCursor }) => {
+export const GridCard = ({ title, category, image, className = "", onClick }) => {
     return (
-        <div className={`group cursor-pointer ${className}`} 
-             onClick={onClick}
-             style={{ cursor: customCursor ? `url("${customCursor}"), auto` : 'pointer' }}>
+        <div className={`group cursor-pointer ${className}`} onClick={onClick}>
             <div style={{
                 width: '100%',
                 overflow: 'hidden',
@@ -24,8 +22,7 @@ export const GridCard = ({ title, category, image, className = "", onClick, cust
                             height: 'auto',
                             display: 'block',
                             objectFit: 'cover',
-                            transition: 'transform 0.7s ease',
-                            transform: 'scale(1)'
+                            transition: 'transform 0.7s ease'
                         }}
                         onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                         onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
