@@ -160,7 +160,7 @@ export const Navbar = ({ theme = 'light' }) => {
                         onMouseEnter={(e) => handleMouseEnter(e, false)} 
                         onMouseLeave={(e) => handleMouseLeave(e, false)}
                     >
-                        Resume <IconLaunch />
+                        Resume <IconLaunch size={14} style={{ marginLeft: '2px' }} />
                     </a>
                 </div>
             </nav>
