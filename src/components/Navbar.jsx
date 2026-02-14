@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { IconLaunch } from '@arco-design/web-react/icon';
 import { colors, spacing, typography, fontWeight } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 
@@ -153,11 +154,11 @@ export const Navbar = ({ theme = 'light' }) => {
                     </Link>
                     <a 
                         href="#" 
-                        style={getLinkStyle(false)} 
+                        style={{...getLinkStyle(false), display: 'flex', alignItems: 'center', gap: '4px'}} 
                         onMouseEnter={(e) => handleMouseEnter(e, false)} 
                         onMouseLeave={(e) => handleMouseLeave(e, false)}
                     >
-                        Resume
+                        Resume <IconLaunch />
                     </a>
                 </div>
             </nav>

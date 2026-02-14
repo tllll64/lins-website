@@ -6,7 +6,8 @@ import TextType from '../components/TextType';
 import { ASSETS } from '../constants/assets';
 import { colors, spacing, typography, fontWeight, stackSpacing, gridGap, layoutSpacing, componentSpacing, width, fontSize } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
-import { Twitter, Github, Mail, Phone, MessageCircle, Copy, Check } from 'lucide-react';
+import { Twitter, Github, Mail, MessageCircle, Copy, Check } from 'lucide-react';
+import { IconPhone } from '@arco-design/web-react/icon';
 
 import profileImage from '../assets/profile.jpg';
 
@@ -275,7 +276,7 @@ export const About = () => {
                                     onMouseLeave={() => setHoveredField(null)}
                                     onClick={() => handleCopy('(+86) 15968545540', 'phone')}
                                 >
-                                    <Phone size={16} /> <span>(+86) 15968545540</span>
+                                    <IconPhone size={16} /> <span>(+86) 15968545540</span>
                                     <div style={iconContainerStyle}>
                                         {copiedField === 'phone' ? (
                                             <Check size={14} color={colors.grey[9]} />
