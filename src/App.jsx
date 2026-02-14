@@ -1,21 +1,24 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Home } from './pages/Home';
-import { About } from './pages/About';
-import { Research } from './pages/Research';
-import { ZhiXiaoBao } from './pages/works/zhi-xiao-bao';
-import { XiaoMi } from './pages/works/xiao-mi';
+import React, { Suspense, lazy } from 'react';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+
+const Home = lazy(() => import('./pages/Home').then(module => ({ default: module.Home })));
+const About = lazy(() => import('./pages/About').then(module => ({ default: module.About })));
+const Research = lazy(() => import('./pages/Research').then(module => ({ default: module.Research })));
+const ZhiXiaoBao = lazy(() => import('./pages/works/zhi-xiao-bao').then(module => ({ default: module.ZhiXiaoBao })));
+const XiaoMi = lazy(() => import('./pages/works/xiao-mi').then(module => ({ default: module.XiaoMi })));
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/research" element={<Research />} />
-        <Route path="/works/zhi-xiao-bao" element={<ZhiXiaoBao />} />
-        <Route path="/works/xiao-mi" element={<XiaoMi />} />
-      </Routes>
+      <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/research" element={<Research />} />
+          <Route path="/works/zhi-xiao-bao" element={<ZhiXiaoBao />} />
+          <Route path="/works/xiao-mi" element={<XiaoMi />} />
+        </Routes>
+      </Suspense>
     </Router>
   );
 }
