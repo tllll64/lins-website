@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 /**
  * PDF查看器组件
@@ -8,6 +7,7 @@ import PropTypes from 'prop-types';
 const PDFViewer = ({ 
   src, 
   title = "PDF Document", 
+  showHeader = true,
   width = "100%", 
   height = "600px",
   className = "",
@@ -26,18 +26,20 @@ const PDFViewer = ({
       }}
     >
       {/* PDF标题栏 */}
-      <div 
-        style={{
-          padding: '12px 16px',
-          backgroundColor: '#fff',
-          borderBottom: '1px solid #e8e8e8',
-          fontSize: '14px',
-          fontWeight: '500',
-          color: '#333'
-        }}
-      >
-        {title}
-      </div>
+      {showHeader && (
+        <div 
+          style={{
+            padding: '12px 16px',
+            backgroundColor: '#fff',
+            borderBottom: '1px solid #e8e8e8',
+            fontSize: '14px',
+            fontWeight: '500',
+            color: '#333'
+          }}
+        >
+          {title}
+        </div>
+      )}
       
       {/* PDF内容区域 */}
       <div style={{ width: '100%', height }}>
@@ -57,15 +59,6 @@ const PDFViewer = ({
       </div>
     </div>
   );
-};
-
-PDFViewer.propTypes = {
-  src: PropTypes.string.isRequired,        // PDF文件路径
-  title: PropTypes.string,                 // 文档标题
-  width: PropTypes.string,                 // 宽度
-  height: PropTypes.string,                // 高度
-  className: PropTypes.string,             // 自定义CSS类名
-  style: PropTypes.object                  // 自定义样式
 };
 
 export default PDFViewer;

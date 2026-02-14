@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Modal, Button } from '@arco-design/web-react';
+import { IconLaunch } from '@arco-design/web-react/icon';
 import { Section } from '../components/Section';
 import { ProjectCard } from '../components/ProjectCard';
 import { GridCard } from '../components/GridCard';
@@ -7,6 +9,7 @@ import { BlogCard } from '../components/BlogCard';
 import { Navbar } from '../components/Navbar';
 import { ContactSection } from '../components/ContactSection';
 import { StickerText } from '../components/StickerText';
+import PDFViewer from '../components/PDFViewer';
 import { ASSETS } from '../constants/assets';
 import { colors, spacing, typography, stackSpacing, gridGap, layoutSpacing, componentSpacing, width, fontSize } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
@@ -20,6 +23,7 @@ export const Home = () => {
     const blogSectionRef = useRef(null);
     const [navTheme, setNavTheme] = useState('light');
     const [blogHeight, setBlogHeight] = useState(null);
+    const [showPDF, setShowPDF] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -237,7 +241,7 @@ export const Home = () => {
                             title="Colean: 未来家务 AR 游戏"
                             category="AR 应用探索"
                             image={ASSETS.digital4}
-                            onClick={() => navigate('/works/colean')}
+                            onClick={() => setShowPDF(true)}
                         />
                     </div>
                 </Section>
@@ -283,6 +287,45 @@ export const Home = () => {
 
             <ContactSection />
 
+            <Modal
+                title={
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span>Colean: AR家务游戏 - 技术文档</span>
+                        <a 
+                            href="https://jq6o8oyx72u.feishu.cn/wiki/S4WzwOXJKibHJXkwXcKcXUr6nve" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            style={{ 
+                                fontSize: '14px', 
+                                color: '#1890ff', 
+                                display: 'flex', 
+                                alignItems: 'center',
+                                gap: '4px',
+                                textDecoration: 'none'
+                            }}
+                        >
+                            <IconLaunch /> 飞书原文档
+                        </a>
+                    </div>
+                }
+                visible={showPDF}
+                onOk={() => setShowPDF(false)}
+                onCancel={() => setShowPDF(false)}
+                autoFocus={false}
+                focusLock={true}
+                footer={null}
+                style={{ width: '80%', maxWidth: '1000px', top: '20px' }}
+            >
+                <div style={{ height: '80vh', overflow: 'hidden' }}>
+                    <PDFViewer 
+                        src="/documents/AR家务.pdf" 
+                        title="Colean: AR家务游戏 - 技术文档"
+                        showHeader={false}
+                        height="100%"
+                        style={{ border: 'none' }}
+                    />
+                </div>
+            </Modal>
         </div>
     );
 };

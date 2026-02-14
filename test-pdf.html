@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF测试页面</title>
+</head>
+<body>
+    <h1>PDF加载测试</h1>
+    
+    <h2>测试1: 直接链接访问</h2>
+    <a href="/documents/AR家务.pdf" target="_blank">点击这里直接打开PDF</a>
+    
+    <h2>测试2: iframe嵌入</h2>
+    <iframe src="/documents/AR家务.pdf" width="100%" height="600px" style="border: 1px solid #ccc;"></iframe>
+    
+    <h2>测试3: 对象标签</h2>
+    <object data="/documents/AR家务.pdf" type="application/pdf" width="100%" height="600px">
+        <p>您的浏览器不支持PDF查看器。请<a href="/documents/AR家务.pdf">下载PDF</a>。</p>
+    </object>
+    
+    <h2>测试4: embed标签</h2>
+    <embed src="/documents/AR家务.pdf" type="application/pdf" width="100%" height="600px">
+</body>
+</html>
