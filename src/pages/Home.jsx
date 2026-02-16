@@ -26,6 +26,10 @@ export const Home = () => {
     const [navTheme, setNavTheme] = useState('light');
     const [blogHeight, setBlogHeight] = useState(null);
     const [showPDF, setShowPDF] = useState(false);
+    
+    // State for name tooltip
+    const [showNameTooltip, setShowNameTooltip] = useState(false);
+    const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
 
     useEffect(() => {
         const handleScroll = () => {
@@ -107,7 +111,7 @@ export const Home = () => {
         paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
         maxWidth: width.container.xl,
         margin: '0 auto',
-        minHeight: blogHeight ? `${blogHeight}px` : undefined,
+        minHeight: '85vh', // Ensure enough height for separation
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -175,31 +179,107 @@ export const Home = () => {
 
             <section style={teaserStyle}>
                 {/* NothingDotClock in top-left corner */}
-                <div style={{ 
-                    position: 'absolute', 
-                    top: layoutSpacing.section.md, 
+                <div style={{
+                    position: 'absolute',
+                    top: layoutSpacing.section.md,
                     left: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
-                    zIndex: 2 
+                    zIndex: 10
                 }}>
                     <NothingDotClock />
                 </div>
 
-                <div style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-                    <StickerText 
-                        as="h1" 
-                        color={colors.black.solid}
-                        fontSize={isMobile ? '48px' : '80px'}
-                        strokeWidth="38px"
-                        style={{ 
-                            filter: 'drop-shadow(0 2px 1px rgba(0, 0, 0, 0.15))',
-                            letterSpacing: '-0.02em'
-                        }}
-                    >
-                        Lynn Tian
-                    </StickerText>
-                </div>
-                <div style={{ marginTop: '40px' }}>
+                {/* NothingWordClock in bottom-left corner */}
+                <div style={{
+                    position: 'absolute',
+                    bottom: layoutSpacing.section.md,
+                    left: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
+                    zIndex: 10
+                }}>
                     <NothingWordClock />
+                </div>
+
+                <div style={{
+                    position: 'relative',
+                    width: '100%',
+                    zIndex: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    flex: 1
+                }}>
+
+                    {/* Text Content */}
+                    <div style={{
+                        textAlign: 'center',
+                        color: colors.black.solid, // Changed to black for visibility
+                        maxWidth: '800px',
+                        padding: '0 20px'
+                    }}>
+                         <h3 
+                            onMouseEnter={() => setShowNameTooltip(true)}
+                            onMouseLeave={() => setShowNameTooltip(false)}
+                            onMouseMove={(e) => setTooltipPosition({ x: e.clientX, y: e.clientY })}
+                            style={{
+                                fontFamily: '"Inter", sans-serif',
+                                fontSize: isMobile ? '16px' : '20px',
+                                fontWeight: 500,
+                                marginBottom: '16px',
+                                letterSpacing: '0.02em',
+                                color: colors.grey[40], // Slightly lighter for subhead
+                                cursor: 'default',
+                                width: 'fit-content',
+                                margin: '0 auto 16px auto'
+                         }}>
+                            Hi, I'm Lynn Tian
+                         </h3>
+                         
+                         {/* Name Tooltip */}
+                         {showNameTooltip && (
+                            <div style={{
+                                position: 'fixed',
+                                top: tooltipPosition.y - 40, // Position above cursor (adjusted for bubble height)
+                                left: tooltipPosition.x + 15, // Position to the right
+                                background: colors.white.solid,
+                                padding: '8px 16px',
+                                borderRadius: '50px',
+                                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                                zIndex: 1000,
+                                pointerEvents: 'none',
+                                fontFamily: '"Noto Sans SC", "PingFang SC", sans-serif',
+                                fontSize: '18px',
+                                fontWeight: 500,
+                                color: colors.grey[9],
+                                border: `1px solid ${colors.grey[92]}`,
+                                whiteSpace: 'nowrap'
+                            }}>
+                                田琳
+                            </div>
+                         )}
+                         
+                         <h1 style={{
+                            fontFamily: 'Lora, "Times New Roman", Georgia, serif',
+                            fontSize: isMobile ? '42px' : '72px',
+                            fontWeight: 400,
+                            lineHeight: 1.1,
+                            marginBottom: '24px',
+                            letterSpacing: '-0.02em'
+                         }}>
+                            Product Designer <br/>
+                            AI Engineer
+                         </h1>
+
+                         <p style={{
+                            fontFamily: '"Inter", sans-serif',
+                            fontSize: isMobile ? '16px' : '18px',
+                            lineHeight: 1.6,
+                            maxWidth: '600px',
+                            margin: '0 auto',
+                            opacity: 0.9
+                         }}>
+                            Simplicity is my superpower. I turn complex ideas into experiences users love and investors trust. I help SaaS, AI, and Dev founders craft story-driven brands and products.
+                         </p>
+                    </div>
                 </div>
             </section>
 
