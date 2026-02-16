@@ -5,13 +5,13 @@ import { colors } from '../design-system/tokens';
 const FolderIcon = ({ 
     title = "Daily memo ✍️", 
     subtitle = "Notes & Journaling", 
-    noteCount = 2568,
+    bottomText = "2 568 notes",
+    scale = 1,
+    folderImages = [], // Array of image URLs
     onClick,
     style
 }) => {
     const [isHovered, setIsHovered] = useState(false);
-    const [isMenuHovered, setIsMenuHovered] = useState(false);
-    const [isSettingsHovered, setIsSettingsHovered] = useState(false);
 
     // Dimensions
     const width = 280; // Base width
@@ -26,8 +26,11 @@ const FolderIcon = ({
         height: `${height}px`,
         cursor: onClick ? 'pointer' : 'default',
         transition: 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
-        transform: isHovered ? 'scale(1.02)' : 'scale(1)',
+        transform: isHovered ? `scale(${scale * 1.02})` : `scale(${scale})`,
+        transformOrigin: 'top right', // Pivot from top-right to maintain position relative to container
         filter: 'drop-shadow(0px 8px 24px rgba(0,0,0,0.12))',
+        perspective: '1000px', // Enable 3D perspective
+        transformStyle: 'preserve-3d',
         ...style
     };
 
@@ -71,6 +74,45 @@ const FolderIcon = ({
         transition: 'transform 0.3s ease',
         transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
     };
+    
+    // Image item styles for scattered layout
+    const getImageStyle = (index) => {
+        // Different transforms for up to 3 images
+        const transforms = [
+            // Left: Overlap center by ~50%
+            { 
+                initial: { rotate: '-15deg', x: '-20%', y: '-30%', scale: 1 },
+                hover: { rotate: '-25deg', x: '-35%', y: '-65%', scale: 1.1 }
+            },  
+            // Right: Overlap center by ~50%
+            { 
+                initial: { rotate: '15deg', x: '80%', y: '-25%', scale: 1 },
+                hover: { rotate: '25deg', x: '85%', y: '-60%', scale: 1.1 }
+            },   
+            // Center: Middle
+            { 
+                initial: { rotate: '-2deg', x: '30%', y: '-40%', scale: 1.05 },
+                hover: { rotate: '0deg', x: '27.5%', y: '-77.5%', scale: 1.15 }
+            },    
+        ];
+        
+        const t = transforms[index % 3];
+        const currentTransform = isHovered ? t.hover : t.initial;
+        
+        return {
+            position: 'absolute',
+            width: '140px', // Increased size (1.4x of 100px)
+            height: '140px', // Increased size
+            objectFit: 'contain',
+            top: '10%', // Base position
+            left: '10%', // Base position
+            transform: `translate(${currentTransform.x}, ${currentTransform.y}) rotate(${currentTransform.rotate}) scale(${currentTransform.scale})`,
+            zIndex: isHovered ? 10 + index : 2 + index, // Ensure they are on top when hovered
+            // Snappy bounce effect
+            transition: 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), z-index 0s', 
+            filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.2))',
+        };
+    };
 
     // Front Body (The main container)
     const frontBodyStyle = {
@@ -81,13 +123,25 @@ const FolderIcon = ({
         height: '82%', // Covers most of the bottom
         background: blueGradient,
         borderRadius: '16px',
-        zIndex: 3,
+        zIndex: 4, // Increased z-index to cover images
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
         padding: '24px',
         boxSizing: 'border-box',
         boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.3), 0 -2px 10px rgba(0,0,0,0.05)', // Inner highlight + shadow from paper
+        transformOrigin: 'bottom',
+        transition: 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+        transform: isHovered ? 'rotateX(35deg)' : 'rotateX(0deg)', // Open folder effect, increased angle
+    };
+
+    const textContainerStyle = {
+        transition: 'opacity 0.2s ease',
+        opacity: isHovered ? 0 : 1, // Hide text on hover
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
     };
 
     const textStyle = {
@@ -114,60 +168,43 @@ const FolderIcon = ({
             <div style={backTabStyle} />
             <div style={backBodyStyle} />
 
-            {/* Paper */}
-            <div style={paperStyle} />
+            {/* Folder Contents (Images or Paper) */}
+            {folderImages && folderImages.length > 0 ? (
+                folderImages.map((imgSrc, index) => (
+                    <img 
+                        key={index} 
+                        src={imgSrc} 
+                        alt={`Folder content ${index + 1}`} 
+                        style={getImageStyle(index)} 
+                    />
+                ))
+            ) : (
+                <div style={paperStyle} />
+            )}
 
             {/* Front Body */}
             <div style={frontBodyStyle}>
-                {/* Top Section */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                    <div>
-                        <div style={{
-                            ...textStyle,
-                            fontSize: '20px',
-                            fontWeight: 600,
-                            marginBottom: '4px',
-                            textShadow: '0 1px 2px rgba(0,0,0,0.1)'
-                        }}>
-                            {title}
-                        </div>
-                        <div style={{
-                            ...textStyle,
-                            fontSize: '14px',
-                            opacity: 0.8,
-                            fontWeight: 400
-                        }}>
-                            {subtitle}
-                        </div>
+                <div style={textContainerStyle}>
+                    <div style={{
+                        ...textStyle,
+                        fontSize: '26px',
+                        fontWeight: 600,
+                        textShadow: '0 1px 2px rgba(0,0,0,0.1)'
+                    }}>
+                        {title}
                     </div>
-                    
-                    {/* Icons */}
-                    <div style={{ display: 'flex', gap: '12px' }}>
-                        <div 
-                            onMouseEnter={() => setIsMenuHovered(true)}
-                            onMouseLeave={() => setIsMenuHovered(false)}
-                            style={iconButtonStyle(isMenuHovered)}
-                        >
-                            <MoreVertical size={20} />
-                        </div>
-                        <div 
-                            onMouseEnter={() => setIsSettingsHovered(true)}
-                            onMouseLeave={() => setIsSettingsHovered(false)}
-                            style={iconButtonStyle(isSettingsHovered)}
-                        >
-                            <Settings size={20} />
-                        </div>
+                    <div style={{
+                        ...textStyle,
+                        fontSize: '15px',
+                        opacity: 0.9,
+                        fontWeight: 500,
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        width: '100%'
+                    }}>
+                        {subtitle}
                     </div>
-                </div>
-
-                {/* Bottom Section */}
-                <div style={{
-                    ...textStyle,
-                    fontSize: '14px',
-                    opacity: 0.9,
-                    fontWeight: 500
-                }}>
-                    {noteCount.toLocaleString().replace(/,/g, ' ')} notes
                 </div>
             </div>
         </div>

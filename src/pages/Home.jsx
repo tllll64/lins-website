@@ -10,6 +10,7 @@ import { ContactSection } from '../components/ContactSection';
 import { StickerText } from '../components/StickerText';
 import NothingWordClock from '../components/NothingWordClock';
 import NothingDotClock from '../components/NothingDotClock';
+import FolderIcon from '../components/FolderIcon';
 import PDFViewer from '../components/PDFViewer';
 import ReflectionList from '../components/ReflectionList';
 import IframeModal from '../components/IframeModal';
@@ -210,6 +211,22 @@ export const Home = () => {
                     <NothingDotClock />
                 </div>
 
+                {/* FolderIcon in top-right corner */}
+                <div style={{
+                    position: 'absolute',
+                    top: layoutSpacing.section.xl,
+                    right: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
+                    zIndex: 10,
+                    display: isMobile ? 'none' : 'block' // Hide on mobile if too crowded, or adjust
+                }}>
+                    <FolderIcon 
+                        title="Lynn's Projects"
+                        subtitle="Internship, AI-Driven, Digital"
+                        scale={0.6}
+                        folderImages={[PromoteLogo, TakoLogo, LingxiLogo]}
+                    />
+                </div>
+
                 {/* NothingWordClock in bottom-left corner */}
                 <div style={{
                     position: 'absolute',
@@ -307,7 +324,7 @@ export const Home = () => {
             </section>
 
             <header style={heroStyle} id="works">
-                <h1 style={heroTitleStyle}>Selected works</h1>
+                <h1 style={heroTitleStyle}>internship Projects</h1>
                 <p style={heroSubtitleStyle}>
                     2023-2026年 实习项目产出和复盘思考
                 </p>
