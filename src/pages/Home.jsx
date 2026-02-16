@@ -12,6 +12,7 @@ import NothingWordClock from '../components/NothingWordClock';
 import NothingDotClock from '../components/NothingDotClock';
 import PDFViewer from '../components/PDFViewer';
 import ReflectionList from '../components/ReflectionList';
+import IframeModal from '../components/IframeModal';
 import { ASSETS } from '../constants/assets';
 import { colors, spacing, typography, stackSpacing, gridGap, layoutSpacing, componentSpacing, width, fontSize } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
@@ -26,6 +27,23 @@ export const Home = () => {
     const [navTheme, setNavTheme] = useState('light');
     const [blogHeight, setBlogHeight] = useState(null);
     const [showPDF, setShowPDF] = useState(false);
+    const [iframeModal, setIframeModal] = useState({
+        isOpen: false,
+        url: '',
+        title: ''
+    });
+    
+    const openFigmaModal = (url, title) => {
+        setIframeModal({
+            isOpen: true,
+            url,
+            title
+        });
+    };
+
+    const closeFigmaModal = () => {
+        setIframeModal(prev => ({ ...prev, isOpen: false }));
+    };
     
     // State for name tooltip
     const [showNameTooltip, setShowNameTooltip] = useState(false);
@@ -293,16 +311,28 @@ export const Home = () => {
             <div style={worksContainerStyle}>
                 <ProjectCard
                     date="June - Aug 2023"
-                    title="TikTok ToB Dataviz"
+                    title="薯条加热放心投"
                     description="Designed data visualization tools for enterprise analytics, improving data readability and decision-making efficiency."
-                    tags={['Data Visualization', 'ToB Product']}
+                    tags={['APP', '产设共建']}
                     image={ASSETS.tiktok}
+                    onClick={() => openFigmaModal(
+                        "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FMCyWIWjYNBpVUUdqlRdAGw%2F%25E6%259A%2591%25E6%259C%259F%25E4%25BD%259C%25E5%2593%2581%25E9%259B%2586%3Fpage-id%3D738%253A15009%26node-id%3D738-22150%26viewport%3D232%252C293%252C0.25%26t%3DPGqmJzHbhJK8ZgKg-1%26scaling%3Dscale-down-width%26content-scaling%3Dfixed",
+                        "薯条加热放心投"
+                    )}
                 />
                 <ProjectCard
                     date="Mar - May 2024"
                     title="Procreate"
                     description="A deep dive into mobile creative tools, analyzing interaction patterns and recreating key workflows for iOS."
-                    tags={['Mobile App', 'Product Analysis']}
+                    tags={['APP', '产设共建']}
+                    image={ASSETS.pro}
+                    customCursor={xhsCursor}
+                />
+                <ProjectCard
+                    date="Mar - May 2024"
+                    title="Procreate"
+                    description="A deep dive into mobile creative tools, analyzing interaction patterns and recreating key workflows for iOS."
+                    tags={['APP', '产设共建']}
                     image={ASSETS.pro}
                     customCursor={xhsCursor}
                 />
@@ -336,17 +366,28 @@ export const Home = () => {
                             title="NIO Roam 城市漫游座舱"
                             category="本科校级&院级优秀毕设"
                             image={ASSETS.digital2}
+                            onClick={() => openFigmaModal(
+                                "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FKerAYedbweEAHVc4pEWPak%2F%25E5%258E%2586%25E5%258F%25B2%25E4%25BD%259C%25E5%2593%2581%25E9%259B%2586%25E5%2590%2588%3Fpage-id%3D0%253A1%26node-id%3D3-5%26viewport%3D320%252C317%252C0.02%26t%3DTNvKH6ruKYJgjx1i-1%26scaling%3Dscale-down-width%26content-scaling%3Dfixed",
+                                "NIO Roam 城市漫游座舱"
+                            )}
                         />
                         <GridCard
                             title="方由: 国学教育玩具设计"
                             category="智能硬件产品设计"
                             image={ASSETS.digital3}
+                            onClick={() => openFigmaModal(
+                                "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FKerAYedbweEAHVc4pEWPak%2F%25E5%258E%2586%25E5%258F%25B2%25E4%25BD%259C%25E5%2593%2581%25E9%259B%2586%25E5%2590%2588%3Fpage-id%3D0%253A1%26node-id%3D12-2901%26viewport%3D-92%252C894%252C0.05%26t%3DXxpwcogo7FOPPPgJ-1%26scaling%3Dscale-down-width%26content-scaling%3Dfixed",
+                                "方由: 国学教育玩具设计"
+                            )}
                         />
                         <GridCard
                             title="Colean: 未来家务 AR 游戏"
                             category="AR 应用探索"
                             image={ASSETS.digital4}
-                            onClick={() => setShowPDF(true)}
+                            onClick={() => openFigmaModal(
+                                "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FKerAYedbweEAHVc4pEWPak%2F%25E5%258E%2586%25E5%258F%25B2%25E4%25BD%259C%25E5%2593%2581%25E9%259B%2586%25E5%2590%2588%3Fpage-id%3D0%253A1%26node-id%3D12-973%26viewport%3D-92%252C894%252C0.05%26t%3DG7M5N4g1HM6V495R-1%26scaling%3Dscale-down-width%26content-scaling%3Dfixed",
+                                "Colean: 未来家务 AR 游戏"
+                            )}
                         />
                     </div>
                 </Section>
@@ -403,6 +444,14 @@ export const Home = () => {
                     />
                 </div>
             </Modal>
+
+            {/* Figma Preview Modal */}
+            <IframeModal
+                isOpen={iframeModal.isOpen}
+                onClose={closeFigmaModal}
+                url={iframeModal.url}
+                title={iframeModal.title}
+            />
         </div>
     );
 };

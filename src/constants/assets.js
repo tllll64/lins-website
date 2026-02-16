@@ -1,6 +1,6 @@
 export const ASSETS = {
     // Main projects
-    tiktok: new URL('../assets/Home/xiaomi.png', import.meta.url).href, // Placeholder
+    tiktok: new URL('../assets/Home/promote.png', import.meta.url).href, // Placeholder
     pro: new URL('../assets/Home/Nio.png', import.meta.url).href, // Placeholder
     dashboard: new URL('../assets/Home/fangyou.png', import.meta.url).href, // Placeholder
 
