@@ -8,6 +8,7 @@ import { GridCard } from '../components/GridCard';
 import { Navbar } from '../components/Navbar';
 import { ContactSection } from '../components/ContactSection';
 import { StickerText } from '../components/StickerText';
+import NothingWordClock from '../components/NothingWordClock';
 import PDFViewer from '../components/PDFViewer';
 import ReflectionList from '../components/ReflectionList';
 import { ASSETS } from '../constants/assets';
@@ -184,6 +185,9 @@ export const Home = () => {
                     >
                         Lynn Tian
                     </StickerText>
+                </div>
+                <div style={{ marginTop: '40px' }}>
+                    <NothingWordClock />
                 </div>
             </section>
 
