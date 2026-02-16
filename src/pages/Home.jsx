@@ -9,6 +9,7 @@ import { Navbar } from '../components/Navbar';
 import { ContactSection } from '../components/ContactSection';
 import { StickerText } from '../components/StickerText';
 import NothingWordClock from '../components/NothingWordClock';
+import NothingDotClock from '../components/NothingDotClock';
 import PDFViewer from '../components/PDFViewer';
 import ReflectionList from '../components/ReflectionList';
 import { ASSETS } from '../constants/assets';
@@ -99,6 +100,7 @@ export const Home = () => {
     };
 
     const teaserStyle = {
+        position: 'relative', // Added for absolute positioning of children
         paddingTop: layoutSpacing.section.md,
         paddingBottom: layoutSpacing.section.md,
         paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
@@ -172,6 +174,16 @@ export const Home = () => {
             <Navbar theme={navTheme} />
 
             <section style={teaserStyle}>
+                {/* NothingDotClock in top-left corner */}
+                <div style={{ 
+                    position: 'absolute', 
+                    top: layoutSpacing.section.md, 
+                    left: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
+                    zIndex: 2 
+                }}>
+                    <NothingDotClock />
+                </div>
+
                 <div style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
                     <StickerText 
                         as="h1" 
