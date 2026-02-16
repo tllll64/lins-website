@@ -121,7 +121,7 @@ export const Navbar = ({ theme = 'light' }) => {
     };
 
     const isWorksActive = location.pathname === '/' && location.hash === '';
-    const isPlaybookActive = location.pathname === '/playbook';
+    const isSandboxActive = location.pathname === '/sandbox';
     const isAboutActive = location.pathname === '/about';
 
     return (
@@ -137,12 +137,12 @@ export const Navbar = ({ theme = 'light' }) => {
                         Works
                     </Link>
                     <Link 
-                        to="/playbook" 
-                        style={getLinkStyle(isPlaybookActive)} 
-                        onMouseEnter={(e) => handleMouseEnter(e, isPlaybookActive)} 
-                        onMouseLeave={(e) => handleMouseLeave(e, isPlaybookActive)}
+                        to="/sandbox" 
+                        style={getLinkStyle(isSandboxActive)} 
+                        onMouseEnter={(e) => handleMouseEnter(e, isSandboxActive)} 
+                        onMouseLeave={(e) => handleMouseLeave(e, isSandboxActive)}
                     >
-                        Playbook
+                        Sandbox
                     </Link>
                     <Link 
                         to="/about" 

@@ -15,7 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/playbook" element={<Research />} />
+          <Route path="/sandbox" element={<Research />} />
           <Route path="/works/zhi-xiao-bao" element={<ZhiXiaoBao />} />
           <Route path="/works/xiao-mi" element={<XiaoMi />} />
           <Route path="/works/colean" element={<ColeanDetail />} />

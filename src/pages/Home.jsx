@@ -247,6 +247,12 @@ export const Home = () => {
         { title: "华为问界智驾教学产品分析", category: "Analysis", image: ASSETS.blog2 }
     ];
 
+    const demoItems = [
+        { type: 'video', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' }, // Placeholder 1
+        { type: 'video', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' }, // Placeholder 2
+        { type: 'video', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' }, // Placeholder 3
+    ];
+
     return (
         <div style={pageStyle}>
             <Navbar theme={navTheme} />
@@ -480,6 +486,35 @@ export const Home = () => {
                                 links={pub.links}
                                 image={pub.image}
                             />
+                        ))}
+                    </div>
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
+                        gap: gridGap.lg,
+                        marginTop: layoutSpacing.section.lg
+                    }}>
+                        {demoItems.map((item, index) => (
+                            <div key={index} style={{
+                                width: '100%',
+                                aspectRatio: '4/3',
+                                background: colors.grey[92],
+                                borderRadius: '12px',
+                                overflow: 'hidden',
+                                position: 'relative'
+                            }}>
+                                <iframe
+                                    width="100%"
+                                    height="100%"
+                                    src={item.src}
+                                    title={`Demo Video ${index + 1}`}
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerPolicy="strict-origin-when-cross-origin"
+                                    allowFullScreen
+                                    style={{ border: 'none' }}
+                                ></iframe>
+                            </div>
                         ))}
                     </div>
                 </Section>
