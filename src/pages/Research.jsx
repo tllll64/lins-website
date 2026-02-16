@@ -27,7 +27,7 @@ export const Research = () => {
         margin: '0 auto',
         paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
         paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
-        paddingTop: '120px' // Space for navbar + title
+        paddingTop: '0' // Handled by individual sections for better centering
     };
 
     const titleStyle = {
@@ -105,31 +105,20 @@ export const Research = () => {
         <div style={pageStyle}>
             <Navbar theme="light" />
             
-            {/* Teaser Section */}
-            <div style={{
-                width: '100%',
-                height: '80vh',
-                background: colors.white.solid,
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                position: 'relative',
-                overflow: 'hidden'
-            }}>
-                <div style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    backgroundImage: 'radial-gradient(rgba(0,0,0,0.1) 1px, transparent 1px)',
-                    backgroundSize: '24px 24px',
-                    opacity: 0.5
-                }}></div>
-            </div>
-
             <div style={containerStyle}>
+                <div style={{
+                    minHeight: '100vh',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    paddingTop: '80px', // Clear navbar
+                    marginBottom: layoutSpacing.section.xl
+                }}>
+                    <div style={{ width: '100%', height: '600px' }}>
+                        <CircularGallery items={galleryItems} bend={3} textColor={colors.grey[9]} borderRadius={0.05} />
+                    </div>
+                </div>
+
                 <h1 style={titleStyle}>Publications</h1>
                 
                 <div style={{ marginBottom: layoutSpacing.section.xl }}>
@@ -177,11 +166,6 @@ export const Research = () => {
                              )}
                         </div>
                     ))}
-                </div>
-
-                <h1 style={titleStyle}>AI Expertise</h1>
-                <div style={{ marginBottom: layoutSpacing.section.xl, height: '600px' }}>
-                    <CircularGallery items={galleryItems} bend={3} textColor={colors.grey[9]} borderRadius={0.05} />
                 </div>
             </div>
         </div>

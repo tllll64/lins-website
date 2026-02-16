@@ -303,15 +303,19 @@ class App {
       font = 'bold 30px Figtree',
       scrollSpeed = 1.4,
       scrollEase = 0.05,
+      autoScrollSpeed = 1.0,
       onActiveChange
     } = {}
   ) {
     document.documentElement.classList.remove('no-js');
     this.container = container;
     this.scrollSpeed = scrollSpeed;
+    this.autoScrollSpeed = autoScrollSpeed;
     this.onActiveChange = onActiveChange;
     this.scroll = { ease: scrollEase, current: 0, target: 0, last: 0 };
     this.onCheckDebounce = debounce(this.onCheck, 200);
+    this.isHovering = false;
+    this.lastWheelTime = 0;
     this.createRenderer();
     this.createCamera();
     this.createScene();
@@ -427,6 +431,8 @@ class App {
       }
     }
 
+    this.isHovering = hoveredIndex !== -1;
+
     if (this.onActiveChange && hoveredIndex !== this.lastHoveredIndex) {
       this.lastHoveredIndex = hoveredIndex;
       this.onActiveChange(hoveredIndex === -1 ? -1 : hoveredIndex % (this.mediasImages.length / 2));
@@ -435,6 +441,7 @@ class App {
   onWheel(e) {
     const delta = e.deltaY || e.wheelDelta || e.detail;
     this.scroll.target += (delta > 0 ? this.scrollSpeed : -this.scrollSpeed) * 0.2;
+    this.lastWheelTime = Date.now();
     this.onCheckDebounce();
   }
   onCheck() {
@@ -463,6 +470,12 @@ class App {
   }
   update() {
     this.scroll.current = lerp(this.scroll.current, this.scroll.target, this.scroll.ease);
+
+    const isWheeling = Date.now() - this.lastWheelTime < 500;
+    if (!this.isDown && !this.isHovering && !isWheeling) {
+      this.scroll.target += this.autoScrollSpeed;
+    }
+
     const direction = this.scroll.current > this.scroll.last ? 'right' : 'left';
     if (this.medias) {
       this.medias.forEach(media => media.update(this.scroll, direction));
@@ -512,7 +525,8 @@ export default function CircularGallery({
   borderRadius = 0.05,
   font = 'bold 30px Figtree',
   scrollSpeed = 1.4,
-  scrollEase = 0.05
+  scrollEase = 0.05,
+  autoScrollSpeed = 0.01
 }) {
   const containerRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(-1);
@@ -526,6 +540,7 @@ export default function CircularGallery({
       font,
       scrollSpeed,
       scrollEase,
+      autoScrollSpeed,
       onActiveChange: (index) => {
         setActiveIndex(index);
       }
@@ -533,7 +548,7 @@ export default function CircularGallery({
     return () => {
       app.destroy();
     };
-  }, [items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase]);
+  }, [items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase, autoScrollSpeed]);
 
   const activeItem = activeIndex !== -1 && items ? items[activeIndex] : null;
 
