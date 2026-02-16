@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 
 const ROWS = 32;
@@ -6,6 +6,7 @@ const COLS = 32;
 
 const NothingDotClock = () => {
   const isMobile = useMediaQuery('(max-width: 768px)');
+  const [isHovered, setIsHovered] = useState(false);
   
   // Responsive constants
   const CELL_SIZE = isMobile ? '1.65px' : '3.3px';
@@ -138,25 +139,63 @@ const NothingDotClock = () => {
   const getStyleForType = (type, isVisible) => {
     if (!isVisible) return { backgroundColor: 'transparent', opacity: 0 };
 
+    let style;
     switch (type) {
       case 'HIGHLIGHT':
-        return { backgroundColor: '#FFFFFF', opacity: 1 };
+        style = { backgroundColor: '#FFFFFF', opacity: 1 };
+        break;
       case 'SHADOW':
-        return { backgroundColor: '#FFFFFF', opacity: 0.4 }; // Half-lit greyish
+        style = { backgroundColor: '#FFFFFF', opacity: 0.4 }; // Half-lit greyish
+        break;
       case 'SPRINKLE':
-        return { backgroundColor: '#333333', opacity: 1 }; // Dark dot inside white
+        style = { backgroundColor: '#333333', opacity: 1 }; // Dark dot inside white
+        break;
       case 'BACKGROUND':
       default:
-        return { backgroundColor: '#333333', opacity: 0.5 }; // Restore visibility of base grid
+        style = { backgroundColor: '#333333', opacity: 0.5 }; // Restore visibility of base grid
+        break;
     }
+
+    if (isHovered) {
+      style.opacity = style.opacity * 0.3;
+    }
+    return style;
   };
 
   return (
-    <div style={{
-      position: 'relative',
-      backgroundColor: '#000000',
-      borderRadius: '50%',
-      padding: PADDING_SIZE,
+    <div style={{ position: 'relative' }}>
+      {/* Custom Tooltip */}
+      <div style={{
+        position: 'absolute',
+        top: '14.6%',
+        left: '85.4%',
+        transform: 'translate(-50%, -50%)',
+        backgroundColor: '#fff',
+        color: '#000',
+        width: '48px',
+        height: '48px',
+        borderRadius: '50%',
+        fontSize: '24px',
+        opacity: isHovered ? 1 : 0,
+        pointerEvents: 'none',
+        transition: 'opacity 0.15s ease-out, transform 0.15s ease-out',
+        zIndex: 10,
+        boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+        🍩
+      </div>
+
+      <div 
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        style={{
+          position: 'relative',
+          backgroundColor: '#000000',
+          borderRadius: '50%',
+          padding: PADDING_SIZE,
       overflow: 'hidden',
       display: 'grid',
       gridTemplateColumns: `repeat(${COLS}, ${CELL_SIZE})`,
@@ -180,13 +219,14 @@ const NothingDotClock = () => {
                 width: CELL_SIZE,
                 height: CELL_SIZE,
                 borderRadius: '0.5px',
-                transition: 'background-color 0.3s ease, opacity 0.3s ease',
+                transition: 'opacity 0.15s ease-out',
               }}
             />
           );
         })
       ))}
     </div>
+  </div>
   );
 };
 

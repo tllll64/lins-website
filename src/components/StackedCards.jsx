@@ -26,9 +26,9 @@ const StackedCards = ({ assets }) => {
     return { ...card, image };
   });
 
-  // Card dimensions - Square (Scaled to 120%)
-  const CARD_WIDTH = 120;
-  const CARD_HEIGHT = 120;
+  // Card dimensions - Square (Scaled to 0.7x of 120%)
+  const CARD_WIDTH = 84;
+  const CARD_HEIGHT = 84;
   
   // Animation variants
   const containerVariants = {
@@ -45,22 +45,22 @@ const StackedCards = ({ assets }) => {
   return (
     <div style={{
       width: '100%',
-      padding: '40px 0',
+      padding: '28px 0',
       // overflow: 'hidden', // Removed to prevent shadow clipping
       display: 'flex',
       flexDirection: 'column',
-      gap: '20px'
+      gap: '14px'
     }}>
       {/* Title Section */}
-      <div style={{ paddingLeft: '20px', paddingRight: '20px' }}>
+      <div style={{ paddingLeft: '14px', paddingRight: '14px' }}>
         <h2 style={{
           fontFamily: 'Lora, "Times New Roman", Georgia, serif',
-          fontSize: '48px',
+          fontSize: '34px',
           fontWeight: 600,
-          lineHeight: '56px',
+          lineHeight: '40px',
           letterSpacing: '0px',
           color: 'rgb(23, 23, 23)',
-          marginBottom: '12px'
+          marginBottom: '8px'
         }}>
           Recently Work with
         </h2>
@@ -73,8 +73,8 @@ const StackedCards = ({ assets }) => {
           alignItems: 'center',
           justifyContent: 'flex-start',
           position: 'relative',
-          height: CARD_HEIGHT + 80, // Increased height for large shadows
-          paddingLeft: '40px', // Increased padding for left shadow
+          height: CARD_HEIGHT + 56, // Increased height for large shadows
+          paddingLeft: '28px', // Increased padding for left shadow
           width: '100%',
           overflowX: isExpanded ? 'auto' : 'visible', // Allow scrolling when expanded
           // overflowY: 'hidden', // Removed to prevent shadow clipping
@@ -93,15 +93,15 @@ const StackedCards = ({ assets }) => {
             height: '100%',
             display: 'flex',
             alignItems: 'center',
-            minWidth: isExpanded ? (cards.length * (CARD_WIDTH * 5 / 6) + 100) : 'auto'
+            minWidth: isExpanded ? (cards.length * (CARD_WIDTH * 5 / 6) + 70) : 'auto'
           }}
         >
           {cards.map((card, index) => {
             // Calculated styles for collapsed state
             // No rotation, just stacking
-            const collapsedX = index * 20; // Scaled overlap distance
+            const collapsedX = index * 14; // Scaled overlap distance
             const collapsedY = 0; // No Y offset
-            const collapsedRotate = 0; // No rotation
+            const collapsedRotate = 10; // Rotated 10 degrees to the right per user request
             
             // Calculated styles for expanded state
             // Each card is covered by 1/6 by the previous card (meaning next card in index if stacking left-to-right)
@@ -116,11 +116,11 @@ const StackedCards = ({ assets }) => {
                   position: 'absolute',
                   width: CARD_WIDTH,
                   height: CARD_HEIGHT,
-                  borderRadius: '12px', // Scaled border radius
+                  borderRadius: '8px', // Scaled border radius
                   backgroundColor: '#E5E5E5', // Grey background as requested
                   // Updated shadow style per request (softer, cleaner)
-                  boxShadow: '0 8px 24px rgba(0,0,0,0.025), 0 2px 6px rgba(0,0,0,0.01)',
-                  border: '6px solid white', // Scaled border to 6px
+                  boxShadow: '0 6px 17px rgba(0,0,0,0.025), 0 1.5px 4px rgba(0,0,0,0.01)',
+                  border: '4px solid white', // Scaled border to 4px
                   overflow: 'hidden',
                   zIndex: cards.length - index, // Reverse stack order so Left covers Right
                   transformOrigin: 'bottom left',
@@ -137,7 +137,7 @@ const StackedCards = ({ assets }) => {
                   expanded: {
                     x: expandedX,
                     y: 0,
-                    rotate: 0,
+                    rotate: 10, // Keep 10 degrees tilt even when expanded
                     scale: 1,
                     zIndex: cards.length - index
                   }
