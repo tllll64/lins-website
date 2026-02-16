@@ -8,18 +8,21 @@ const NothingDotClock = () => {
   const isMobile = useMediaQuery('(max-width: 768px)');
   
   // Responsive constants
-  // Target content size ~130px (Desktop) to match NothingWordClock
-  // 32 * 3px + 31 * 1px = 96 + 31 = 127px
-  const CELL_SIZE = isMobile ? '1.5px' : '3px';
+  // Increased cell size by 1.1x as requested
+  // Mobile: 1.5 * 1.1 = 1.65px
+  // Desktop: 3 * 1.1 = 3.3px
+  const CELL_SIZE = isMobile ? '1.65px' : '3.3px';
   const GAP_SIZE = isMobile ? '0.5px' : '1px';
-  const PADDING_SIZE = isMobile ? '8px' : '16px';
   
-  // Generate grid data with circular mask and soft edges
+  // Reduced padding by 0.7x (maintained from previous step)
+  const PADDING_SIZE = isMobile ? '5.5px' : '11px';
+  
+  // Generate grid data with hard circular mask (no fading)
   const gridData = useMemo(() => {
     let grid = [];
     const center = (ROWS - 1) / 2;
-    // Radius slightly larger to fill corners better, but strictly controlled
-    const radius = center; 
+    // Radius set to maximize the circle within the grid without losing shape
+    const radius = center + 0.2; 
 
     for (let r = 0; r < ROWS; r++) {
       let row = [];
@@ -27,25 +30,12 @@ const NothingDotClock = () => {
         // Calculate distance from center
         const distance = Math.sqrt(Math.pow(r - center, 2) + Math.pow(c - center, 2));
         
-        // Edge smoothing logic
-        let opacity = 0;
-        let isVisible = false;
-
-        if (distance <= radius - 0.5) {
-          // Fully inside
-          opacity = 1;
-          isVisible = true;
-        } else if (distance <= radius + 0.5) {
-          // Edge: Anti-aliasing fade
-          // 1.0 at radius-0.5, 0.0 at radius+0.5
-          opacity = 1 - (distance - (radius - 0.5));
-          isVisible = true;
-        }
+        // Hard cut-off for visibility
+        const isVisible = distance <= radius;
 
         row.push({ 
           active: false,
-          isVisible,
-          opacity: Math.max(0, Math.min(1, opacity)) // Clamp between 0 and 1
+          isVisible
         });
       }
       grid.push(row);
@@ -78,11 +68,11 @@ const NothingDotClock = () => {
             <div
               key={`${rowIndex}-${colIndex}`}
               style={{
-                backgroundColor: cell.isVisible ? `rgba(51, 51, 51, ${cell.opacity})` : 'transparent', // #333333 is 51,51,51
+                backgroundColor: cell.isVisible ? '#333333' : 'transparent',
                 width: CELL_SIZE,
                 height: CELL_SIZE,
                 borderRadius: '0.5px', // Tiny rounding for smooth square look
-                opacity: cell.isVisible ? 1 : 0,
+                opacity: cell.isVisible ? 0.5 : 0, // Reduced opacity to 0.5x as requested
               }}
             />
           ))}
