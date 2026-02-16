@@ -6,6 +6,7 @@ import { colors, layoutSpacing, width, typography, stackSpacing, fontSize, gridG
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 import { ASSETS } from '../constants/assets';
 import { motion } from 'framer-motion';
+import tiantianquanImg from '../assets/Research/tiantianquan.png';
 
 // --- Demo Components ---
 
@@ -23,7 +24,7 @@ const SectionTitle = ({ children }) => {
                 background: colors.grey[9],
                 color: '#fff',
                 padding: '12px 32px',
-                borderRadius: '32px',
+                borderRadius: '32px 32px 0 32px',
                 fontFamily: 'Inter, sans-serif',
                 fontSize: isMobile ? '20px' : '24px',
                 fontWeight: 600,
@@ -129,15 +130,15 @@ const AIBotAvatar = () => (
         height: '64px',
         background: '#fff',
         border: `1px solid ${colors.grey[92]}`,
-        borderRadius: '6px 6px 6px 0',
+        borderRadius: '50px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        fontSize: '32px',
         flexShrink: 0,
-        boxShadow: '0 2px 8px rgba(0,0,0,0.05)'
+        boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+        overflow: 'hidden'
     }}>
-        🤖
+        <img src={tiantianquanImg} alt="AI Bot" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
     </div>
 );
 
@@ -262,8 +263,8 @@ export const Research = () => {
                     <SectionTitle>Principles</SectionTitle>
                     <div style={{
                         display: 'flex',
-                        gap: isMobile ? '16px' : '32px',
-                        alignItems: 'flex-start'
+                        gap: isMobile ? '8px' : '16px',
+                        alignItems: 'flex-end'
                     }}>
                         <AIBotAvatar />
                         <div style={{
@@ -288,8 +289,8 @@ export const Research = () => {
                     <SectionTitle>Co-AI Workflows</SectionTitle>
                     <div style={{
                         display: 'flex',
-                        gap: isMobile ? '16px' : '32px',
-                        alignItems: 'flex-start'
+                        gap: isMobile ? '8px' : '16px',
+                        alignItems: 'flex-end'
                     }}>
                         <AIBotAvatar />
                         <div style={{
@@ -326,8 +327,8 @@ export const Research = () => {
                     <SectionTitle>AI Expertise</SectionTitle>
                     <div style={{
                         display: 'flex',
-                        gap: isMobile ? '16px' : '32px',
-                        alignItems: 'flex-start'
+                        gap: isMobile ? '8px' : '16px',
+                        alignItems: 'flex-end'
                     }}>
                         <AIBotAvatar />
                         <div style={{
