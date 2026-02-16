@@ -26,10 +26,9 @@ const StackedCards = ({ assets }) => {
     return { ...card, image };
   });
 
-  // Card dimensions
-  const CARD_WIDTH = 200;
-  const CARD_HEIGHT = 250;
-  const EXPANDED_GAP = 20;
+  // Card dimensions - Square (Scaled to 120%)
+  const CARD_WIDTH = 120;
+  const CARD_HEIGHT = 120;
   
   // Animation variants
   const containerVariants = {
@@ -46,11 +45,11 @@ const StackedCards = ({ assets }) => {
   return (
     <div style={{
       width: '100%',
-      padding: '60px 0',
-      overflow: 'hidden', // Hide scrollbar for cleaner look, or 'auto' if scrolling needed
+      padding: '40px 0',
+      // overflow: 'hidden', // Removed to prevent shadow clipping
       display: 'flex',
       flexDirection: 'column',
-      gap: '40px'
+      gap: '20px'
     }}>
       {/* Title Section */}
       <div style={{ paddingLeft: '20px', paddingRight: '20px' }}>
@@ -68,17 +67,22 @@ const StackedCards = ({ assets }) => {
       </div>
 
       {/* Interactive Area */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        position: 'relative',
-        height: CARD_HEIGHT + 60, // Add padding for rotation/shadows
-        paddingLeft: '40px', // Initial offset
-        width: '100%',
-        overflowX: isExpanded ? 'auto' : 'visible', // Allow scrolling when expanded if needed
-        overflowY: 'hidden'
-      }}>
+      <div 
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-start',
+          position: 'relative',
+          height: CARD_HEIGHT + 80, // Increased height for large shadows
+          paddingLeft: '40px', // Increased padding for left shadow
+          width: '100%',
+          overflowX: isExpanded ? 'auto' : 'visible', // Allow scrolling when expanded
+          // overflowY: 'hidden', // Removed to prevent shadow clipping
+          cursor: 'pointer' // Indicate interactivity
+        }}
+        onMouseEnter={() => setIsExpanded(true)}
+        onMouseLeave={() => setIsExpanded(false)}
+      >
         {/* Cards Container */}
         <motion.div 
           variants={containerVariants}
@@ -89,17 +93,21 @@ const StackedCards = ({ assets }) => {
             height: '100%',
             display: 'flex',
             alignItems: 'center',
-            minWidth: isExpanded ? (cards.length * (CARD_WIDTH + EXPANDED_GAP) + 300) : 'auto' // Ensure space for scrolling
+            minWidth: isExpanded ? (cards.length * (CARD_WIDTH * 5 / 6) + 100) : 'auto'
           }}
         >
           {cards.map((card, index) => {
             // Calculated styles for collapsed state
-            const collapsedX = index * 15; // Tight overlap
-            const collapsedY = index % 2 === 0 ? 5 : -5; // Slight Y offset for randomness
-            const collapsedRotate = 5 + (index * 1); // Slight progressive rotation
+            // No rotation, just stacking
+            const collapsedX = index * 20; // Scaled overlap distance
+            const collapsedY = 0; // No Y offset
+            const collapsedRotate = 0; // No rotation
             
             // Calculated styles for expanded state
-            const expandedX = index * (CARD_WIDTH + EXPANDED_GAP);
+            // Each card is covered by 1/6 by the previous card (meaning next card in index if stacking left-to-right)
+            // But user said "previous card". In a left-to-right visual stack, "previous" is left.
+            // If Left covers Right, then z-index must be reversed.
+            const expandedX = index * (CARD_WIDTH * 5 / 6);
             
             return (
               <motion.div
@@ -108,13 +116,15 @@ const StackedCards = ({ assets }) => {
                   position: 'absolute',
                   width: CARD_WIDTH,
                   height: CARD_HEIGHT,
-                  borderRadius: '16px',
-                  backgroundColor: 'white',
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
+                  borderRadius: '12px', // Scaled border radius
+                  backgroundColor: '#E5E5E5', // Grey background as requested
+                  // Updated shadow style per request (softer, cleaner)
+                  boxShadow: '0 8px 24px rgba(0,0,0,0.025), 0 2px 6px rgba(0,0,0,0.01)',
+                  border: '6px solid white', // Scaled border to 6px
                   overflow: 'hidden',
-                  zIndex: index, // Stack order
-                  transformOrigin: 'bottom left', // Pivot point for fan effect
-                  left: 0, // Base position, animated via x
+                  zIndex: cards.length - index, // Reverse stack order so Left covers Right
+                  transformOrigin: 'bottom left',
+                  left: 0,
                 }}
                 variants={{
                   collapsed: {
@@ -122,97 +132,26 @@ const StackedCards = ({ assets }) => {
                     y: collapsedY,
                     rotate: collapsedRotate,
                     scale: 1,
-                    zIndex: index
+                    zIndex: cards.length - index
                   },
                   expanded: {
                     x: expandedX,
                     y: 0,
                     rotate: 0,
                     scale: 1,
-                    zIndex: index
+                    zIndex: cards.length - index
                   }
                 }}
                 transition={{
-                  duration: 0.6,
-                  ease: [0.16, 1, 0.3, 1], // Custom ease (easeOutExpo-ish)
-                  delay: index * 0.02 // Stagger effect
+                  duration: 0.5,
+                  ease: [0.16, 1, 0.3, 1], // Custom ease
+                  delay: index * 0.03 // Slightly faster stagger
                 }}
-              >
-                {card.image ? (
-                  <img 
-                    src={card.image} 
-                    alt={card.title}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover'
-                    }}
-                  />
-                ) : (
-                  <div style={{
-                    width: '100%',
-                    height: '100%',
-                    background: card.color,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'white',
-                    fontWeight: 'bold',
-                    fontSize: '24px'
-                  }}>
-                    {index + 1}
-                  </div>
-                )}
-              </motion.div>
+              />
             );
           })}
-
-          {/* Trigger Button - Positioned after the last card in collapsed state, or far right in expanded */}
-          <motion.div
-            onClick={() => setIsExpanded(!isExpanded)}
-            style={{
-              position: 'absolute',
-              width: 200,
-              height: 200, // Slightly smaller than cards
-              border: '2px dashed #ccc',
-              borderRadius: '16px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              backgroundColor: 'transparent',
-              zIndex: 100
-            }}
-            variants={{
-              collapsed: {
-                x: (cards.length * 15) + 220, // Positioned after the collapsed stack
-                y: 0,
-                opacity: 1
-              },
-              expanded: {
-                x: (cards.length * (CARD_WIDTH + EXPANDED_GAP)) + 20, // Positioned after expanded cards
-                y: 0,
-                opacity: 1
-              }
-            }}
-            transition={{
-              duration: 0.6,
-              ease: [0.16, 1, 0.3, 1]
-            }}
-            whileHover={{ scale: 1.05, borderColor: '#333' }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span style={{
-              fontFamily: 'Inter, sans-serif',
-              fontSize: '18px',
-              fontWeight: 500,
-              color: '#333',
-              textAlign: 'center',
-              padding: '20px'
-            }}>
-              Let's make it resonate.
-            </span>
-          </motion.div>
+          
+          {/* Trigger Button Removed per user request */}
         </motion.div>
       </div>
     </div>
