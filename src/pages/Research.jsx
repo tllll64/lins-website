@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar } from '../components/Navbar';
 import { PublicationCard } from '../components/PublicationCard';
-import { StackCardGallery } from '../components/StackCardGallery';
+import CircularGallery from '../components/CircularGallery';
 import { colors, layoutSpacing, width, typography, stackSpacing, fontSize, gridGap } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 import { ASSETS } from '../constants/assets';
@@ -90,6 +90,17 @@ export const Research = () => {
         { type: 'video', src: 'https://www.youtube.com/embed/dMuGlI-wrhQ' }
     ];
 
+    const galleryItems = [
+        { text: 'Project One', image: 'https://picsum.photos/700/700?random=1', link: '#' },
+        { text: 'Project Two', image: 'https://picsum.photos/700/700?random=2', link: '#' },
+        { text: 'Project Three', image: 'https://picsum.photos/700/700?random=3', link: '#' },
+        { text: 'Project Four', image: 'https://picsum.photos/700/700?random=4', link: '#' },
+        { text: 'Project Five', image: 'https://picsum.photos/700/700?random=5', link: '#' },
+        { text: 'Project Six', image: 'https://picsum.photos/700/700?random=6', link: '#' },
+        { text: 'Project Seven', image: 'https://picsum.photos/700/700?random=7', link: '#' },
+        { text: 'Project Eight', image: 'https://picsum.photos/700/700?random=8', link: '#' },
+    ];
+
     return (
         <div style={pageStyle}>
             <Navbar theme="light" />
@@ -169,8 +180,8 @@ export const Research = () => {
                 </div>
 
                 <h1 style={titleStyle}>AI Expertise</h1>
-                <div style={{ marginBottom: layoutSpacing.section.xl }}>
-                    <StackCardGallery />
+                <div style={{ marginBottom: layoutSpacing.section.xl, height: '600px' }}>
+                    <CircularGallery items={galleryItems} bend={3} textColor={colors.grey[9]} borderRadius={0.05} />
                 </div>
             </div>
         </div>
