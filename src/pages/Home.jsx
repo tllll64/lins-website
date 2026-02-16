@@ -190,7 +190,7 @@ export const Home = () => {
             <header style={heroStyle} id="works">
                 <h1 style={heroTitleStyle}>Selected works</h1>
                 <p style={heroSubtitleStyle}>
-                    2023-2024年 实习项目产出和复盘思考
+                    2023-2026年 实习项目产出和复盘思考
                 </p>
             </header>
 

@@ -99,7 +99,7 @@ const ReflectionList = ({ items }) => {
             }}
           >
             <div style={{ 
-              fontSize: isMobile ? '12px' : '12px', 
+              fontSize: isMobile ? '14px' : '14px', 
               fontWeight: 400, 
               color: colors.white.solid 
             }}>

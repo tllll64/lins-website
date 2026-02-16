@@ -1,8 +1,11 @@
 import React from 'react';
 import { colors, spacing, typography, stackSpacing } from '../design-system/tokens';
 import { ArrowRight } from 'lucide-react';
+import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 
 export const GridCard = ({ title, category, image, className = "", onClick }) => {
+    const isCompact = useMediaQuery('(max-width: 1024px)');
+
     return (
         <div className={`group cursor-pointer ${className}`} onClick={onClick}>
             <div style={{
@@ -44,8 +47,10 @@ export const GridCard = ({ title, category, image, className = "", onClick }) =>
             </div>
             <div style={{
                 display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center'
+                flexDirection: isCompact ? 'column' : 'row',
+                justifyContent: isCompact ? 'flex-start' : 'space-between',
+                alignItems: isCompact ? 'flex-start' : 'center',
+                gap: isCompact ? '4px' : '0'
             }}>
                 <h3 style={{
                     fontFamily: typography.heading5.fontFamily,

@@ -6,11 +6,10 @@ import TextType from '../components/TextType';
 import { ASSETS } from '../constants/assets';
 import { colors, spacing, typography, fontWeight, stackSpacing, gridGap, layoutSpacing, componentSpacing, width, fontSize } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
-import { Twitter, Github, Mail, MessageCircle, Copy, Check } from 'lucide-react';
-import { IconPhone } from '@arco-design/web-react/icon';
+import { Twitter, Github, Mail, MessageCircle, Copy, Check, Phone } from 'lucide-react';
 
 import profileImage from '../assets/profile.jpg';
-
+import PolaroidGallery from '../components/PolaroidGallery';
 export const About = () => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     const footerRef = useRef(null);
@@ -276,7 +275,7 @@ export const About = () => {
                                     onMouseLeave={() => setHoveredField(null)}
                                     onClick={() => handleCopy('(+86) 15968545540', 'phone')}
                                 >
-                                    <IconPhone size={16} style={{ transform: 'translateY(1px)' }} /> <span>(+86) 15968545540</span>
+                                    <Phone size={16} style={{ transform: 'translateY(1px)' }} /> <span>(+86) 15968545540</span>
                                     <div style={iconContainerStyle}>
                                         {copiedField === 'phone' ? (
                                             <Check size={14} color={colors.grey[9]} />
@@ -347,38 +346,7 @@ export const About = () => {
             </Section>
 
             <Section title="Extra Extra !" subtitle="不工作的时候，你会发现我在 🏃 Citywalk，💗 志愿服务，🧘 旅行，🎵 听 R&B 歌曲，🍮 享用甜点，以及 👧 照顾我的小侄子（德华带娃）。" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
-                <div style={photoGridStyle}>
-                    {ASSETS.photo1 && (
-                        <div style={{...photoItemStyle, transform: photoRotations[0]}} onMouseEnter={(e) => e.currentTarget.style.transform = 'rotate(0deg)'} onMouseLeave={(e) => e.currentTarget.style.transform = photoRotations[0]}>
-                            <img src={ASSETS.photo1} alt="Life 1" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                        </div>
-                    )}
-                    {ASSETS.photo2 && (
-                        <div style={{...photoItemStyle, transform: photoRotations[1]}} onMouseEnter={(e) => e.currentTarget.style.transform = 'rotate(0deg)'} onMouseLeave={(e) => e.currentTarget.style.transform = photoRotations[1]}>
-                            <img src={ASSETS.photo2} alt="Life 2" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                        </div>
-                    )}
-                    {ASSETS.photo3 && (
-                        <div style={{...photoItemStyle, transform: photoRotations[2]}} onMouseEnter={(e) => e.currentTarget.style.transform = 'rotate(0deg)'} onMouseLeave={(e) => e.currentTarget.style.transform = photoRotations[2]}>
-                            <img src={ASSETS.photo3} alt="Life 3" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                        </div>
-                    )}
-                    {ASSETS.photo4 && (
-                        <div style={{...photoItemStyle, transform: photoRotations[3]}} onMouseEnter={(e) => e.currentTarget.style.transform = 'rotate(0deg)'} onMouseLeave={(e) => e.currentTarget.style.transform = photoRotations[3]}>
-                            <img src={ASSETS.photo4} alt="Life 4" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                        </div>
-                    )}
-                    {ASSETS.photo5 && (
-                        <div style={{...photoItemStyle, transform: photoRotations[4]}} onMouseEnter={(e) => e.currentTarget.style.transform = 'rotate(0deg)'} onMouseLeave={(e) => e.currentTarget.style.transform = photoRotations[4]}>
-                            <img src={ASSETS.photo5} alt="Life 5" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                        </div>
-                    )}
-                    {ASSETS.photo6 && (
-                        <div style={{...photoItemStyle, transform: photoRotations[5]}} onMouseEnter={(e) => e.currentTarget.style.transform = 'rotate(0deg)'} onMouseLeave={(e) => e.currentTarget.style.transform = photoRotations[5]}>
-                            <img src={ASSETS.photo6} alt="Life 6" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                        </div>
-                    )}
-                </div>
+                <PolaroidGallery images={[ASSETS.photo1, ASSETS.photo2, ASSETS.photo3].filter(Boolean)} />
             </Section>
 
             <ContactSection ref={footerRef} />
