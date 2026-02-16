@@ -301,7 +301,7 @@ class App {
       textColor = '#ffffff',
       borderRadius = 0,
       font = 'bold 30px Figtree',
-      scrollSpeed = 1.4,
+      scrollSpeed = 0.7,
       scrollEase = 0.05,
       autoScrollSpeed = 1.0,
       onActiveChange
@@ -524,7 +524,7 @@ export default function CircularGallery({
   textColor = '#ffffff',
   borderRadius = 0.05,
   font = 'bold 30px Figtree',
-  scrollSpeed = 1.4,
+  scrollSpeed = 0.7,
   scrollEase = 0.05,
   autoScrollSpeed = 0.01
 }) {

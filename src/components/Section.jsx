@@ -2,7 +2,7 @@ import React from 'react';
 import { colors, spacing, typography, stackSpacing, width, layoutSpacing, fontSize } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 
-export const Section = ({ title, subtitle, children, className = "", dark = false, style = {} }) => {
+export const Section = ({ title, subtitle, children, className = "", dark = false, style = {}, subtitleStyle = {} }) => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     const isTablet = useMediaQuery('(max-width: 1024px)');
 
@@ -36,13 +36,14 @@ export const Section = ({ title, subtitle, children, className = "", dark = fals
         marginBottom: stackSpacing.sm
     };
 
-    const subtitleStyle = {
+    const mergedSubtitleStyle = {
         fontFamily: typography.body.fontFamily,
         fontSize: typography.body.fontSize,
         fontWeight: typography.body.fontWeight,
         lineHeight: typography.body.lineHeight,
         letterSpacing: typography.body.letterSpacing,
-        color: colors.grey[56]
+        color: colors.grey[56],
+        ...subtitleStyle
     };
 
     return (
@@ -56,7 +57,7 @@ export const Section = ({ title, subtitle, children, className = "", dark = fals
                             </h2>
                         )}
                         {subtitle && (
-                            <p style={subtitleStyle}>
+                            <p style={mergedSubtitleStyle}>
                                 {subtitle}
                             </p>
                         )}

@@ -15,14 +15,19 @@ const CARD_DATA = [
   { id: 8, color: '#011627', title: 'Project 8' },
 ];
 
-const StackedCards = ({ assets }) => {
+const StackedCards = ({ assets, images }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   // Combine provided assets with placeholders if needed to reach 8
   const cards = CARD_DATA.map((card, index) => {
-    // Try to map to available assets photo1...photo6
-    const assetKey = `photo${(index % 6) + 1}`;
-    const image = assets && assets[assetKey] ? assets[assetKey] : null;
+    let image = null;
+    if (images && index < images.length) {
+      image = images[index];
+    } else {
+      // Try to map to available assets photo1...photo6
+      const assetKey = `photo${(index % 6) + 1}`;
+      image = assets && assets[assetKey] ? assets[assetKey] : null;
+    }
     return { ...card, image };
   });
 
@@ -45,27 +50,10 @@ const StackedCards = ({ assets }) => {
   return (
     <div style={{
       width: '100%',
-      padding: '28px 0',
-      // overflow: 'hidden', // Removed to prevent shadow clipping
       display: 'flex',
       flexDirection: 'column',
       gap: '14px'
     }}>
-      {/* Title Section */}
-      <div style={{ paddingLeft: '14px', paddingRight: '14px' }}>
-        <h2 style={{
-          fontFamily: 'Lora, "Times New Roman", Georgia, serif',
-          fontSize: '34px',
-          fontWeight: 600,
-          lineHeight: '40px',
-          letterSpacing: '0px',
-          color: 'rgb(23, 23, 23)',
-          marginBottom: '8px'
-        }}>
-          Recently Work with
-        </h2>
-      </div>
-
       {/* Interactive Area */}
       <div 
         style={{
@@ -93,21 +81,19 @@ const StackedCards = ({ assets }) => {
             height: '100%',
             display: 'flex',
             alignItems: 'center',
-            minWidth: isExpanded ? (cards.length * (CARD_WIDTH * 5 / 6) + 70) : 'auto'
+            minWidth: isExpanded ? (cards.length * (CARD_WIDTH * 4 / 5) + 70) : 'auto'
           }}
         >
           {cards.map((card, index) => {
             // Calculated styles for collapsed state
             // No rotation, just stacking
-            const collapsedX = index * 14; // Scaled overlap distance
+            const collapsedX = index * (CARD_WIDTH / 3); // Scaled overlap distance (1/3 exposed)
             const collapsedY = 0; // No Y offset
-            const collapsedRotate = 10; // Rotated 10 degrees to the right per user request
+            const collapsedRotate = 0; // No rotation
             
             // Calculated styles for expanded state
-            // Each card is covered by 1/6 by the previous card (meaning next card in index if stacking left-to-right)
-            // But user said "previous card". In a left-to-right visual stack, "previous" is left.
-            // If Left covers Right, then z-index must be reversed.
-            const expandedX = index * (CARD_WIDTH * 5 / 6);
+            // Each card is covered by 1/5 by the previous card (meaning 4/5 exposed)
+            const expandedX = index * (CARD_WIDTH * 4 / 5);
             
             return (
               <motion.div
@@ -116,7 +102,7 @@ const StackedCards = ({ assets }) => {
                   position: 'absolute',
                   width: CARD_WIDTH,
                   height: CARD_HEIGHT,
-                  borderRadius: '8px', // Scaled border radius
+                  borderRadius: '16px', // Scaled border radius
                   backgroundColor: '#E5E5E5', // Grey background as requested
                   // Updated shadow style per request (softer, cleaner)
                   boxShadow: '0 6px 17px rgba(0,0,0,0.025), 0 1.5px 4px rgba(0,0,0,0.01)',
@@ -137,7 +123,7 @@ const StackedCards = ({ assets }) => {
                   expanded: {
                     x: expandedX,
                     y: 0,
-                    rotate: 10, // Keep 10 degrees tilt even when expanded
+                    rotate: 0, // No rotation
                     scale: 1,
                     zIndex: cards.length - index
                   }
@@ -147,7 +133,19 @@ const StackedCards = ({ assets }) => {
                   ease: [0.16, 1, 0.3, 1], // Custom ease
                   delay: index * 0.03 // Slightly faster stagger
                 }}
-              />
+              >
+                {card.image && (
+                  <img 
+                    src={card.image} 
+                    alt={`Card ${index}`}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover'
+                    }}
+                  />
+                )}
+              </motion.div>
             );
           })}
           

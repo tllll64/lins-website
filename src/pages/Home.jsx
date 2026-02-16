@@ -5,6 +5,7 @@ import { IconLaunch } from '@arco-design/web-react/icon';
 import { Section } from '../components/Section';
 import { ProjectCard } from '../components/ProjectCard';
 import { GridCard } from '../components/GridCard';
+import { PublicationCard } from '../components/PublicationCard';
 import { Navbar } from '../components/Navbar';
 import { ContactSection } from '../components/ContactSection';
 import { StickerText } from '../components/StickerText';
@@ -23,6 +24,13 @@ import xhsCursor from '../assets/cursor/xhs-cursor.png';
 import PromoteLogo from '../assets/Home/Promote_logo.png';
 import TakoLogo from '../assets/Home/Tako_logo.png';
 import LingxiLogo from '../assets/Home/Lingxi_logo.png';
+
+const RESEARCH_ASSETS = {
+    chi: new URL('../assets/Research/CHI@3x.png', import.meta.url).href,
+    iasdr: new URL('../assets/Research/iasdr@3x.png', import.meta.url).href,
+    uist: new URL('../assets/Research/UIST@3x.png', import.meta.url).href,
+    cscw: new URL('../assets/Research/CSCW@3x.png', import.meta.url).href,
+};
 
 export const Home = () => {
     const navigate = useNavigate();
@@ -180,6 +188,49 @@ export const Home = () => {
         gap: gridGap.xl
     };
 
+    const publicationsData = [
+        {
+            title: "Exploring Generative Personalized Facial Expression Interfaces for Intelligent Agents",
+            authors: "Yate Ge, Lin Tian, Ge Chen, Shuhan Pan, Weiwei Guo, Xiaohua Sun*",
+            venue: "CHI'26 (full paper)",
+            links: [
+                { label: "ACM DL", url: "#" },
+                { label: "PDF", url: "#" },
+            ],
+            image: RESEARCH_ASSETS.chi
+        },
+        {
+            title: "Jokeasy: Exploring Human-AI Collaboration in Thematic Joke Generation",
+            authors: "Yate Ge, Lin Tian, Chiqian Xu, Luyao Xu, Meiying Li, Yuanda Hu, Weiwei Guo*",
+            venue: "iasdr'25 (full paper)",
+            links: [
+                { label: "xxx", url: "#" },
+                { label: "PDF", url: "#" },
+            ],
+            image: RESEARCH_ASSETS.iasdr
+        },
+        {
+            title: "Exploring Generative Personalized Facial Expression Interfaces for Intelligent Agents",
+            authors: "Yate Ge, Lin Tian, Ge Chen, Shuhan Pan, Weiwei Guo, Xiaohua Sun*",
+            venue: "UIST'25 (poster)",
+            links: [
+                { label: "ACM DL", url: "#" },
+                { label: "PDF", url: "#" },
+            ],
+            image: RESEARCH_ASSETS.uist
+        },
+        {
+            title: "When Accessibility Becomes a Trap: A User-Centric Characterization of Dark Patterns Arising from Screen Reader Users' Perceived Deception in Mobile Interfaces",
+            authors: "Dai Shi, Lin Tian, Jiaxun Sun, TOMOMI KAWAKAMI, Nuo Cheng, Shuchang Xu, Guanhong L",
+            venue: "CSCW'25 (poster)",
+            links: [
+                { label: "ACM DL", url: "#" },
+                { label: "PDF", url: "#" }
+            ],
+            image: RESEARCH_ASSETS.cscw
+        }
+    ];
+
     const footerStyle = {
         background: colors.black.solid,
         color: colors.white.solid,
@@ -188,7 +239,7 @@ export const Home = () => {
     };
 
     const blogItems = [
-        { title: "Lynn's 人与 AI 协作日志（日常更新）", category: "Daily Log", image: ASSETS.blog1 },
+        { title: "理想态英文阅读体验在Tako的应用", category: "Daily Log", image: ASSETS.blog1 },
         { title: "“AIGC+模板化”融入B端业务实践反思", category: "Reflection", image: ASSETS.blog2 },
         { title: "商业化产品引导体系建设调研", category: "Research", image: ASSETS.blog1 },
         { title: "国内外用户 AI 使用差异调研", category: "Research", image: ASSETS.blog2 },
@@ -220,7 +271,7 @@ export const Home = () => {
                     display: isMobile ? 'none' : 'block' // Hide on mobile if too crowded, or adjust
                 }}>
                     <FolderIcon 
-                        title="Lynn's Projects"
+                        title="Lynn's works"
                         subtitle="Internship, AI-Driven, Digital"
                         scale={0.6}
                         folderImages={[PromoteLogo, TakoLogo, LingxiLogo]}
@@ -415,6 +466,21 @@ export const Home = () => {
                                 "Colean: 未来家务 AR 游戏"
                             )}
                         />
+                    </div>
+                </Section>
+
+                <Section title="Publications" subtitle="Academic research and conference papers" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
+                    <div style={{ marginBottom: layoutSpacing.section.xl }}>
+                        {publicationsData.map((pub, index) => (
+                            <PublicationCard
+                                key={index}
+                                title={pub.title}
+                                authors={pub.authors}
+                                venue={pub.venue}
+                                links={pub.links}
+                                image={pub.image}
+                            />
+                        ))}
                     </div>
                 </Section>
             </div>

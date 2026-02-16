@@ -1,17 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const PolaroidCard = ({ image, rotation, zIndex }) => {
+const PolaroidCard = ({ image, rotation, zIndex, imageStyle = {} }) => {
   return (
     <motion.div
       style={{
         position: 'relative',
-        width: '280px',
-        height: '340px',
+        width: '180px', // Reduced width (0.6x)
+        height: '195px', // Reduced height (0.6x) -> 1:1 content ratio
         backgroundColor: '#fff',
-        padding: '16px 16px 40px 16px', // Polaroid-style padding (extra at bottom)
-        boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
-        borderRadius: '8px',
+        padding: '10px 10px 25px 10px', // Adjusted padding
+        boxShadow: '0 6px 20px rgba(0,0,0,0.15)',
+        borderRadius: '6px',
         transformOrigin: 'center center',
         zIndex: zIndex,
         cursor: 'pointer',
@@ -21,9 +21,9 @@ const PolaroidCard = ({ image, rotation, zIndex }) => {
       }}
       initial={{ rotate: rotation, y: 0 }}
       whileHover={{
-        scale: 1.05,
-        zIndex: 100, // Bring to front on hover
-        rotate: 0, // Straighten slightly on hover
+        scale: 1.1,
+        zIndex: 100,
+        rotate: 0,
         transition: { duration: 0.3 }
       }}
     >
@@ -42,7 +42,9 @@ const PolaroidCard = ({ image, rotation, zIndex }) => {
             width: '100%', 
             height: '100%', 
             objectFit: 'cover',
-            display: 'block'
+            display: 'block',
+            filter: 'brightness(0.96) saturate(0.9) contrast(0.96)',
+            ...imageStyle
           }} 
         />
       </div>
@@ -51,22 +53,25 @@ const PolaroidCard = ({ image, rotation, zIndex }) => {
 };
 
 const PolaroidGallery = ({ images }) => {
-  // Select top 3 images or fallback
-  const displayImages = images.slice(0, 3);
+  // Select top 6 images or fallback
+  const displayImages = images.slice(0, 6);
   
-  // Configuration for the 3 cards
+  // Configuration for the 6 cards
   const cardsConfig = [
     { rotation: -6, zIndex: 1 },
     { rotation: 4, zIndex: 2 },
-    { rotation: -3, zIndex: 3 } // Third one
+    { rotation: -3, zIndex: 3 },
+    { rotation: 5, zIndex: 2 },
+    { rotation: -5, zIndex: 1 },
+    { rotation: 3, zIndex: 2 }
   ];
 
   return (
     <div style={{
       position: 'relative',
       width: '100%',
-      minHeight: '600px', // Ensure enough space
-      backgroundColor: '#f9f9f9', // Light grey background
+      minHeight: '350px', // Reduced height
+      backgroundColor: '#f9f9f9',
       borderRadius: '24px',
       overflow: 'hidden',
       display: 'flex',
@@ -87,45 +92,33 @@ const PolaroidGallery = ({ images }) => {
         pointerEvents: 'none'
       }} />
 
-      {/* Dashed Path (SVG) */}
-      <svg 
-        width="100%" 
-        height="100%" 
-        style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none', zIndex: 0 }}
-        viewBox="0 0 800 600"
-        preserveAspectRatio="xMidYMid slice"
-      >
-        {/* Dashed Path - A simple curve connecting the area */}
-        <path 
-          d="M 100 300 C 200 100, 600 100, 700 300" 
-          fill="none" 
-          stroke="#ccc" 
-          strokeWidth="2" 
-          strokeDasharray="10, 10" 
-        />
-      </svg>
-
       {/* Cards Container */}
       <div style={{
         position: 'relative',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        gap: '-40px', // Overlap effect
+        // gap is removed as we use negative margins for overlap
         maxWidth: '1000px',
         width: '100%'
       }}>
         {displayImages.map((imgSrc, index) => {
           const config = cardsConfig[index % cardsConfig.length];
           // Determine offsets to create irregular stacking look
-          const yOffset = index === 1 ? '-20px' : '20px'; // Middle one higher
+          const yOffset = index % 2 === 0 ? '0px' : '-20px'; // Alternating offset
+          
+          // Special zoom for photo4 (index 3)
+          const imageStyle = index === 3 ? {
+            transform: 'scale(1.3)',
+            transformOrigin: 'bottom right'
+          } : {};
 
           return (
             <div 
               key={index} 
               style={{ 
                 position: 'relative',
-                marginLeft: index > 0 ? '-60px' : '0', // Negative margin for overlap
+                marginLeft: index > 0 ? '-30px' : '0', // Negative margin for overlap
                 marginTop: yOffset
               }}
             >
@@ -133,6 +126,7 @@ const PolaroidGallery = ({ images }) => {
                 image={imgSrc}
                 rotation={config.rotation}
                 zIndex={config.zIndex}
+                imageStyle={imageStyle}
               />
             </div>
           );

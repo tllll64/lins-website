@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { MoreVertical, Settings } from 'lucide-react';
 import { colors } from '../design-system/tokens';
 
 const FolderIcon = ({ 
     title = "Daily memo ✍️", 
     subtitle = "Notes & Journaling", 
-    bottomText = "2 568 notes",
     scale = 1,
     folderImages = [], // Array of image URLs
     onClick,
@@ -46,9 +46,7 @@ const FolderIcon = ({
         zIndex: 1,
     };
 
-    // The main back part of the folder (visible behind the paper if any, usually same color as front but darker or same)
-    // Actually, for macOS style, the back is often just the tab + a rect behind.
-    // Let's make a full back rect to be safe.
+    // The main back part of the folder
     const backBodyStyle = {
         position: 'absolute',
         top: '12%', // Starts a bit down
@@ -75,43 +73,72 @@ const FolderIcon = ({
         transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
     };
     
-    // Image item styles for scattered layout
-    const getImageStyle = (index) => {
-        // Different transforms for up to 3 images
-        const transforms = [
-            // Left: Overlap center by ~50%
-            { 
-                initial: { rotate: '-15deg', x: '-20%', y: '-30%', scale: 1 },
-                hover: { rotate: '-25deg', x: '-35%', y: '-65%', scale: 1.1 }
-            },  
-            // Right: Overlap center by ~50%
-            { 
-                initial: { rotate: '15deg', x: '80%', y: '-25%', scale: 1 },
-                hover: { rotate: '25deg', x: '85%', y: '-60%', scale: 1.1 }
-            },   
-            // Center: Middle
-            { 
-                initial: { rotate: '-2deg', x: '30%', y: '-40%', scale: 1.05 },
-                hover: { rotate: '0deg', x: '27.5%', y: '-77.5%', scale: 1.15 }
-            },    
-        ];
-        
-        const t = transforms[index % 3];
-        const currentTransform = isHovered ? t.hover : t.initial;
-        
-        return {
-            position: 'absolute',
-            width: '140px', // Increased size (1.4x of 100px)
-            height: '140px', // Increased size
-            objectFit: 'contain',
-            top: '10%', // Base position
-            left: '10%', // Base position
-            transform: `translate(${currentTransform.x}, ${currentTransform.y}) rotate(${currentTransform.rotate}) scale(${currentTransform.scale})`,
-            zIndex: isHovered ? 10 + index : 2 + index, // Ensure they are on top when hovered
-            // Snappy bounce effect
-            transition: 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), z-index 0s', 
-            filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.2))',
-        };
+    // Animation variants for scattering images
+    const imageVariants = {
+        initial: (index) => {
+            // Slight fan/stagger for peeking when closed
+            const initialPositions = [
+                // Left-ish peek
+                { x: '10%', y: '5%', rotate: -5, scale: 0.65, zIndex: 2 },
+                // Right-ish peek
+                { x: '40%', y: '0%', rotate: 5, scale: 0.65, zIndex: 3 },
+                // Center peek (highest)
+                { x: '25%', y: '-5%', rotate: 0, scale: 0.7, zIndex: 4 }
+            ];
+            const pos = initialPositions[index % 3];
+
+            return {
+                x: pos.x,
+                y: pos.y,
+                rotate: pos.rotate,
+                scale: pos.scale,
+                zIndex: pos.zIndex,
+                transition: {
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 25
+                }
+            };
+        },
+        hover: (index) => {
+            // Scatter positions: Left, Right, Center-Top
+            const positions = [
+                // Left - Top Left scatter
+                { x: '-40%', y: '-70%', rotate: -25, scale: 1.1, zIndex: 10 },
+                // Right - Top Right scatter
+                { x: '90%', y: '-60%', rotate: 25, scale: 1.1, zIndex: 11 },
+                // Center - Top Center scatter
+                { x: '25%', y: '-90%', rotate: 0, scale: 1.15, zIndex: 12 }
+            ];
+            
+            const pos = positions[index % 3];
+            
+            return {
+                x: pos.x,
+                y: pos.y,
+                rotate: pos.rotate,
+                scale: pos.scale,
+                zIndex: pos.zIndex,
+                transition: {
+                    type: "spring",
+                    stiffness: 300, // Bouncy spring
+                    damping: 12,    // Low damping for bounce
+                    mass: 0.8,
+                    delay: index * 0.05 // Stagger
+                }
+            };
+        }
+    };
+
+    // Base style for images
+    const baseImageStyle = {
+        position: 'absolute',
+        width: '140px',
+        height: '140px',
+        objectFit: 'contain',
+        top: '10%',
+        left: '10%',
+        filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.2))',
     };
 
     // Front Body (The main container)
@@ -123,7 +150,7 @@ const FolderIcon = ({
         height: '82%', // Covers most of the bottom
         background: blueGradient,
         borderRadius: '16px',
-        zIndex: 4, // Increased z-index to cover images
+        zIndex: 20, // High z-index to cover images initially
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -149,14 +176,6 @@ const FolderIcon = ({
         color: '#FFFFFF',
     };
 
-    const iconButtonStyle = (isIconHovered) => ({
-        cursor: 'pointer',
-        opacity: isIconHovered ? 1 : 0.8,
-        transition: 'opacity 0.2s ease, transform 0.2s ease',
-        transform: isIconHovered ? 'scale(1.1)' : 'scale(1)',
-        color: '#FFFFFF'
-    });
-
     return (
         <div 
             style={containerStyle}
@@ -171,11 +190,15 @@ const FolderIcon = ({
             {/* Folder Contents (Images or Paper) */}
             {folderImages && folderImages.length > 0 ? (
                 folderImages.map((imgSrc, index) => (
-                    <img 
+                    <motion.img 
                         key={index} 
                         src={imgSrc} 
                         alt={`Folder content ${index + 1}`} 
-                        style={getImageStyle(index)} 
+                        style={baseImageStyle}
+                        variants={imageVariants}
+                        initial="initial"
+                        animate={isHovered ? "hover" : "initial"}
+                        custom={index}
                     />
                 ))
             ) : (
@@ -187,7 +210,7 @@ const FolderIcon = ({
                 <div style={textContainerStyle}>
                     <div style={{
                         ...textStyle,
-                        fontSize: '26px',
+                        fontSize: '28px',
                         fontWeight: 600,
                         textShadow: '0 1px 2px rgba(0,0,0,0.1)'
                     }}>
@@ -195,13 +218,12 @@ const FolderIcon = ({
                     </div>
                     <div style={{
                         ...textStyle,
-                        fontSize: '15px',
+                        fontSize: '18px',
                         opacity: 0.9,
                         fontWeight: 500,
                         whiteSpace: 'nowrap',
                         overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        width: '100%'
+                        textOverflow: 'ellipsis'
                     }}>
                         {subtitle}
                     </div>

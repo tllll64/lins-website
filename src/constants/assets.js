@@ -22,13 +22,23 @@ export const ASSETS = {
     linkLogo: new URL('../assets/react.svg', import.meta.url).href, // Placeholder
 
     // About Page
-    profile: new URL('../assets/profile.jpg', import.meta.url).href,
+    profile: new URL('../assets/about/profile.jpg', import.meta.url).href,
 
     // Photo Grid
-    photo1: new URL('../assets/Research/meeting1.png', import.meta.url).href, // Placeholder
-    photo2: new URL('../assets/Research/meeting1.png', import.meta.url).href,
-    photo3: new URL('../assets/Research/meeting1.png', import.meta.url).href,
-    photo4: new URL('../assets/Research/meeting1.png', import.meta.url).href,
-    photo5: new URL('../assets/Research/meeting1.png', import.meta.url).href,
-    photo6: new URL('../assets/react.svg', import.meta.url).href,
+    photo1: new URL('../assets/about/919625a6c6f63f74a6b95bf015a8331e.JPG', import.meta.url).href,
+    photo2: new URL('../assets/about/截屏2026-02-16 17.31.51.png', import.meta.url).href,
+    photo3: new URL('../assets/about/截屏2026-02-16 17.14.19.png', import.meta.url).href,
+    photo4: new URL('../assets/about/IMG_3790.JPG', import.meta.url).href,
+    photo5: new URL('../assets/about/IMG_4621.jpg', import.meta.url).href,
+    photo6: new URL('../assets/about/IMG_4958.jpg', import.meta.url).href,
+
+    // Work With
+    tiktokWork: new URL('../assets/workwith/TikTok.png', import.meta.url).href,
+    ant: new URL('../assets/workwith/ant@3x.png', import.meta.url).href,
+    bmw: new URL('../assets/workwith/bmw@3x.png', import.meta.url).href,
+    huawei: new URL('../assets/workwith/huawei@3x.png', import.meta.url).href,
+    mi: new URL('../assets/workwith/mi@3x.png', import.meta.url).href,
+    nio: new URL('../assets/workwith/nio@3x.png', import.meta.url).href,
+    red: new URL('../assets/workwith/red@3x.png', import.meta.url).href,
+    zeekr: new URL('../assets/workwith/zeekr@3x.png', import.meta.url).href,
 };

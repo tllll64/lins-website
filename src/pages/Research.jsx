@@ -1,17 +1,9 @@
 import React from 'react';
 import { Navbar } from '../components/Navbar';
-import { PublicationCard } from '../components/PublicationCard';
 import CircularGallery from '../components/CircularGallery';
 import { colors, layoutSpacing, width, typography, stackSpacing, fontSize, gridGap } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 import { ASSETS } from '../constants/assets';
-
-const RESEARCH_ASSETS = {
-    chi: new URL('../assets/Research/CHI@3x.png', import.meta.url).href,
-    iasdr: new URL('../assets/Research/iasdr@3x.png', import.meta.url).href,
-    uist: new URL('../assets/Research/UIST@3x.png', import.meta.url).href,
-    cscw: new URL('../assets/Research/CSCW@3x.png', import.meta.url).href,
-};
 
 export const Research = () => {
     const isMobile = useMediaQuery('(max-width: 768px)');
@@ -39,49 +31,6 @@ export const Research = () => {
         marginBottom: stackSpacing.xl,
         letterSpacing: '0.05em'
     };
-
-    const publicationsData = [
-        {
-            title: "Exploring Generative Personalized Facial Expression Interfaces for Intelligent Agents",
-            authors: "Yate Ge, Lin Tian, Ge Chen, Shuhan Pan, Weiwei Guo, Xiaohua Sun*",
-            venue: "CHI'26 (full paper)",
-            links: [
-                { label: "ACM DL", url: "#" },
-                { label: "PDF", url: "#" },
-            ],
-            image: RESEARCH_ASSETS.chi
-        },
-        {
-            title: "Jokeasy: Exploring Human-AI Collaboration in Thematic Joke Generation",
-            authors: "Yate Ge, Lin Tian, Chiqian Xu, Luyao Xu, Meiying Li, Yuanda Hu, Weiwei Guo*",
-            venue: "iasdr'25 (full paper)",
-            links: [
-                { label: "xxx", url: "#" },
-                { label: "PDF", url: "#" },
-            ],
-            image: RESEARCH_ASSETS.iasdr
-        },
-        {
-            title: "Exploring Generative Personalized Facial Expression Interfaces for Intelligent Agents",
-            authors: "Yate Ge, Lin Tian, Ge Chen, Shuhan Pan, Weiwei Guo, Xiaohua Sun*",
-            venue: "UIST'25 (poster)",
-            links: [
-                { label: "ACM DL", url: "#" },
-                { label: "PDF", url: "#" },
-            ],
-            image: RESEARCH_ASSETS.uist
-        },
-        {
-            title: "When Accessibility Becomes a Trap: A User-Centric Characterization of Dark Patterns Arising from Screen Reader Users' Perceived Deception in Mobile Interfaces",
-            authors: "Dai Shi, Lin Tian, Jiaxun Sun, TOMOMI KAWAKAMI, Nuo Cheng, Shuchang Xu, Guanhong L",
-            venue: "CSCW'25 (poster)",
-            links: [
-                { label: "ACM DL", url: "#" },
-                { label: "PDF", url: "#" }
-            ],
-            image: RESEARCH_ASSETS.cscw
-        }
-    ];
 
     const demoItems = [
         { type: 'placeholder' },
@@ -114,24 +63,9 @@ export const Research = () => {
                     paddingTop: '80px', // Clear navbar
                     marginBottom: layoutSpacing.section.xl
                 }}>
-                    <div style={{ width: '100%', height: '600px' }}>
+                    <div style={{ width: '100%', height: '720px' }}>
                         <CircularGallery items={galleryItems} bend={3} textColor={colors.grey[9]} borderRadius={0.05} />
                     </div>
-                </div>
-
-                <h1 style={titleStyle}>Publications</h1>
-                
-                <div style={{ marginBottom: layoutSpacing.section.xl }}>
-                    {publicationsData.map((pub, index) => (
-                        <PublicationCard
-                            key={index}
-                            title={pub.title}
-                            authors={pub.authors}
-                            venue={pub.venue}
-                            links={pub.links}
-                            image={pub.image}
-                        />
-                    ))}
                 </div>
 
                 <h1 style={titleStyle}>Interactive Demos</h1>

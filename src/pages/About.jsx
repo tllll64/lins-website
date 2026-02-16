@@ -8,9 +8,10 @@ import { colors, spacing, typography, fontWeight, stackSpacing, gridGap, layoutS
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 import { Twitter, Github, Mail, MessageCircle, Copy, Check, Phone } from 'lucide-react';
 
-import profileImage from '../assets/profile.jpg';
+import profileImage from '../assets/about/profile.jpg';
 import PolaroidGallery from '../components/PolaroidGallery';
 import StackedCards from '../components/StackedCards';
+import AboutContact from '../components/AboutContact';
 export const About = () => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     const footerRef = useRef(null);
@@ -264,65 +265,7 @@ export const About = () => {
                             </p>
                         </div>
 
-                        <div style={contactInfoStyle}>
-                            <h3 style={contactTitleStyle}>寻找 27 届暑期实习中，欢迎联系🙋🏻‍♀️</h3>
-                            <div style={contactLinksStyle}>
-                                <div 
-                                    style={{
-                                        ...contactLinkStyle,
-                                        color: hoveredField === 'phone' ? colors.grey[9] : colors.grey[56]
-                                    }}
-                                    onMouseEnter={() => setHoveredField('phone')}
-                                    onMouseLeave={() => setHoveredField(null)}
-                                    onClick={() => handleCopy('(+86) 15968545540', 'phone')}
-                                >
-                                    <Phone size={16} style={{ transform: 'translateY(1px)' }} /> <span>(+86) 15968545540</span>
-                                    <div style={iconContainerStyle}>
-                                        {copiedField === 'phone' ? (
-                                            <Check size={14} color={colors.grey[9]} />
-                                        ) : hoveredField === 'phone' ? (
-                                            <Copy size={14} style={{ opacity: 0.5 }} />
-                                        ) : null}
-                                    </div>
-                                </div>
-                                <div 
-                                    style={{
-                                        ...contactLinkStyle,
-                                        color: hoveredField === 'wechat' ? colors.grey[9] : colors.grey[56]
-                                    }}
-                                    onMouseEnter={() => setHoveredField('wechat')}
-                                    onMouseLeave={() => setHoveredField(null)}
-                                    onClick={() => handleCopy('LittleLionTOP', 'wechat')}
-                                >
-                                    <MessageCircle size={16} /> <span>LittleLionTOP</span>
-                                    <div style={iconContainerStyle}>
-                                        {copiedField === 'wechat' ? (
-                                            <Check size={14} color={colors.grey[9]} />
-                                        ) : hoveredField === 'wechat' ? (
-                                            <Copy size={14} style={{ opacity: 0.5 }} />
-                                        ) : null}
-                                    </div>
-                                </div>
-                                <div 
-                                    style={{
-                                        ...contactLinkStyle,
-                                        color: hoveredField === 'email' ? colors.grey[9] : colors.grey[56]
-                                    }}
-                                    onMouseEnter={() => setHoveredField('email')}
-                                    onMouseLeave={() => setHoveredField(null)}
-                                    onClick={() => handleCopy('AstronautTL@163.com', 'email')}
-                                >
-                                    <Mail size={16} /> <span>AstronautTL@163.com</span>
-                                    <div style={iconContainerStyle}>
-                                        {copiedField === 'email' ? (
-                                            <Check size={14} color={colors.grey[9]} />
-                                        ) : hoveredField === 'email' ? (
-                                            <Copy size={14} style={{ opacity: 0.5 }} />
-                                        ) : null}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <AboutContact />
                     </div>
 
                     <div style={avatarContainerStyle}>
@@ -333,7 +276,42 @@ export const About = () => {
                 </div>
             </div>
 
-            <StackedCards assets={ASSETS} />
+            <Section style={{ paddingTop: layoutSpacing.section.xs, paddingBottom: layoutSpacing.section.xs }}>
+                <div style={{ 
+                    display: 'flex', 
+                    flexDirection: isMobile ? 'column' : 'row',
+                    alignItems: isMobile ? 'flex-start' : 'center', 
+                    gap: isMobile ? stackSpacing.md : '20px' 
+                }}>
+                    <h2 style={{
+                        fontFamily: typography.heading1.fontFamily,
+                        fontSize: isMobile ? '36px' : typography.heading1.fontSize,
+                        fontWeight: typography.heading1.fontWeight,
+                        lineHeight: typography.heading1.lineHeight,
+                        letterSpacing: typography.heading1.letterSpacing,
+                        color: colors.grey[9],
+                        margin: 0,
+                        whiteSpace: 'nowrap'
+                    }}>
+                        Recently Work with
+                    </h2>
+                    <div style={{ flex: 1, width: isMobile ? '100%' : 'auto' }}>
+                        <StackedCards 
+                            assets={ASSETS} 
+                            images={[
+                                ASSETS.tiktokWork,
+                                ASSETS.ant,
+                                ASSETS.bmw,
+                                ASSETS.huawei,
+                                ASSETS.mi,
+                                ASSETS.nio,
+                                ASSETS.red,
+                                ASSETS.zeekr
+                            ]}
+                        />
+                    </div>
+                </div>
+            </Section>
 
             <Section title="Latest News" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
                 <div style={newsContainerStyle}>
@@ -348,8 +326,8 @@ export const About = () => {
                 </div>
             </Section>
 
-            <Section title="Extra Extra !" subtitle="不工作的时候，你会发现我在 🏃 Citywalk，💗 志愿服务，🧘 旅行，🎵 听 R&B 歌曲，🍮 享用甜点，以及 👧 照顾我的小侄子（德华带娃）。" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
-                <PolaroidGallery images={[ASSETS.photo1, ASSETS.photo2, ASSETS.photo3].filter(Boolean)} />
+            <Section title="Extra Extra !" subtitle="不工作的时候，我会 🏃 Citywalk，🧘 旅行，🎵 听音乐&播客，💪 健身，🩵 追星，🍮 享用甜点，以及 👧 照顾我的小侄子（德华带娃）。" subtitleStyle={{ color: colors.grey[9] }} style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
+                <PolaroidGallery images={[ASSETS.photo1, ASSETS.photo2, ASSETS.photo3, ASSETS.photo4, ASSETS.photo5, ASSETS.photo6].filter(Boolean)} />
             </Section>
 
             <ContactSection ref={footerRef} />
