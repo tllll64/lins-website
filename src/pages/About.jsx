@@ -10,6 +10,7 @@ import { Twitter, Github, Mail, MessageCircle, Copy, Check, Phone } from 'lucide
 
 import profileImage from '../assets/profile.jpg';
 import PolaroidGallery from '../components/PolaroidGallery';
+import StackedCards from '../components/StackedCards';
 export const About = () => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     const footerRef = useRef(null);
@@ -331,6 +332,8 @@ export const About = () => {
                     </div>
                 </div>
             </div>
+
+            <StackedCards assets={ASSETS} />
 
             <Section title="Latest News" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
                 <div style={newsContainerStyle}>
