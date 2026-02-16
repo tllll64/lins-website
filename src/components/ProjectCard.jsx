@@ -50,8 +50,19 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
     };
 
     const dotMatrixStyle = {
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='8' height='8' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='6' height='6' fill='%23e5e5e5' fill-opacity='0.5'/%3E%3C/svg%3E")`,
-        backgroundSize: '8px 8px',
+        border: '12px solid #fff',
+        background: '#fff',
+        backgroundClip: 'padding-box',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden'
+    };
+
+    const circleDotMatrixStyle = {
+        backgroundImage: `radial-gradient(rgba(229, 229, 229, 0.7) 1.3px, transparent 1.3px)`,
+        backgroundSize: '12px 12px',
+        backgroundPosition: '0 0',
         border: '12px solid #fff',
         backgroundClip: 'padding-box',
         display: 'flex',
@@ -181,7 +192,7 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
 
                 {/* Right Side: Two Square Blocks */}
                 <div style={rightColumnStyle}>
-                    <div style={squareBlockStyle}></div>
+                    <div style={{...squareBlockStyle, ...circleDotMatrixStyle}}></div>
                     <div style={{...squareBlockStyle, ...dotMatrixStyle}}>
                         <PixelEye size={6} gap={2} />
                     </div>
