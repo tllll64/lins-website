@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar } from '../components/Navbar';
 import { PublicationCard } from '../components/PublicationCard';
+import { StackCardGallery } from '../components/StackCardGallery';
 import { colors, layoutSpacing, width, typography, stackSpacing, fontSize, gridGap } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 import { ASSETS } from '../constants/assets';
@@ -165,6 +166,11 @@ export const Research = () => {
                              )}
                         </div>
                     ))}
+                </div>
+
+                <h1 style={titleStyle}>AI Expertise</h1>
+                <div style={{ marginBottom: layoutSpacing.section.xl }}>
+                    <StackCardGallery />
                 </div>
             </div>
         </div>
