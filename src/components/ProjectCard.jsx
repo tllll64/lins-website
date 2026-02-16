@@ -5,10 +5,9 @@ import { ArrowRight } from 'lucide-react';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 import PixelEye from './PixelEye';
 
-export const ProjectCard = ({ date, title, description, tags, image, link, className = "", customCursor, onClick, logo }) => {
+export const ProjectCard = ({ date, title, description, tags, image, link, className = "", customCursor, onClick, logo, pixelPattern }) => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     const [isHovered, setIsHovered] = useState(false);
-    const [isLogoHovered, setIsLogoHovered] = useState(false);
 
     const containerStyle = {
         display: 'flex',
@@ -186,8 +185,6 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
                 <div style={rightColumnStyle}>
                     <div 
                   style={{...squareBlockStyle, ...circleDotMatrixStyle, position: 'relative'}}
-                  onMouseEnter={() => setIsLogoHovered(true)}
-                  onMouseLeave={() => setIsLogoHovered(false)}
                 >
                     {logo && (
                       <img 
@@ -197,14 +194,14 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
                           width: '80%',
                           height: '80%',
                           objectFit: 'contain',
-                          filter: isLogoHovered ? 'none' : 'grayscale(100%)',
+                          filter: isHovered ? 'none' : 'grayscale(100%)',
                           transition: 'filter 0.3s ease'
                         }} 
                       />
                     )}
                   </div>
                     <div style={{...squareBlockStyle, ...dotMatrixStyle}}>
-                        <PixelEye size={6} gap={2} />
+                        {pixelPattern || <PixelEye size={6} gap={2} />}
                     </div>
                 </div>
             </div>

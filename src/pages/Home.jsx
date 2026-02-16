@@ -13,6 +13,7 @@ import NothingDotClock from '../components/NothingDotClock';
 import PDFViewer from '../components/PDFViewer';
 import ReflectionList from '../components/ReflectionList';
 import IframeModal from '../components/IframeModal';
+import PixelLock from '../components/PixelLock';
 import { ASSETS } from '../constants/assets';
 import { colors, spacing, typography, stackSpacing, gridGap, layoutSpacing, componentSpacing, width, fontSize } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
@@ -202,7 +203,7 @@ export const Home = () => {
                 {/* NothingDotClock in top-left corner */}
                 <div style={{
                     position: 'absolute',
-                    top: layoutSpacing.section.md,
+                    top: layoutSpacing.section.xl,
                     left: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
                     zIndex: 10
                 }}>
@@ -212,7 +213,7 @@ export const Home = () => {
                 {/* NothingWordClock in bottom-left corner */}
                 <div style={{
                     position: 'absolute',
-                    bottom: layoutSpacing.section.md,
+                    bottom: spacing[4],
                     left: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
                     zIndex: 10
                 }}>
@@ -235,7 +236,8 @@ export const Home = () => {
                         textAlign: 'center',
                         color: colors.black.solid, // Changed to black for visibility
                         maxWidth: '800px',
-                        padding: '0 20px'
+                        padding: '0 20px',
+                        transform: 'translateY(40px)'
                     }}>
                          <h3 
                             onMouseEnter={() => setShowNameTooltip(true)}
@@ -332,6 +334,7 @@ export const Home = () => {
                     image={ASSETS.pro}
                     logo={TakoLogo}
                     customCursor={xhsCursor}
+                    pixelPattern={<PixelLock size={6} gap={2} />}
                 />
                 <ProjectCard
                     date="Mar - May 2024"
