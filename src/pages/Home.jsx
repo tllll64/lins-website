@@ -5,11 +5,11 @@ import { IconLaunch } from '@arco-design/web-react/icon';
 import { Section } from '../components/Section';
 import { ProjectCard } from '../components/ProjectCard';
 import { GridCard } from '../components/GridCard';
-import { BlogCard } from '../components/BlogCard';
 import { Navbar } from '../components/Navbar';
 import { ContactSection } from '../components/ContactSection';
 import { StickerText } from '../components/StickerText';
 import PDFViewer from '../components/PDFViewer';
+import ReflectionList from '../components/ReflectionList';
 import { ASSETS } from '../constants/assets';
 import { colors, spacing, typography, stackSpacing, gridGap, layoutSpacing, componentSpacing, width, fontSize } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
@@ -157,6 +157,15 @@ export const Home = () => {
         paddingBottom: layoutSpacing.section.lg
     };
 
+    const blogItems = [
+        { title: "Lynn's 人与 AI 协作日志（日常更新）", category: "Daily Log", image: ASSETS.blog1 },
+        { title: "“AIGC+模板化”融入B端业务实践反思", category: "Reflection", image: ASSETS.blog2 },
+        { title: "商业化产品引导体系建设调研", category: "Research", image: ASSETS.blog1 },
+        { title: "国内外用户 AI 使用差异调研", category: "Research", image: ASSETS.blog2 },
+        { title: "B 端 AI 应用设计框架调研", category: "Framework", image: ASSETS.blog1 },
+        { title: "华为问界智驾教学产品分析", category: "Analysis", image: ASSETS.blog2 }
+    ];
+
     return (
         <div style={pageStyle}>
             <Navbar theme={navTheme} />
@@ -250,36 +259,8 @@ export const Home = () => {
             <footer style={footerStyle} id="about" ref={footerRef}>
                 <div ref={blogSectionRef}>
                     <Section title="Reflection Blog" subtitle="从实践中反思沉淀，解构 AI 协作机制" dark className="!py-0 !px-0">
-                        <div style={{
-                            display: 'grid',
-                            gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
-                            gap: gridGap.xl,
-                            marginBottom: layoutSpacing.section.md
-                        }}>
-                            <BlogCard
-                                title="Lynn's 人与 AI 协作日志（日常更新）"
-                                image={ASSETS.blog1}
-                            />
-                            <BlogCard
-                                title="“AIGC+模板化”融入B端业务实践反思"
-                                image={ASSETS.blog2}
-                            />
-                            <BlogCard
-                                title="商业化产品引导体系建设调研"
-                                image={ASSETS.blog1}
-                            />
-                            <BlogCard
-                                title="国内外用户 AI 使用差异调研"
-                                image={ASSETS.blog2}
-                            />
-                            <BlogCard
-                                title="B 端 AI 应用设计框架调研"
-                                image={ASSETS.blog1}
-                            />
-                            <BlogCard
-                                title="华为问界智驾教学产品分析"
-                                image={ASSETS.blog2}
-                            />
+                        <div style={{ marginBottom: layoutSpacing.section.md }}>
+                            <ReflectionList items={blogItems} />
                         </div>
                     </Section>
                 </div>
