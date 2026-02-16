@@ -5,9 +5,10 @@ import { ArrowRight } from 'lucide-react';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 import PixelEye from './PixelEye';
 
-export const ProjectCard = ({ date, title, description, tags, image, link, className = "", customCursor, onClick }) => {
+export const ProjectCard = ({ date, title, description, tags, image, link, className = "", customCursor, onClick, logo }) => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     const [isHovered, setIsHovered] = useState(false);
+    const [isLogoHovered, setIsLogoHovered] = useState(false);
 
     const containerStyle = {
         display: 'flex',
@@ -30,7 +31,7 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
         overflow: 'hidden',
         position: 'relative',
         background: colors.grey[95],
-        cursor: customCursor ? `url("${customCursor}"), auto` : 'default'
+        cursor: 'default'
     };
 
     const rightColumnStyle = {
@@ -145,23 +146,14 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                 >
-                    {image && (
-                        <div style={imageContainerStyle}>
-                             <img
-                                src={image}
-                                alt={title}
-                                style={{
-                                    height: '100%',
-                                    width: '100%',
-                                    objectFit: 'cover',
-                                    objectPosition: 'center',
-                                    transition: 'transform 0.7s ease',
-                                    transform: 'scale(1)',
-                                    cursor: 'inherit'
-                                }}
-                            />
-                        </div>
-                    )}
+                    <div style={{
+                        position: 'absolute',
+                        inset: 0,
+                        backgroundImage: `url(${image})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        transition: 'transform 0.5s ease'
+                    }} />
                     
                     <div style={textOverlayStyle}>
                         {date && (
@@ -192,7 +184,25 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
 
                 {/* Right Side: Two Square Blocks */}
                 <div style={rightColumnStyle}>
-                    <div style={{...squareBlockStyle, ...circleDotMatrixStyle}}></div>
+                    <div 
+                  style={{...squareBlockStyle, ...circleDotMatrixStyle, position: 'relative'}}
+                  onMouseEnter={() => setIsLogoHovered(true)}
+                  onMouseLeave={() => setIsLogoHovered(false)}
+                >
+                    {logo && (
+                      <img 
+                        src={logo} 
+                        alt="logo" 
+                        style={{
+                          width: '80%',
+                          height: '80%',
+                          objectFit: 'contain',
+                          filter: isLogoHovered ? 'none' : 'grayscale(100%)',
+                          transition: 'filter 0.3s ease'
+                        }} 
+                      />
+                    )}
+                  </div>
                     <div style={{...squareBlockStyle, ...dotMatrixStyle}}>
                         <PixelEye size={6} gap={2} />
                     </div>
