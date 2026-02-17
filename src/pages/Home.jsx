@@ -118,7 +118,7 @@ export const Home = () => {
     const heroTitleStyle = {
         fontFamily: typography.heading1.fontFamily,
         fontSize: isMobile ? '36px' : typography.heading1.fontSize,
-        fontWeight: typography.heading1.fontWeight,
+        fontWeight: 400,
         lineHeight: typography.heading1.lineHeight,
         letterSpacing: '0px',
         color: colors.grey[9],
@@ -176,6 +176,7 @@ export const Home = () => {
         paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
         maxWidth: width.container.xl,
         margin: '0 auto',
+        marginTop: '4px',
         display: 'flex',
         flexDirection: 'column',
         gap: isMobile ? stackSpacing.xl : layoutSpacing.section.md,
@@ -335,8 +336,8 @@ export const Home = () => {
                          {showNameTooltip && (
                             <div style={{
                                 position: 'fixed',
-                                top: tooltipPosition.y - 40, // Position above cursor (adjusted for bubble height)
-                                left: tooltipPosition.x + 15, // Position to the right
+                                top: tooltipPosition.y - 60, // Position above cursor (adjusted for bubble height)
+                                left: tooltipPosition.x + 20, // Position to the right
                                 background: colors.white.solid,
                                 padding: '8px 16px',
                                 borderRadius: '50px',
@@ -357,8 +358,8 @@ export const Home = () => {
                          <h1 style={{
                             fontFamily: 'Lora, "Times New Roman", Georgia, serif',
                             fontSize: isMobile ? '42px' : '72px',
-                            fontWeight: 400,
-                            lineHeight: 1.1,
+                            fontWeight: 200,
+                            lineHeight: 1.58,
                             marginBottom: '24px',
                             letterSpacing: '-0.02em'
                          }}>
@@ -368,7 +369,7 @@ export const Home = () => {
 
                          <p style={{
                             fontFamily: typography.body.fontFamily,
-                            fontSize: isMobile ? '16px' : '18px',
+                            fontSize: typography.body.fontSize,
                             lineHeight: 1.6,
                             maxWidth: '600px',
                             margin: '0 auto',
@@ -381,13 +382,22 @@ export const Home = () => {
             </section>
 
             <header style={heroStyle} id="works">
-                <h1 style={heroTitleStyle}>internship Projects</h1>
+                <h1 style={heroTitleStyle}>Internship Projects</h1>
                 <p style={heroSubtitleStyle}>
                     2023-2026年 实习项目产出和复盘思考
                 </p>
             </header>
 
             <div style={worksContainerStyle}>
+                <ProjectCard
+                    date="Mar - May 2024"
+                    title="Procreate"
+                    description="A deep dive into mobile creative tools, analyzing interaction patterns and recreating key workflows for iOS."
+                    tags={['APP', '产设共建']}
+                    image={ASSETS.pro}
+                    logo={LingxiLogo}
+                    customCursor={xhsCursor}
+                />
                 <ProjectCard
                     date="June - Aug 2023"
                     title="薯条加热放心投"
@@ -410,19 +420,54 @@ export const Home = () => {
                     customCursor={xhsCursor}
                     pixelPattern={<PixelLock size={6} gap={2} />}
                 />
-                <ProjectCard
-                    date="Mar - May 2024"
-                    title="Procreate"
-                    description="A deep dive into mobile creative tools, analyzing interaction patterns and recreating key workflows for iOS."
-                    tags={['APP', '产设共建']}
-                    image={ASSETS.pro}
-                    logo={LingxiLogo}
-                    customCursor={xhsCursor}
-                />
             </div>
 
             <div id="explorations">
-                <Section title="AI-Driven Projects" subtitle="研究生期间在生成式交互方向上探索的原型与落地作品" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
+                <Section title="Publications" subtitle="研究生期间的 HAI 相关研究论文" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: 0 }}>
+                    <div style={{ marginBottom: layoutSpacing.section.xl }}>
+                        {publicationsData.map((pub, index) => (
+                            <PublicationCard
+                                key={index}
+                                title={pub.title}
+                                authors={pub.authors}
+                                venue={pub.venue}
+                                links={pub.links}
+                                image={pub.image}
+                            />
+                        ))}
+                    </div>
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
+                        gap: gridGap.lg,
+                        marginTop: layoutSpacing.section.lg
+                    }}>
+                        {demoItems.map((item, index) => (
+                            <div key={index} style={{
+                                width: '100%',
+                                aspectRatio: '4/3',
+                                background: colors.grey[92],
+                                borderRadius: '12px',
+                                overflow: 'hidden',
+                                position: 'relative'
+                            }}>
+                                <iframe
+                                    width="100%"
+                                    height="100%"
+                                    src={item.src}
+                                    title={`Demo Video ${index + 1}`}
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerPolicy="strict-origin-when-cross-origin"
+                                    allowFullScreen
+                                    style={{ border: 'none' }}
+                                ></iframe>
+                            </div>
+                        ))}
+                    </div>
+                </Section>
+
+                <Section title="AI-Driven Projects" subtitle="研究生期间在生成式AI方向上探索的原型与落地作品" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: 0 }}>
                     <div style={gridStyle}>
                         <GridCard
                             title="GenFaceUI: Meta-Design Tool"
@@ -474,55 +519,11 @@ export const Home = () => {
                         />
                     </div>
                 </Section>
-
-                <Section title="Publications" subtitle="Academic research and conference papers" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
-                    <div style={{ marginBottom: layoutSpacing.section.xl }}>
-                        {publicationsData.map((pub, index) => (
-                            <PublicationCard
-                                key={index}
-                                title={pub.title}
-                                authors={pub.authors}
-                                venue={pub.venue}
-                                links={pub.links}
-                                image={pub.image}
-                            />
-                        ))}
-                    </div>
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
-                        gap: gridGap.lg,
-                        marginTop: layoutSpacing.section.lg
-                    }}>
-                        {demoItems.map((item, index) => (
-                            <div key={index} style={{
-                                width: '100%',
-                                aspectRatio: '4/3',
-                                background: colors.grey[92],
-                                borderRadius: '12px',
-                                overflow: 'hidden',
-                                position: 'relative'
-                            }}>
-                                <iframe
-                                    width="100%"
-                                    height="100%"
-                                    src={item.src}
-                                    title={`Demo Video ${index + 1}`}
-                                    frameBorder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    referrerPolicy="strict-origin-when-cross-origin"
-                                    allowFullScreen
-                                    style={{ border: 'none' }}
-                                ></iframe>
-                            </div>
-                        ))}
-                    </div>
-                </Section>
             </div>
 
             <footer style={footerStyle} id="about" ref={footerRef}>
                 <div ref={blogSectionRef}>
-                    <Section title="Reflection Blog" subtitle="从实践中反思沉淀，解构 AI 协作机制" dark className="!py-0 !px-0">
+                    <Section title="Reflection Blog" dark className="!py-0 !px-0">
                         <div style={{ marginBottom: layoutSpacing.section.md }}>
                             <ReflectionList items={blogItems} />
                         </div>

@@ -29,9 +29,9 @@ export const Section = ({ title, subtitle, children, className = "", dark = fals
     const titleStyle = {
         fontFamily: typography.heading1.fontFamily,
         fontSize: isMobile ? '36px' : isTablet ? fontSize[48] : typography.heading1.fontSize,
-        fontWeight: typography.heading1.fontWeight,
+        fontWeight: 200,
         lineHeight: typography.heading1.lineHeight,
-        letterSpacing: '0px',
+        letterSpacing: '-0.02em',
         color: dark ? colors.white.solid : colors.grey[9],
         marginBottom: stackSpacing.sm
     };

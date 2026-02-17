@@ -33,13 +33,13 @@ export const PublicationCard = ({ title, authors, venue, links, image }) => {
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
-        gap: spacing[1], // Reduced from stackSpacing.xs (8px) to 4px
+        gap: '8px',
         justifyContent: 'flex-start',
         paddingTop: isMobile ? 0 : spacing.xs
     };
 
     const titleStyle = {
-        fontFamily: typography.body.fontFamily,
+        fontFamily: typography.heading1.fontFamily,
         fontSize: '18px',
         fontWeight: fontWeight.bold,
         lineHeight: '1.4',

@@ -102,16 +102,6 @@ export default function Stack({
               className="card-image"
             />
           )
-        },
-        {
-          id: 4,
-          content: (
-            <img
-              src="https://images.unsplash.com/photo-1572120360610-d971b9d7767c?q=80&w=500&auto=format"
-              alt="card-4"
-              className="card-image"
-            />
-          )
         }
       ];
     }

@@ -179,11 +179,18 @@ class Media {
           );
           vec4 color = texture2D(tMap, uv);
           
-          float d = roundedBoxSDF(vUv - 0.5, vec2(0.5 - uBorderRadius), uBorderRadius);
+          // Convert UV to World Space (centered)
+          vec2 pos = (vUv - 0.5) * uPlaneSizes;
           
-          // Smooth antialiasing for edges
-          float edgeSmooth = 0.002;
-          float alpha = 1.0 - smoothstep(-edgeSmooth, edgeSmooth, d);
+          // Calculate SDF in World Space
+          // Box size is half-size minus radius
+          vec2 b = (uPlaneSizes * 0.5) - uBorderRadius;
+          float d = roundedBoxSDF(pos, b, uBorderRadius);
+          
+          // Smooth antialiasing for edges (approx 1px in world space? No, need pixel size)
+          // We don't have exact pixel size derivative here easily without fwidth, but 0.002 world units is approx enough
+          // Better: use fwidth(d) if available, or just a small constant
+          float alpha = 1.0 - smoothstep(0.0, 0.01, d);
           
           gl_FragColor = vec4(color.rgb, alpha);
         }
@@ -194,7 +201,7 @@ class Media {
         uImageSizes: { value: [0, 0] },
         uSpeed: { value: 0 },
         uTime: { value: 100 * Math.random() },
-        uBorderRadius: { value: this.borderRadius }
+        uBorderRadius: { value: 0 } // Updated in onResize
       },
       transparent: true
     });
@@ -285,6 +292,12 @@ class Media {
     this.plane.scale.x = this.baseScale.x;
     this.plane.scale.y = this.baseScale.y;
     this.plane.program.uniforms.uPlaneSizes.value = [this.plane.scale.x, this.plane.scale.y];
+    
+    // Calculate radius and border in world units
+    // viewport.height is in world units, screen.height is in pixels
+    const pxToWorld = this.viewport.height / this.screen.height;
+    this.plane.program.uniforms.uBorderRadius.value = this.borderRadius * pxToWorld;
+
     this.padding = 2;
     this.width = this.plane.scale.x + this.padding;
     this.widthTotal = this.width * this.length;
@@ -560,9 +573,10 @@ export default function CircularGallery({
         <h2
           style={{
             color: textColor,
-            fontSize: '2rem',
+            fontFamily: 'Lora, "Times New Roman", Georgia, serif',
+            fontSize: '24px',
             margin: '0 0 10px 0',
-            fontWeight: 'normal'
+            fontWeight: 600
           }}
         >
           {activeItem ? activeItem.text : ''}

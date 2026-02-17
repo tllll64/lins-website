@@ -52,13 +52,13 @@ const PrincipleCard = ({ title, description, icon }) => (
         <div style={{ fontSize: '24px', marginBottom: stackSpacing.xs }}>{icon}</div>
         <h3 style={{
             fontFamily: typography.heading3.fontFamily,
-            fontSize: '18px',
+            fontSize: '20px',
             fontWeight: 600,
             color: colors.grey[9]
         }}>{title}</h3>
         <p style={{
             fontFamily: typography.body.fontFamily,
-            fontSize: '14px',
+            fontSize: '16px',
             lineHeight: 1.5,
             color: colors.grey[7]
         }}>{description}</p>
@@ -158,7 +158,7 @@ export const Research = () => {
         margin: '0 auto',
         paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
         paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
-        paddingTop: '120px',
+        paddingTop: '40px',
         paddingBottom: '240px'
     };
 
@@ -231,7 +231,7 @@ export const Research = () => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     paddingTop: '80px',
-                    marginBottom: layoutSpacing.section.lg
+                    marginBottom: '120px'
                 }}>
                     <h1 style={{
                         fontFamily: 'Lora, "Times New Roman", Georgia, serif',
@@ -242,7 +242,7 @@ export const Research = () => {
                         letterSpacing: '-0.02em',
                         color: colors.grey[9]
                     }}>
-                        Play with AI
+                        Human 🤝 AI Sandbox
                     </h1>
                     <p style={{
                         fontFamily: typography.body.fontFamily,
@@ -256,8 +256,8 @@ export const Research = () => {
                     }}>
                         Simplicity is my superpower. I turn complex ideas into experiences users love and investors trust. I help SaaS, AI, and Dev founders craft story-driven brands and products.
                     </p>
-                    <div style={{ width: '100%', height: '600px' }}>
-                        <CircularGallery items={galleryItems} bend={3} textColor={colors.grey[9]} borderRadius={0.05} />
+                    <div style={{ width: '100%' }}>
+                        <CircularGallery items={galleryItems} bend={3} textColor={colors.grey[9]} borderRadius={12} />
                     </div>
                 </div>
 
@@ -278,6 +278,7 @@ export const Research = () => {
                             border: `1px solid ${colors.grey[92]}`,
                             borderRadius: '32px 32px 32px 0',
                             padding: '32px',
+                            marginRight: isMobile ? '0' : '80px',
                             flex: 1
                         }}>
                             {principles.map((p, index) => (
@@ -320,9 +321,9 @@ export const Research = () => {
                     </div>
                 </section>
 
-                {/* Section 3: AI Expertise */}
+                {/* Section 2 (Copy): AI Workflow Decoupled */}
                 <section style={sectionStyle}>
-                    <SectionTitle>AI时代设计师核心竞争力</SectionTitle>
+                    <SectionTitle>Lynn's Vibe Coding Workflows</SectionTitle>
                     <div style={{
                         display: 'flex',
                         gap: isMobile ? '8px' : '16px',
@@ -331,7 +332,39 @@ export const Research = () => {
                         <AIBotAvatar />
                         <div style={{
                             display: 'flex',
-                            height: '600px', // Adjusted height to be more reasonable
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            background: '#fff',
+                            border: `1px solid ${colors.grey[92]}`,
+                            borderRadius: '32px 32px 32px 0',
+                            padding: '10px',
+                            marginRight: isMobile ? '0' : '80px',
+                            flex: 1
+                        }}>
+                            <img 
+                                src={StackImg} 
+                                alt="AI Workflow Stack" 
+                                style={{
+                                    maxWidth: '100%',
+                                    height: 'auto',
+                                    display: 'block'
+                                }} 
+                            />
+                        </div>
+                    </div>
+                </section>
+
+                {/* Section 3: AI Expertise */}
+                <section style={sectionStyle}>
+                    <SectionTitle>Lynn's Co-AI Outputs</SectionTitle>
+                    <div style={{
+                        display: 'flex',
+                        gap: isMobile ? '8px' : '16px',
+                        alignItems: 'flex-end'
+                    }}>
+                        <AIBotAvatar />
+                        <div style={{
+                            display: 'flex',
                             padding: 0,
                             flex: 1,
                             position: 'relative'

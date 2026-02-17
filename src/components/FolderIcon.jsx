@@ -210,7 +210,7 @@ const FolderIcon = ({
                 <div style={textContainerStyle}>
                     <div style={{
                         ...textStyle,
-                        fontSize: '28px',
+                        fontSize: '26px',
                         fontWeight: 600,
                         textShadow: '0 1px 2px rgba(0,0,0,0.1)'
                     }}>
@@ -218,7 +218,7 @@ const FolderIcon = ({
                     </div>
                     <div style={{
                         ...textStyle,
-                        fontSize: '18px',
+                        fontSize: '16px',
                         opacity: 0.9,
                         fontWeight: 500,
                         whiteSpace: 'nowrap',

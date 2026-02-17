@@ -43,9 +43,9 @@ export const ContactSection = () => {
     const footerTitleStyle = {
         fontFamily: typography.heading1.fontFamily,
         fontSize: isMobile ? fontSize[24] : fontSize[32],
-        fontWeight: typography.heading1.fontWeight,
+        fontWeight: 200,
         lineHeight: typography.heading1.lineHeight,
-        letterSpacing: typography.heading1.letterSpacing,
+        letterSpacing: '-0.02em',
         color: colors.white.solid,
         marginBottom: spacing.xs
     };
