@@ -2,7 +2,7 @@ import React from 'react';
 import { colors, spacing, typography, stackSpacing, width, layoutSpacing, fontSize } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 
-export const Section = ({ title, subtitle, children, className = "", dark = false, style = {}, subtitleStyle = {}, ...props }) => {
+export const Section = ({ title, subtitle, children, className = "", dark = false, style = {}, subtitleStyle = {} }) => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     const isTablet = useMediaQuery('(max-width: 1024px)');
 
@@ -29,9 +29,9 @@ export const Section = ({ title, subtitle, children, className = "", dark = fals
     const titleStyle = {
         fontFamily: typography.heading1.fontFamily,
         fontSize: isMobile ? '36px' : isTablet ? fontSize[48] : typography.heading1.fontSize,
-        fontWeight: 200,
+        fontWeight: typography.heading1.fontWeight,
         lineHeight: typography.heading1.lineHeight,
-        letterSpacing: '-0.02em',
+        letterSpacing: '0px',
         color: dark ? colors.white.solid : colors.grey[9],
         marginBottom: stackSpacing.sm
     };
@@ -47,7 +47,7 @@ export const Section = ({ title, subtitle, children, className = "", dark = fals
     };
 
     return (
-        <section style={sectionStyle} className={className} {...props}>
+        <section style={sectionStyle} className={className}>
             <div style={containerStyle}>
                 {(title || subtitle) && (
                     <div style={headerStyle}>

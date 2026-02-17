@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
-import { colors, typography } from '../design-system/tokens';
+import { colors } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 
 const ReflectionList = ({ items }) => {
@@ -44,24 +44,15 @@ const ReflectionList = ({ items }) => {
             }}
           >
             <div style={{ 
-              fontSize: typography.heading5.fontSize,
-              fontFamily: typography.heading5.fontFamily,
-              fontWeight: typography.heading5.fontWeight, 
+              fontSize: isMobile ? '14px' : '14px', 
+              fontWeight: 400, 
               color: colors.white.solid 
             }}>
               {item.title}
             </div>
             
             {!isMobile && (
-              <div style={{ 
-                fontSize: '19px', 
-                color: colors.grey[66],
-                border: `1px solid ${colors.white.solid}`,
-                borderRadius: '999px',
-                padding: '4px 12px',
-                width: 'fit-content',
-                display: 'inline-block'
-              }}>
+              <div style={{ fontSize: '12px', color: colors.grey[66] }}>
                 {item.category}
               </div>
             )}
@@ -73,7 +64,7 @@ const ReflectionList = ({ items }) => {
               alignItems: 'center', 
               gap: '8px',
               color: colors.white.solid,
-              fontSize: '19px'
+              fontSize: '12px'
             }}>
               <span style={{ 
                 opacity: activeIndex === index ? 1 : 0, 

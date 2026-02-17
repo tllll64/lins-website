@@ -106,6 +106,34 @@ export const Home = () => {
         background: colors.grey[98]
     };
 
+    const heroStyle = {
+        paddingTop: layoutSpacing.hero.top,
+        paddingBottom: layoutSpacing.hero.bottom,
+        paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
+        paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
+        maxWidth: width.container.xl,
+        margin: '0 auto'
+    };
+
+    const heroTitleStyle = {
+        fontFamily: typography.heading1.fontFamily,
+        fontSize: isMobile ? '36px' : typography.heading1.fontSize,
+        fontWeight: typography.heading1.fontWeight,
+        lineHeight: typography.heading1.lineHeight,
+        letterSpacing: '0px',
+        color: colors.grey[9],
+        marginBottom: stackSpacing.sm
+    };
+
+    const heroSubtitleStyle = {
+        fontFamily: typography.body.fontFamily,
+        fontSize: typography.body.fontSize,
+        fontWeight: typography.body.fontWeight,
+        lineHeight: typography.body.lineHeight,
+        letterSpacing: typography.body.letterSpacing,
+        color: colors.grey[56]
+    };
+
     const teaserStyle = {
         position: 'relative', // Added for absolute positioning of children
         paddingTop: layoutSpacing.section.md,
@@ -143,6 +171,17 @@ export const Home = () => {
         color: colors.grey[56]
     };
 
+    const worksContainerStyle = {
+        paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
+        paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
+        maxWidth: width.container.xl,
+        margin: '0 auto',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: isMobile ? stackSpacing.xl : layoutSpacing.section.md,
+        marginBottom: layoutSpacing.section.xl
+    };
+
     const gridStyle = {
         display: 'grid',
         gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
@@ -151,41 +190,52 @@ export const Home = () => {
 
     const publicationsData = [
         {
-            title: "GenFaceUI: Meta-Design of Generative Personalized Facial Expression Interfaces for\nIntelligent Agents",
-            authors: "Yate Ge, Lin Tian, Yi Dai, Shuhan Pan, Yiwen Zhang, Qi Wang, Weiwei Guo*, Xiaohua Sun*",
-            venue: "CHI'26 (Full Paper)",
+            title: "Exploring Generative Personalized Facial Expression Interfaces for Intelligent Agents",
+            authors: "Yate Ge, Lin Tian, Ge Chen, Shuhan Pan, Weiwei Guo, Xiaohua Sun*",
+            venue: "CHI'26 (full paper)",
             links: [
-                { label: "arxiv PDF", url: "https://arxiv.org/abs/2602.11055" },
+                { label: "ACM DL", url: "#" },
+                { label: "PDF", url: "#" },
             ],
             image: RESEARCH_ASSETS.chi
         },
         {
             title: "Jokeasy: Exploring Human-AI Collaboration in Thematic Joke Generation",
             authors: "Yate Ge, Lin Tian, Chiqian Xu, Luyao Xu, Meiying Li, Yuanda Hu, Weiwei Guo*",
-            venue: "iasdr'25 (Full Paper)",
+            venue: "iasdr'25 (full paper)",
             links: [
-                { label: "arxiv PDF", url: "https://arxiv.org/abs/2602.09496" },
+                { label: "xxx", url: "#" },
+                { label: "PDF", url: "#" },
             ],
             image: RESEARCH_ASSETS.iasdr
         },
         {
             title: "Exploring Generative Personalized Facial Expression Interfaces for Intelligent Agents",
             authors: "Yate Ge, Lin Tian, Ge Chen, Shuhan Pan, Weiwei Guo, Xiaohua Sun*",
-            venue: "UIST'25 (Poster)",
+            venue: "UIST'25 (poster)",
             links: [
-                { label: "ACM DL", url: "https://dl.acm.org/doi/10.1145/3746058.3758382" },
-                { label: "PDF", url: "https://dl.acm.org/doi/pdf/10.1145/3746058.3758382" },
+                { label: "ACM DL", url: "#" },
+                { label: "PDF", url: "#" },
             ],
             image: RESEARCH_ASSETS.uist
+        },
+        {
+            title: "When Accessibility Becomes a Trap: A User-Centric Characterization of Dark Patterns Arising from Screen Reader Users' Perceived Deception in Mobile Interfaces",
+            authors: "Dai Shi, Lin Tian, Jiaxun Sun, TOMOMI KAWAKAMI, Nuo Cheng, Shuchang Xu, Guanhong L",
+            venue: "CSCW'25 (poster)",
+            links: [
+                { label: "ACM DL", url: "#" },
+                { label: "PDF", url: "#" }
+            ],
+            image: RESEARCH_ASSETS.cscw
         }
-
     ];
 
     const footerStyle = {
-        background: '#333333',
+        background: colors.black.solid,
         color: colors.white.solid,
         paddingTop: layoutSpacing.section.md,
-        paddingBottom: layoutSpacing.section.md
+        paddingBottom: layoutSpacing.section.lg
     };
 
     const blogItems = [
@@ -198,9 +248,9 @@ export const Home = () => {
     ];
 
     const demoItems = [
-        { type: 'video', src: 'https://www.youtube.com/embed/oBq4iC_T-Yk' },
-        { type: 'video', src: 'https://www.youtube.com/embed/5nUYwufk3-U' },
-        { type: 'video', src: 'https://www.youtube.com/embed/dMuGlI-wrhQ' },
+        { type: 'video', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' }, // Placeholder 1
+        { type: 'video', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' }, // Placeholder 2
+        { type: 'video', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' }, // Placeholder 3
     ];
 
     return (
@@ -286,7 +336,7 @@ export const Home = () => {
                             <div style={{
                                 position: 'fixed',
                                 top: tooltipPosition.y - 40, // Position above cursor (adjusted for bubble height)
-                                left: tooltipPosition.x + 10, // Position to the right
+                                left: tooltipPosition.x + 15, // Position to the right
                                 background: colors.white.solid,
                                 padding: '8px 16px',
                                 borderRadius: '50px',
@@ -307,7 +357,7 @@ export const Home = () => {
                          <h1 style={{
                             fontFamily: 'Lora, "Times New Roman", Georgia, serif',
                             fontSize: isMobile ? '42px' : '72px',
-                            fontWeight: 200,
+                            fontWeight: 400,
                             lineHeight: 1.1,
                             marginBottom: '24px',
                             letterSpacing: '-0.02em'
@@ -318,7 +368,7 @@ export const Home = () => {
 
                          <p style={{
                             fontFamily: typography.body.fontFamily,
-                            fontSize: typography.body.fontSize,
+                            fontSize: isMobile ? '16px' : '18px',
                             lineHeight: 1.6,
                             maxWidth: '600px',
                             margin: '0 auto',
@@ -330,57 +380,53 @@ export const Home = () => {
                 </div>
             </section>
 
-            <Section 
-                title="Internship Projects" 
-                subtitle="2023-2026 年实习项目产出和复盘思考" 
-                id="works" 
-                style={{ paddingTop: layoutSpacing.section['2xl'], paddingBottom: 0 }}
-            >
-                <div style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: isMobile ? stackSpacing.xl : layoutSpacing.section.md
-                }}>
-                    <ProjectCard
-                        date="Mar - May 2024"
-                        title="Procreate"
-                        description="A deep dive into mobile creative tools, analyzing interaction patterns and recreating key workflows for iOS."
-                        tags={['APP', '产设共建']}
-                        image={ASSETS.pro}
-                        logo={TakoLogo}
-                        customCursor={xhsCursor}
-                        pixelPattern={<PixelLock size={6} gap={2} />}
-                    />
-                    <ProjectCard
-                        date="Mar - May 2024"
-                        title="Procreate"
-                        description="A deep dive into mobile creative tools, analyzing interaction patterns and recreating key workflows for iOS."
-                        tags={['APP', '产设共建']}
-                        image={ASSETS.pro}
-                        logo={LingxiLogo}
-                        customCursor={xhsCursor}
-                    />
-                    <ProjectCard
-                        date="June - Aug 2023"
-                        title="薯条加热放心投"
-                        description="Designed data visualization tools for enterprise analytics, improving data readability and decision-making efficiency."
-                        tags={['APP', '产设共建']}
-                        image={ASSETS.tiktok}
-                        logo={PromoteLogo}
-                        onClick={() => openFigmaModal(
-                            "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FMCyWIWjYNBpVUUdqlRdAGw%2F%25E6%259A%2591%25E6%259C%259F%25E4%25BD%259C%25E5%2593%2581%25E9%259B%2586%3Fpage-id%3D738%253A15009%26node-id%3D738-22150%26viewport%3D232%252C293%252C0.25%26t%3DPGqmJzHbhJK8ZgKg-1%26scaling%3Dscale-down-width%26content-scaling%3Dfixed",
-                            "薯条加热放心投"
-                        )}
-                    />
-                </div>
-            </Section>
+            <header style={heroStyle} id="works">
+                <h1 style={heroTitleStyle}>internship Projects</h1>
+                <p style={heroSubtitleStyle}>
+                    2023-2026年 实习项目产出和复盘思考
+                </p>
+            </header>
+
+            <div style={worksContainerStyle}>
+                <ProjectCard
+                    date="June - Aug 2023"
+                    title="薯条加热放心投"
+                    description="Designed data visualization tools for enterprise analytics, improving data readability and decision-making efficiency."
+                    tags={['APP', '产设共建']}
+                    image={ASSETS.tiktok}
+                    logo={PromoteLogo}
+                    onClick={() => openFigmaModal(
+                        "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FMCyWIWjYNBpVUUdqlRdAGw%2F%25E6%259A%2591%25E6%259C%259F%25E4%25BD%259C%25E5%2593%2581%25E9%259B%2586%3Fpage-id%3D738%253A15009%26node-id%3D738-22150%26viewport%3D232%252C293%252C0.25%26t%3DPGqmJzHbhJK8ZgKg-1%26scaling%3Dscale-down-width%26content-scaling%3Dfixed",
+                        "薯条加热放心投"
+                    )}
+                />
+                <ProjectCard
+                    date="Mar - May 2024"
+                    title="Procreate"
+                    description="A deep dive into mobile creative tools, analyzing interaction patterns and recreating key workflows for iOS."
+                    tags={['APP', '产设共建']}
+                    image={ASSETS.pro}
+                    logo={TakoLogo}
+                    customCursor={xhsCursor}
+                    pixelPattern={<PixelLock size={6} gap={2} />}
+                />
+                <ProjectCard
+                    date="Mar - May 2024"
+                    title="Procreate"
+                    description="A deep dive into mobile creative tools, analyzing interaction patterns and recreating key workflows for iOS."
+                    tags={['APP', '产设共建']}
+                    image={ASSETS.pro}
+                    logo={LingxiLogo}
+                    customCursor={xhsCursor}
+                />
+            </div>
 
             <div id="explorations">
-                <Section title="AI-Driven Projects" subtitle="研究生期间在生成式AI方向上探索的原型与落地作品" style={{ paddingTop: layoutSpacing.section['2xl'], paddingBottom: '64px' }}>
+                <Section title="AI-Driven Projects" subtitle="研究生期间在生成式交互方向上探索的原型与落地作品" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
                     <div style={gridStyle}>
                         <GridCard
                             title="GenFaceUI: Meta-Design Tool"
-                            category="CHI'26 Full Paper"
+                            category="CHI‘26 Full Paper"
                             image={ASSETS.ai1}
                         />
                         <GridCard
@@ -392,51 +438,7 @@ export const Home = () => {
                     </div>
                 </Section>
 
-                <Section title="Publications" subtitle="研究生期间的 HAI 相关研究论文" style={{ paddingTop: layoutSpacing.section['2xl'], paddingBottom: 0 }}>
-                    <div style={{ marginBottom: layoutSpacing.section.xl }}>
-                        {publicationsData.map((pub, index) => (
-                            <PublicationCard
-                                key={index}
-                                title={pub.title}
-                                authors={pub.authors}
-                                venue={pub.venue}
-                                links={pub.links}
-                                image={pub.image}
-                            />
-                        ))}
-                    </div>
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
-                        gap: gridGap.lg,
-                        marginTop: layoutSpacing.section.lg
-                    }}>
-                        {demoItems.map((item, index) => (
-                            <div key={index} style={{
-                                width: '100%',
-                                aspectRatio: '16/9',
-                                background: colors.grey[92],
-                                borderRadius: '12px',
-                                overflow: 'hidden',
-                                position: 'relative'
-                            }}>
-                                <iframe
-                                    width="100%"
-                                    height="100%"
-                                    src={item.src}
-                                    title={`Demo Video ${index + 1}`}
-                                    frameBorder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    referrerPolicy="strict-origin-when-cross-origin"
-                                    allowFullScreen
-                                    style={{ border: 'none' }}
-                                ></iframe>
-                            </div>
-                        ))}
-                    </div>
-                </Section>
-
-                <Section title="Digital Projects" subtitle="本科期间在车载 HMI 和智能AI产品设计方向的落地性探索" style={{ paddingTop: layoutSpacing.section['2xl'], paddingBottom: layoutSpacing.section['2xl'] }}>
+                <Section title="Digital Projects" subtitle="本科期间在车载 HMI 和智能交互产品设计方向的落地性探索" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
                     <div style={gridStyle}>
                         <GridCard
                             title="小米汽车智驾学堂"
@@ -472,11 +474,55 @@ export const Home = () => {
                         />
                     </div>
                 </Section>
+
+                <Section title="Publications" subtitle="Academic research and conference papers" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
+                    <div style={{ marginBottom: layoutSpacing.section.xl }}>
+                        {publicationsData.map((pub, index) => (
+                            <PublicationCard
+                                key={index}
+                                title={pub.title}
+                                authors={pub.authors}
+                                venue={pub.venue}
+                                links={pub.links}
+                                image={pub.image}
+                            />
+                        ))}
+                    </div>
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
+                        gap: gridGap.lg,
+                        marginTop: layoutSpacing.section.lg
+                    }}>
+                        {demoItems.map((item, index) => (
+                            <div key={index} style={{
+                                width: '100%',
+                                aspectRatio: '4/3',
+                                background: colors.grey[92],
+                                borderRadius: '12px',
+                                overflow: 'hidden',
+                                position: 'relative'
+                            }}>
+                                <iframe
+                                    width="100%"
+                                    height="100%"
+                                    src={item.src}
+                                    title={`Demo Video ${index + 1}`}
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerPolicy="strict-origin-when-cross-origin"
+                                    allowFullScreen
+                                    style={{ border: 'none' }}
+                                ></iframe>
+                            </div>
+                        ))}
+                    </div>
+                </Section>
             </div>
 
             <footer style={footerStyle} id="about" ref={footerRef}>
                 <div ref={blogSectionRef}>
-                    <Section title="Reflection Blog" dark className="!py-0 !px-0" style={{ background: 'transparent' }}>
+                    <Section title="Reflection Blog" subtitle="从实践中反思沉淀，解构 AI 协作机制" dark className="!py-0 !px-0">
                         <div style={{ marginBottom: layoutSpacing.section.md }}>
                             <ReflectionList items={blogItems} />
                         </div>

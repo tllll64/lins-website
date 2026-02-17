@@ -43,9 +43,9 @@ export const ContactSection = () => {
     const footerTitleStyle = {
         fontFamily: typography.heading1.fontFamily,
         fontSize: isMobile ? fontSize[24] : fontSize[32],
-        fontWeight: 200,
+        fontWeight: typography.heading1.fontWeight,
         lineHeight: typography.heading1.lineHeight,
-        letterSpacing: '-0.02em',
+        letterSpacing: typography.heading1.letterSpacing,
         color: colors.white.solid,
         marginBottom: spacing.xs
     };
@@ -203,7 +203,7 @@ export const ContactSection = () => {
                 </div>
             </div>
             <div style={copyrightStyle}>
-                Designed and Coded by Chloe Tian • Copyright @ 2026
+                Designed and Coded by Chloe Tian • 2025 · Copyright @ 2025
             </div>
         </footer>
     );
