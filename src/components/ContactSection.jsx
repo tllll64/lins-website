@@ -203,7 +203,7 @@ export const ContactSection = () => {
                 </div>
             </div>
             <div style={copyrightStyle}>
-                Designed and Coded by Chloe Tian • 2025 · Copyright @ 2025
+                Designed and Coded by Chloe Tian • Copyright @ 2026
             </div>
         </footer>
     );

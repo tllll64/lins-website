@@ -168,7 +168,7 @@ const FolderIcon = ({
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-end',
     };
 
     const textStyle = {
@@ -210,22 +210,11 @@ const FolderIcon = ({
                 <div style={textContainerStyle}>
                     <div style={{
                         ...textStyle,
-                        fontSize: '26px',
+                        fontSize: '24px',
                         fontWeight: 600,
                         textShadow: '0 1px 2px rgba(0,0,0,0.1)'
                     }}>
                         {title}
-                    </div>
-                    <div style={{
-                        ...textStyle,
-                        fontSize: '16px',
-                        opacity: 0.9,
-                        fontWeight: 500,
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis'
-                    }}>
-                        {subtitle}
                     </div>
                 </div>
             </div>

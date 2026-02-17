@@ -106,34 +106,6 @@ export const Home = () => {
         background: colors.grey[98]
     };
 
-    const heroStyle = {
-        paddingTop: layoutSpacing.hero.top,
-        paddingBottom: layoutSpacing.hero.bottom,
-        paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
-        paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
-        maxWidth: width.container.xl,
-        margin: '0 auto'
-    };
-
-    const heroTitleStyle = {
-        fontFamily: typography.heading1.fontFamily,
-        fontSize: isMobile ? '36px' : typography.heading1.fontSize,
-        fontWeight: 400,
-        lineHeight: typography.heading1.lineHeight,
-        letterSpacing: '0px',
-        color: colors.grey[9],
-        marginBottom: stackSpacing.sm
-    };
-
-    const heroSubtitleStyle = {
-        fontFamily: typography.body.fontFamily,
-        fontSize: typography.body.fontSize,
-        fontWeight: typography.body.fontWeight,
-        lineHeight: typography.body.lineHeight,
-        letterSpacing: typography.body.letterSpacing,
-        color: colors.grey[56]
-    };
-
     const teaserStyle = {
         position: 'relative', // Added for absolute positioning of children
         paddingTop: layoutSpacing.section.md,
@@ -171,18 +143,6 @@ export const Home = () => {
         color: colors.grey[56]
     };
 
-    const worksContainerStyle = {
-        paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
-        paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
-        maxWidth: width.container.xl,
-        margin: '0 auto',
-        marginTop: '4px',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: isMobile ? stackSpacing.xl : layoutSpacing.section.md,
-        marginBottom: layoutSpacing.section.xl
-    };
-
     const gridStyle = {
         display: 'grid',
         gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
@@ -191,52 +151,41 @@ export const Home = () => {
 
     const publicationsData = [
         {
-            title: "Exploring Generative Personalized Facial Expression Interfaces for Intelligent Agents",
-            authors: "Yate Ge, Lin Tian, Ge Chen, Shuhan Pan, Weiwei Guo, Xiaohua Sun*",
-            venue: "CHI'26 (full paper)",
+            title: "GenFaceUI: Meta-Design of Generative Personalized Facial Expression Interfaces for\nIntelligent Agents",
+            authors: "Yate Ge, Lin Tian, Yi Dai, Shuhan Pan, Yiwen Zhang, Qi Wang, Weiwei Guo*, Xiaohua Sun*",
+            venue: "CHI'26 (Full Paper)",
             links: [
-                { label: "ACM DL", url: "#" },
-                { label: "PDF", url: "#" },
+                { label: "arxiv PDF", url: "https://arxiv.org/abs/2602.11055" },
             ],
             image: RESEARCH_ASSETS.chi
         },
         {
             title: "Jokeasy: Exploring Human-AI Collaboration in Thematic Joke Generation",
             authors: "Yate Ge, Lin Tian, Chiqian Xu, Luyao Xu, Meiying Li, Yuanda Hu, Weiwei Guo*",
-            venue: "iasdr'25 (full paper)",
+            venue: "iasdr'25 (Full Paper)",
             links: [
-                { label: "xxx", url: "#" },
-                { label: "PDF", url: "#" },
+                { label: "arxiv PDF", url: "https://arxiv.org/abs/2602.09496" },
             ],
             image: RESEARCH_ASSETS.iasdr
         },
         {
             title: "Exploring Generative Personalized Facial Expression Interfaces for Intelligent Agents",
             authors: "Yate Ge, Lin Tian, Ge Chen, Shuhan Pan, Weiwei Guo, Xiaohua Sun*",
-            venue: "UIST'25 (poster)",
+            venue: "UIST'25 (Poster)",
             links: [
-                { label: "ACM DL", url: "#" },
-                { label: "PDF", url: "#" },
+                { label: "ACM DL", url: "https://dl.acm.org/doi/10.1145/3746058.3758382" },
+                { label: "PDF", url: "https://dl.acm.org/doi/pdf/10.1145/3746058.3758382" },
             ],
             image: RESEARCH_ASSETS.uist
-        },
-        {
-            title: "When Accessibility Becomes a Trap: A User-Centric Characterization of Dark Patterns Arising from Screen Reader Users' Perceived Deception in Mobile Interfaces",
-            authors: "Dai Shi, Lin Tian, Jiaxun Sun, TOMOMI KAWAKAMI, Nuo Cheng, Shuchang Xu, Guanhong L",
-            venue: "CSCW'25 (poster)",
-            links: [
-                { label: "ACM DL", url: "#" },
-                { label: "PDF", url: "#" }
-            ],
-            image: RESEARCH_ASSETS.cscw
         }
+
     ];
 
     const footerStyle = {
-        background: colors.black.solid,
+        background: '#333333',
         color: colors.white.solid,
         paddingTop: layoutSpacing.section.md,
-        paddingBottom: layoutSpacing.section.lg
+        paddingBottom: layoutSpacing.section.md
     };
 
     const blogItems = [
@@ -249,9 +198,9 @@ export const Home = () => {
     ];
 
     const demoItems = [
-        { type: 'video', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' }, // Placeholder 1
-        { type: 'video', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' }, // Placeholder 2
-        { type: 'video', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' }, // Placeholder 3
+        { type: 'video', src: 'https://www.youtube.com/embed/oBq4iC_T-Yk' },
+        { type: 'video', src: 'https://www.youtube.com/embed/5nUYwufk3-U' },
+        { type: 'video', src: 'https://www.youtube.com/embed/dMuGlI-wrhQ' },
     ];
 
     return (
@@ -336,8 +285,8 @@ export const Home = () => {
                          {showNameTooltip && (
                             <div style={{
                                 position: 'fixed',
-                                top: tooltipPosition.y - 60, // Position above cursor (adjusted for bubble height)
-                                left: tooltipPosition.x + 20, // Position to the right
+                                top: tooltipPosition.y - 40, // Position above cursor (adjusted for bubble height)
+                                left: tooltipPosition.x + 10, // Position to the right
                                 background: colors.white.solid,
                                 padding: '8px 16px',
                                 borderRadius: '50px',
@@ -359,7 +308,7 @@ export const Home = () => {
                             fontFamily: 'Lora, "Times New Roman", Georgia, serif',
                             fontSize: isMobile ? '42px' : '72px',
                             fontWeight: 200,
-                            lineHeight: 1.58,
+                            lineHeight: 1.1,
                             marginBottom: '24px',
                             letterSpacing: '-0.02em'
                          }}>
@@ -381,49 +330,69 @@ export const Home = () => {
                 </div>
             </section>
 
-            <header style={heroStyle} id="works">
-                <h1 style={heroTitleStyle}>Internship Projects</h1>
-                <p style={heroSubtitleStyle}>
-                    2023-2026年 实习项目产出和复盘思考
-                </p>
-            </header>
-
-            <div style={worksContainerStyle}>
-                <ProjectCard
-                    date="Mar - May 2024"
-                    title="Procreate"
-                    description="A deep dive into mobile creative tools, analyzing interaction patterns and recreating key workflows for iOS."
-                    tags={['APP', '产设共建']}
-                    image={ASSETS.pro}
-                    logo={LingxiLogo}
-                    customCursor={xhsCursor}
-                />
-                <ProjectCard
-                    date="June - Aug 2023"
-                    title="薯条加热放心投"
-                    description="Designed data visualization tools for enterprise analytics, improving data readability and decision-making efficiency."
-                    tags={['APP', '产设共建']}
-                    image={ASSETS.tiktok}
-                    logo={PromoteLogo}
-                    onClick={() => openFigmaModal(
-                        "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FMCyWIWjYNBpVUUdqlRdAGw%2F%25E6%259A%2591%25E6%259C%259F%25E4%25BD%259C%25E5%2593%2581%25E9%259B%2586%3Fpage-id%3D738%253A15009%26node-id%3D738-22150%26viewport%3D232%252C293%252C0.25%26t%3DPGqmJzHbhJK8ZgKg-1%26scaling%3Dscale-down-width%26content-scaling%3Dfixed",
-                        "薯条加热放心投"
-                    )}
-                />
-                <ProjectCard
-                    date="Mar - May 2024"
-                    title="Procreate"
-                    description="A deep dive into mobile creative tools, analyzing interaction patterns and recreating key workflows for iOS."
-                    tags={['APP', '产设共建']}
-                    image={ASSETS.pro}
-                    logo={TakoLogo}
-                    customCursor={xhsCursor}
-                    pixelPattern={<PixelLock size={6} gap={2} />}
-                />
-            </div>
+            <Section 
+                title="Internship Projects" 
+                subtitle="2023-2026 年实习项目产出和复盘思考" 
+                id="works" 
+                style={{ paddingTop: layoutSpacing.section['2xl'], paddingBottom: 0 }}
+            >
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: isMobile ? stackSpacing.xl : layoutSpacing.section.md
+                }}>
+                    <ProjectCard
+                        date="Mar - May 2024"
+                        title="Procreate"
+                        description="A deep dive into mobile creative tools, analyzing interaction patterns and recreating key workflows for iOS."
+                        tags={['APP', '产设共建']}
+                        image={ASSETS.pro}
+                        logo={TakoLogo}
+                        customCursor={xhsCursor}
+                        pixelPattern={<PixelLock size={6} gap={2} />}
+                    />
+                    <ProjectCard
+                        date="Mar - May 2024"
+                        title="Procreate"
+                        description="A deep dive into mobile creative tools, analyzing interaction patterns and recreating key workflows for iOS."
+                        tags={['APP', '产设共建']}
+                        image={ASSETS.pro}
+                        logo={LingxiLogo}
+                        customCursor={xhsCursor}
+                    />
+                    <ProjectCard
+                        date="June - Aug 2023"
+                        title="薯条加热放心投"
+                        description="Designed data visualization tools for enterprise analytics, improving data readability and decision-making efficiency."
+                        tags={['APP', '产设共建']}
+                        image={ASSETS.tiktok}
+                        logo={PromoteLogo}
+                        onClick={() => openFigmaModal(
+                            "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FMCyWIWjYNBpVUUdqlRdAGw%2F%25E6%259A%2591%25E6%259C%259F%25E4%25BD%259C%25E5%2593%2581%25E9%259B%2586%3Fpage-id%3D738%253A15009%26node-id%3D738-22150%26viewport%3D232%252C293%252C0.25%26t%3DPGqmJzHbhJK8ZgKg-1%26scaling%3Dscale-down-width%26content-scaling%3Dfixed",
+                            "薯条加热放心投"
+                        )}
+                    />
+                </div>
+            </Section>
 
             <div id="explorations">
-                <Section title="Publications" subtitle="研究生期间的 HAI 相关研究论文" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: 0 }}>
+                <Section title="AI-Driven Projects" subtitle="研究生期间在生成式AI方向上探索的原型与落地作品" style={{ paddingTop: layoutSpacing.section['2xl'], paddingBottom: '64px' }}>
+                    <div style={gridStyle}>
+                        <GridCard
+                            title="GenFaceUI: Meta-Design Tool"
+                            category="CHI'26 Full Paper"
+                            image={ASSETS.ai1}
+                        />
+                        <GridCard
+                            title="基于周边出行场景的支小宝 AI 应用创新探索"
+                            category="设计探索"
+                            image={ASSETS.ai2}
+                            onClick={() => navigate('/works/zhi-xiao-bao')}
+                        />
+                    </div>
+                </Section>
+
+                <Section title="Publications" subtitle="研究生期间的 HAI 相关研究论文" style={{ paddingTop: layoutSpacing.section['2xl'], paddingBottom: 0 }}>
                     <div style={{ marginBottom: layoutSpacing.section.xl }}>
                         {publicationsData.map((pub, index) => (
                             <PublicationCard
@@ -445,7 +414,7 @@ export const Home = () => {
                         {demoItems.map((item, index) => (
                             <div key={index} style={{
                                 width: '100%',
-                                aspectRatio: '4/3',
+                                aspectRatio: '16/9',
                                 background: colors.grey[92],
                                 borderRadius: '12px',
                                 overflow: 'hidden',
@@ -467,23 +436,7 @@ export const Home = () => {
                     </div>
                 </Section>
 
-                <Section title="AI-Driven Projects" subtitle="研究生期间在生成式AI方向上探索的原型与落地作品" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: 0 }}>
-                    <div style={gridStyle}>
-                        <GridCard
-                            title="GenFaceUI: Meta-Design Tool"
-                            category="CHI'26 Full Paper"
-                            image={ASSETS.ai1}
-                        />
-                        <GridCard
-                            title="基于周边出行场景的支小宝 AI 应用创新探索"
-                            category="设计探索"
-                            image={ASSETS.ai2}
-                            onClick={() => navigate('/works/zhi-xiao-bao')}
-                        />
-                    </div>
-                </Section>
-
-                <Section title="Digital Projects" subtitle="本科期间在车载 HMI 和智能交互产品设计方向的落地性探索" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
+                <Section title="Digital Projects" subtitle="本科期间在车载 HMI 和智能AI产品设计方向的落地性探索" style={{ paddingTop: layoutSpacing.section['2xl'], paddingBottom: layoutSpacing.section['2xl'] }}>
                     <div style={gridStyle}>
                         <GridCard
                             title="小米汽车智驾学堂"
@@ -523,7 +476,7 @@ export const Home = () => {
 
             <footer style={footerStyle} id="about" ref={footerRef}>
                 <div ref={blogSectionRef}>
-                    <Section title="Reflection Blog" dark className="!py-0 !px-0">
+                    <Section title="Reflection Blog" dark className="!py-0 !px-0" style={{ background: 'transparent' }}>
                         <div style={{ marginBottom: layoutSpacing.section.md }}>
                             <ReflectionList items={blogItems} />
                         </div>

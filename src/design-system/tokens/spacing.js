@@ -262,6 +262,7 @@ export const layoutSpacing = {
     md: spacing[14],       // 56px - Standard sections
     lg: spacing[18],       // 72px - Large sections
     xl: spacing[24],       // 96px - Extra large sections
+    '2xl': spacing[30],    // 120px - Huge sections
   },
 
   // Hero spacing

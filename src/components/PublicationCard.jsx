@@ -26,7 +26,8 @@ export const PublicationCard = ({ title, authors, venue, links, image }) => {
         width: '100%',
         height: 'auto',
         objectFit: 'contain',
-        display: 'block'
+        display: 'block',
+        borderRadius: '8px'
     };
 
     const contentStyle = {
@@ -43,7 +44,8 @@ export const PublicationCard = ({ title, authors, venue, links, image }) => {
         fontSize: '18px',
         fontWeight: fontWeight.bold,
         lineHeight: '1.4',
-        color: colors.grey[9]
+        color: colors.grey[9],
+        whiteSpace: 'pre-line'
     };
 
     const authorsStyle = {
@@ -72,7 +74,7 @@ export const PublicationCard = ({ title, authors, venue, links, image }) => {
     };
 
     const linkStyle = {
-        color: colors.grey[9],
+        color: '#0056b3',
         textDecoration: 'none',
         cursor: 'pointer',
         transition: 'opacity 0.2s ease'
@@ -93,13 +95,15 @@ export const PublicationCard = ({ title, authors, venue, links, image }) => {
                             <React.Fragment key={index}>
                                 <a 
                                     href={link.url} 
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     style={linkStyle}
                                     onMouseEnter={(e) => e.currentTarget.style.opacity = '0.6'}
                                     onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
                                 >
                                     {link.label}
                                 </a>
-                                {index < links.length - 1 && <span style={{ color: colors.grey[92] }}>|</span>}
+                                {index < links.length - 1 && <span style={{ color: 'rgba(0, 0, 0, 0.2)' }}>|</span>}
                             </React.Fragment>
                         ))}
                     </div>
