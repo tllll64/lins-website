@@ -438,12 +438,6 @@ class App {
       this.onActiveChange(hoveredIndex === -1 ? -1 : hoveredIndex % (this.mediasImages.length / 2));
     }
   }
-  onWheel(e) {
-    const delta = e.deltaY || e.wheelDelta || e.detail;
-    this.scroll.target += (delta > 0 ? this.scrollSpeed : -this.scrollSpeed) * 0.2;
-    this.lastWheelTime = Date.now();
-    this.onCheckDebounce();
-  }
   onCheck() {
     if (!this.medias || !this.medias[0]) return;
     const width = this.medias[0].width;
@@ -471,8 +465,7 @@ class App {
   update() {
     this.scroll.current = lerp(this.scroll.current, this.scroll.target, this.scroll.ease);
 
-    const isWheeling = Date.now() - this.lastWheelTime < 500;
-    if (!this.isDown && !this.isHovering && !isWheeling) {
+    if (!this.isDown && !this.isHovering) {
       this.scroll.target += this.autoScrollSpeed;
     }
 
@@ -486,14 +479,11 @@ class App {
   }
   addEventListeners() {
     this.boundOnResize = this.onResize.bind(this);
-    this.boundOnWheel = this.onWheel.bind(this);
     this.boundOnTouchDown = this.onTouchDown.bind(this);
     this.boundOnTouchMove = this.onTouchMove.bind(this);
     this.boundOnTouchUp = this.onTouchUp.bind(this);
     this.boundOnMouseMove = this.onMouseMove.bind(this);
     window.addEventListener('resize', this.boundOnResize);
-    window.addEventListener('mousewheel', this.boundOnWheel);
-    window.addEventListener('wheel', this.boundOnWheel);
     window.addEventListener('mousedown', this.boundOnTouchDown);
     window.addEventListener('mousemove', this.boundOnMouseMove);
     window.addEventListener('mouseup', this.boundOnTouchUp);
@@ -504,8 +494,6 @@ class App {
   destroy() {
     window.cancelAnimationFrame(this.raf);
     window.removeEventListener('resize', this.boundOnResize);
-    window.removeEventListener('mousewheel', this.boundOnWheel);
-    window.removeEventListener('wheel', this.boundOnWheel);
     window.removeEventListener('mousedown', this.boundOnTouchDown);
     window.removeEventListener('mousemove', this.boundOnMouseMove);
     window.removeEventListener('mouseup', this.boundOnTouchUp);

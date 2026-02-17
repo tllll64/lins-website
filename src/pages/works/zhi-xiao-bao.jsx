@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Navbar } from '../../components/Navbar';
-import { colors, layoutSpacing, width } from '../../design-system/tokens';
+import { colors, layoutSpacing, width, typography } from '../../design-system/tokens';
 import { useMediaQuery } from '../../design-system/hooks/useMediaQuery';
 import headerBg from '../../assets/works/zhi-xiao-bao/header-bg.png';
 import background1 from '../../assets/works/zhi-xiao-bao/background-1.png';
@@ -42,7 +42,7 @@ const SectionTitle = ({ children, style = {} }) => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     return (
         <h2 style={{
-            fontFamily: 'Inter, sans-serif',
+            fontFamily: typography.body.fontFamily,
             fontWeight: 600,
             fontSize: isMobile ? '28px' : '40px',
             lineHeight: isMobile ? '33.6px' : '48px',
@@ -59,7 +59,7 @@ const SectionSubtitle = ({ children }) => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     return (
         <h3 style={{
-            fontFamily: 'Inter, sans-serif',
+            fontFamily: typography.body.fontFamily,
             fontWeight: 500,
             fontSize: isMobile ? '20px' : '24px',
             lineHeight: '28.8px',
@@ -73,7 +73,7 @@ const SectionSubtitle = ({ children }) => {
 
 const BodyText = ({ children, style = {} }) => (
     <p style={{
-        fontFamily: 'Inter, sans-serif',
+        fontFamily: typography.body.fontFamily,
         fontWeight: 400,
         fontSize: '20px',
         lineHeight: '28px',
@@ -298,7 +298,7 @@ export const ZhiXiaoBao = () => {
                                 {insights[activeInsight].label}
                             </div>
                             <h3 style={{
-                                fontFamily: 'Inter, sans-serif',
+                                fontFamily: typography.body.fontFamily,
                                 fontSize: isMobile ? '24px' : '32px',
                                 fontWeight: 500,
                                 marginBottom: '24px',
@@ -309,7 +309,7 @@ export const ZhiXiaoBao = () => {
                             <p style={{
                                 opacity: 0.8,
                                 lineHeight: 1.6,
-                                fontFamily: 'Inter, sans-serif',
+                                fontFamily: typography.body.fontFamily,
                                 fontSize: '18px'
                             }}>
                                 {insights[activeInsight].content}
@@ -471,7 +471,7 @@ export const ZhiXiaoBao = () => {
                             padding: isMobile ? '24px' : '32px'
                         }}>
                             <h4 style={{
-                                fontFamily: 'Inter, sans-serif',
+                                fontFamily: typography.body.fontFamily,
                                 fontWeight: 600,
                                 fontSize: '20px',
                                 marginBottom: '12px'
@@ -482,7 +482,7 @@ export const ZhiXiaoBao = () => {
                                 快速整合大量信息
                             </BodyText>
                             <ul style={{
-                                fontFamily: 'Inter, sans-serif',
+                                fontFamily: typography.body.fontFamily,
                                 fontSize: '16px',
                                 lineHeight: '24px',
                                 color: 'rgba(0, 0, 0, 0.7)',
@@ -499,7 +499,7 @@ export const ZhiXiaoBao = () => {
                             padding: isMobile ? '24px' : '32px'
                         }}>
                             <h4 style={{
-                                fontFamily: 'Inter, sans-serif',
+                                fontFamily: typography.body.fontFamily,
                                 fontWeight: 600,
                                 fontSize: '20px',
                                 marginBottom: '12px'
@@ -510,7 +510,7 @@ export const ZhiXiaoBao = () => {
                                 懂我伴我
                             </BodyText>
                             <ul style={{
-                                fontFamily: 'Inter, sans-serif',
+                                fontFamily: typography.body.fontFamily,
                                 fontSize: '16px',
                                 lineHeight: '24px',
                                 color: 'rgba(0, 0, 0, 0.7)',
@@ -527,7 +527,7 @@ export const ZhiXiaoBao = () => {
                             padding: isMobile ? '24px' : '32px'
                         }}>
                             <h4 style={{
-                                fontFamily: 'Inter, sans-serif',
+                                fontFamily: typography.body.fontFamily,
                                 fontWeight: 600,
                                 fontSize: '20px',
                                 marginBottom: '12px'
@@ -538,7 +538,7 @@ export const ZhiXiaoBao = () => {
                                 活人感
                             </BodyText>
                             <ul style={{
-                                fontFamily: 'Inter, sans-serif',
+                                fontFamily: typography.body.fontFamily,
                                 fontSize: '16px',
                                 lineHeight: '24px',
                                 color: 'rgba(0, 0, 0, 0.7)',
@@ -569,7 +569,7 @@ export const ZhiXiaoBao = () => {
                         marginBottom: '32px'
                     }}>
                         <h4 style={{
-                            fontFamily: 'Inter, sans-serif',
+                            fontFamily: typography.body.fontFamily,
                             fontWeight: 600,
                             fontSize: '20px',
                             marginBottom: '16px',
@@ -603,7 +603,7 @@ export const ZhiXiaoBao = () => {
                             padding: isMobile ? '24px' : '40px'
                         }}>
                             <h4 style={{
-                                fontFamily: 'Inter, sans-serif',
+                                fontFamily: typography.body.fontFamily,
                                 fontWeight: 600,
                                 fontSize: '24px',
                                 marginBottom: '16px',
@@ -623,7 +623,7 @@ export const ZhiXiaoBao = () => {
                             padding: isMobile ? '24px' : '40px'
                         }}>
                             <h4 style={{
-                                fontFamily: 'Inter, sans-serif',
+                                fontFamily: typography.body.fontFamily,
                                 fontWeight: 600,
                                 fontSize: '24px',
                                 marginBottom: '16px',
@@ -643,7 +643,7 @@ export const ZhiXiaoBao = () => {
                             padding: isMobile ? '24px' : '40px'
                         }}>
                             <h4 style={{
-                                fontFamily: 'Inter, sans-serif',
+                                fontFamily: typography.body.fontFamily,
                                 fontWeight: 600,
                                 fontSize: '24px',
                                 marginBottom: '16px',
@@ -673,7 +673,7 @@ export const ZhiXiaoBao = () => {
                         marginBottom: '32px'
                     }}>
                         <ul style={{
-                            fontFamily: 'Inter, sans-serif',
+                            fontFamily: typography.body.fontFamily,
                             fontSize: '18px',
                             lineHeight: '28px',
                             color: 'rgba(0, 0, 0, 0.7)',
@@ -700,7 +700,7 @@ export const ZhiXiaoBao = () => {
 
                     <div style={{ maxWidth: '600px', margin: '0 auto' }}>
                         <h3 style={{
-                            fontFamily: 'Inter, sans-serif',
+                            fontFamily: typography.body.fontFamily,
                             fontSize: '24px',
                             fontWeight: 600,
                             marginBottom: '16px',
@@ -725,21 +725,21 @@ export const ZhiXiaoBao = () => {
                             marginBottom: '60px'
                         }}>
                             <div style={{
-                                fontFamily: 'Inter, sans-serif',
+                                fontFamily: typography.body.fontFamily,
                                 fontSize: '16px',
                                 color: 'rgba(0, 0, 0, 0.7)'
                             }}>
                                 📱 (+86)15968545540
                             </div>
                             <div style={{
-                                fontFamily: 'Inter, sans-serif',
+                                fontFamily: typography.body.fontFamily,
                                 fontSize: '16px',
                                 color: 'rgba(0, 0, 0, 0.7)'
                             }}>
                                 💬 LittleLionTOP
                             </div>
                             <div style={{
-                                fontFamily: 'Inter, sans-serif',
+                                fontFamily: typography.body.fontFamily,
                                 fontSize: '16px',
                                 color: 'rgba(0, 0, 0, 0.7)'
                             }}>
@@ -748,7 +748,7 @@ export const ZhiXiaoBao = () => {
                         </div>
 
                         <div style={{
-                            fontFamily: 'Inter, sans-serif',
+                            fontFamily: typography.body.fontFamily,
                             fontSize: '14px',
                             color: 'rgba(0, 0, 0, 0.4)',
                             marginTop: '40px'
@@ -757,7 +757,7 @@ export const ZhiXiaoBao = () => {
                         </div>
 
                         <div style={{
-                            fontFamily: 'Inter, sans-serif',
+                            fontFamily: typography.body.fontFamily,
                             fontSize: '14px',
                             color: 'rgba(0, 0, 0, 0.4)',
                             marginTop: '8px'

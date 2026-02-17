@@ -367,7 +367,7 @@ export const Home = () => {
                          </h1>
 
                          <p style={{
-                            fontFamily: '"Inter", sans-serif',
+                            fontFamily: typography.body.fontFamily,
                             fontSize: isMobile ? '16px' : '18px',
                             lineHeight: 1.6,
                             maxWidth: '600px',
