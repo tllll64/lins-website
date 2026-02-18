@@ -1,13 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Mail, Phone, MessageCircle, Copy, Check } from 'lucide-react';
-import Antigravity from './Antigravity';
 import { colors, spacing, typography, fontWeight, stackSpacing, layoutSpacing, fontSize } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 
 export const ContactSection = () => {
     const isMobile = useMediaQuery('(max-width: 768px)');
-    const footerRef = useRef(null);
-    const [isFooterHovered, setIsFooterHovered] = useState(false);
     const [copiedField, setCopiedField] = useState(null);
     const [hoveredField, setHoveredField] = useState(null);
 
@@ -102,42 +99,7 @@ export const ContactSection = () => {
     };
 
     return (
-        <footer
-            style={footerStyle}
-            ref={footerRef}
-            onMouseEnter={() => setIsFooterHovered(true)}
-            onMouseLeave={() => setIsFooterHovered(false)}
-        >
-            <div style={{
-                position: 'absolute',
-                width: '900px',
-                height: '900px',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                zIndex: 0,
-                opacity: isFooterHovered ? 1 : 0,
-                transition: 'opacity 0.3s ease-in-out'
-            }}>
-                <Antigravity
-                    count={400}
-                    magnetRadius={10}
-                    ringRadius={20}
-                    waveSpeed={0.8}
-                    waveAmplitude={1.0}
-                    particleSize={1.5}
-                    lerpSpeed={0.35}
-                    color="#e8e8e8"
-                    opacity={0.3}
-                    autoAnimate={false}
-                    particleVariance={1}
-                    rotationSpeed={0}
-                    depthFactor={1}
-                    pulseSpeed={4}
-                    particleShape="sphere"
-                    fieldStrength={12}
-                />
-            </div>
+        <footer style={footerStyle}>
             <div style={footerContainerStyle}>
                 <div>
                     <h2 style={footerTitleStyle}>Contact Me</h2>

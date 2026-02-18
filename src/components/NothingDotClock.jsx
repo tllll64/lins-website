@@ -164,28 +164,60 @@ const NothingDotClock = () => {
 
   return (
     <div style={{ position: 'relative' }}>
-      {/* Custom Tooltip */}
+      {/* Custom Annotation (Arrow + Text) */}
       <div style={{
         position: 'absolute',
-        top: '14.6%',
-        left: '85.4%',
-        transform: 'translate(-50%, -50%)',
-        backgroundColor: '#fff',
-        color: '#000',
-        width: '48px',
-        height: '48px',
-        borderRadius: '50%',
-        fontSize: '24px',
-        opacity: isHovered ? 1 : 0,
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
         pointerEvents: 'none',
-        transition: 'opacity 0.15s ease-out, transform 0.15s ease-out',
-        zIndex: 10,
-        boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        zIndex: 20,
+        opacity: isHovered ? 1 : 0,
+        transition: 'opacity 0.3s ease-out',
       }}>
-        🍩
+        {/* Arrow SVG - visible over larger area */}
+        <svg style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '200%', // Allow overflow to right
+          height: '200%', // Allow overflow to bottom
+          overflow: 'visible'
+        }}>
+          <defs>
+            {/* Custom "forked branch" marker */}
+            <marker id="forkedArrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+               <path d="M 0 2 L 10 6 L 0 10" fill="none" stroke="#000" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+            </marker>
+          </defs>
+          <path 
+            d="M 120 120 Q 180 130 160 175" 
+            fill="none" 
+            stroke="#000" 
+            strokeWidth="1.2" 
+            strokeLinecap="round"
+            markerEnd="url(#forkedArrow)"
+            style={{
+                transition: 'd 0.3s ease-out'
+            }}
+          />
+        </svg>
+        
+        <div style={{
+          position: 'absolute',
+          top: '100%',
+          left: '50%',
+          transform: 'translate(-50%, 28px)', // Center below with spacing
+          width: 'max-content',
+          fontFamily: 'Inter, sans-serif',
+          fontSize: '16px',
+          color: '#000',
+          fontWeight: 'normal',
+          pointerEvents: 'none'
+        }}>
+          anan agent I’m hatching 🍩
+        </div>
       </div>
 
       <div

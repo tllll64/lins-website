@@ -24,6 +24,8 @@ import xhsCursor from '../assets/cursor/xhs-cursor.png';
 import PromoteLogo from '../assets/Home/Promote_logo.png';
 import TakoLogo from '../assets/Home/Tako_logo.png';
 import LingxiLogo from '../assets/Home/Lingxi_logo.png';
+import PolaroidDecoration from '../components/PolaroidDecoration';
+import profileImg from '../assets/about/profile2.png';
 
 const RESEARCH_ASSETS = {
     chi: new URL('../assets/Research/CHI@3x.png', import.meta.url).href,
@@ -106,43 +108,6 @@ export const Home = () => {
         background: colors.grey[98]
     };
 
-    const teaserStyle = {
-        position: 'relative', // Added for absolute positioning of children
-        paddingTop: layoutSpacing.section.md,
-        paddingBottom: layoutSpacing.section.md,
-        paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
-        paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
-        maxWidth: width.container.xl,
-        margin: '0 auto',
-        minHeight: '85vh', // Ensure enough height for separation
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        backgroundImage: `radial-gradient(${colors.grey[92]} 1px, transparent 1px)`,
-        backgroundSize: '18px 18px',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'repeat'
-    };
-
-    const teaserTitleStyle = {
-        fontFamily: typography.heading1.fontFamily,
-        fontSize: isMobile ? '28px' : '32px',
-        fontWeight: typography.heading1.fontWeight,
-        lineHeight: typography.heading1.lineHeight,
-        letterSpacing: '0px',
-        color: colors.grey[9],
-        marginBottom: stackSpacing.xs
-    };
-
-    const teaserSubtitleStyle = {
-        fontFamily: typography.body.fontFamily,
-        fontSize: typography.body.fontSize,
-        fontWeight: typography.body.fontWeight,
-        lineHeight: typography.body.lineHeight,
-        letterSpacing: typography.body.letterSpacing,
-        color: colors.grey[56]
-    };
-
     const gridStyle = {
         display: 'grid',
         gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
@@ -207,12 +172,27 @@ export const Home = () => {
         <div style={pageStyle}>
             <Navbar theme={navTheme} />
 
-            <section style={teaserStyle}>
+            <Section
+                style={{
+                    position: 'relative',
+                    minHeight: '85vh',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    marginBottom: '80px',
+                    backgroundImage: `radial-gradient(${colors.grey[92]} 1px, transparent 1px)`,
+                    backgroundSize: '18px 18px',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'repeat',
+                    paddingTop: layoutSpacing.section.md,
+                    paddingBottom: layoutSpacing.section.md,
+                }}
+            >
                 {/* NothingDotClock in top-left corner */}
                 <div style={{
                     position: 'absolute',
                     top: layoutSpacing.section.xl,
-                    left: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
+                    left: isMobile ? layoutSpacing.page.mobile : layoutSpacing.section.xl,
                     zIndex: 10
                 }}>
                     <NothingDotClock />
@@ -222,7 +202,7 @@ export const Home = () => {
                 <div style={{
                     position: 'absolute',
                     top: layoutSpacing.section.xl,
-                    right: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
+                    right: isMobile ? layoutSpacing.page.mobile : layoutSpacing.section.xl,
                     zIndex: 10,
                     display: isMobile ? 'none' : 'block' // Hide on mobile if too crowded, or adjust
                 }}>
@@ -231,16 +211,36 @@ export const Home = () => {
                         subtitle="Internship, AI-Driven, Digital"
                         scale={0.6}
                         folderImages={[PromoteLogo, TakoLogo, LingxiLogo]}
+                        onClick={() => document.getElementById('works')?.scrollIntoView({ behavior: 'smooth' })}
                     />
                 </div>
 
-                {/* NothingWordClock in bottom-left corner */}
-                <div style={{
-                    position: 'absolute',
-                    bottom: spacing[4],
-                    left: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
-                    zIndex: 10
-                }}>
+                {/* Polaroid Decoration in bottom-left corner */}
+                <div 
+                    style={{
+                        position: 'absolute',
+                        bottom: spacing[4],
+                        left: isMobile ? layoutSpacing.page.mobile : layoutSpacing.section.xl,
+                        zIndex: 10,
+                        display: isMobile ? 'none' : 'block',
+                        cursor: 'pointer'
+                    }}
+                    onClick={() => navigate('/about')}
+                >
+                    <PolaroidDecoration images={[null, profileImg]} scale={1.1} />
+                </div>
+
+                {/* NothingWordClock in bottom-right corner */}
+                <div 
+                    style={{
+                        position: 'absolute',
+                        bottom: spacing[4],
+                        right: isMobile ? layoutSpacing.page.mobile : layoutSpacing.section.xl,
+                        zIndex: 10,
+                        cursor: 'pointer'
+                    }}
+                    onClick={() => navigate('/sandbox')}
+                >
                     <NothingWordClock />
                 </div>
 
@@ -328,13 +328,13 @@ export const Home = () => {
                          </p>
                     </div>
                 </div>
-            </section>
+            </Section>
 
             <Section 
                 title="Internship Projects" 
                 subtitle="2023-2026 年实习项目产出和复盘思考" 
                 id="works" 
-                style={{ paddingTop: layoutSpacing.section['2xl'], paddingBottom: 0 }}
+                style={{ paddingTop: '60px', paddingBottom: 0 }}
             >
                 <div style={{
                     display: 'flex',
