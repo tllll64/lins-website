@@ -188,7 +188,7 @@ const NothingDotClock = () => {
         🍩
       </div>
 
-      <div 
+      <div
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         style={{

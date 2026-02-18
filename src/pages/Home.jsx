@@ -342,6 +342,18 @@ export const Home = () => {
                     gap: isMobile ? stackSpacing.xl : layoutSpacing.section.md
                 }}>
                     <ProjectCard
+                        date="June - Aug 2023"
+                        title="薯条加热放心投"
+                        description="Designed data visualization tools for enterprise analytics, improving data readability and decision-making efficiency."
+                        tags={['APP', '产设共建']}
+                        image={ASSETS.tiktok}
+                        logo={PromoteLogo}
+                        onClick={() => openFigmaModal(
+                            "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FMCyWIWjYNBpVUUdqlRdAGw%2F%25E6%259A%2591%25E6%259C%259F%25E4%25BD%259C%25E5%2593%2581%25E9%259B%2586%3Fpage-id%3D738%253A15009%26node-id%3D738-22150%26viewport%3D232%252C293%252C0.25%26t%3DPGqmJzHbhJK8ZgKg-1%26scaling%3Dscale-down-width%26content-scaling%3Dfixed",
+                            "薯条加热放心投"
+                        )}
+                    />
+                    <ProjectCard
                         date="Mar - May 2024"
                         title="Procreate"
                         description="A deep dive into mobile creative tools, analyzing interaction patterns and recreating key workflows for iOS."
@@ -359,18 +371,6 @@ export const Home = () => {
                         image={ASSETS.pro}
                         logo={LingxiLogo}
                         customCursor={xhsCursor}
-                    />
-                    <ProjectCard
-                        date="June - Aug 2023"
-                        title="薯条加热放心投"
-                        description="Designed data visualization tools for enterprise analytics, improving data readability and decision-making efficiency."
-                        tags={['APP', '产设共建']}
-                        image={ASSETS.tiktok}
-                        logo={PromoteLogo}
-                        onClick={() => openFigmaModal(
-                            "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FMCyWIWjYNBpVUUdqlRdAGw%2F%25E6%259A%2591%25E6%259C%259F%25E4%25BD%259C%25E5%2593%2581%25E9%259B%2586%3Fpage-id%3D738%253A15009%26node-id%3D738-22150%26viewport%3D232%252C293%252C0.25%26t%3DPGqmJzHbhJK8ZgKg-1%26scaling%3Dscale-down-width%26content-scaling%3Dfixed",
-                            "薯条加热放心投"
-                        )}
                     />
                 </div>
             </Section>
