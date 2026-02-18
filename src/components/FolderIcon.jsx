@@ -19,6 +19,7 @@ const FolderIcon = ({
     
     // Gradient
     const blueGradient = 'linear-gradient(135deg, #6BB6FF 0%, #5BA3E8 100%)';
+    const backColor = '#5A9FDE'; // Unified solid color for back parts
     
     const containerStyle = {
         position: 'relative',
@@ -41,7 +42,7 @@ const FolderIcon = ({
         left: 0,
         width: '40%', // Slightly wider to ensure connection
         height: '20%',
-        background: blueGradient,
+        background: backColor,
         borderRadius: '16px 16px 0 0',
         zIndex: 1,
     };
@@ -53,7 +54,7 @@ const FolderIcon = ({
         left: 0,
         width: '100%',
         height: '88%',
-        background: blueGradient,
+        background: backColor,
         borderRadius: '16px',
         zIndex: 1,
     };
@@ -76,14 +77,14 @@ const FolderIcon = ({
     // Animation variants for scattering images
     const imageVariants = {
         initial: (index) => {
-            // Slight fan/stagger for peeking when closed
+            // Each logo peeks ~1/6 above the front body's top edge
             const initialPositions = [
-                // Left-ish peek
-                { x: '10%', y: '5%', rotate: -5, scale: 0.65, zIndex: 2 },
-                // Right-ish peek
-                { x: '40%', y: '0%', rotate: 5, scale: 0.65, zIndex: 3 },
-                // Center peek (highest)
-                { x: '25%', y: '-5%', rotate: 0, scale: 0.7, zIndex: 4 }
+                // Left logo
+                { x: -25, y: -21, rotate: -6, scale: 0.65, zIndex: 2 },
+                // Right logo
+                { x: 85,  y: -21, rotate:  6, scale: 0.65, zIndex: 3 },
+                // Center logo (front)
+                { x: 30,  y: -18, rotate:  0, scale: 0.70, zIndex: 4 }
             ];
             const pos = initialPositions[index % 3];
 
