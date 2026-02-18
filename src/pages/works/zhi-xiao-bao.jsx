@@ -184,7 +184,7 @@ export const ZhiXiaoBao = () => {
             {/* Teaser Section */}
             <div style={{
                 width: '100%',
-                height: '80vh',
+                height: '100vh',
                 background: colors.white.solid,
                 display: 'flex',
                 flexDirection: 'column',
