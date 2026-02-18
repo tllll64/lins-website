@@ -78,13 +78,15 @@ const FolderIcon = ({
     const imageVariants = {
         initial: (index) => {
             // Each logo peeks ~1/6 above the front body's top edge
+            // Adjusted to peek out more for "half-hidden" affordance
+            // Further adjusted: Increased scale to match hover size roughly (~1.0)
             const initialPositions = [
-                // Left logo
-                { x: -25, y: -21, rotate: -6, scale: 0.65, zIndex: 2 },
-                // Right logo
-                { x: 85,  y: -21, rotate:  6, scale: 0.65, zIndex: 3 },
-                // Center logo (front)
-                { x: 30,  y: -18, rotate:  0, scale: 0.70, zIndex: 4 }
+                // Left logo - Peeking out left
+                { x: -55, y: -55, rotate: -15, scale: 1.0, zIndex: 2 },
+                // Right logo - Peeking out right
+                { x: 115, y: -55, rotate:  15, scale: 1.0, zIndex: 3 },
+                // Center logo (front) - Peeking out top center
+                { x: 30,  y: -75, rotate:  0, scale: 1.05, zIndex: 4 }
             ];
             const pos = initialPositions[index % 3];
 
@@ -103,13 +105,14 @@ const FolderIcon = ({
         },
         hover: (index) => {
             // Scatter positions: Left, Right, Center-Top
+            // Reduced jump amplitude to ~1/3 of the previous extreme version
             const positions = [
-                // Left - Top Left scatter
-                { x: '-40%', y: '-70%', rotate: -25, scale: 1.1, zIndex: 10 },
-                // Right - Top Right scatter
-                { x: '90%', y: '-60%', rotate: 25, scale: 1.1, zIndex: 11 },
-                // Center - Top Center scatter
-                { x: '25%', y: '-90%', rotate: 0, scale: 1.15, zIndex: 12 }
+                // Left - Top Left scatter (Moderate)
+                { x: '-55%', y: '-95%', rotate: -25, scale: 1.15, zIndex: 10 },
+                // Right - Top Right scatter (Moderate)
+                { x: '110%', y: '-85%', rotate: 25, scale: 1.15, zIndex: 11 },
+                // Center - Top Center scatter (Moderate)
+                { x: '28%', y: '-110%', rotate: 0, scale: 1.2, zIndex: 12 }
             ];
             
             const pos = positions[index % 3];
@@ -160,7 +163,8 @@ const FolderIcon = ({
         boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.3), 0 -2px 10px rgba(0,0,0,0.05)', // Inner highlight + shadow from paper
         transformOrigin: 'bottom',
         transition: 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-        transform: isHovered ? 'rotateX(35deg)' : 'rotateX(0deg)', // Open folder effect, increased angle
+        // Negative angle makes the top come towards viewer, creating "wider top" perspective
+        transform: isHovered ? 'rotateX(-20deg)' : 'rotateX(0deg)', // Open folder effect, adjusted for correct perspective
     };
 
     const textContainerStyle = {

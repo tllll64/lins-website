@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import { motion } from 'framer-motion';
+import React, { useMemo, useState, useEffect } from 'react';
+import { motion, useAnimation } from 'framer-motion';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 
 const ROWS = 8;
@@ -13,14 +13,44 @@ const getRandomChar = () => {
 
 const NothingWordClock = () => {
   const isMobile = useMediaQuery('(max-width: 768px)');
+  const controls = useAnimation();
+  const [wordSetIndex, setWordSetIndex] = useState(0);
   
   // Responsive constants
-  // Adjusted to maintain similar total size with 8x8 grid instead of 10x10
-  const CELL_SIZE = isMobile ? '6.5px' : '10.5px';
-  const GAP_SIZE = isMobile ? '2.5px' : '6.5px';
+  // Adjusted for 8x8 grid to match NothingDotClock width (~158px desktop, ~79px mobile)
+  const CELL_SIZE = isMobile ? '6.2px' : '11.5px';
+  const GAP_SIZE = isMobile ? '2px' : '5px';
   const PADDING_SIZE = isMobile ? '8px' : '16px';
-  const FONT_SIZE = isMobile ? '5px' : '8px';
+  const FONT_SIZE = isMobile ? '4.5px' : '9.5px';
   const BORDER_RADIUS = isMobile ? '10px' : '16px';
+
+  // Animation sequence
+  useEffect(() => {
+    const sequence = async () => {
+      // Start scanning
+      const animationPromise = controls.start({
+        x: ['-150%', '300%'],
+        transition: { duration: 2.5, ease: "linear" }
+      });
+
+      // Change word halfway through the scan (1.25s)
+      const timeoutId = setTimeout(() => {
+        setWordSetIndex((prev) => (prev + 1) % 3);
+      }, 1250);
+
+      await animationPromise;
+      
+      // Wait before next scan
+      await new Promise(resolve => setTimeout(resolve, 3500)); // 6s total cycle approx
+      
+      // Loop
+      sequence();
+    };
+
+    sequence();
+
+    return () => controls.stop();
+  }, [controls]);
 
   // Generate grid data
   const gridData = useMemo(() => {
@@ -34,27 +64,35 @@ const NothingWordClock = () => {
       grid.push(row);
     }
 
-    // Place target words scattered vertically
-    const words = [
-      { text: "THIS", row: 1 },
-      { text: "IS", row: 3, forceCol: 1 }, // Left side
-      { text: "MY", row: 5, forceCol: 5 }, // Right side offset
-      { text: "WEBSITE", row: 7 }
+    // Define word sets for 8x8 grid
+    // Constraint: Start from Row 3 (index 2), avoid last row (index 7)
+    // Available Rows: 2, 3, 4, 5, 6
+    const wordSets = [
+      // Set 0: CURIO SITY DRIVEN
+      [
+        { text: "CURIO", row: 2, col: 0 },     // Row 3, Left (5 chars -> cols 0-4)
+        { text: "SITY", row: 3, col: 4 },      // Row 4, Right (4 chars -> cols 4-7)
+        { text: "DRIVEN", row: 6, col: 2 }     // Row 7 (Index 6), Centered (6 chars -> cols 2-7)
+      ],
+      // Set 1: HANDS ON
+      [
+        { text: "HANDS", row: 3, col: 0 },     // Row 4 (5 chars)
+        { text: "ON", row: 6, col: 6 }         // Row 7 (Index 6), Bottom Right
+      ],
+      // Set 2: TECH FOR ALL
+      [
+        { text: "TECH", row: 2, col: 0 },      // Row 3 (4 chars)
+        { text: "FOR", row: 4, col: 3 },       // Row 5, Middle (3 chars)
+        { text: "ALL", row: 6, col: 5 }        // Row 7 (Index 6), Right (3 chars)
+      ]
     ];
 
-    words.forEach(({ text, row, forceCol }) => {
-        // Use forced column if provided, otherwise random valid column
-        let startCol;
-        if (forceCol !== undefined) {
-            startCol = forceCol;
-        } else {
-            const maxStart = COLS - text.length;
-            startCol = Math.floor(Math.random() * (maxStart + 1));
-        }
-        
+    const currentWords = wordSets[wordSetIndex];
+
+    currentWords.forEach(({ text, row, col }) => {
         for (let i = 0; i < text.length; i++) {
-            if (row < ROWS && (startCol + i) < COLS) {
-                grid[row][startCol + i] = { char: text[i], isTarget: true };
+            if (row < ROWS && (col + i) < COLS) {
+                grid[row][col + i] = { char: text[i], isTarget: true };
             }
         }
     });
@@ -70,7 +108,7 @@ const NothingWordClock = () => {
     };
 
     return grid;
-  }, []);
+  }, [wordSetIndex]);
 
   return (
     <div style={{
@@ -93,12 +131,28 @@ const NothingWordClock = () => {
       {gridData.map((row, rowIndex) => (
         <div key={rowIndex} style={{ display: 'flex', gap: GAP_SIZE, justifyContent: 'center' }}>
           {row.map((cell, colIndex) => (
-            <div
+            <motion.div
               key={`${rowIndex}-${colIndex}`}
+              initial={false}
+              animate={cell.isTarget ? "active" : "inactive"}
+               variants={{
+                 active: {
+                   color: '#FFFFFF',
+                   textShadow: 'none', // Removed glow effect as requested
+                   opacity: 1,
+                   scale: 1.05,
+                   transition: { duration: 0.4, ease: [0.34, 1.56, 0.64, 1] } // Spring-like ease
+                 },
+                 inactive: {
+                   color: '#333333',
+                   textShadow: 'none',
+                   opacity: 0.3,
+                   scale: 0.95,
+                   transition: { duration: 0.4, ease: "easeOut" }
+                 }
+               }}
               className="matrix-char"
               style={{
-                color: cell.isTarget ? '#FFFFFF' : '#333333',
-                textShadow: cell.isTarget ? '0 0 8px rgba(255, 255, 255, 0.4)' : 'none',
                 fontSize: FONT_SIZE,
                 fontWeight: '600',
                 width: CELL_SIZE,
@@ -106,35 +160,27 @@ const NothingWordClock = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                transition: 'color 0.2s ease, text-shadow 0.2s ease',
                 zIndex: 2,
                 position: 'relative',
-                opacity: cell.isTarget ? 1 : 0.4 // Lower opacity for non-target
+                cursor: 'default'
               }}
             >
               {cell.char}
-            </div>
+            </motion.div>
           ))}
         </div>
       ))}
 
       {/* Scanning Beam */}
       <motion.div
-        initial={{ x: '-150%' }} // Start further left
-        animate={{ x: '300%' }} // Move further right
-        transition={{
-          repeat: Infinity,
-          repeatDelay: 15, // 15 seconds delay
-          duration: 2.5, // Slower scan
-          ease: "linear"
-        }}
+        animate={controls}
         style={{
           position: 'absolute',
           top: 0,
           left: 0,
-          width: '200px', // Wider beam
+          width: '80px', // Reduced width to 1/2 (was 200px, but 100px is still wide, 80px is sharper)
           height: '100%',
-          background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%)',
+          background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%)', // Reduced brightness to 1/3
           zIndex: 3,
           pointerEvents: 'none',
           mixBlendMode: 'screen' // Brightens everything

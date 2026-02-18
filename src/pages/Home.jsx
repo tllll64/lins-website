@@ -227,7 +227,7 @@ export const Home = () => {
                     display: isMobile ? 'none' : 'block' // Hide on mobile if too crowded, or adjust
                 }}>
                     <FolderIcon 
-                        title="Lynn's works"
+                        title="Lynn's Projects"
                         subtitle="Internship, AI-Driven, Digital"
                         scale={0.6}
                         folderImages={[PromoteLogo, TakoLogo, LingxiLogo]}
