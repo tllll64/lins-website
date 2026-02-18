@@ -216,7 +216,7 @@ const NothingDotClock = () => {
           fontWeight: 'normal',
           pointerEvents: 'none'
         }}>
-          anan agent I’m hatching 🍩
+          An agent I’m hatching 🍩
         </div>
       </div>
 

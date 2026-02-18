@@ -55,26 +55,87 @@ const Polaroid = ({ src, rotate = 0, zIndex = 1, scale = 1, shadow = 'rgba(0, 0,
 };
 
 const PolaroidDecoration = ({ images, scale = 1 }) => {
+    const [isHovered, setIsHovered] = React.useState(false);
+
     return (
-        <div style={{ 
-            position: 'relative', 
-            width: '158px', 
-            height: '178px',
-            transform: `scale(${scale})`,
-            transformOrigin: 'center center'
-        }}>
-            {/* Background Shape: Black with 10% opacity, small shadow */}
+        <div 
+            style={{ 
+                position: 'relative', 
+                width: '158px', 
+                height: '178px',
+                transform: `scale(${scale})`,
+                transformOrigin: 'center center'
+            }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            {/* Custom Annotation (Arrow + Text) */}
+            <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                pointerEvents: 'none',
+                zIndex: 20,
+                opacity: isHovered ? 1 : 0,
+                transition: 'opacity 0.3s ease-out',
+            }}>
+                <svg style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    overflow: 'visible',
+                    pointerEvents: 'none'
+                }}>
+                    <defs>
+                        <marker id="forkedArrowPolaroid" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+                           <path d="M 0 2 L 10 6 L 0 10" fill="none" stroke="#000" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </marker>
+                    </defs>
+                    <path 
+                        d="M 145 45 Q 205 10 132 -25" 
+                        fill="none" 
+                        stroke="#000" 
+                        strokeWidth="1.2" 
+                        strokeLinecap="round"
+                        markerEnd="url(#forkedArrowPolaroid)"
+                        style={{
+                            transition: 'd 0.3s ease-out'
+                        }}
+                    />
+                </svg>
+                
+                <div style={{
+                    position: 'absolute',
+                    top: '-45px', // Above the component
+                    left: '50%',
+                    transform: 'translateX(-50%)', 
+                    width: 'max-content',
+                    fontFamily: 'Inter, sans-serif',
+                    fontSize: '16px',
+                    color: '#000',
+                    fontWeight: 'normal',
+                    pointerEvents: 'none'
+                }}>
+                    About Me 🙋🏻‍♀️
+                </div>
+            </div>
+
+            {/* Background Shape: Black with 10% opacity, no shadow, halve opacity on hover */}
             <div style={{
                 position: 'absolute',
                 top: 4,
                 right: 14,
                 width: '158px',
                 height: '174px',
-                backgroundColor: 'rgba(0, 0, 0, 0.1)', // Black with 10% opacity
+                backgroundColor: isHovered ? 'rgba(0, 0, 0, 0.05)' : 'rgba(0, 0, 0, 0.1)', // Halved opacity on hover
                 borderRadius: '4px',
                 transform: 'rotate(-8deg)',
                 zIndex: 0,
-                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)' // Small shadow for depth
+                transition: 'background-color 0.3s ease'
             }} />
             
             {/* Foreground Photo: Shadow matches FolderIcon (drop-shadow) */}

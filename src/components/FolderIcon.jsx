@@ -144,6 +144,13 @@ const FolderIcon = ({
         left: '10%',
         filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.2))',
     };
+    
+    // Calculate adjusted font size and stroke width based on scale to maintain consistent visual size (approx 16px)
+    // Default target size is 16px. If scale is 0.6, we need 16 / 0.6 = 26.6px
+    const targetFontSize = 16;
+    const adjustedFontSize = Math.round(targetFontSize / scale);
+    // Adjusted to be visually thinner (approx 1.0px visual width instead of 1.2px)
+    const adjustedStrokeWidth = 1.0 / scale;
 
     // Front Body (The main container)
     const frontBodyStyle = {
@@ -215,12 +222,69 @@ const FolderIcon = ({
                 <div style={textContainerStyle}>
                     <div style={{
                         ...textStyle,
-                        fontSize: '24px',
-                        fontWeight: 600,
-                        textShadow: '0 1px 2px rgba(0,0,0,0.1)'
+                        fontSize: '16px',
+                        fontWeight: 'normal',
+                        textAlign: 'center',
+                        width: '100%',
+                        opacity: 0.4
                     }}>
                         {title}
                     </div>
+                </div>
+            </div>
+
+            {/* Custom Annotation (Arrow + Text) */}
+            <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                pointerEvents: 'none',
+                zIndex: 30,
+                opacity: isHovered ? 1 : 0,
+                transition: 'opacity 0.3s ease-out',
+            }}>
+                <svg style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    overflow: 'visible',
+                    pointerEvents: 'none'
+                }}>
+                    <defs>
+                        <marker id="forkedArrowFolder" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+                            <path d="M 0 2 L 10 6 L 0 10" fill="none" stroke="#000" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
+                        </marker>
+                    </defs>
+                    <path 
+                        d="M 140 180 Q 200 230 140 280" 
+                        fill="none" 
+                        stroke="#000" 
+                        strokeWidth={adjustedStrokeWidth}
+                        strokeLinecap="round"
+                        markerEnd="url(#forkedArrowFolder)"
+                        style={{
+                            transition: 'd 0.3s ease-out'
+                        }}
+                    />
+                </svg>
+                
+                <div style={{
+                    position: 'absolute',
+                    top: '290px',
+                    left: '50%',
+                    transform: 'translateX(-50%)', 
+                    width: 'max-content',
+                    fontFamily: 'Inter, sans-serif',
+                    fontSize: `${adjustedFontSize}px`,
+                    color: '#000',
+                    fontWeight: 'normal',
+                    pointerEvents: 'none'
+                }}>
+                    My Projects
                 </div>
             </div>
         </div>

@@ -15,6 +15,7 @@ const NothingWordClock = () => {
   const isMobile = useMediaQuery('(max-width: 768px)');
   const controls = useAnimation();
   const [wordSetIndex, setWordSetIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
   
   // Responsive constants
   // Adjusted for 8x8 grid to match NothingDotClock width (~158px desktop, ~79px mobile)
@@ -111,6 +112,66 @@ const NothingWordClock = () => {
   }, [wordSetIndex]);
 
   return (
+    <div 
+      style={{ position: 'relative', display: 'inline-block' }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+        {/* Custom Annotation (Arrow + Text) */}
+        <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            pointerEvents: 'none',
+            zIndex: 20,
+            opacity: isHovered ? 1 : 0,
+            transition: 'opacity 0.3s ease-out',
+        }}>
+            <svg style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                overflow: 'visible',
+                pointerEvents: 'none'
+            }}>
+                <defs>
+                    <marker id="forkedArrowClock" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+                        <path d="M 0 2 L 10 6 L 0 10" fill="none" stroke="#000" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </marker>
+                </defs>
+                <path 
+                    d="M 22 38 Q -65 10 -12 -30" 
+                    fill="none" 
+                    stroke="#000" 
+                    strokeWidth="1.2" 
+                    strokeLinecap="round"
+                    markerEnd="url(#forkedArrowClock)"
+                    style={{
+                        transition: 'd 0.3s ease-out'
+                    }}
+                />
+            </svg>
+            
+            <div style={{
+                position: 'absolute',
+                top: '-45px',
+                left: '50%',
+                transform: 'translateX(-50%)', 
+                width: 'max-content',
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '16px',
+                color: '#000',
+                fontWeight: 'normal',
+                pointerEvents: 'none'
+            }}>
+                Human-AI Sandbox
+            </div>
+        </div>
+
     <div style={{
       position: 'relative',
       backgroundColor: '#121212',
@@ -187,6 +248,7 @@ const NothingWordClock = () => {
         }}
       />
       
+    </div>
     </div>
   );
 };

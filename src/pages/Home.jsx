@@ -62,7 +62,6 @@ export const Home = () => {
     
     // State for name tooltip
     const [showNameTooltip, setShowNameTooltip] = useState(false);
-    const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
 
     useEffect(() => {
         const handleScroll = () => {
@@ -207,7 +206,7 @@ export const Home = () => {
                     display: isMobile ? 'none' : 'block' // Hide on mobile if too crowded, or adjust
                 }}>
                     <FolderIcon 
-                        title="Lynn's Projects"
+                        title="12 Projects"
                         subtitle="Internship, AI-Driven, Digital"
                         scale={0.6}
                         folderImages={[PromoteLogo, TakoLogo, LingxiLogo]}
@@ -227,7 +226,7 @@ export const Home = () => {
                     }}
                     onClick={() => navigate('/about')}
                 >
-                    <PolaroidDecoration images={[null, profileImg]} scale={1.1} />
+                    <PolaroidDecoration images={[null, profileImg]} scale={0.99} />
                 </div>
 
                 {/* NothingWordClock in bottom-right corner */}
@@ -266,7 +265,6 @@ export const Home = () => {
                          <h3 
                             onMouseEnter={() => setShowNameTooltip(true)}
                             onMouseLeave={() => setShowNameTooltip(false)}
-                            onMouseMove={(e) => setTooltipPosition({ x: e.clientX, y: e.clientY })}
                             style={{
                                 fontFamily: '"Inter", sans-serif',
                                 fontSize: isMobile ? '16px' : '20px',
@@ -276,33 +274,29 @@ export const Home = () => {
                                 color: colors.grey[40], // Slightly lighter for subhead
                                 cursor: 'default',
                                 width: 'fit-content',
-                                margin: '0 auto 16px auto'
+                                margin: '0 auto 16px auto',
+                                position: 'relative'
                          }}>
                             Hi, I'm Lynn Tian
-                         </h3>
-                         
-                         {/* Name Tooltip */}
-                         {showNameTooltip && (
+                            
+                            {/* Hover Annotation */}
                             <div style={{
-                                position: 'fixed',
-                                top: tooltipPosition.y - 40, // Position above cursor (adjusted for bubble height)
-                                left: tooltipPosition.x + 10, // Position to the right
-                                background: colors.white.solid,
-                                padding: '8px 16px',
-                                borderRadius: '50px',
-                                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                                zIndex: 1000,
+                                position: 'absolute',
+                                top: '-10px',
+                                left: 'calc(100% + 5px)',
+                                width: 'max-content',
+                                opacity: showNameTooltip ? 1 : 0,
+                                transition: 'opacity 0.3s ease-out',
                                 pointerEvents: 'none',
                                 fontFamily: '"Noto Sans SC", "PingFang SC", sans-serif',
-                                fontSize: '18px',
-                                fontWeight: 500,
-                                color: colors.grey[9],
-                                border: `1px solid ${colors.grey[92]}`,
-                                whiteSpace: 'nowrap'
+                                fontSize: '16px',
+                                color: '#000',
+                                fontWeight: 'normal',
+                                zIndex: 20
                             }}>
-                                田琳
+                                [田琳]
                             </div>
-                         )}
+                         </h3>
                          
                          <h1 style={{
                             fontFamily: 'Lora, "Times New Roman", Georgia, serif',
