@@ -386,7 +386,7 @@ export const Home = () => {
                     </div>
                 </Section>
 
-                <Section title="Publications" subtitle="研究生期间的 HAI 相关研究论文" style={{ paddingTop: layoutSpacing.section['2xl'], paddingBottom: 0 }}>
+                <Section title="AI-Driven Papers" subtitle="研究生期间的 HAI 相关研究论文" style={{ paddingTop: layoutSpacing.section['2xl'], paddingBottom: 0 }}>
                     <div style={{ marginBottom: layoutSpacing.section.xl }}>
                         {publicationsData.map((pub, index) => (
                             <PublicationCard
