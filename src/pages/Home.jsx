@@ -150,16 +150,18 @@ export const Home = () => {
         background: 'rgba(0, 0, 0, 0.9)',
         color: colors.white.solid,
         paddingTop: layoutSpacing.section['2xl'],
-        paddingBottom: spacing[20]
+        paddingBottom: `calc(${spacing[20]} + 20px)`,
+        WebkitFontSmoothing: 'antialiased',
+        MozOsxFontSmoothing: 'grayscale'
     };
 
     const blogItems = [
-        { title: "理想态英文阅读体验在Tako的应用", category: "Daily Log", image: ASSETS.blog1 },
-        { title: "“AIGC+模板化”融入B端业务实践反思", category: "Reflection", image: ASSETS.blog2 },
-        { title: "商业化产品引导体系建设调研", category: "Research", image: ASSETS.blog1 },
-        { title: "国内外用户 AI 使用差异调研", category: "Research", image: ASSETS.blog2 },
-        { title: "B 端 AI 应用设计框架调研", category: "Framework", image: ASSETS.blog1 },
-        { title: "华为问界智驾教学产品分析", category: "Analysis", image: ASSETS.blog2 }
+        { title: "理想态英文阅读体验在Tako的应用", category: "[AI]  [Reflection]", image: ASSETS.blog1 },
+        { title: "“AIGC+模板化”融入B端业务实践反思", category: "[AI]  [Reflection]", image: ASSETS.blog2 },
+        { title: "商业化产品引导体系建设调研", category: "[Research]", image: ASSETS.blog1 },
+        { title: "国内外用户 AI 使用差异调研", category: "[AI]  [Research]", image: ASSETS.blog2 },
+        { title: "B 端 AI 应用设计框架调研", category: "[AI]  [Research]", image: ASSETS.blog1 },
+        { title: "华为问界智驾教学产品分析", category: "[Research]", image: ASSETS.blog2 }
     ];
 
     const demoItems = [

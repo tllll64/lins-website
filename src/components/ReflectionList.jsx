@@ -44,9 +44,7 @@ const ReflectionList = ({ items }) => {
             }}
           >
             <div style={{ 
-              fontSize: typography.heading5.fontSize,
-              fontFamily: typography.heading5.fontFamily,
-              fontWeight: typography.heading5.fontWeight, 
+              ...typography.heading5,
               color: colors.white.solid 
             }}>
               {item.title}
@@ -54,13 +52,9 @@ const ReflectionList = ({ items }) => {
             
             {!isMobile && (
               <div style={{ 
-                fontSize: '19px', 
-                color: colors.grey[66],
-                border: `1px solid ${colors.white.solid}`,
-                borderRadius: '999px',
-                padding: '4px 12px',
-                width: 'fit-content',
-                display: 'inline-block'
+                fontSize: '16px', 
+                color: activeIndex === index ? colors.white.solid : colors.grey[66],
+                transition: 'color 0.3s ease'
               }}>
                 {item.category}
               </div>
@@ -72,15 +66,16 @@ const ReflectionList = ({ items }) => {
               justifyContent: 'flex-end', 
               alignItems: 'center', 
               gap: '8px',
-              color: colors.white.solid,
-              fontSize: '19px'
+              color: activeIndex === index ? colors.white.solid : colors.grey[66],
+              transition: 'color 0.3s ease',
+              fontSize: '16px'
             }}>
               <span style={{ 
                 opacity: activeIndex === index ? 1 : 0, 
                 transition: 'opacity 0.2s ease',
                 display: isMobile ? 'none' : 'inline'
               }}>
-                See project
+                See More
               </span>
               <ArrowUpRight size={18} />
             </div>
