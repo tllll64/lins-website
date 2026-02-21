@@ -135,7 +135,7 @@ const StackedCards = ({ assets, images }) => {
                   width: CARD_WIDTH,
                   height: CARD_HEIGHT,
                   borderRadius: '16px', // Restored border radius per request
-                  backgroundColor: index === 0 ? '#000000' : '#FFFFFF', // First card black, others white per request
+                  backgroundColor: '#FFFFFF', // Changed to white per request
                   // Updated shadow style per request (softer, cleaner)
                   boxShadow: '0 6px 17px rgba(0,0,0,0.025), 0 1.5px 4px rgba(0,0,0,0.01)',
                   // border: '4px solid white', // Removed border per request
@@ -174,8 +174,8 @@ const StackedCards = ({ assets, images }) => {
                     src={card.image} 
                     alt={`Card ${index}`}
                     style={{
-                      width: index === 0 ? '79.2%' : '88%', // First card scaled to 90% of 88% (79.2%), others remain at 88%
-                      height: index === 0 ? '79.2%' : '88%', // First card scaled to 90% of 88% (79.2%), others remain at 88%
+                      width: index === 0 ? '71.28%' : '88%', // First card scaled to 90% of previous 79.2% (71.28%), others remain at 88%
+                      height: index === 0 ? '71.28%' : '88%', // First card scaled to 90% of previous 79.2% (71.28%), others remain at 88%
                       objectFit: 'contain' // Changed to contain to preserve aspect ratio within the box
                     }}
                   />

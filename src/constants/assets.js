@@ -33,7 +33,7 @@ export const ASSETS = {
     photo6: new URL('../assets/about/IMG_4958.jpg', import.meta.url).href,
 
     // Work With
-    tiktokWork: new URL('../assets/workwith/TikTok.png', import.meta.url).href,
+    tiktokWork: new URL('../assets/Home/TikTok.png', import.meta.url).href,
     ant: new URL('../assets/workwith/ant@3x.png', import.meta.url).href,
     bmw: new URL('../assets/workwith/bmw@3x.png', import.meta.url).href,
     huawei: new URL('../assets/workwith/huawei@3x.png', import.meta.url).href,

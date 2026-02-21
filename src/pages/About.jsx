@@ -211,7 +211,7 @@ export const About = () => {
     };
 
     const newsData = [
-        { date: "[02/2026]", emoji: "🎵", text: "结束了在字节的产品设计实习，这是一次对 AI 落地业务的全方位了解，虽然总感叹时光短暂，但仍然会保持眼里有光，保持 passion ✨" },
+        { date: "[02/2026]", emoji: "🎵", text: "结束了在字节的产品设计实习，这是一次对 AI 落地业务的全方位了解，我仍然会保持眼里有光，保持 passion ✨" },
         { date: "[01/2026]", emoji: "🇪🇸", text: "My first CHI! 四月份西班牙巴塞罗那见！感谢学术之途的每一位引路人，给世界贡献一份 contribution（本 N 人的终极梦想）正在一步步实现中 ✨" },
         { date: "[11/2025]", emoji: "🎉", text: "CHI 首轮拿到了 ARR A ARR ARR！完全超乎预期的成绩～ 持续奋战中 💪" },
         { date: "[11/2025]", emoji: "🔮", text: "本人的毕设研究课题「元设计驱动的生成式设计研究」开动啦！和之前 UIST、CHI 论文一脉相承的研究方向，将持续一年半，期待由我主导的、严谨细腻的、为真实世界作出贡献的研究成果..." },
@@ -326,7 +326,7 @@ export const About = () => {
                 </div>
             </Section>
 
-            <Section title="Extra Extra !" subtitle="不工作的时候，我会 🏃 Citywalk，🧘 旅行，🎵 听音乐&播客，💪 健身，🩵 追星，🍮 享用甜点，以及 👧 照顾我的小侄子（德华带娃）。" subtitleStyle={{ color: colors.grey[9] }} style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
+            <Section title="Extra Extra" subtitle="不工作的时候，我会 🏃 Citywalk，🧘 旅行，🎵 听音乐&播客，💪 健身，🩵 追星，🍮 享用甜点，以及 👧 照顾我的小侄子（德华带娃）。" subtitleStyle={{ color: colors.grey[9] }} style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
                 <PolaroidGallery images={[ASSETS.photo1, ASSETS.photo2, ASSETS.photo3, ASSETS.photo4, ASSETS.photo5, ASSETS.photo6].filter(Boolean)} />
             </Section>
 
