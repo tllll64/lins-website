@@ -295,7 +295,7 @@ export const About = () => {
                     }}>
                         Recently Work with
                     </h2>
-                    <div style={{ flex: 1, width: isMobile ? '100%' : 'auto' }}>
+                    <div style={{ flex: 1, width: '100%' }}>
                         <StackedCards 
                             assets={ASSETS} 
                             images={[

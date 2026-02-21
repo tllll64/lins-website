@@ -92,16 +92,32 @@ const StackedCards = ({ assets, images }) => {
             minWidth: isExpanded ? (cards.length * (CARD_WIDTH + 24)) : 'auto'
           }}
           transition={{
-            type: "spring",
-            stiffness: 260,
-            damping: 20
+            duration: 0.8,
+            ease: [0.16, 1, 0.3, 1] // Smooth ease, no bounce
           }}
         >
           {cards.map((card, index) => {
+            // Reverse Stagger Logic: Outer cards move first/fastest, inner cards move last/slowest
+            const middleIndex = (cards.length - 1) / 2;
+            const distFromCenter = Math.abs(index - middleIndex);
+            // The max distance is roughly half the length. 
+            // We want smaller distance (inner) to have HIGHER delay, and larger distance (outer) to have LOWER delay.
+            const maxDist = middleIndex;
+            // Delay = (MaxDist - CurrentDist) * factor. 
+            // Outer cards (Dist ~ Max) -> Delay ~ 0
+            // Inner cards (Dist ~ 0) -> Delay ~ Max * factor
+            const staggerDelay = (maxDist - distFromCenter) * 0.1; 
+            
             // Calculated styles for collapsed state
-            // No rotation, just stacking
-            const totalCollapsedWidth = (cards.length - 1) * (CARD_WIDTH / 3) + CARD_WIDTH;
-            const collapsedX = index * (CARD_WIDTH / 3) - totalCollapsedWidth / 2; // Scaled overlap distance (1/3 exposed) and centered
+            // Overlap 40% (meaning offset is 60% of width? Or offset is 40% so overlap is 60%?)
+            // "各自重叠40%" usually implies they share 40% of their area.
+            // Let's assume user wants a tighter stack, so overlap is significant.
+            // If offset is 40% of width (33.6px), overlap is 60%.
+            // If offset is 60% of width (50.4px), overlap is 40%.
+            // Let's go with offset = 40% (33.6px) for a tighter, centered stack look as requested "先居中展示"
+            const collapsedOffset = CARD_WIDTH * 0.4; 
+            const totalCollapsedWidth = (cards.length - 1) * collapsedOffset + CARD_WIDTH;
+            const collapsedX = index * collapsedOffset - totalCollapsedWidth / 2; // Centered
             const collapsedY = 0; // No Y offset
             const collapsedRotate = 0; // No rotation
             
@@ -148,10 +164,9 @@ const StackedCards = ({ assets, images }) => {
                   }
                 }}
                 transition={{
-                  type: "spring",
-                  stiffness: 260,
-                  damping: 20,
-                  delay: index * 0.03 // Slightly faster stagger
+                  duration: 0.8,
+                  ease: [0.4, 0, 0.2, 1], // Standard EaseInOut (Material Design) - Smooth start and end
+                  delay: staggerDelay
                 }}
               >
                 {card.image && (
