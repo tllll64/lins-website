@@ -23,6 +23,7 @@ import { Twitter, Github, Mail } from 'lucide-react';
 import xhsCursor from '../assets/cursor/xhs-cursor.png';
 import PromoteLogo from '../assets/Home/Promote_logo.png';
 import TakoLogo from '../assets/Home/Tako_logo.png';
+import TakoImg from '../assets/Home/Tako.png';
 import LingxiLogo from '../assets/Home/Lingxi_logo.png';
 import PolaroidDecoration from '../components/PolaroidDecoration';
 import profileImg from '../assets/about/profile2.png';
@@ -352,7 +353,7 @@ export const Home = () => {
                         title="Procreate"
                         description="A deep dive into mobile creative tools, analyzing interaction patterns and recreating key workflows for iOS."
                         tags={['APP', '产设共建']}
-                        image={ASSETS.pro}
+                        image={TakoImg}
                         logo={TakoLogo}
                         customCursor={xhsCursor}
                         pixelPattern={<PixelLock size={6} gap={2} />}
