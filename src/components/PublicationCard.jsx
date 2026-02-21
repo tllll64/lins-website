@@ -74,7 +74,7 @@ export const PublicationCard = ({ title, authors, venue, links, image }) => {
     };
 
     const linkStyle = {
-        color: '#0056b3',
+        color: '#000000',
         textDecoration: 'none',
         cursor: 'pointer',
         transition: 'opacity 0.2s ease'
