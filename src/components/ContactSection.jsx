@@ -19,7 +19,7 @@ export const ContactSection = () => {
         background: colors.black.solid,
         color: colors.white.solid,
         paddingTop: `calc(${layoutSpacing.section.md} + 30px)`,
-        paddingBottom: layoutSpacing.section.lg,
+        paddingBottom: `calc(${layoutSpacing.section.lg} + 20px)`,
         overflow: 'hidden'
     };
 
@@ -38,7 +38,7 @@ export const ContactSection = () => {
             "title links"
             "copyright resume"
         `,
-        rowGap: spacing['2xl'],
+        rowGap: `calc(${spacing['2xl']} - 26px)`,
         columnGap: stackSpacing.xl,
         gap: isMobile ? stackSpacing.xl : undefined, // Gap for flex mobile layout
     };
