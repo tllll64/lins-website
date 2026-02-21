@@ -202,8 +202,8 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
                         src={logo} 
                         alt="logo" 
                         style={{
-                          width: '80%',
-                          height: '80%',
+                          width: '64%',
+                          height: '64%',
                           objectFit: 'contain',
                           filter: isHovered ? 'none' : 'grayscale(100%)',
                           transition: 'filter 0.3s ease'

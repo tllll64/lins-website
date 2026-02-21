@@ -25,6 +25,8 @@ import PromoteLogo from '../assets/Home/Promote_logo.png';
 import TakoLogo from '../assets/Home/Tako_logo.png';
 import TakoImg from '../assets/Home/Tako.png';
 import LingxiLogo from '../assets/Home/Lingxi_logo.png';
+import RedLogo from '../assets/Home/red.png';
+import TikTokAppLogo from '../assets/Home/TikTok.png';
 import PolaroidDecoration from '../components/PolaroidDecoration';
 import profileImg from '../assets/about/profile2.png';
 
@@ -364,7 +366,7 @@ export const Home = () => {
                         description="Designed data visualization tools for enterprise analytics, improving data readability and decision-making efficiency."
                         tags={['APP', '产设共建']}
                         image={ASSETS.tiktok}
-                        logo={PromoteLogo}
+                        logo={RedLogo}
                         onClick={() => openFigmaModal(
                             "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FMCyWIWjYNBpVUUdqlRdAGw%2F%25E6%259A%2591%25E6%259C%259F%25E4%25BD%259C%25E5%2593%2581%25E9%259B%2586%3Fpage-id%3D738%253A15009%26node-id%3D738-22150%26viewport%3D232%252C293%252C0.25%26t%3DPGqmJzHbhJK8ZgKg-1%26scaling%3Dscale-down-width%26content-scaling%3Dfixed",
                             "薯条加热权益保障放心投"
@@ -376,7 +378,7 @@ export const Home = () => {
                         description="A deep dive into mobile creative tools, analyzing interaction patterns and recreating key workflows for iOS."
                         tags={['APP', '设计自驱&设计探索']}
                         image={TakoImg}
-                        logo={TakoLogo}
+                        logo={TikTokAppLogo}
                         customCursor={xhsCursor}
                         pixelPattern={<PixelLock size={6} gap={2} />}
                         reversed={true}
@@ -387,7 +389,7 @@ export const Home = () => {
                         description="A deep dive into mobile creative tools, analyzing interaction patterns and recreating key workflows for iOS."
                         tags={['Web', '需求支持']}
                         image={ASSETS.pro}
-                        logo={LingxiLogo}
+                        logo={RedLogo}
                         customCursor={xhsCursor}
                     />
                 </div>
