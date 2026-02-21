@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { colors, spacing, typography, fontWeight } from '../design-system/tokens';
 
 // Placeholder images - using assets or fallback to solid colors/gradients
@@ -16,7 +16,13 @@ const CARD_DATA = [
 ];
 
 const StackedCards = ({ assets, images }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { 
+    amount: 0.2, // Lower threshold to trigger earlier
+    once: false,
+    margin: "0px 0px -10% 0px" // Slight offset to ensure full engagement
+  });
+  const isExpanded = isInView;
 
   // Combine provided assets with placeholders if needed to reach 8
   const cards = CARD_DATA.map((card, index) => {
@@ -48,31 +54,33 @@ const StackedCards = ({ assets, images }) => {
   };
 
   return (
-    <div style={{
-      width: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '14px'
-    }}>
-      {/* Interactive Area */}
+    <div 
+      ref={containerRef}
+      style={{
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '14px'
+      }}
+    >
+      {/* Scrollable Container */}
       <div 
         style={{
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'flex-start',
+          justifyContent: 'center', // Changed from flex-start to center for content alignment
           position: 'relative',
           height: CARD_HEIGHT + 56, // Increased height for large shadows
-          paddingLeft: '28px', // Increased padding for left shadow
+          paddingLeft: '0px', // Removed padding for left shadow per request
+          paddingRight: '0px', // Unified padding to 0 per request
           width: '100%',
           overflowX: isExpanded ? 'auto' : 'visible', // Allow scrolling when expanded
           // overflowY: 'hidden', // Removed to prevent shadow clipping
-          cursor: 'pointer' // Indicate interactivity
         }}
-        onMouseEnter={() => setIsExpanded(true)}
-        onMouseLeave={() => setIsExpanded(false)}
       >
         {/* Cards Container */}
         <motion.div 
+          layout
           variants={containerVariants}
           initial="collapsed"
           animate={isExpanded ? "expanded" : "collapsed"}
@@ -81,36 +89,47 @@ const StackedCards = ({ assets, images }) => {
             height: '100%',
             display: 'flex',
             alignItems: 'center',
-            minWidth: isExpanded ? (cards.length * (CARD_WIDTH * 4 / 5) + 70) : 'auto'
+            minWidth: isExpanded ? (cards.length * (CARD_WIDTH + 24)) : 'auto'
+          }}
+          transition={{
+            type: "spring",
+            stiffness: 260,
+            damping: 20
           }}
         >
           {cards.map((card, index) => {
             // Calculated styles for collapsed state
             // No rotation, just stacking
-            const collapsedX = index * (CARD_WIDTH / 3); // Scaled overlap distance (1/3 exposed)
+            const totalCollapsedWidth = (cards.length - 1) * (CARD_WIDTH / 3) + CARD_WIDTH;
+            const collapsedX = index * (CARD_WIDTH / 3) - totalCollapsedWidth / 2; // Scaled overlap distance (1/3 exposed) and centered
             const collapsedY = 0; // No Y offset
             const collapsedRotate = 0; // No rotation
             
             // Calculated styles for expanded state
-            // Each card is covered by 1/5 by the previous card (meaning 4/5 exposed)
-            const expandedX = index * (CARD_WIDTH * 4 / 5);
+            // No overlap, cards are spaced with 24px gap (3x previous 8px)
+            const totalExpandedWidth = (cards.length - 1) * (CARD_WIDTH + 24) + CARD_WIDTH;
+            const expandedX = index * (CARD_WIDTH + 24) - totalExpandedWidth / 2; // Centered
             
             return (
               <motion.div
                 key={card.id}
+                layout
                 style={{
                   position: 'absolute',
                   width: CARD_WIDTH,
                   height: CARD_HEIGHT,
-                  borderRadius: '16px', // Scaled border radius
-                  backgroundColor: '#E5E5E5', // Grey background as requested
+                  borderRadius: '16px', // Restored border radius per request
+                  backgroundColor: index === 0 ? '#000000' : '#FFFFFF', // First card black, others white per request
                   // Updated shadow style per request (softer, cleaner)
                   boxShadow: '0 6px 17px rgba(0,0,0,0.025), 0 1.5px 4px rgba(0,0,0,0.01)',
-                  border: '4px solid white', // Scaled border to 4px
+                  // border: '4px solid white', // Removed border per request
                   overflow: 'hidden',
                   zIndex: cards.length - index, // Reverse stack order so Left covers Right
-                  transformOrigin: 'bottom left',
-                  left: 0,
+                  transformOrigin: 'center center', // Changed to center center for more balanced expansion
+                  left: '50%', // Centered relative to container
+                  display: 'flex', // Added flex to center the scaled image
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
                 variants={{
                   collapsed: {
@@ -129,8 +148,9 @@ const StackedCards = ({ assets, images }) => {
                   }
                 }}
                 transition={{
-                  duration: 0.5,
-                  ease: [0.16, 1, 0.3, 1], // Custom ease
+                  type: "spring",
+                  stiffness: 260,
+                  damping: 20,
                   delay: index * 0.03 // Slightly faster stagger
                 }}
               >
@@ -139,9 +159,9 @@ const StackedCards = ({ assets, images }) => {
                     src={card.image} 
                     alt={`Card ${index}`}
                     style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover'
+                      width: index === 0 ? '79.2%' : '88%', // First card scaled to 90% of 88% (79.2%), others remain at 88%
+                      height: index === 0 ? '79.2%' : '88%', // First card scaled to 90% of 88% (79.2%), others remain at 88%
+                      objectFit: 'contain' // Changed to contain to preserve aspect ratio within the box
                     }}
                   />
                 )}

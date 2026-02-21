@@ -75,7 +75,7 @@ export const About = () => {
     const profileTitleStyle = {
         fontFamily: typography.heading1.fontFamily,
         fontSize: isMobile ? '36px' : typography.heading1.fontSize,
-        fontWeight: typography.heading1.fontWeight,
+        fontWeight: 200,
         lineHeight: typography.heading1.lineHeight,
         letterSpacing: typography.heading1.letterSpacing,
         color: colors.grey[9]
@@ -279,14 +279,14 @@ export const About = () => {
             <Section style={{ paddingTop: layoutSpacing.section.xs, paddingBottom: layoutSpacing.section.xs }}>
                 <div style={{ 
                     display: 'flex', 
-                    flexDirection: isMobile ? 'column' : 'row',
-                    alignItems: isMobile ? 'flex-start' : 'center', 
-                    gap: isMobile ? stackSpacing.md : '20px' 
+                    flexDirection: 'column',
+                    alignItems: 'center', // Changed from flex-start to center for horizontal centering
+                    gap: isMobile ? stackSpacing.md : '6.66px' // Reduced to ~1/3 of 20px
                 }}>
                     <h2 style={{
                         fontFamily: typography.heading1.fontFamily,
-                        fontSize: isMobile ? '36px' : typography.heading1.fontSize,
-                        fontWeight: typography.heading1.fontWeight,
+                        fontSize: isMobile ? '28px' : `calc(${typography.heading1.fontSize} - 8px)`, // Reduced by 8px
+                        fontWeight: 200,
                         lineHeight: typography.heading1.lineHeight,
                         letterSpacing: typography.heading1.letterSpacing,
                         color: colors.grey[9],
@@ -300,12 +300,12 @@ export const About = () => {
                             assets={ASSETS} 
                             images={[
                                 ASSETS.tiktokWork,
+                                ASSETS.red,
+                                ASSETS.mi,
                                 ASSETS.ant,
                                 ASSETS.bmw,
                                 ASSETS.huawei,
-                                ASSETS.mi,
                                 ASSETS.nio,
-                                ASSETS.red,
                                 ASSETS.zeekr
                             ]}
                         />
