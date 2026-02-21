@@ -76,8 +76,8 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
         left: spacing.md,
         right: spacing.md,
         padding: `${spacing.sm} ${spacing.xl}`, // Increased vertical padding (xs->sm) for +8px height
-        background: '#ffffff', // Pure white background
-        backdropFilter: 'blur(32px)',
+        background: 'rgba(255, 255, 255, 0.8)', // 80% opacity white
+        backdropFilter: 'blur(40px)',
         borderRadius: '100px',
         border: '1px solid rgba(0, 0, 0, 0.06)', // Black border with 6% opacity
         display: 'flex',
@@ -143,13 +143,13 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
         <div 
             className={`group relative block w-full ${className}`} 
             onClick={onClick}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
         >
             <div style={containerStyle}>
                 {/* Left Side: 5:3 Cover with Image and Text */}
                 <div 
                     style={leftCoverStyle}
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
                 >
                     <div style={{
                         position: 'absolute',
