@@ -72,16 +72,21 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
 
     const textOverlayStyle = {
         position: 'absolute',
-        inset: 0,
-        padding: spacing.lg,
-        background: 'rgba(0, 0, 0, 0.6)', // Deep gray/black overlay
+        bottom: spacing.md,
+        left: spacing.md,
+        right: spacing.md,
+        padding: `${spacing.sm} ${spacing.xl}`, // Increased vertical padding (xs->sm) for +8px height
+        background: '#ffffff', // Pure white background
+        backdropFilter: 'blur(32px)',
+        borderRadius: '100px',
+        border: '1px solid rgba(0, 0, 0, 0.06)', // Black border with 6% opacity
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
         gap: spacing.xs,
-        color: '#fff',
+        color: colors.grey[9], // Dark text for light background
         opacity: isHovered ? 1 : 0,
-        transition: 'opacity 0.3s ease',
+        transition: 'all 0.3s ease',
     };
 
     const imageContainerStyle = {
@@ -91,21 +96,23 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
         filter: isHovered ? 'grayscale(100%) brightness(0.7)' : 'none', // Optional: desaturate and darken image
     };
 
-    const dateStyle = {
-        fontFamily: typography.body.fontFamily,
-        fontSize: '16px',
-        color: '#FF5733', 
-        fontStyle: 'italic',
-        marginBottom: spacing.xs
+    const headerRowStyle = {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        gap: spacing.md,
+        width: '100%'
     };
 
     const titleStyle = {
-        fontFamily: typography.heading2.fontFamily,
-        fontSize: '32px',
-        fontWeight: typography.heading2.fontWeight,
-        lineHeight: typography.heading2.lineHeight,
-        color: '#fff', // Changed to white for overlay
-        marginBottom: spacing.xs
+        fontFamily: typography.heading5.fontFamily,
+        fontSize: typography.heading5.fontSize,
+        fontWeight: typography.heading5.fontWeight,
+        lineHeight: typography.heading5.lineHeight,
+        letterSpacing: typography.heading5.letterSpacing,
+        color: colors.grey[9], // Changed to dark grey for light overlay
+        margin: 0,
+        flex: 1
     };
 
     const descriptionStyle = {
@@ -120,17 +127,16 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
         display: 'flex',
         flexWrap: 'wrap',
         gap: spacing.sm,
-        marginTop: spacing.md
+        flexShrink: 0
     };
 
     const tagStyle = {
-        padding: `${spacing.xs} ${spacing.md}`,
-        background: 'rgba(255, 255, 255, 0.2)', // Translucent white
-        backdropFilter: 'blur(4px)',
-        borderRadius: '8px',
+        padding: 0,
+        background: 'transparent',
         fontFamily: typography.body.fontFamily,
         fontSize: '14px',
-        color: '#fff'
+        color: colors.grey[9],
+        opacity: 0.6 // Slight opacity for hierarchy
     };
 
     return (
@@ -155,31 +161,36 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
                     }} />
                     
                     <div style={textOverlayStyle}>
-                        {date && (
-                            <div style={{ display: 'flex', alignItems: 'center', gap: spacing.xs }}>
-                                <span style={dateStyle}>{date}</span>
-                            </div>
-                        )}
-                        
-                        <h2 style={titleStyle}>{title}</h2>
-                        
-                        {description && (
-                            <p style={descriptionStyle}>
-                                {description}
-                            </p>
-                        )}
-
-                        {tags && tags.length > 0 && (
+                        <div style={headerRowStyle}>
+                            <h2 style={titleStyle}>{title}</h2>
+                            
+                            {tags && tags.length > 0 && (
                             <div style={tagsContainerStyle}>
-                                {tags.map((tag, index) => (
-                                    <span key={index} style={tagStyle}>
-                                        {tag}
-                                    </span>
-                                ))}
+                                <span style={tagStyle}>
+                                    {tags.join(' · ')}
+                                </span>
                             </div>
                         )}
+                        </div>
+                        
+                        {/* Description removed per user request */}
                     </div>
                 </div>
+                
+                {/* Mobile Title */}
+                {isMobile && (
+                    <h3 style={{
+                        fontFamily: 'Lora, "Times New Roman", Georgia, serif',
+                        fontSize: '20px',
+                        fontWeight: 600,
+                        lineHeight: '28px',
+                        color: 'rgb(23, 23, 23)',
+                        marginTop: '12px',
+                        marginBottom: '12px'
+                    }}>
+                        {title}
+                    </h3>
+                )}
 
                 {/* Right Side: Two Square Blocks */}
                 <div style={rightColumnStyle}>
