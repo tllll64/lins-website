@@ -65,7 +65,6 @@ export const GridCard = ({ title, category, image, className = "", onClick }) =>
                 <span style={{
                     fontSize: '16px',
                     color: colors.grey[56],
-                    textTransform: 'uppercase',
                     letterSpacing: '0.05em'
                 }}>
                     {category}

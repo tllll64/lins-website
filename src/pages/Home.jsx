@@ -379,7 +379,7 @@ export const Home = () => {
                             image={ASSETS.ai1}
                         />
                         <GridCard
-                            title="基于周边出行场景的支小宝 AI 应用创新探索"
+                            title="惊喜驱动的支小宝周边出行应用探索"
                             category="设计探索"
                             image={ASSETS.ai2}
                             onClick={() => navigate('/works/zhi-xiao-bao')}

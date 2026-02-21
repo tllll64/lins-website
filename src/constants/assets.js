@@ -6,7 +6,7 @@ export const ASSETS = {
 
     // AI Projects
     ai1: new URL('../assets/Home/GenFaceUI.png', import.meta.url).href, // Creative AI - GenFaceUI
-    ai2: new URL('../assets/works/zhi-xiao-bao/header-bg.png', import.meta.url).href, // ZhiXiaoBao AI
+    ai2: new URL('../assets/Home/zhixiaobao.png', import.meta.url).href, // ZhiXiaoBao AI
 
     // Digital Projects
     digital1: new URL('../assets/Home/xiaomi.png', import.meta.url).href,
