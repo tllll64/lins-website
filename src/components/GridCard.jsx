@@ -25,11 +25,8 @@ export const GridCard = ({ title, category, image, className = "", onClick }) =>
                             width: '100%',
                             height: '100%',
                             display: 'block',
-                            objectFit: 'cover',
-                            transition: 'transform 0.7s ease'
+                            objectFit: 'cover'
                         }}
-                        onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                        onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                     />
                 )}
                 <div style={{
