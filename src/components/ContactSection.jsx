@@ -38,7 +38,7 @@ export const ContactSection = () => {
             "title links"
             "copyright resume"
         `,
-        rowGap: `calc(${spacing['2xl']} - 12px)`,
+        rowGap: `calc(${spacing['2xl']} - 26px)`,
         columnGap: stackSpacing.xl,
         gap: isMobile ? stackSpacing.xl : undefined, // Gap for flex mobile layout
     };

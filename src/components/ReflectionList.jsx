@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Lock } from 'lucide-react';
 import { colors, typography } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 
@@ -38,7 +38,7 @@ const ReflectionList = ({ items }) => {
               padding: '32px 0',
               borderBottom: `1px solid ${colors.grey[18]}`,
               alignItems: 'center',
-              cursor: 'pointer',
+              cursor: item.locked ? 'not-allowed' : 'pointer',
               transition: 'opacity 0.3s ease',
               opacity: activeIndex !== null && activeIndex !== index ? 0.3 : 1
             }}
@@ -75,9 +75,9 @@ const ReflectionList = ({ items }) => {
                 transition: 'opacity 0.2s ease',
                 display: isMobile ? 'none' : 'inline'
               }}>
-                See More
+                {item.locked ? 'Coming Soon' : 'See More'}
               </span>
-              <ArrowUpRight size={18} />
+              {item.locked ? <Lock size={16} /> : <ArrowUpRight size={20} />}
             </div>
           </div>
         ))}
