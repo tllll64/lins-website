@@ -379,6 +379,7 @@ export const Home = () => {
                         logo={TakoLogo}
                         customCursor={xhsCursor}
                         pixelPattern={<PixelLock size={6} gap={2} />}
+                        reversed={true}
                     />
                     <ProjectCard
                         date="Mar - May 2024"
@@ -393,7 +394,7 @@ export const Home = () => {
             </Section>
 
             <div id="explorations">
-                <Section title="AI-Driven Projects" subtitle="研究生期间在生成式AI方向上探索的原型与落地作品" style={{ paddingTop: layoutSpacing.section['2xl'], paddingBottom: '64px' }}>
+                <Section title="AI-Driven Projects" subtitle="研究生期间在生成式 AI 方向上探索的原型与落地作品" style={{ paddingTop: layoutSpacing.section['2xl'], paddingBottom: '64px' }}>
                     <div style={gridStyle}>
                         <GridCard
                             title="GenFaceUI: Meta-Design Tool"
@@ -404,7 +405,7 @@ export const Home = () => {
                             title="惊喜驱动的支小宝周边出行应用探索"
                             category="设计探索"
                             image={ASSETS.ai2}
-                            onClick={() => navigate('/works/zhi-xiao-bao')}
+                            onClick={() => window.open('https://lynntian.framer.website/works/zhi-xiao-bao', '_blank')}
                         />
                     </div>
                 </Section>
@@ -459,6 +460,7 @@ export const Home = () => {
                             title="小米汽车智驾学堂"
                             category="小米实习产出 | 已上线"
                             image={ASSETS.digital1}
+                            onClick={() => window.open('https://lynntian.framer.website/works/xiao-mi', '_blank')}
                         />
                         <GridCard
                             title="NIO Roam 城市漫游座舱"

@@ -5,13 +5,13 @@ import { ArrowRight } from 'lucide-react';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 import PixelEye from './PixelEye';
 
-export const ProjectCard = ({ date, title, description, tags, image, link, className = "", customCursor, onClick, logo, pixelPattern }) => {
+export const ProjectCard = ({ date, title, description, tags, image, link, className = "", customCursor, onClick, logo, pixelPattern, reversed = false }) => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     const [isHovered, setIsHovered] = useState(false);
 
     const containerStyle = {
         display: 'flex',
-        flexDirection: isMobile ? 'column' : 'row',
+        flexDirection: isMobile ? 'column' : (reversed ? 'row-reverse' : 'row'),
         alignItems: 'stretch',
         justifyContent: 'space-between',
         gap: spacing.md,
