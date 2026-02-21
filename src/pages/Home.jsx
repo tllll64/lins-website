@@ -147,10 +147,10 @@ export const Home = () => {
     ];
 
     const footerStyle = {
-        background: '#333333',
+        background: 'rgba(0, 0, 0, 0.9)',
         color: colors.white.solid,
-        paddingTop: layoutSpacing.section.md,
-        paddingBottom: layoutSpacing.section.md
+        paddingTop: layoutSpacing.section['2xl'],
+        paddingBottom: spacing[20]
     };
 
     const blogItems = [
@@ -469,15 +469,15 @@ export const Home = () => {
                 </Section>
             </div>
 
-            <footer style={footerStyle} id="about" ref={footerRef}>
+            <section style={footerStyle} id="about" ref={footerRef}>
                 <div ref={blogSectionRef}>
-                    <Section title="Reflection Blog" dark className="!py-0 !px-0" style={{ background: 'transparent' }}>
-                        <div style={{ marginBottom: layoutSpacing.section.md }}>
+                    <Section title="Reflection Blog" dark className="!py-0 !px-0" style={{ background: 'transparent', paddingTop: 0, paddingBottom: 0 }}>
+                        <div>
                             <ReflectionList items={blogItems} />
                         </div>
                     </Section>
                 </div>
-            </footer>
+            </section>
 
             <ContactSection />
 

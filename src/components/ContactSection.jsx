@@ -18,7 +18,7 @@ export const ContactSection = () => {
         position: 'relative',
         background: colors.black.solid,
         color: colors.white.solid,
-        paddingTop: `calc(${layoutSpacing.section.md} + 30px)`,
+        paddingTop: `calc(${layoutSpacing.section['2xl']} - 34px)`,
         paddingBottom: `calc(${layoutSpacing.section.lg} + 20px)`,
         overflow: 'hidden'
     };
@@ -38,7 +38,7 @@ export const ContactSection = () => {
             "title links"
             "copyright resume"
         `,
-        rowGap: `calc(${spacing['2xl']} - 26px)`,
+        rowGap: `calc(${spacing['2xl']} - 18px)`,
         columnGap: stackSpacing.xl,
         gap: isMobile ? stackSpacing.xl : undefined, // Gap for flex mobile layout
     };
@@ -129,7 +129,7 @@ export const ContactSection = () => {
                 <div style={{ gridArea: 'title' }}>
                     <h2 style={footerTitleStyle}>Contact Me</h2>
                     <p style={footerDescStyle}>
-                        Thanks for reaching end of page. If you want to learn more, email me or verify what I'm working on, feel free to get in touch!
+                        Thanks for reaching end of page. If you want to learn more, email me to verify what I'm working on, feel free to get in touch!
                     </p>
                 </div>
                 
