@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { IconLaunch } from '@arco-design/web-react/icon';
 import { colors, spacing, typography, fontWeight } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 
@@ -137,14 +136,6 @@ export const Navbar = ({ theme = 'light' }) => {
                         Works
                     </Link>
                     <Link 
-                        to="/sandbox" 
-                        style={getLinkStyle(isSandboxActive)} 
-                        onMouseEnter={(e) => handleMouseEnter(e, isSandboxActive)} 
-                        onMouseLeave={(e) => handleMouseLeave(e, isSandboxActive)}
-                    >
-                        Sandbox
-                    </Link>
-                    <Link 
                         to="/about" 
                         style={getLinkStyle(isAboutActive)} 
                         onMouseEnter={(e) => handleMouseEnter(e, isAboutActive)} 
@@ -152,16 +143,14 @@ export const Navbar = ({ theme = 'light' }) => {
                     >
                         About
                     </Link>
-                    <a 
-                        href="https://jq6o8oyx72u.feishu.cn/wiki/R2XrwQooKiYVk1kF4facXBtdnkd" 
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{...getLinkStyle(false), display: 'flex', alignItems: 'center', gap: '4px'}} 
-                        onMouseEnter={(e) => handleMouseEnter(e, false)} 
-                        onMouseLeave={(e) => handleMouseLeave(e, false)}
+                    <Link 
+                        to="/sandbox" 
+                        style={getLinkStyle(isSandboxActive)} 
+                        onMouseEnter={(e) => handleMouseEnter(e, isSandboxActive)} 
+                        onMouseLeave={(e) => handleMouseLeave(e, isSandboxActive)}
                     >
-                        Resume <IconLaunch size={14} style={{ marginLeft: '2px' }} />
-                    </a>
+                        Sandbox
+                    </Link>
                 </div>
             </nav>
         </>

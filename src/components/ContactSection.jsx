@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MessageCircle, Copy, Check } from 'lucide-react';
+import { Mail, Phone, MessageCircle, Copy, Check, ArrowUpRight } from 'lucide-react';
 import { colors, spacing, typography, fontWeight, stackSpacing, layoutSpacing, fontSize } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 
@@ -18,23 +18,29 @@ export const ContactSection = () => {
         position: 'relative',
         background: colors.black.solid,
         color: colors.white.solid,
-        paddingTop: layoutSpacing.section.md,
+        paddingTop: `calc(${layoutSpacing.section.md} + 30px)`,
         paddingBottom: layoutSpacing.section.lg,
         overflow: 'hidden'
     };
 
-    const footerContainerStyle = {
+    const footerContentStyle = {
         position: 'relative',
         zIndex: 1,
         maxWidth: '1200px',
         margin: '0 auto',
         paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
         paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
-        display: 'flex',
-        flexDirection: isMobile ? 'column' : 'row',
-        justifyContent: 'space-between',
-        alignItems: isMobile ? 'flex-start' : 'center',
-        gap: stackSpacing.xl
+        display: isMobile ? 'flex' : 'grid',
+        flexDirection: isMobile ? 'column' : undefined,
+        gridTemplateColumns: isMobile ? undefined : '1fr auto',
+        gridTemplateRows: isMobile ? undefined : 'auto auto',
+        gridTemplateAreas: isMobile ? undefined : `
+            "title links"
+            "copyright resume"
+        `,
+        rowGap: spacing['2xl'],
+        columnGap: stackSpacing.xl,
+        gap: isMobile ? stackSpacing.xl : undefined, // Gap for flex mobile layout
     };
 
     const footerTitleStyle = {
@@ -58,8 +64,10 @@ export const ContactSection = () => {
     };
 
     const footerLinksStyle = {
+        gridArea: 'links',
         display: 'flex',
         flexDirection: 'column',
+        alignItems: 'flex-start',
         gap: stackSpacing.md,
         fontSize: typography.body.fontSize,
         color: colors.grey[66]
@@ -85,28 +93,46 @@ export const ContactSection = () => {
     };
 
     const copyrightStyle = {
-        position: 'relative',
-        zIndex: 1,
-        maxWidth: '1200px',
-        margin: '0 auto',
-        paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
-        paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
-        marginTop: spacing.xl,
+        gridArea: 'copyright',
+        alignSelf: 'end',
         fontSize: '11px',
         color: colors.grey[66],
         opacity: '0.4',
         textAlign: isMobile ? 'center' : 'left'
     };
 
+    const resumeButtonStyle = {
+        gridArea: 'resume',
+        alignSelf: 'end',
+        justifySelf: 'start', // Keep left align relative to the column (same as links)
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: spacing.xs,
+        background: colors.white.solid,
+        color: colors.black.solid,
+        padding: `${spacing.xs} ${spacing.md}`,
+        borderRadius: '100px',
+        textDecoration: 'none',
+        fontSize: typography.body.fontSize,
+        fontWeight: 500,
+        width: 'fit-content',
+        transition: 'transform 0.2s ease',
+        cursor: 'pointer',
+        // Add margin top for mobile spacing if needed, but flex gap handles it
+        marginTop: isMobile ? stackSpacing.md : 0
+    };
+
     return (
         <footer style={footerStyle}>
-            <div style={footerContainerStyle}>
-                <div>
+            <div style={footerContentStyle}>
+                <div style={{ gridArea: 'title' }}>
                     <h2 style={footerTitleStyle}>Contact Me</h2>
                     <p style={footerDescStyle}>
                         Thanks for reaching end of page. If you want to learn more, email me or verify what I'm working on, feel free to get in touch!
                     </p>
                 </div>
+                
                 <div style={footerLinksStyle}>
                     <div 
                         style={{
@@ -163,9 +189,21 @@ export const ContactSection = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div style={copyrightStyle}>
-                Designed and Coded by Chloe Tian • Copyright @ 2026
+
+                <a 
+                    href="https://jq6o8oyx72u.feishu.cn/wiki/R2XrwQooKiYVk1kF4facXBtdnkd"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={resumeButtonStyle}
+                    onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                    onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                >
+                    Resume <ArrowUpRight size={16} />
+                </a>
+                
+                <div style={copyrightStyle}>
+                    Designed and Coded by Lynn Tian • Copyright @ 2026
+                </div>
             </div>
         </footer>
     );
