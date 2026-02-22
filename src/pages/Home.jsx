@@ -339,11 +339,12 @@ export const Home = () => {
                             fontFamily: typography.body.fontFamily,
                             fontSize: typography.body.fontSize,
                             lineHeight: 1.6,
-                            maxWidth: '600px',
+                            maxWidth: '800px',
                             margin: '0 auto',
                             opacity: 0.9
                          }}>
-                            Simplicity is my superpower. I turn complex ideas into experiences users love and investors trust. I help SaaS, AI, and Dev founders craft story-driven brands and products.
+                            I’m dedicated to merging human-centered design with cutting-edge technology. <br />
+                            Lately, I’ve been focused on human-AI collaboration and seamless integration.
                          </p>
                     </div>
                 </div>
