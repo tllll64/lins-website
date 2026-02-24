@@ -392,17 +392,19 @@ export const Home = () => {
                         image={ASSETS.pro}
                         logo={RedLogo}
                         customCursor={xhsCursor}
+                        pixelPattern={<PixelLock size={6} gap={2} />}
                     />
                 </div>
             </Section>
 
             <div id="explorations">
-                <Section title="AI-Driven Projects" subtitle="研究生期间在生成式 AI 方向上探索的原型与落地作品" style={{ paddingTop: layoutSpacing.section['2xl'], paddingBottom: '64px' }}>
+                <Section title="AI-Driven Projects" subtitle="研究生期间在生成式 AI 方向上探索的原型与落地作品" style={{ paddingTop: '200px', paddingBottom: 0 }}>
                     <div style={gridStyle}>
                         <GridCard
                             title="GenFaceUI: Meta-Design Tool"
                             category="CHI'26 Full Paper"
                             image={ASSETS.ai1}
+                            onClick={() => window.open('https://arxiv.org/abs/2602.11055', '_blank')}
                         />
                         <GridCard
                             title="惊喜驱动的支小宝周边出行应用探索"
@@ -413,7 +415,7 @@ export const Home = () => {
                     </div>
                 </Section>
 
-                <Section title="AI-Driven Papers" subtitle="研究生期间的 HAI 相关研究论文" style={{ paddingTop: layoutSpacing.section['2xl'], paddingBottom: 0 }}>
+                <Section title="AI-Driven Papers" subtitle="研究生期间的 HAI 相关研究论文" style={{ paddingTop: '200px', paddingBottom: 0 }}>
                     <div style={{ marginBottom: layoutSpacing.section.xl }}>
                         {publicationsData.map((pub, index) => (
                             <PublicationCard
@@ -457,11 +459,11 @@ export const Home = () => {
                     </div>
                 </Section>
 
-                <Section title="Digital Projects" subtitle="本科期间在车载 HMI 和智能AI产品设计方向的落地性探索" style={{ paddingTop: layoutSpacing.section['2xl'], paddingBottom: layoutSpacing.section['2xl'] }}>
+                <Section title="Digital Projects" subtitle="本科期间在车载 HMI 和智能AI产品设计方向的落地性探索" style={{ paddingTop: '200px', paddingBottom: layoutSpacing.section['2xl'] }}>
                     <div style={gridStyle}>
                         <GridCard
                             title="小米汽车智驾学堂"
-                            category="小米实习产出 | 已上线"
+                            category="小米实习产出"
                             image={ASSETS.digital1}
                             onClick={() => window.open('https://lynntian.framer.website/works/xiao-mi', '_blank')}
                         />
