@@ -459,7 +459,7 @@ export const Home = () => {
                     </div>
                 </Section>
 
-                <Section title="Digital Projects" subtitle="本科期间在车载 HMI 和智能AI产品设计方向的落地性探索" style={{ paddingTop: '200px', paddingBottom: layoutSpacing.section['2xl'] }}>
+                <Section title="Digital Projects" subtitle="本科期间在车载 HMI 和智能产品设计方向的落地性探索" style={{ paddingTop: '200px', paddingBottom: layoutSpacing.section['2xl'] }}>
                     <div style={gridStyle}>
                         <GridCard
                             title="小米汽车智驾学堂"
