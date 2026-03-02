@@ -105,6 +105,27 @@ export const Home = () => {
         return () => observer.disconnect();
     }, []);
 
+    // Handle anchor link navigation
+    useEffect(() => {
+        const handleHashChange = () => {
+            const hash = window.location.hash;
+            if (hash) {
+                const element = document.querySelector(hash);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        };
+
+        // Handle initial load with hash
+        handleHashChange();
+
+        // Listen for hash changes
+        window.addEventListener('hashchange', handleHashChange);
+
+        return () => window.removeEventListener('hashchange', handleHashChange);
+    }, []);
+
     const pageStyle = {
         minHeight: '100vh',
         background: colors.grey[98]
@@ -415,7 +436,7 @@ export const Home = () => {
                     </div>
                 </Section>
 
-                <Section title="AI-Driven Papers" subtitle="研究生期间的 HAI 相关研究论文" style={{ paddingTop: '200px', paddingBottom: 0 }}>
+                <Section id="ai-driven-papers" title="AI-Driven Papers" subtitle="研究生期间的 HAI 相关研究论文" style={{ paddingTop: '200px', paddingBottom: 0 }}>
                     <div style={{ marginBottom: layoutSpacing.section.xl }}>
                         {publicationsData.map((pub, index) => (
                             <PublicationCard
