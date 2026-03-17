@@ -149,6 +149,7 @@ const AIBotAvatar = () => (
 export const Research = () => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     const [showHistory, setShowHistory] = useState(false);
+    const [discHovered, setDiscHovered] = useState(false);
 
     // Infinite canvas drag state
     const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -301,6 +302,32 @@ export const Research = () => {
                 pointerEvents: isDragging ? 'none' : 'auto',
                 zIndex: 1,
             }}>
+                {/* Title sticker — above the disc */}
+                <div style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -220px) rotate(-1.5deg)',
+                    pointerEvents: 'none',
+                    whiteSpace: 'nowrap',
+                    display: 'inline-block',
+                }}>
+                    <h1 style={{
+                        fontFamily: 'Lora, "Times New Roman", Georgia, serif',
+                        fontSize: '48px',
+                        fontWeight: 400,
+                        lineHeight: 1.2,
+                        letterSpacing: '-0.02em',
+                        color: colors.grey[9],
+                        margin: 0,
+                        WebkitTextStroke: '20px white',
+                        paintOrder: 'stroke fill',
+                        filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.08))',
+                    }}>
+                        Human & AI Sandbox
+                    </h1>
+                </div>
+
                 {/* Canvas content — centered at origin */}
                 <div style={{
                     position: 'absolute',
@@ -312,7 +339,7 @@ export const Research = () => {
                     gap: '16px',
                     pointerEvents: 'auto',
                 }}>
-                    <NothingDotClock staticMode />
+                    <NothingDotClock staticMode onHoverChange={setDiscHovered} />
                     <button
                         onClick={() => setShowHistory(true)}
                         style={{
@@ -336,6 +363,47 @@ export const Research = () => {
                         <History size={20} color={colors.grey[40]} />
                     </button>
                 </div>
+            </div>
+
+            {/* Bottom hover info bar */}
+            <div style={{
+                position: 'fixed',
+                bottom: '24px',
+                left: '24px',
+                right: '24px',
+                transform: `translateY(${discHovered ? '0px' : '12px'})`,
+                opacity: discHovered ? 1 : 0,
+                transition: 'opacity 0.25s ease, transform 0.25s ease',
+                pointerEvents: 'none',
+                zIndex: 200,
+                background: 'rgba(255,255,255,0.8)',
+                backdropFilter: 'blur(40px)',
+                WebkitBackdropFilter: 'blur(40px)',
+                border: '1px solid rgba(0,0,0,0.06)',
+                borderRadius: '100px',
+                padding: '12px 24px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+            }}>
+                <span style={{
+                    fontFamily: typography.heading5.fontFamily,
+                    fontSize: typography.heading5.fontSize,
+                    fontWeight: typography.heading5.fontWeight,
+                    lineHeight: typography.heading5.lineHeight,
+                    letterSpacing: typography.heading5.letterSpacing,
+                    color: colors.grey[9],
+                }}>
+                    An Agent I'm Hatching
+                </span>
+                <span style={{
+                    fontFamily: typography.body.fontFamily,
+                    fontSize: '14px',
+                    color: colors.grey[9],
+                    opacity: 0.6,
+                }}>
+                    Pixel Art · 2024
+                </span>
             </div>
 
             {/* History Overlay Panel */}

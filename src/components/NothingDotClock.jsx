@@ -4,7 +4,7 @@ import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 const ROWS = 32;
 const COLS = 32;
 
-const NothingDotClock = ({ staticMode = false, scale = 1, noGlow = false }) => {
+const NothingDotClock = ({ staticMode = false, scale = 1, noGlow = false, onHoverChange }) => {
   const isMobile = useMediaQuery('(max-width: 768px)');
   const [isHovered, setIsHovered] = useState(false);
   const [isDiscHovered, setIsDiscHovered] = useState(false);
@@ -247,8 +247,8 @@ const NothingDotClock = ({ staticMode = false, scale = 1, noGlow = false }) => {
       )}
 
       <div
-        onMouseEnter={() => { if (!staticMode) setIsHovered(true); setIsDiscHovered(true); }}
-        onMouseLeave={() => { if (!staticMode) setIsHovered(false); setIsDiscHovered(false); }}
+        onMouseEnter={() => { if (!staticMode) setIsHovered(true); setIsDiscHovered(true); onHoverChange?.(true); }}
+        onMouseLeave={() => { if (!staticMode) setIsHovered(false); setIsDiscHovered(false); onHoverChange?.(false); }}
         style={{
           position: 'relative',
           backgroundColor: '#000000',
@@ -259,7 +259,7 @@ const NothingDotClock = ({ staticMode = false, scale = 1, noGlow = false }) => {
       gridTemplateColumns: `repeat(${COLS}, ${CELL_SIZE})`,
       gap: GAP_SIZE,
       boxShadow: isDiscHovered
-        ? '0 0 0 3px rgba(24,160,251,0.25), 0 0 20px 6px rgba(24,160,251,0.15), 0 2px 1px rgba(0,0,0,0.15)'
+        ? '0 0 0 4px rgba(24,160,251,0.3), 0 0 40px 16px rgba(24,160,251,0.2), 0 0 80px 32px rgba(24,160,251,0.08), 0 2px 1px rgba(0,0,0,0.15)'
         : '0 2px 1px rgba(0, 0, 0, 0.15)',
       transition: 'box-shadow 0.25s ease',
       userSelect: 'none',
