@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { colors, spacing, typography, fontWeight } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export const Navbar = ({ theme = 'light' }) => {
     const isMobile = useMediaQuery('(max-width: 768px)');
@@ -9,6 +10,7 @@ export const Navbar = ({ theme = 'light' }) => {
     const [isHidden, setIsHidden] = useState(false);
     const lastScrollYRef = useRef(0);
     const isHiddenRef = useRef(false);
+    const { language, toggleLanguage } = useLanguage();
 
     useEffect(() => {
         const hideThreshold = 8;
@@ -48,44 +50,30 @@ export const Navbar = ({ theme = 'light' }) => {
     }, []);
 
     const isDark = theme === 'dark';
-    const textColor = isDark ? colors.white.solid : colors.grey[56];
-    const activeColor = isDark ? colors.white.solid : colors.grey[9];
-    const hoverColor = isDark ? colors.grey[40] : colors.grey[9]; // On dark bg, hover to dim? Or hover to white?
-    // User wants: "In black background... improve readability (change font color)"
-    // Typically on dark bg: Default White, Hover slightly dimmer or accent?
-    // Let's stick to: Default White (high contrast), Active White, Hover Grey.
-    // Wait, on light bg: Default Grey56, Active Grey9 (Darker), Hover Grey9 (Darker).
-    // On dark bg: Default Grey66 (dim), Active White, Hover White?
-    // Let's try: Default White (solid), Hover Grey (dimmer).
-    
-    // Adjusted logic:
-    // Light Theme: Default Grey56, Hover/Active Grey9.
-    // Dark Theme: Default Grey66 (readable on black), Hover/Active White.
-    
-    // Actually user said "improve readability".
-    // Maybe Default White is better for readability on black.
-    // Let's use:
-    // Dark Theme: Default colors.grey[66] (Light Grey), Hover/Active colors.white.solid.
-    
     const baseColor = isDark ? colors.grey[63] : colors.grey[56];
     const highlightColor = isDark ? colors.white.solid : colors.grey[9];
 
-    const navStyle = {
+    const pillBase = {
+        background: isDark ? 'rgba(30, 30, 30, 0.7)' : `${colors.grey[98]}80`,
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : colors.grey[92]}`,
+        borderRadius: '9999px',
+        boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
+        transition: 'background 0.3s ease, border-color 0.3s ease',
+    };
+
+    const wrapperStyle = {
         position: 'fixed',
         top: spacing.lg,
         left: '50%',
-        transform: `translate(-50%, ${isHidden ? '-120%' : '0'})`,
+        transform: `translateX(-50%) translateY(${isHidden ? '-120%' : '0'})`,
         zIndex: 50,
-        background: isDark ? 'rgba(30, 30, 30, 0.7)' : `${colors.grey[98]}80`, // Slight adjustment for dark mode bg?
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
-        border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : colors.grey[92]}`, // Adjust border for dark mode visibility?
-        borderRadius: '9999px',
-        boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
-        transition: 'transform 0.28s ease, opacity 0.28s ease, background 0.3s ease, border-color 0.3s ease',
+        display: 'flex',
+        alignItems: 'center',
+        gap: spacing.sm,
         opacity: isHidden ? 0 : 1,
-        width: 'auto',
-        maxWidth: '90%'
+        transition: 'transform 0.28s ease, opacity 0.28s ease',
     };
 
     const containerStyle = {
@@ -104,11 +92,33 @@ export const Navbar = ({ theme = 'light' }) => {
         transition: 'color 0.3s ease'
     };
 
+    const langBubbleStyle = {
+        ...pillBase,
+        height: '48px',
+        paddingLeft: spacing.md,
+        paddingRight: spacing.md,
+        display: 'flex',
+        alignItems: 'center',
+        gap: '6px',
+        cursor: 'pointer',
+        fontFamily: typography.body.fontFamily,
+        fontSize: typography.body.fontSize,
+        fontWeight: fontWeight.medium,
+        letterSpacing: '0.05em',
+        userSelect: 'none',
+        whiteSpace: 'nowrap',
+    };
+
     const getLinkStyle = (isActive) => ({
         color: isActive ? highlightColor : baseColor,
         textDecoration: 'none',
         transition: 'color 0.2s ease',
         cursor: 'pointer'
+    });
+
+    const getLangItemStyle = (isActive) => ({
+        color: isActive ? highlightColor : baseColor,
+        transition: 'color 0.2s ease',
     });
 
     const handleMouseEnter = (e, isActive) => {
@@ -124,35 +134,46 @@ export const Navbar = ({ theme = 'light' }) => {
     const isAboutActive = location.pathname === '/about';
 
     return (
-        <>
-            <nav style={navStyle}>
+        <div style={wrapperStyle}>
+            <nav style={pillBase}>
                 <div style={containerStyle}>
-                    <Link 
-                        to="/" 
-                        style={getLinkStyle(isWorksActive)} 
-                        onMouseEnter={(e) => handleMouseEnter(e, isWorksActive)} 
+                    <Link
+                        to="/"
+                        style={getLinkStyle(isWorksActive)}
+                        onMouseEnter={(e) => handleMouseEnter(e, isWorksActive)}
                         onMouseLeave={(e) => handleMouseLeave(e, isWorksActive)}
                     >
                         Works
                     </Link>
-                    <Link 
-                        to="/about" 
-                        style={getLinkStyle(isAboutActive)} 
-                        onMouseEnter={(e) => handleMouseEnter(e, isAboutActive)} 
+                    <Link
+                        to="/about"
+                        style={getLinkStyle(isAboutActive)}
+                        onMouseEnter={(e) => handleMouseEnter(e, isAboutActive)}
                         onMouseLeave={(e) => handleMouseLeave(e, isAboutActive)}
                     >
                         About
                     </Link>
-                    <Link 
-                        to="/sandbox" 
-                        style={getLinkStyle(isSandboxActive)} 
-                        onMouseEnter={(e) => handleMouseEnter(e, isSandboxActive)} 
+                    <Link
+                        to="/sandbox"
+                        style={getLinkStyle(isSandboxActive)}
+                        onMouseEnter={(e) => handleMouseEnter(e, isSandboxActive)}
                         onMouseLeave={(e) => handleMouseLeave(e, isSandboxActive)}
                     >
                         Sandbox
                     </Link>
                 </div>
             </nav>
-        </>
+
+            <div
+                style={langBubbleStyle}
+                onClick={toggleLanguage}
+                onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'}
+                onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+            >
+                <span style={getLangItemStyle(language === 'en')}>EN</span>
+                <span style={{ color: isDark ? 'rgba(255,255,255,0.2)' : colors.grey[88] }}>/</span>
+                <span style={getLangItemStyle(language === 'zh')}>中</span>
+            </div>
+        </div>
     );
 };
