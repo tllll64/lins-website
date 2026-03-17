@@ -128,7 +128,11 @@ export const Home = () => {
 
     const pageStyle = {
         minHeight: '100vh',
-        background: colors.grey[98]
+        background: colors.grey[98],
+        backgroundImage: `radial-gradient(${colors.grey[92]} 1px, transparent 1px)`,
+        backgroundSize: '18px 18px',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'repeat'
     };
 
     const gridStyle = {
@@ -225,10 +229,6 @@ export const Home = () => {
                     flexDirection: 'column',
                     justifyContent: 'center',
                     marginBottom: '80px',
-                    backgroundImage: `radial-gradient(${colors.grey[92]} 1px, transparent 1px)`,
-                    backgroundSize: '18px 18px',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'repeat',
                     paddingTop: layoutSpacing.section.md,
                     paddingBottom: layoutSpacing.section.md,
                 }}

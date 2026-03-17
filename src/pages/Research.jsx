@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Navbar } from '../components/Navbar';
-import PixelBlast from '../components/PixelBlast';
 import { ContactSection } from '../components/ContactSection';
+import NothingDotClock from '../components/NothingDotClock';
 import CircularGallery from '../components/CircularGallery';
 import { colors, layoutSpacing, width, typography, stackSpacing, fontSize, gridGap } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
@@ -10,6 +10,7 @@ import { motion } from 'framer-motion';
 import tiantianquanImg from '../assets/Research/tiantianquan.png';
 import Stack from '../components/Stack';
 import StackImg from '../assets/Research/Stack.png';
+import { History, X } from 'lucide-react';
 
 // --- Demo Components ---
 
@@ -147,10 +148,16 @@ const AIBotAvatar = () => (
 
 export const Research = () => {
     const isMobile = useMediaQuery('(max-width: 768px)');
+    const [showHistory, setShowHistory] = useState(false);
 
     const pageStyle = {
-        minHeight: '100vh',
+        height: '100vh',
+        overflow: 'hidden',
         background: colors.grey[98],
+        backgroundImage: `radial-gradient(${colors.grey[92]} 1px, transparent 1px)`,
+        backgroundSize: '18px 18px',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'repeat',
         paddingBottom: 0
     };
 
@@ -160,7 +167,8 @@ export const Research = () => {
         paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
         paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
         paddingTop: '40px',
-        paddingBottom: '240px'
+        position: 'relative',
+        zIndex: 1
     };
 
     const sectionStyle = {
@@ -234,8 +242,8 @@ export const Research = () => {
 
     return (
         <div style={pageStyle}>
-            <Navbar theme="light" />
-            
+            <Navbar theme="light" style={{ position: 'relative', zIndex: 10 }} />
+
             <div style={containerStyle}>
                 <div style={{
                     minHeight: '80vh',
@@ -245,25 +253,9 @@ export const Research = () => {
                     justifyContent: 'center',
                     paddingTop: '80px',
                     marginBottom: '120px',
-                    position: 'relative'
+                    position: 'relative',
+                    zIndex: 1
                 }}>
-                    <PixelBlast
-                        variant="circle"
-                        pixelSize={4.5}
-                        color="#b0b0b0"
-                        patternScale={1.5}
-                        patternDensity={0.85}
-                        enableRipples={true}
-                        rippleSpeed={0.4}
-                        rippleThickness={0.04}
-                        rippleIntensityScale={2}
-                        edgeFade={0.15}
-                        speed={0.6}
-                        transparent={true}
-                        hoverRipple={true}
-                        hoverRippleInterval={380}
-                        style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'all' }}
-                    />
                     <h1 style={{
                         fontFamily: 'Lora, "Times New Roman", Georgia, serif',
                         fontSize: '72px',
@@ -273,7 +265,7 @@ export const Research = () => {
                         letterSpacing: '-0.02em',
                         color: colors.grey[9],
                         position: 'relative',
-                        zIndex: 1
+                        zIndex: 2
                     }}>
                         Human 🤝 AI Sandbox
                     </h1>
@@ -287,130 +279,197 @@ export const Research = () => {
                         color: colors.grey[7],
                         textAlign: 'center',
                         position: 'relative',
-                        zIndex: 1
+                        zIndex: 2
                     }}>
                         Simplicity is my superpower. I turn complex ideas into experiences users love and investors trust. I help SaaS, AI, and Dev founders craft story-driven brands and products.
                     </p>
+
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginTop: '32px', position: 'relative', zIndex: 2 }}>
+                        <NothingDotClock staticMode />
+                        <button
+                            onClick={() => setShowHistory(true)}
+                            style={{
+                                background: 'rgba(255,255,255,0.6)',
+                                backdropFilter: 'blur(8px)',
+                                border: '1px solid rgba(0,0,0,0.08)',
+                                borderRadius: '50%',
+                                width: '48px',
+                                height: '48px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                                position: 'relative',
+                                zIndex: 2,
+                                transition: 'background 0.2s',
+                                padding: 0,
+                                outline: 'none'
+                            }}
+                            onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.8)'}
+                            onMouseLeave={(e) => e.target.style.background = 'rgba(255,255,255,0.6)'}
+                        >
+                            <History size={20} color={colors.grey[40]} />
+                        </button>
+                    </div>
+
                     <div style={{ width: '100%' }}>
                         {/* <CircularGallery items={galleryItems} bend={3} textColor={colors.grey[9]} borderRadius={12} /> */}
                     </div>
                 </div>
-
-                {/* Section 1: AI Collaborative Principles */}
-                <section style={sectionStyle}>
-                    <SectionTitle>Lynn's Co-AI Principles</SectionTitle>
-                    <div style={{
-                        display: 'flex',
-                        gap: isMobile ? '8px' : '16px',
-                        alignItems: 'flex-end'
-                    }}>
-                        <AIBotAvatar />
-                        <div style={{
-                            display: 'grid',
-                            gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
-                            gap: gridGap.lg,
-                            background: '#fff',
-                            border: `1px solid ${colors.grey[92]}`,
-                            borderRadius: '32px 32px 32px 0',
-                            padding: '32px',
-                            marginRight: isMobile ? '0' : '80px',
-                            flex: 1
-                        }}>
-                            {principles.map((p, index) => (
-                                <PrincipleCard key={index} {...p} />
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
-                {/* Section 2: AI Workflow */}
-                <section style={sectionStyle}>
-                    <SectionTitle>Lynn's AI Stack</SectionTitle>
-                    <div style={{
-                        display: 'flex',
-                        gap: isMobile ? '8px' : '16px',
-                        alignItems: 'flex-end'
-                    }}>
-                        <AIBotAvatar />
-                        <div style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            background: '#fff',
-                            border: `1px solid ${colors.grey[92]}`,
-                            borderRadius: '32px 32px 32px 0',
-                            padding: '10px',
-                            marginRight: isMobile ? '0' : '80px',
-                            flex: 1
-                        }}>
-                            <img 
-                                src={StackImg} 
-                                alt="AI Workflow Stack" 
-                                style={{
-                                    maxWidth: '100%',
-                                    height: 'auto',
-                                    display: 'block'
-                                }} 
-                            />
-                        </div>
-                    </div>
-                </section>
-
-                {/* Section 2 (Copy): AI Workflow Decoupled */}
-                <section style={sectionStyle}>
-                    <SectionTitle>Lynn's Vibe Coding Workflows</SectionTitle>
-                    <div style={{
-                        display: 'flex',
-                        gap: isMobile ? '8px' : '16px',
-                        alignItems: 'flex-end'
-                    }}>
-                        <AIBotAvatar />
-                        <div style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            background: '#fff',
-                            border: `1px solid ${colors.grey[92]}`,
-                            borderRadius: '32px 32px 32px 0',
-                            padding: '10px',
-                            marginRight: isMobile ? '0' : '80px',
-                            flex: 1
-                        }}>
-                            <img 
-                                src={StackImg} 
-                                alt="AI Workflow Stack" 
-                                style={{
-                                    maxWidth: '100%',
-                                    height: 'auto',
-                                    display: 'block'
-                                }} 
-                            />
-                        </div>
-                    </div>
-                </section>
-
-                {/* Section 3: AI Expertise */}
-                {/* <section style={sectionStyle}>
-                    <SectionTitle>Lynn's Co-AI Outputs</SectionTitle>
-                    <div style={{
-                        display: 'flex',
-                        gap: isMobile ? '8px' : '16px',
-                        alignItems: 'flex-end'
-                    }}>
-                        <AIBotAvatar />
-                        <div style={{
-                            display: 'flex',
-                            padding: 0,
-                            flex: 1,
-                            position: 'relative'
-                        }}>
-                            <Stack />
-                        </div>
-                    </div>
-                </section> */}
             </div>
 
-            <ContactSection />
+            {/* History Overlay Panel */}
+            {showHistory && (
+                <div style={{
+                    position: 'fixed',
+                    inset: 0,
+                    zIndex: 40,
+                    background: '#f9f9f9',
+                    backdropFilter: 'blur(0px)',
+                    overflow: 'auto',
+                    opacity: showHistory ? 1 : 0,
+                    pointerEvents: showHistory ? 'auto' : 'none',
+                    transform: showHistory ? 'translateY(0)' : 'translateY(16px)',
+                    transition: 'opacity 0.3s ease, transform 0.3s ease'
+                }}>
+                    {/* Close button */}
+                    <button
+                        onClick={() => setShowHistory(false)}
+                        style={{
+                            position: 'fixed',
+                            top: '32px',
+                            right: '32px',
+                            zIndex: 41,
+                            background: 'rgba(255,255,255,0.6)',
+                            backdropFilter: 'blur(8px)',
+                            border: '1px solid rgba(0,0,0,0.08)',
+                            borderRadius: '50%',
+                            width: '48px',
+                            height: '48px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            cursor: 'pointer',
+                            padding: 0,
+                            outline: 'none',
+                            transition: 'background 0.2s'
+                        }}
+                        onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.8)'}
+                        onMouseLeave={(e) => e.target.style.background = 'rgba(255,255,255,0.6)'}
+                    >
+                        <X size={20} color={colors.grey[40]} />
+                    </button>
+
+                    {/* Overlay Content */}
+                    <div style={{
+                        maxWidth: width.container.xl,
+                        margin: '0 auto',
+                        paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
+                        paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
+                        paddingTop: '80px',
+                        paddingBottom: '120px'
+                    }}>
+                        {/* Section 1: Lynn's Co-AI Principles */}
+                        <section style={{
+                            marginBottom: isMobile ? layoutSpacing.section.lg : layoutSpacing.section.xl
+                        }}>
+                            <SectionTitle>Lynn's Co-AI Principles</SectionTitle>
+                            <div style={{
+                                display: 'flex',
+                                gap: isMobile ? '8px' : '16px',
+                                alignItems: 'flex-end'
+                            }}>
+                                <AIBotAvatar />
+                                <div style={{
+                                    display: 'grid',
+                                    gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
+                                    gap: gridGap.lg,
+                                    background: '#fff',
+                                    border: `1px solid ${colors.grey[92]}`,
+                                    borderRadius: '32px 32px 32px 0',
+                                    padding: '32px',
+                                    marginRight: isMobile ? '0' : '80px',
+                                    flex: 1
+                                }}>
+                                    {principles.map((p, index) => (
+                                        <PrincipleCard key={index} {...p} />
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Section 2: Lynn's AI Stack */}
+                        <section style={{
+                            marginBottom: isMobile ? layoutSpacing.section.lg : layoutSpacing.section.xl
+                        }}>
+                            <SectionTitle>Lynn's AI Stack</SectionTitle>
+                            <div style={{
+                                display: 'flex',
+                                gap: isMobile ? '8px' : '16px',
+                                alignItems: 'flex-end'
+                            }}>
+                                <AIBotAvatar />
+                                <div style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    background: '#fff',
+                                    border: `1px solid ${colors.grey[92]}`,
+                                    borderRadius: '32px 32px 32px 0',
+                                    padding: '10px',
+                                    marginRight: isMobile ? '0' : '80px',
+                                    flex: 1
+                                }}>
+                                    <img
+                                        src={StackImg}
+                                        alt="AI Workflow Stack"
+                                        style={{
+                                            maxWidth: '100%',
+                                            height: 'auto',
+                                            display: 'block'
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Section 3: Lynn's Vibe Coding Workflows */}
+                        <section style={{
+                            marginBottom: isMobile ? layoutSpacing.section.lg : layoutSpacing.section.xl
+                        }}>
+                            <SectionTitle>Lynn's Vibe Coding Workflows</SectionTitle>
+                            <div style={{
+                                display: 'flex',
+                                gap: isMobile ? '8px' : '16px',
+                                alignItems: 'flex-end'
+                            }}>
+                                <AIBotAvatar />
+                                <div style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    background: '#fff',
+                                    border: `1px solid ${colors.grey[92]}`,
+                                    borderRadius: '32px 32px 32px 0',
+                                    padding: '10px',
+                                    marginRight: isMobile ? '0' : '80px',
+                                    flex: 1
+                                }}>
+                                    <img
+                                        src={StackImg}
+                                        alt="AI Workflow Stack"
+                                        style={{
+                                            maxWidth: '100%',
+                                            height: 'auto',
+                                            display: 'block'
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

@@ -4,7 +4,7 @@ import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 const ROWS = 32;
 const COLS = 32;
 
-const NothingDotClock = () => {
+const NothingDotClock = ({ staticMode = false }) => {
   const isMobile = useMediaQuery('(max-width: 768px)');
   const [isHovered, setIsHovered] = useState(false);
   
@@ -165,6 +165,7 @@ const NothingDotClock = () => {
   return (
     <div style={{ position: 'relative' }}>
       {/* Custom Annotation (Arrow + Text) */}
+      {!staticMode && (
       <div style={{
         position: 'absolute',
         top: 0,
@@ -219,10 +220,11 @@ const NothingDotClock = () => {
           An agent I’m hatching 🍩
         </div>
       </div>
+      )}
 
       <div
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        onMouseEnter={() => !staticMode && setIsHovered(true)}
+        onMouseLeave={() => !staticMode && setIsHovered(false)}
         style={{
           position: 'relative',
           backgroundColor: '#000000',
