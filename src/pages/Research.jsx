@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navbar } from '../components/Navbar';
+import PixelBlast from '../components/PixelBlast';
 import { ContactSection } from '../components/ContactSection';
 import CircularGallery from '../components/CircularGallery';
 import { colors, layoutSpacing, width, typography, stackSpacing, fontSize, gridGap } from '../design-system/tokens';
@@ -243,8 +244,26 @@ export const Research = () => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     paddingTop: '80px',
-                    marginBottom: '120px'
+                    marginBottom: '120px',
+                    position: 'relative'
                 }}>
+                    <PixelBlast
+                        variant="circle"
+                        pixelSize={4.5}
+                        color="#b0b0b0"
+                        patternScale={1.5}
+                        patternDensity={0.85}
+                        enableRipples={true}
+                        rippleSpeed={0.4}
+                        rippleThickness={0.04}
+                        rippleIntensityScale={2}
+                        edgeFade={0.15}
+                        speed={0.6}
+                        transparent={true}
+                        hoverRipple={true}
+                        hoverRippleInterval={380}
+                        style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'all' }}
+                    />
                     <h1 style={{
                         fontFamily: 'Lora, "Times New Roman", Georgia, serif',
                         fontSize: '72px',
@@ -252,7 +271,9 @@ export const Research = () => {
                         lineHeight: 1.1,
                         marginBottom: '24px',
                         letterSpacing: '-0.02em',
-                        color: colors.grey[9]
+                        color: colors.grey[9],
+                        position: 'relative',
+                        zIndex: 1
                     }}>
                         Human 🤝 AI Sandbox
                     </h1>
@@ -264,7 +285,9 @@ export const Research = () => {
                         margin: '0 auto',
                         opacity: 0.9,
                         color: colors.grey[7],
-                        textAlign: 'center'
+                        textAlign: 'center',
+                        position: 'relative',
+                        zIndex: 1
                     }}>
                         Simplicity is my superpower. I turn complex ideas into experiences users love and investors trust. I help SaaS, AI, and Dev founders craft story-driven brands and products.
                     </p>
