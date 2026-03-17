@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Navbar } from '../components/Navbar';
 import { ContactSection } from '../components/ContactSection';
 import NothingDotClock from '../components/NothingDotClock';
@@ -10,7 +10,7 @@ import { motion } from 'framer-motion';
 import tiantianquanImg from '../assets/Research/tiantianquan.png';
 import Stack from '../components/Stack';
 import StackImg from '../assets/Research/Stack.png';
-import { History, X } from 'lucide-react';
+import { History, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 // --- Demo Components ---
 
@@ -150,14 +150,51 @@ export const Research = () => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     const [showHistory, setShowHistory] = useState(false);
 
+    // Infinite canvas drag state
+    const [offset, setOffset] = useState({ x: 0, y: 0 });
+    const [isDragging, setIsDragging] = useState(false);
+    const dragStartRef = useRef(null);
+
+    const handleMouseDown = (e) => {
+        if (e.target.closest('button, a, input')) return;
+        setIsDragging(true);
+        dragStartRef.current = { x: e.clientX - offset.x, y: e.clientY - offset.y };
+    };
+
+    const handleMouseMove = (e) => {
+        if (!isDragging || !dragStartRef.current) return;
+        setOffset({ x: e.clientX - dragStartRef.current.x, y: e.clientY - dragStartRef.current.y });
+    };
+
+    const handleMouseUp = () => {
+        setIsDragging(false);
+        dragStartRef.current = null;
+    };
+
+    const handleTouchStart = (e) => {
+        if (e.target.closest('button, a, input')) return;
+        const t = e.touches[0];
+        setIsDragging(true);
+        dragStartRef.current = { x: t.clientX - offset.x, y: t.clientY - offset.y };
+    };
+
+    const handleTouchMove = (e) => {
+        if (!isDragging || !dragStartRef.current) return;
+        const t = e.touches[0];
+        setOffset({ x: t.clientX - dragStartRef.current.x, y: t.clientY - dragStartRef.current.y });
+    };
+
     const pageStyle = {
         height: '100vh',
         overflow: 'hidden',
+        position: 'relative',
         background: colors.grey[98],
-        backgroundImage: `radial-gradient(${colors.grey[92]} 1px, transparent 1px)`,
+        backgroundImage: `radial-gradient(#aaaaaa 1px, transparent 1px)`,
         backgroundSize: '18px 18px',
-        backgroundPosition: 'center',
+        backgroundPosition: `${offset.x % 18}px ${offset.y % 18}px`,
         backgroundRepeat: 'repeat',
+        cursor: isDragging ? 'grabbing' : 'grab',
+        userSelect: 'none',
         paddingBottom: 0
     };
 
@@ -241,80 +278,63 @@ export const Research = () => {
     ];
 
     return (
-        <div style={pageStyle}>
-            <Navbar theme="light" style={{ position: 'relative', zIndex: 10 }} />
+        <div
+            style={pageStyle}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleMouseUp}
+        >
+            {/* Navbar — fixed, not affected by canvas pan */}
+            <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100 }}>
+                <Navbar theme="light" />
+            </div>
 
-            <div style={containerStyle}>
+            {/* Infinite canvas layer */}
+            <div style={{
+                position: 'absolute',
+                top: 0, left: 0, right: 0, bottom: 0,
+                transform: `translate(${offset.x}px, ${offset.y}px)`,
+                pointerEvents: isDragging ? 'none' : 'auto',
+                zIndex: 1,
+            }}>
+                {/* Canvas content — centered at origin */}
                 <div style={{
-                    minHeight: '80vh',
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
                     display: 'flex',
-                    flexDirection: 'column',
                     alignItems: 'center',
-                    justifyContent: 'center',
-                    paddingTop: '80px',
-                    marginBottom: '120px',
-                    position: 'relative',
-                    zIndex: 1
+                    gap: '16px',
+                    pointerEvents: 'auto',
                 }}>
-                    <h1 style={{
-                        fontFamily: 'Lora, "Times New Roman", Georgia, serif',
-                        fontSize: '72px',
-                        fontWeight: 400,
-                        lineHeight: 1.1,
-                        marginBottom: '24px',
-                        letterSpacing: '-0.02em',
-                        color: colors.grey[9],
-                        position: 'relative',
-                        zIndex: 2
-                    }}>
-                        Human 🤝 AI Sandbox
-                    </h1>
-                    <p style={{
-                        fontFamily: typography.body.fontFamily,
-                        fontSize: '18px',
-                        lineHeight: 1.6,
-                        maxWidth: '600px',
-                        margin: '0 auto',
-                        opacity: 0.9,
-                        color: colors.grey[7],
-                        textAlign: 'center',
-                        position: 'relative',
-                        zIndex: 2
-                    }}>
-                        Simplicity is my superpower. I turn complex ideas into experiences users love and investors trust. I help SaaS, AI, and Dev founders craft story-driven brands and products.
-                    </p>
-
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginTop: '32px', position: 'relative', zIndex: 2 }}>
-                        <NothingDotClock staticMode />
-                        <button
-                            onClick={() => setShowHistory(true)}
-                            style={{
-                                background: 'rgba(255,255,255,0.6)',
-                                backdropFilter: 'blur(8px)',
-                                border: '1px solid rgba(0,0,0,0.08)',
-                                borderRadius: '50%',
-                                width: '48px',
-                                height: '48px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                cursor: 'pointer',
-                                position: 'relative',
-                                zIndex: 2,
-                                transition: 'background 0.2s',
-                                padding: 0,
-                                outline: 'none'
-                            }}
-                            onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.8)'}
-                            onMouseLeave={(e) => e.target.style.background = 'rgba(255,255,255,0.6)'}
-                        >
-                            <History size={20} color={colors.grey[40]} />
-                        </button>
-                    </div>
-
-                    <div style={{ width: '100%' }}>
-                        {/* <CircularGallery items={galleryItems} bend={3} textColor={colors.grey[9]} borderRadius={12} /> */}
-                    </div>
+                    <NothingDotClock staticMode />
+                    <button
+                        onClick={() => setShowHistory(true)}
+                        style={{
+                            background: 'rgba(255,255,255,0.6)',
+                            backdropFilter: 'blur(8px)',
+                            border: '1px solid rgba(0,0,0,0.08)',
+                            borderRadius: '50%',
+                            width: '48px',
+                            height: '48px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            cursor: 'pointer',
+                            transition: 'background 0.2s',
+                            padding: 0,
+                            outline: 'none',
+                        }}
+                        onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.8)'}
+                        onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.6)'}
+                    >
+                        <History size={20} color={colors.grey[40]} />
+                    </button>
                 </div>
             </div>
 

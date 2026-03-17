@@ -4,14 +4,21 @@ import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 const ROWS = 32;
 const COLS = 32;
 
-const NothingDotClock = ({ staticMode = false }) => {
+const NothingDotClock = ({ staticMode = false, scale = 1, noGlow = false }) => {
   const isMobile = useMediaQuery('(max-width: 768px)');
   const [isHovered, setIsHovered] = useState(false);
-  
-  // Responsive constants
-  const CELL_SIZE = isMobile ? '1.65px' : '3.3px';
-  const GAP_SIZE = isMobile ? '0.5px' : '1px';
-  const PADDING_SIZE = isMobile ? '5.5px' : '11px';
+  const [isDiscHovered, setIsDiscHovered] = useState(false);
+
+  // Responsive constants (base size × scale)
+  const basePx = isMobile ? 1.65 * scale : 3.3 * scale;
+  const CELL_SIZE = `${basePx}px`;
+  const GAP_SIZE = isMobile ? `${0.5 * scale}px` : `${1 * scale}px`;
+  const PADDING_SIZE = isMobile ? `${5.5 * scale}px` : `${11 * scale}px`;
+
+  // LED glow sizes relative to cell size
+  const g1 = basePx * 0.2;
+  const g2 = basePx * 0.5;
+  const g3 = basePx * 0.9;
   
   const gridData = useMemo(() => {
     let grid = [];
@@ -135,30 +142,47 @@ const NothingDotClock = ({ staticMode = false }) => {
     return grid;
   }, []);
 
-  // Color mapping logic
+  // Color mapping logic — LED glow effect
   const getStyleForType = (type, isVisible) => {
     if (!isVisible) return { backgroundColor: 'transparent', opacity: 0 };
 
     let style;
     switch (type) {
       case 'HIGHLIGHT':
-        style = { backgroundColor: '#FFFFFF', opacity: 1 };
+        style = {
+          backgroundColor: noGlow ? '#666666' : '#FFFFFF',
+          opacity: isHovered ? 0.3 : (noGlow ? 0.45 : 1),
+          borderRadius: '50%',
+          boxShadow: 'none',
+        };
         break;
       case 'SHADOW':
-        style = { backgroundColor: '#FFFFFF', opacity: 0.4 }; // Half-lit greyish
+        style = {
+          backgroundColor: noGlow ? '#444444' : '#CCCCCC',
+          opacity: isHovered ? 0.12 : (noGlow ? 0.3 : 0.7),
+          borderRadius: '50%',
+          boxShadow: 'none',
+        };
         break;
       case 'SPRINKLE':
-        style = { backgroundColor: '#333333', opacity: 1 }; // Dark dot inside white
+        style = {
+          backgroundColor: '#1a1a1a',
+          opacity: isHovered ? 0.15 : 0.9,
+          borderRadius: '50%',
+          boxShadow: 'none',
+        };
         break;
       case 'BACKGROUND':
       default:
-        style = { backgroundColor: '#333333', opacity: 0.5 }; // Restore visibility of base grid
+        style = {
+          backgroundColor: '#444444',
+          opacity: isHovered ? 0.1 : (noGlow ? 0.12 : 0.2),
+          borderRadius: '50%',
+          boxShadow: 'none',
+        };
         break;
     }
 
-    if (isHovered) {
-      style.opacity = style.opacity * 0.3;
-    }
     return style;
   };
 
@@ -223,8 +247,8 @@ const NothingDotClock = ({ staticMode = false }) => {
       )}
 
       <div
-        onMouseEnter={() => !staticMode && setIsHovered(true)}
-        onMouseLeave={() => !staticMode && setIsHovered(false)}
+        onMouseEnter={() => { if (!staticMode) setIsHovered(true); setIsDiscHovered(true); }}
+        onMouseLeave={() => { if (!staticMode) setIsHovered(false); setIsDiscHovered(false); }}
         style={{
           position: 'relative',
           backgroundColor: '#000000',
@@ -234,7 +258,10 @@ const NothingDotClock = ({ staticMode = false }) => {
       display: 'grid',
       gridTemplateColumns: `repeat(${COLS}, ${CELL_SIZE})`,
       gap: GAP_SIZE,
-      boxShadow: '0 2px 1px rgba(0, 0, 0, 0.15)',
+      boxShadow: isDiscHovered
+        ? '0 0 0 3px rgba(24,160,251,0.25), 0 0 20px 6px rgba(24,160,251,0.15), 0 2px 1px rgba(0,0,0,0.15)'
+        : '0 2px 1px rgba(0, 0, 0, 0.15)',
+      transition: 'box-shadow 0.25s ease',
       userSelect: 'none',
       width: 'fit-content',
       height: 'fit-content',
@@ -252,8 +279,7 @@ const NothingDotClock = ({ staticMode = false }) => {
                 ...style,
                 width: CELL_SIZE,
                 height: CELL_SIZE,
-                borderRadius: '0.5px',
-                transition: 'opacity 0.15s ease-out',
+                flexShrink: 0,
               }}
             />
           );
