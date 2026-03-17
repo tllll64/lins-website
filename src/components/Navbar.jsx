@@ -92,33 +92,55 @@ export const Navbar = ({ theme = 'light' }) => {
         transition: 'color 0.3s ease'
     };
 
+    const THUMB_SIZE = 38;
+    const BUBBLE_PAD = 5;
+
     const langBubbleStyle = {
         ...pillBase,
-        height: '48px',
-        paddingLeft: spacing.md,
-        paddingRight: spacing.md,
+        height: `${THUMB_SIZE + BUBBLE_PAD * 2}px`,
+        padding: `${BUBBLE_PAD}px`,
         display: 'flex',
         alignItems: 'center',
-        gap: '6px',
+        position: 'relative',
         cursor: 'pointer',
+        userSelect: 'none',
+        overflow: 'hidden',
+    };
+
+    const langThumbStyle = {
+        position: 'absolute',
+        top: `${BUBBLE_PAD}px`,
+        left: language === 'en' ? `${BUBBLE_PAD}px` : `${BUBBLE_PAD + THUMB_SIZE}px`,
+        width: `${THUMB_SIZE}px`,
+        height: `${THUMB_SIZE}px`,
+        borderRadius: '9999px',
+        background: isDark ? 'rgba(255,255,255,0.15)' : colors.white.solid,
+        boxShadow: isDark ? 'none' : '0 1px 3px rgba(0,0,0,0.12)',
+        transition: 'left 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+        zIndex: 0,
+    };
+
+    const getLangOptionStyle = (isActive) => ({
+        width: `${THUMB_SIZE}px`,
+        height: `${THUMB_SIZE}px`,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+        zIndex: 1,
+        color: isActive ? highlightColor : baseColor,
         fontFamily: typography.body.fontFamily,
         fontSize: typography.body.fontSize,
         fontWeight: fontWeight.medium,
         letterSpacing: '0.05em',
-        userSelect: 'none',
-        whiteSpace: 'nowrap',
-    };
+        transition: 'color 0.25s ease',
+    });
 
     const getLinkStyle = (isActive) => ({
         color: isActive ? highlightColor : baseColor,
         textDecoration: 'none',
         transition: 'color 0.2s ease',
         cursor: 'pointer'
-    });
-
-    const getLangItemStyle = (isActive) => ({
-        color: isActive ? highlightColor : baseColor,
-        transition: 'color 0.2s ease',
     });
 
     const handleMouseEnter = (e, isActive) => {
@@ -164,15 +186,10 @@ export const Navbar = ({ theme = 'light' }) => {
                 </div>
             </nav>
 
-            <div
-                style={langBubbleStyle}
-                onClick={toggleLanguage}
-                onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'}
-                onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
-            >
-                <span style={getLangItemStyle(language === 'en')}>EN</span>
-                <span style={{ color: isDark ? 'rgba(255,255,255,0.2)' : colors.grey[88] }}>/</span>
-                <span style={getLangItemStyle(language === 'zh')}>中</span>
+            <div style={langBubbleStyle} onClick={toggleLanguage}>
+                <div style={langThumbStyle} />
+                <span style={getLangOptionStyle(language === 'en')}>EN</span>
+                <span style={getLangOptionStyle(language === 'zh')}>CN</span>
             </div>
         </div>
     );
