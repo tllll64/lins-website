@@ -138,7 +138,7 @@ export const Home = () => {
                 {/* NothingDotClock in top-left corner */}
                 <div style={{
                     position: 'absolute',
-                    top: layoutSpacing.section.xl,
+                    top: '147px',
                     left: isMobile ? layoutSpacing.page.mobile : layoutSpacing.section.xl,
                     zIndex: 10,
                     userSelect: 'none',
@@ -150,10 +150,10 @@ export const Home = () => {
                 {/* FolderIcon in top-right corner */}
                 <div style={{
                     position: 'absolute',
-                    top: layoutSpacing.section.xl,
+                    top: '162px',
                     right: isMobile ? layoutSpacing.page.mobile : layoutSpacing.section.xl,
                     zIndex: 10,
-                    display: isMobile ? 'none' : 'block', // Hide on mobile if too crowded, or adjust
+                    display: isMobile ? 'none' : 'block',
                     userSelect: 'none',
                     WebkitUserSelect: 'none'
                 }}>
@@ -177,7 +177,7 @@ export const Home = () => {
                         cursor: 'pointer',
                         userSelect: 'none',
                         WebkitUserSelect: 'none',
-                        transform: 'translate(-12px, 84px)'
+                        transform: 'translate(-12px, -61px)'
                     }}
                     onClick={() => navigate('/about')}
                 >
@@ -194,7 +194,7 @@ export const Home = () => {
                         cursor: 'pointer',
                         userSelect: 'none',
                         WebkitUserSelect: 'none',
-                        transform: 'translateY(72px)'
+                        transform: 'translateY(-73px)'
                     }}
                     onClick={() => navigate('/sandbox')}
                 >
@@ -220,7 +220,7 @@ export const Home = () => {
                         padding: '28px 20px',
                         background: colors.grey[98], // Same as page base — masks the dot grid behind the text
                         borderRadius: '16px',
-                        transform: 'translateY(40px)'
+                        transform: 'translateY(20px)'
                     }}>
                          <h1 style={{
                             fontFamily: 'Lora, "Times New Roman", Georgia, serif',

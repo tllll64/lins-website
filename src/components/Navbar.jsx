@@ -50,7 +50,7 @@ export const Navbar = ({ theme = 'light' }) => {
     const highlightColor = isDark ? colors.white.solid : colors.grey[9];
 
     const pillBase = {
-        background: isDark ? 'rgba(30, 30, 30, 0.7)' : `${colors.grey[98]}80`,
+        background: isDark ? 'rgba(30, 30, 30, 0.7)' : '#FFFFFF',
         backdropFilter: 'blur(16px)',
         WebkitBackdropFilter: 'blur(16px)',
         border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : colors.grey[92]}`,
