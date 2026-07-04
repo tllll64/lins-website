@@ -23,6 +23,7 @@ import LingxiLogo from '../assets/Home/Lingxi_logo.png';
 import RedLogo from '../assets/Home/red.png';
 import TikTokAppLogo from '../assets/Home/TikTok.png';
 import PolaroidDecoration from '../components/PolaroidDecoration';
+import AsciiTrail from '../components/AsciiTrail';
 import profileImg from '../assets/about/profile2.png';
 import TencentLogo from '../assets/Home/tencent-color.svg';
 
@@ -122,12 +123,17 @@ export const Home = () => {
                     paddingBottom: layoutSpacing.section.md,
                 }}
             >
+                {/* ASCII cursor-trail effect across the hero */}
+                <AsciiTrail />
+
                 {/* NothingDotClock in top-left corner */}
                 <div style={{
                     position: 'absolute',
                     top: layoutSpacing.section.xl,
                     left: isMobile ? layoutSpacing.page.mobile : layoutSpacing.section.xl,
-                    zIndex: 10
+                    zIndex: 10,
+                    userSelect: 'none',
+                    WebkitUserSelect: 'none'
                 }}>
                     <NothingDotClock />
                 </div>
@@ -138,7 +144,9 @@ export const Home = () => {
                     top: layoutSpacing.section.xl,
                     right: isMobile ? layoutSpacing.page.mobile : layoutSpacing.section.xl,
                     zIndex: 10,
-                    display: isMobile ? 'none' : 'block' // Hide on mobile if too crowded, or adjust
+                    display: isMobile ? 'none' : 'block', // Hide on mobile if too crowded, or adjust
+                    userSelect: 'none',
+                    WebkitUserSelect: 'none'
                 }}>
                     <FolderIcon 
                         title="12 Projects"
@@ -157,7 +165,10 @@ export const Home = () => {
                         left: isMobile ? layoutSpacing.page.mobile : layoutSpacing.section.xl,
                         zIndex: 10,
                         display: isMobile ? 'none' : 'block',
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        userSelect: 'none',
+                        WebkitUserSelect: 'none',
+                        transform: 'translateY(72px)'
                     }}
                     onClick={() => navigate('/about')}
                 >
@@ -171,7 +182,10 @@ export const Home = () => {
                         bottom: spacing[4],
                         right: isMobile ? layoutSpacing.page.mobile : layoutSpacing.section.xl,
                         zIndex: 10,
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        userSelect: 'none',
+                        WebkitUserSelect: 'none',
+                        transform: 'translateY(72px)'
                     }}
                     onClick={() => navigate('/sandbox')}
                 >
@@ -197,52 +211,16 @@ export const Home = () => {
                         padding: '0 20px',
                         transform: 'translateY(40px)'
                     }}>
-                         <h3 
-                            onMouseEnter={() => setShowNameTooltip(true)}
-                            onMouseLeave={() => setShowNameTooltip(false)}
-                            style={{
-                                fontFamily: '"Inter", sans-serif',
-                                fontSize: isMobile ? '16px' : '20px',
-                                fontWeight: 500,
-                                marginBottom: '16px',
-                                letterSpacing: '0.02em',
-                                color: colors.grey[40], // Slightly lighter for subhead
-                                cursor: 'default',
-                                width: 'fit-content',
-                                margin: '0 auto 16px auto',
-                                position: 'relative'
-                         }}>
-                            Hi, I'm Lynn Tian
-                            
-                            {/* Hover Annotation */}
-                            <div style={{
-                                position: 'absolute',
-                                top: '-10px',
-                                left: 'calc(100% + 5px)',
-                                width: 'max-content',
-                                opacity: showNameTooltip ? 1 : 0,
-                                transition: 'opacity 0.3s ease-out',
-                                pointerEvents: 'none',
-                                fontFamily: '"Noto Sans SC", "PingFang SC", sans-serif',
-                                fontSize: '16px',
-                                color: '#000',
-                                fontWeight: 'normal',
-                                zIndex: 20
-                            }}>
-                                [田琳]
-                            </div>
-                         </h3>
-                         
                          <h1 style={{
                             fontFamily: 'Lora, "Times New Roman", Georgia, serif',
-                            fontSize: isMobile ? '54px' : '84px',
+                            fontSize: isMobile ? '32px' : '62px',
                             fontWeight: 400,
                             lineHeight: 1.1,
                             marginBottom: '24px',
                             letterSpacing: '-0.02em'
                          }}>
-                            Design Engineer <br/>
-                            Problem Solver
+                            Design Engineer
+                            <span style={{ display: 'block', marginTop: '8px' }}>With Research Mindset</span>
                          </h1>
 
                          <p style={{
@@ -253,8 +231,7 @@ export const Home = () => {
                             margin: '0 auto',
                             opacity: 0.9
                          }}>
-                            I’m dedicated to merging human-centered design with cutting-edge technology. <br />
-                            Lately, I’ve been focused on human-AI collaboration and seamless integration.
+                            I’m dedicated to merging human-centered design with cutting-edge technology. Lately, I’ve been focused on human-AI collaboration and seamless integration.
                          </p>
                     </div>
                 </div>

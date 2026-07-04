@@ -27,7 +27,7 @@ export const Section = ({ title, subtitle, children, className = "", dark = fals
     };
 
     const titleStyle = {
-        fontFamily: typography.heading1.fontFamily,
+        fontFamily: 'Lora, "Times New Roman", Georgia, serif',
         fontSize: isMobile ? '36px' : isTablet ? fontSize[48] : typography.heading1.fontSize,
         fontWeight: typography.heading1.fontWeight,
         lineHeight: typography.heading1.lineHeight,
@@ -47,7 +47,7 @@ export const Section = ({ title, subtitle, children, className = "", dark = fals
     };
 
     return (
-        <section style={sectionStyle} className={className}>
+        <section style={sectionStyle} className={className} data-theme={dark ? 'dark' : undefined}>
             <div style={containerStyle}>
                 {(title || subtitle) && (
                     <div style={headerStyle}>

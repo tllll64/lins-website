@@ -20,7 +20,7 @@ const SandboxCard = ({ title, date, preview, button, span = 1 }) => {
                 position: 'relative',
                 background: colors.grey[95],
                 borderRadius: '8px',
-                aspectRatio: span > 1 ? '2/1' : '4/3',
+                aspectRatio: '2 / 1',
                 overflow: 'hidden',
             }}>
                 {/* Title + date overlaid on top of the image */}

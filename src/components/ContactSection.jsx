@@ -123,7 +123,7 @@ export const ContactSection = React.forwardRef((props, ref) => {
     };
 
     return (
-        <footer style={footerStyle} ref={ref} id="about">
+        <footer style={footerStyle} ref={ref} id="about" data-theme="dark">
             <div style={footerContentStyle}>
                 <div style={{ gridArea: 'title' }}>
                     <h2 style={footerTitleStyle}>Contact Me</h2>
