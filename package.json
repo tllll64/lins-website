@@ -26,6 +26,7 @@
     "postprocessing": "^6.38.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-github-calendar": "^5.0.6",
     "react-router-dom": "^7.12.0",
     "tailwind-variants": "^3.2.2",
     "tailwindcss": "^4.1.18",

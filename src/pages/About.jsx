@@ -12,6 +12,7 @@ import profileImage from '../assets/about/profile.jpg';
 import PolaroidGallery from '../components/PolaroidGallery';
 import StackedCards from '../components/StackedCards';
 import AboutContact from '../components/AboutContact';
+import { GitHubCalendar } from 'react-github-calendar';
 export const About = () => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     const footerRef = useRef(null);
@@ -324,6 +325,45 @@ export const About = () => {
                             </p>
                         </div>
                     ))}
+                </div>
+            </Section>
+
+            <Section title="Coding Activity" subtitle="GitHub 上的贡献足迹" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
+                <div className="github-calendar-fill" style={{
+                    background: '#fff',
+                    border: `1px solid ${colors.grey[92]}`,
+                    borderRadius: '16px',
+                    padding: isMobile ? '20px' : '28px',
+                    overflowX: 'auto',
+                }}>
+                    <style>{`
+                        .github-calendar-fill .react-activity-calendar {
+                            width: 100%;
+                        }
+                        .github-calendar-fill .react-activity-calendar__scroll-container {
+                            width: 100%;
+                            overflow: visible;
+                        }
+                        .github-calendar-fill .react-activity-calendar svg.react-activity-calendar__calendar {
+                            width: 100%;
+                            height: auto;
+                        }
+                    `}</style>
+                    <GitHubCalendar
+                        username="tllll64"
+                        colorScheme="light"
+                        blockSize={isMobile ? 11 : 14}
+                        blockMargin={isMobile ? 3 : 5}
+                        fontSize={isMobile ? 12 : 15}
+                        theme={{
+                            light: ['#f2f2f2', '#c6c6c6', '#8f8f8f', '#4d4d4d', '#171717'],
+                        }}
+                        style={{
+                            color: colors.grey[40],
+                            fontFamily: typography.body.fontFamily,
+                            width: '100%',
+                        }}
+                    />
                 </div>
             </Section>
 

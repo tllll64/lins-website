@@ -6,7 +6,12 @@
       "Bash(lsof -i:5173)",
       "Bash(jobs)",
       "Bash(curl -I http://localhost:5173)",
-      "Bash(npx eslint *)"
+      "Bash(npx eslint *)",
+      "Bash(npm install *)",
+      "Bash(git -C /Users/xiaoshizi/Documents/GitHub/lins-website config --get remote.origin.url)",
+      "Bash(grep -iE \"NAMESPACE|getClassName|element \\\\?|\\\\\\\\\\\\$\\\\{NAMESPACE\")",
+      "Bash(grep -o \"getClassName = element =>[^;]*;\\\\|function getClassName\\(element\\){[^}]*}\\\\|element => \\\\`[^\\\\`]*\\\\`\")",
+      "Bash(node -e ' *)"
     ]
   }
 }

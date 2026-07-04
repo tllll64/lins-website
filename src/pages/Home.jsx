@@ -529,49 +529,6 @@ export const Home = () => {
                     </div>
                 </Section>
 
-                <Section title="Publications" subtitle="Academic research and conference papers" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
-                    <div style={{ marginBottom: layoutSpacing.section.xl }}>
-                        {publicationsData.map((pub, index) => (
-                            <PublicationCard
-                                key={index}
-                                title={pub.title}
-                                authors={pub.authors}
-                                venue={pub.venue}
-                                links={pub.links}
-                                image={pub.image}
-                            />
-                        ))}
-                    </div>
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
-                        gap: gridGap.lg,
-                        marginTop: layoutSpacing.section.lg
-                    }}>
-                        {demoItems.map((item, index) => (
-                            <div key={index} style={{
-                                width: '100%',
-                                aspectRatio: '4/3',
-                                background: colors.grey[92],
-                                borderRadius: '12px',
-                                overflow: 'hidden',
-                                position: 'relative'
-                            }}>
-                                <iframe
-                                    width="100%"
-                                    height="100%"
-                                    src={item.src}
-                                    title={`Demo Video ${index + 1}`}
-                                    frameBorder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    referrerPolicy="strict-origin-when-cross-origin"
-                                    allowFullScreen
-                                    style={{ border: 'none' }}
-                                ></iframe>
-                            </div>
-                        ))}
-                    </div>
-                </Section>
             </div>
 
             <section style={footerStyle} id="about" ref={footerRef}>
