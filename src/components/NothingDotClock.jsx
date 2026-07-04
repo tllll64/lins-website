@@ -9,6 +9,19 @@ const NothingDotClock = ({ staticMode = false, scale = 1, noGlow = false, onHove
   const [isHovered, setIsHovered] = useState(false);
   const [isDiscHovered, setIsDiscHovered] = useState(false);
 
+  // Handle hover state
+  const handleMouseEnter = () => {
+    if (!staticMode) setIsHovered(true);
+    setIsDiscHovered(true);
+    onHoverChange?.(true);
+  };
+
+  const handleMouseLeave = () => {
+    if (!staticMode) setIsHovered(false);
+    setIsDiscHovered(false);
+    onHoverChange?.(false);
+  };
+
   // Responsive constants (base size × scale)
   const basePx = isMobile ? 1.65 * scale : 3.3 * scale;
   const CELL_SIZE = `${basePx}px`;
@@ -247,8 +260,8 @@ const NothingDotClock = ({ staticMode = false, scale = 1, noGlow = false, onHove
       )}
 
       <div
-        onMouseEnter={() => { if (!staticMode) setIsHovered(true); setIsDiscHovered(true); onHoverChange?.(true); }}
-        onMouseLeave={() => { if (!staticMode) setIsHovered(false); setIsDiscHovered(false); onHoverChange?.(false); }}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         style={{
           position: 'relative',
           backgroundColor: '#000000',
