@@ -181,7 +181,7 @@ export const Navbar = ({ theme = 'light' }) => {
                         onMouseEnter={(e) => handleMouseEnter(e, isSandboxActive)}
                         onMouseLeave={(e) => handleMouseLeave(e, isSandboxActive)}
                     >
-                        Sandbox
+                        Creative
                     </Link>
                 </div>
             </nav>

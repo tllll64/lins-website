@@ -157,8 +157,7 @@ export const Research = () => {
     };
 
     const containerStyle = {
-        maxWidth: '1200px',
-        margin: '0 auto',
+        width: '100%',
         paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
         paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
         paddingTop: '100px',
@@ -189,7 +188,7 @@ export const Research = () => {
                             margin: 0,
                             marginBottom: '6px',
                         }}>
-                            Sandbox
+                            Creative
                         </h1>
                         <p style={{
                             fontFamily: typography.body.fontFamily,
