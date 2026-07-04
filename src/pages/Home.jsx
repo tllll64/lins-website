@@ -143,34 +143,45 @@ export const Home = () => {
 
     const publicationsData = [
         {
-            title: "GenFaceUI: Meta-Design of Generative Personalized Facial Expression Interfaces for\nIntelligent Agents",
-            authors: "Yate Ge, Lin Tian, Yi Dai, Shuhan Pan, Yiwen Zhang, Qi Wang, Weiwei Guo*, Xiaohua Sun*",
-            venue: "CHI'26 (Full Paper)",
+            title: "Exploring Generative Personalized Facial Expression Interfaces for Intelligent Agents",
+            authors: "Yate Ge, Lin Tian, Ge Chen, Shuhan Pan, Weiwei Guo, Xiaohua Sun*",
+            venue: "CHI'26 (full paper)",
             links: [
-                { label: "arxiv PDF", url: "https://arxiv.org/abs/2602.11055" },
+                { label: "ACM DL", url: "#" },
+                { label: "PDF", url: "#" },
             ],
             image: RESEARCH_ASSETS.chi
         },
         {
             title: "Jokeasy: Exploring Human-AI Collaboration in Thematic Joke Generation",
             authors: "Yate Ge, Lin Tian, Chiqian Xu, Luyao Xu, Meiying Li, Yuanda Hu, Weiwei Guo*",
-            venue: "iasdr'25 (Full Paper)",
+            venue: "iasdr'25 (full paper)",
             links: [
-                { label: "arxiv PDF", url: "https://arxiv.org/abs/2602.09496" },
+                { label: "xxx", url: "#" },
+                { label: "PDF", url: "#" },
             ],
             image: RESEARCH_ASSETS.iasdr
         },
         {
             title: "Exploring Generative Personalized Facial Expression Interfaces for Intelligent Agents",
             authors: "Yate Ge, Lin Tian, Ge Chen, Shuhan Pan, Weiwei Guo, Xiaohua Sun*",
-            venue: "UIST'25 (Poster)",
+            venue: "UIST'25 (poster)",
             links: [
-                { label: "ACM DL", url: "https://dl.acm.org/doi/10.1145/3746058.3758382" },
-                { label: "PDF", url: "https://dl.acm.org/doi/pdf/10.1145/3746058.3758382" },
+                { label: "ACM DL", url: "#" },
+                { label: "PDF", url: "#" },
             ],
             image: RESEARCH_ASSETS.uist
+        },
+        {
+            title: "When Accessibility Becomes a Trap: A User-Centric Characterization of Dark Patterns Arising from Screen Reader Users' Perceived Deception in Mobile Interfaces",
+            authors: "Dai Shi, Lin Tian, Jiaxun Sun, TOMOMI KAWAKAMI, Nuo Cheng, Shuchang Xu, Guanhong L",
+            venue: "CSCW'25 (poster)",
+            links: [
+                { label: "ACM DL", url: "#" },
+                { label: "PDF", url: "#" }
+            ],
+            image: RESEARCH_ASSETS.cscw
         }
-
     ];
 
     const footerStyle = {
@@ -212,9 +223,9 @@ export const Home = () => {
     ];
 
     const demoItems = [
-        { type: 'video', src: 'https://www.youtube.com/embed/oBq4iC_T-Yk' },
-        { type: 'video', src: 'https://www.youtube.com/embed/5nUYwufk3-U' },
-        { type: 'video', src: 'https://www.youtube.com/embed/dMuGlI-wrhQ' },
+        { type: 'video', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' }, // Placeholder 1
+        { type: 'video', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' }, // Placeholder 2
+        { type: 'video', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' }, // Placeholder 3
     ];
 
     return (
@@ -347,7 +358,7 @@ export const Home = () => {
                          <h1 style={{
                             fontFamily: 'Lora, "Times New Roman", Georgia, serif',
                             fontSize: isMobile ? '42px' : '72px',
-                            fontWeight: 200,
+                            fontWeight: 400,
                             lineHeight: 1.1,
                             marginBottom: '24px',
                             letterSpacing: '-0.02em'
@@ -358,7 +369,7 @@ export const Home = () => {
 
                          <p style={{
                             fontFamily: typography.body.fontFamily,
-                            fontSize: typography.body.fontSize,
+                            fontSize: isMobile ? '16px' : '18px',
                             lineHeight: 1.6,
                             maxWidth: '800px',
                             margin: '0 auto',
@@ -423,7 +434,7 @@ export const Home = () => {
                     <div style={gridStyle}>
                         <GridCard
                             title="GenFaceUI: Meta-Design Tool"
-                            category="CHI'26 Full Paper"
+                            category="CHI‘26 Full Paper"
                             image={ASSETS.ai1}
                             onClick={() => window.open('https://arxiv.org/abs/2602.11055', '_blank')}
                         />
@@ -515,6 +526,50 @@ export const Home = () => {
                                 "Colean: 未来家务 AR 游戏"
                             )}
                         />
+                    </div>
+                </Section>
+
+                <Section title="Publications" subtitle="Academic research and conference papers" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
+                    <div style={{ marginBottom: layoutSpacing.section.xl }}>
+                        {publicationsData.map((pub, index) => (
+                            <PublicationCard
+                                key={index}
+                                title={pub.title}
+                                authors={pub.authors}
+                                venue={pub.venue}
+                                links={pub.links}
+                                image={pub.image}
+                            />
+                        ))}
+                    </div>
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
+                        gap: gridGap.lg,
+                        marginTop: layoutSpacing.section.lg
+                    }}>
+                        {demoItems.map((item, index) => (
+                            <div key={index} style={{
+                                width: '100%',
+                                aspectRatio: '4/3',
+                                background: colors.grey[92],
+                                borderRadius: '12px',
+                                overflow: 'hidden',
+                                position: 'relative'
+                            }}>
+                                <iframe
+                                    width="100%"
+                                    height="100%"
+                                    src={item.src}
+                                    title={`Demo Video ${index + 1}`}
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerPolicy="strict-origin-when-cross-origin"
+                                    allowFullScreen
+                                    style={{ border: 'none' }}
+                                ></iframe>
+                            </div>
+                        ))}
                     </div>
                 </Section>
             </div>

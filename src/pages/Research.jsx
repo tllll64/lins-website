@@ -29,7 +29,7 @@ const SectionTitle = ({ children }) => {
                 color: '#fff',
                 padding: '12px 32px',
                 borderRadius: '32px 32px 0 32px',
-                fontFamily: typography.heading1.fontFamily, // Match h1 font (Lora)
+                fontFamily: typography.body.fontFamily,
                 fontSize: isMobile ? '20px' : '24px',
                 fontWeight: 600,
                 lineHeight: 1.2,
@@ -54,13 +54,13 @@ const PrincipleCard = ({ title, description }) => (
         {/* <div style={{ fontSize: '24px', marginBottom: stackSpacing.xs }}>{icon}</div> */}
         <h3 style={{
             fontFamily: typography.heading3.fontFamily,
-            fontSize: '20px',
+            fontSize: '18px',
             fontWeight: 600,
             color: colors.grey[9]
         }}>{title}</h3>
         <p style={{
             fontFamily: typography.body.fontFamily,
-            fontSize: '16px',
+            fontSize: '14px',
             lineHeight: 1.5,
             color: colors.grey[7]
         }}>{description}</p>

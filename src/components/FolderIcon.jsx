@@ -180,7 +180,7 @@ const FolderIcon = ({
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'flex-end',
+        justifyContent: 'space-between',
     };
 
     const textStyle = {
@@ -229,6 +229,17 @@ const FolderIcon = ({
                         opacity: 0.4
                     }}>
                         {title}
+                    </div>
+                    <div style={{
+                        ...textStyle,
+                        fontSize: '18px',
+                        opacity: 0.9,
+                        fontWeight: 500,
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis'
+                    }}>
+                        {subtitle}
                     </div>
                 </div>
             </div>
