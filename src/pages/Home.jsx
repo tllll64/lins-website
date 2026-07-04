@@ -1,13 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Modal, Button } from '@arco-design/web-react';
+import { Modal } from '@arco-design/web-react';
 import { IconLaunch } from '@arco-design/web-react/icon';
 import { Section } from '../components/Section';
 import { ProjectCard } from '../components/ProjectCard';
-import { GridCard } from '../components/GridCard';
 import { Navbar } from '../components/Navbar';
 import { ContactSection } from '../components/ContactSection';
-import { StickerText } from '../components/StickerText';
 import NothingWordClock from '../components/NothingWordClock';
 import NothingDotClock from '../components/NothingDotClock';
 import FolderIcon from '../components/FolderIcon';
@@ -15,9 +13,8 @@ import PDFViewer from '../components/PDFViewer';
 import IframeModal from '../components/IframeModal';
 import PixelLock from '../components/PixelLock';
 import { ASSETS } from '../constants/assets';
-import { colors, spacing, typography, stackSpacing, gridGap, layoutSpacing } from '../design-system/tokens';
+import { colors, spacing, typography, stackSpacing, layoutSpacing } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
-import { Twitter, Github, Mail } from 'lucide-react';
 import xhsCursor from '../assets/cursor/xhs-cursor.png';
 import PromoteLogo from '../assets/Home/Promote_logo.png';
 import TakoLogo from '../assets/Home/Tako_logo.png';
@@ -107,11 +104,6 @@ export const Home = () => {
         backgroundRepeat: 'repeat'
     };
 
-    const gridStyle = {
-        display: 'grid',
-        gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
-        gap: gridGap.xl
-    };
 
     return (
         <div style={pageStyle}>
@@ -268,10 +260,10 @@ export const Home = () => {
             </Section>
 
             <Section 
-                title="Internship Projects" 
-                subtitle="2023-2026 年实习项目产出和复盘思考" 
-                id="works" 
-                style={{ paddingTop: '60px', paddingBottom: 0 }}
+                title="Internship Projects"
+                subtitle="2023-2026 年实习项目产出和复盘思考"
+                id="works"
+                style={{ paddingTop: '60px', paddingBottom: layoutSpacing.section['2xl'] }}
             >
                 <div style={{
                     display: 'flex',
@@ -313,64 +305,6 @@ export const Home = () => {
                     />
                 </div>
             </Section>
-
-            <div id="explorations">
-                <Section title="AI-Driven Projects" subtitle="研究生期间在生成式 AI 方向上探索的原型与落地作品" style={{ paddingTop: '200px', paddingBottom: 0 }}>
-                    <div style={gridStyle}>
-                        <GridCard
-                            title="GenFaceUI: Meta-Design Tool"
-                            category="CHI‘26 Full Paper"
-                            image={ASSETS.ai1}
-                            onClick={() => window.open('https://arxiv.org/abs/2602.11055', '_blank')}
-                        />
-                        <GridCard
-                            title="惊喜驱动的支小宝周边出行应用探索"
-                            category="设计探索"
-                            image={ASSETS.ai2}
-                            onClick={() => window.open('https://lynntian.framer.website/works/zhi-xiao-bao', '_blank')}
-                        />
-                    </div>
-                </Section>
-
-                <Section title="Digital Projects" subtitle="本科期间在车载 HMI 和智能产品设计方向的落地性探索" style={{ paddingTop: '200px', paddingBottom: layoutSpacing.section['2xl'] }}>
-                    <div style={gridStyle}>
-                        <GridCard
-                            title="小米汽车智驾学堂"
-                            category="小米实习产出"
-                            image={ASSETS.digital1}
-                            onClick={() => window.open('https://lynntian.framer.website/works/xiao-mi', '_blank')}
-                        />
-                        <GridCard
-                            title="NIO Roam 城市漫游座舱"
-                            category="本科校级&院级优秀毕设"
-                            image={ASSETS.digital2}
-                            onClick={() => openFigmaModal(
-                                "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FKerAYedbweEAHVc4pEWPak%2F%25E5%258E%2586%25E5%258F%25B2%25E4%25BD%259C%25E5%2593%2581%25E9%259B%2586%25E5%2590%2588%3Fpage-id%3D0%253A1%26node-id%3D3-5%26viewport%3D320%252C317%252C0.02%26t%3DTNvKH6ruKYJgjx1i-1%26scaling%3Dscale-down-width%26content-scaling%3Dfixed",
-                                "NIO Roam 城市漫游座舱"
-                            )}
-                        />
-                        <GridCard
-                            title="方由: 国学教育玩具设计"
-                            category="智能硬件产品设计"
-                            image={ASSETS.digital3}
-                            onClick={() => openFigmaModal(
-                                "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FKerAYedbweEAHVc4pEWPak%2F%25E5%258E%2586%25E5%258F%25B2%25E4%25BD%259C%25E5%2593%2581%25E9%259B%2586%25E5%2590%2588%3Fpage-id%3D0%253A1%26node-id%3D12-2901%26viewport%3D-92%252C894%252C0.05%26t%3DXxpwcogo7FOPPPgJ-1%26scaling%3Dscale-down-width%26content-scaling%3Dfixed",
-                                "方由: 国学教育玩具设计"
-                            )}
-                        />
-                        <GridCard
-                            title="Colean: 未来家务 AR 游戏"
-                            category="AR 应用探索"
-                            image={ASSETS.digital4}
-                            onClick={() => openFigmaModal(
-                                "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FKerAYedbweEAHVc4pEWPak%2F%25E5%258E%2586%25E5%258F%25B2%25E4%25BD%259C%25E5%2593%2581%25E9%259B%2586%25E5%2590%2588%3Fpage-id%3D0%253A1%26node-id%3D12-973%26viewport%3D-92%252C894%252C0.05%26t%3DG7M5N4g1HM6V495R-1%26scaling%3Dscale-down-width%26content-scaling%3Dfixed",
-                                "Colean: 未来家务 AR 游戏"
-                            )}
-                        />
-                    </div>
-                </Section>
-
-            </div>
 
             <ContactSection ref={footerRef} />
 

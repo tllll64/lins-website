@@ -92,8 +92,9 @@ export const Navbar = ({ theme = 'light' }) => {
     const BUBBLE_PAD = 5;
 
     const isEchoActive = location.pathname === '/echo';
+    const isAboutActive = location.pathname === '/about';
 
-    const echoBubbleStyle = {
+    const aboutBubbleStyle = {
         ...pillBase,
         height: `${THUMB_SIZE + BUBBLE_PAD * 2}px`,
         paddingLeft: spacing.lg,
@@ -107,7 +108,7 @@ export const Navbar = ({ theme = 'light' }) => {
         fontSize: typography.body.fontSize,
         fontWeight: fontWeight.medium,
         letterSpacing: '0.05em',
-        color: isEchoActive ? highlightColor : baseColor,
+        color: isAboutActive ? highlightColor : baseColor,
         transition: 'color 0.2s ease, background 0.3s ease, border-color 0.3s ease',
     };
 
@@ -128,7 +129,6 @@ export const Navbar = ({ theme = 'light' }) => {
 
     const isWorksActive = location.pathname === '/' && location.hash === '';
     const isSandboxActive = location.pathname === '/sandbox';
-    const isAboutActive = location.pathname === '/about';
 
     return (
         <div style={wrapperStyle}>
@@ -140,7 +140,7 @@ export const Navbar = ({ theme = 'light' }) => {
                         onMouseEnter={(e) => handleMouseEnter(e, isWorksActive)}
                         onMouseLeave={(e) => handleMouseLeave(e, isWorksActive)}
                     >
-                        Works
+                        Design
                     </Link>
                     <Link
                         to="/sandbox"
@@ -151,24 +151,24 @@ export const Navbar = ({ theme = 'light' }) => {
                         Creative
                     </Link>
                     <Link
-                        to="/about"
-                        style={getLinkStyle(isAboutActive)}
-                        onMouseEnter={(e) => handleMouseEnter(e, isAboutActive)}
-                        onMouseLeave={(e) => handleMouseLeave(e, isAboutActive)}
+                        to="/echo"
+                        style={getLinkStyle(isEchoActive)}
+                        onMouseEnter={(e) => handleMouseEnter(e, isEchoActive)}
+                        onMouseLeave={(e) => handleMouseLeave(e, isEchoActive)}
                     >
-                        About
+                        Research
                     </Link>
                 </div>
             </nav>
 
-            {/* Echo — standalone pill on the right */}
-            <Link to="/echo" style={{ textDecoration: 'none' }}>
+            {/* About — standalone pill on the right */}
+            <Link to="/about" style={{ textDecoration: 'none' }}>
                 <div
-                    style={echoBubbleStyle}
-                    onMouseEnter={(e) => { if (!isEchoActive) e.currentTarget.style.color = highlightColor; }}
-                    onMouseLeave={(e) => { if (!isEchoActive) e.currentTarget.style.color = baseColor; }}
+                    style={aboutBubbleStyle}
+                    onMouseEnter={(e) => { if (!isAboutActive) e.currentTarget.style.color = highlightColor; }}
+                    onMouseLeave={(e) => { if (!isAboutActive) e.currentTarget.style.color = baseColor; }}
                 >
-                    Echo
+                    About
                 </div>
             </Link>
 
