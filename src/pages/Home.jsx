@@ -138,7 +138,7 @@ export const Home = () => {
                 {/* NothingDotClock in top-left corner */}
                 <div style={{
                     position: 'absolute',
-                    top: '147px',
+                    top: '135px',
                     left: isMobile ? layoutSpacing.page.mobile : layoutSpacing.section.xl,
                     zIndex: 10,
                     userSelect: 'none',
@@ -150,7 +150,7 @@ export const Home = () => {
                 {/* FolderIcon in top-right corner */}
                 <div style={{
                     position: 'absolute',
-                    top: '162px',
+                    top: '150px',
                     right: isMobile ? layoutSpacing.page.mobile : layoutSpacing.section.xl,
                     zIndex: 10,
                     display: isMobile ? 'none' : 'block',
@@ -220,7 +220,7 @@ export const Home = () => {
                         padding: '28px 20px',
                         background: colors.grey[98], // Same as page base — masks the dot grid behind the text
                         borderRadius: '16px',
-                        transform: 'translateY(20px)'
+                        transform: 'translateY(4px)'
                     }}>
                          <h1 style={{
                             fontFamily: 'Lora, "Times New Roman", Georgia, serif',
@@ -252,7 +252,7 @@ export const Home = () => {
                 title="Internship Projects"
                 subtitle="2023-2026 年实习项目产出和复盘思考"
                 id="works"
-                style={{ paddingTop: '180px', paddingBottom: layoutSpacing.section['2xl'] }}
+                style={{ paddingTop: '40px', paddingBottom: layoutSpacing.section['2xl'] }}
             >
                 <div style={{
                     display: 'flex',
