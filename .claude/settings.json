@@ -11,7 +11,10 @@
       "Bash(git -C /Users/xiaoshizi/Documents/GitHub/lins-website config --get remote.origin.url)",
       "Bash(grep -iE \"NAMESPACE|getClassName|element \\\\?|\\\\\\\\\\\\$\\\\{NAMESPACE\")",
       "Bash(grep -o \"getClassName = element =>[^;]*;\\\\|function getClassName\\(element\\){[^}]*}\\\\|element => \\\\`[^\\\\`]*\\\\`\")",
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "Bash(agent-browser --help)",
+      "Bash(node ~/.claude/skills/website-to-design-md/scripts/check-browser-tooling.mjs)",
+      "Bash(npm -v)"
     ]
   }
 }

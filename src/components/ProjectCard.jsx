@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Card } from '../design-system/components';
 import { colors, spacing, typography, stackSpacing, componentSpacing } from '../design-system/tokens';
-import { ArrowRight } from 'lucide-react';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 import PixelEye from './PixelEye';
+import PixelLock from './PixelLock';
 
-export const ProjectCard = ({ date, title, description, tags, image, link, className = "", customCursor, onClick, logo, pixelPattern, reversed = false }) => {
+export const ProjectCard = ({ date, title, description, tags, image, link, className = "", customCursor, onClick, logo, pixelPattern, reversed = false, locked = false }) => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     const [isHovered, setIsHovered] = useState(false);
 
@@ -20,7 +20,7 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
         background: 'transparent',
         borderRadius: '24px',
         transition: 'all 0.3s ease',
-        cursor: onClick ? 'pointer' : 'default'
+        cursor: locked ? 'not-allowed' : (onClick ? 'pointer' : 'default')
     };
 
     const leftCoverStyle = {
@@ -29,7 +29,7 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
         borderRadius: '24px',
         overflow: 'hidden',
         position: 'relative',
-        background: colors.grey[95],
+        background: image ? colors.grey[95] : '#fff',
         cursor: 'default'
     };
 
@@ -140,9 +140,9 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
     };
 
     return (
-        <div 
-            className={`group relative block w-full ${className}`} 
-            onClick={onClick}
+        <div
+            className={`group relative block w-full ${className}`}
+            onClick={locked ? undefined : onClick}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
@@ -151,15 +151,17 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
                 <div 
                     style={leftCoverStyle}
                 >
-                    <div style={{
-                        position: 'absolute',
-                        inset: 0,
-                        backgroundImage: `url(${image})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        transition: 'transform 0.5s ease'
-                    }} />
-                    
+                    {image && (
+                        <div style={{
+                            position: 'absolute',
+                            inset: 0,
+                            backgroundImage: `url(${image})`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            transition: 'transform 0.5s ease'
+                        }} />
+                    )}
+
                     <div style={textOverlayStyle}>
                         <div style={headerRowStyle}>
                             <h2 style={titleStyle}>{title}</h2>
@@ -212,7 +214,7 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
                     )}
                   </div>
                     <div style={{...squareBlockStyle, ...dotMatrixStyle}}>
-                        {pixelPattern || <PixelEye size={6} gap={2} />}
+                        {pixelPattern || (locked ? <PixelLock size={6} gap={2} /> : <PixelEye size={6} gap={2} />)}
                     </div>
                 </div>
             </div>

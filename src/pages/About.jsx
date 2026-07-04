@@ -279,8 +279,47 @@ export const About = () => {
             </div>
 
             <Section style={{ paddingTop: layoutSpacing.section.xs, paddingBottom: layoutSpacing.section.xs }}>
-                <div style={{ 
-                    display: 'flex', 
+                {/* GitHub contributions calendar */}
+                <div className="github-calendar-fill" style={{
+                    background: '#fff',
+                    border: `1px solid ${colors.grey[92]}`,
+                    borderRadius: '16px',
+                    padding: isMobile ? '20px' : '28px',
+                    overflowX: 'auto',
+                    marginBottom: isMobile ? stackSpacing.xl : layoutSpacing.section.md,
+                }}>
+                    <style>{`
+                        .github-calendar-fill .react-activity-calendar {
+                            width: 100%;
+                        }
+                        .github-calendar-fill .react-activity-calendar__scroll-container {
+                            width: 100%;
+                            overflow: visible;
+                        }
+                        .github-calendar-fill .react-activity-calendar svg.react-activity-calendar__calendar {
+                            width: 100%;
+                            height: auto;
+                        }
+                    `}</style>
+                    <GitHubCalendar
+                        username="tllll64"
+                        colorScheme="light"
+                        blockSize={isMobile ? 11 : 14}
+                        blockMargin={isMobile ? 3 : 5}
+                        fontSize={isMobile ? 12 : 15}
+                        theme={{
+                            light: ['#f2f2f2', '#c6c6c6', '#8f8f8f', '#4d4d4d', '#171717'],
+                        }}
+                        style={{
+                            color: colors.grey[40],
+                            fontFamily: typography.body.fontFamily,
+                            width: '100%',
+                        }}
+                    />
+                </div>
+
+                <div style={{
+                    display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center', // Changed from flex-start to center for horizontal centering
                     gap: isMobile ? stackSpacing.md : '6.66px' // Reduced to ~1/3 of 20px
@@ -325,45 +364,6 @@ export const About = () => {
                             </p>
                         </div>
                     ))}
-                </div>
-            </Section>
-
-            <Section title="Coding Activity" subtitle="GitHub 上的贡献足迹" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
-                <div className="github-calendar-fill" style={{
-                    background: '#fff',
-                    border: `1px solid ${colors.grey[92]}`,
-                    borderRadius: '16px',
-                    padding: isMobile ? '20px' : '28px',
-                    overflowX: 'auto',
-                }}>
-                    <style>{`
-                        .github-calendar-fill .react-activity-calendar {
-                            width: 100%;
-                        }
-                        .github-calendar-fill .react-activity-calendar__scroll-container {
-                            width: 100%;
-                            overflow: visible;
-                        }
-                        .github-calendar-fill .react-activity-calendar svg.react-activity-calendar__calendar {
-                            width: 100%;
-                            height: auto;
-                        }
-                    `}</style>
-                    <GitHubCalendar
-                        username="tllll64"
-                        colorScheme="light"
-                        blockSize={isMobile ? 11 : 14}
-                        blockMargin={isMobile ? 3 : 5}
-                        fontSize={isMobile ? 12 : 15}
-                        theme={{
-                            light: ['#f2f2f2', '#c6c6c6', '#8f8f8f', '#4d4d4d', '#171717'],
-                        }}
-                        style={{
-                            color: colors.grey[40],
-                            fontFamily: typography.body.fontFamily,
-                            width: '100%',
-                        }}
-                    />
                 </div>
             </Section>
 

@@ -5,8 +5,8 @@
 
 // === Font Families ===
 export const fontFamily = {
-  // Display font for headings (Tiempos Text alternative)
-  display: 'Lora, "Times New Roman", Georgia, serif',
+  // Display font for headings (switched to sans-serif per design direction)
+  display: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
 
   // Body font for UI and content
   body: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
