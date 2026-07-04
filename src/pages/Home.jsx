@@ -114,7 +114,7 @@ export const Home = () => {
             <Section
                 style={{
                     position: 'relative',
-                    minHeight: '85vh',
+                    minHeight: '100vh',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
@@ -123,6 +123,15 @@ export const Home = () => {
                     paddingBottom: layoutSpacing.section.md,
                 }}
             >
+                {/* Vertical top→middle→bottom gradient wash (sits above the dot grid, below content) */}
+                <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    zIndex: 0,
+                    pointerEvents: 'none',
+                    background: 'linear-gradient(180deg, rgba(206,212,222,0.65) 0%, rgba(206,212,222,0) 24%, rgba(206,212,222,0) 76%, rgba(206,212,222,0.5) 100%)'
+                }} />
+
                 {/* ASCII cursor-trail effect across the hero */}
                 <AsciiTrail />
 

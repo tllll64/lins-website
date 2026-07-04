@@ -18,7 +18,7 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
         width: '100%',
         padding: 0,
         background: 'transparent',
-        borderRadius: '24px',
+        borderRadius: '6px',
         transition: 'all 0.3s ease',
         cursor: locked ? 'not-allowed' : (onClick ? 'pointer' : 'default')
     };
@@ -26,7 +26,7 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
     const leftCoverStyle = {
         flex: 3,
         aspectRatio: '5/3',
-        borderRadius: '24px',
+        borderRadius: '6px',
         overflow: 'hidden',
         position: 'relative',
         background: image ? colors.grey[95] : '#fff',
@@ -45,7 +45,7 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
         width: '100%',
         aspectRatio: '1/1',
         background: '#fff',
-        borderRadius: '24px',
+        borderRadius: '6px',
         position: 'relative'
     };
 
