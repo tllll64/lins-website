@@ -235,14 +235,14 @@ export const Home = () => {
                          
                          <h1 style={{
                             fontFamily: 'Lora, "Times New Roman", Georgia, serif',
-                            fontSize: isMobile ? '42px' : '72px',
+                            fontSize: isMobile ? '54px' : '84px',
                             fontWeight: 400,
                             lineHeight: 1.1,
                             marginBottom: '24px',
                             letterSpacing: '-0.02em'
                          }}>
-                            Product Designer <br/>
-                            AI Engineer
+                            Design Engineer <br/>
+                            Problem Solver
                          </h1>
 
                          <p style={{
