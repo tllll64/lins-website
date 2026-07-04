@@ -54,14 +54,13 @@ export const Navbar = ({ theme = 'light' }) => {
         backdropFilter: 'blur(16px)',
         WebkitBackdropFilter: 'blur(16px)',
         border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : colors.grey[92]}`,
-        borderRadius: '9999px',
-        boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
+        borderRadius: '6px',
         transition: 'background 0.3s ease, border-color 0.3s ease',
     };
 
     const wrapperStyle = {
         position: 'fixed',
-        top: spacing.lg,
+        top: '24px',
         left: '50%',
         transform: `translateX(-50%) translateY(${isHidden ? '-120%' : '0'})`,
         zIndex: 50,
@@ -75,7 +74,7 @@ export const Navbar = ({ theme = 'light' }) => {
     const containerStyle = {
         paddingLeft: spacing.xl,
         paddingRight: spacing.xl,
-        height: '48px',
+        height: '44px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -88,7 +87,7 @@ export const Navbar = ({ theme = 'light' }) => {
         transition: 'color 0.3s ease'
     };
 
-    const THUMB_SIZE = 38;
+    const THUMB_SIZE = 34;
     const BUBBLE_PAD = 5;
 
     const isEchoActive = location.pathname === '/echo';

@@ -19,7 +19,9 @@ const FolderIcon = ({
     
     // Gradient
     const blueGradient = 'linear-gradient(135deg, #6BB6FF 0%, #5BA3E8 100%)';
-    const backColor = '#5A9FDE'; // Unified solid color for back parts
+    // Front pane: translucent white "frosted glass" so the backdrop blur is visible
+    const frostedFront = 'linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.5) 100%)';
+    const backColor = '#FFFFFF'; // White outer shell (folder skin)
     
     const containerStyle = {
         position: 'relative',
@@ -159,8 +161,11 @@ const FolderIcon = ({
         left: 0,
         width: '100%',
         height: '82%', // Covers most of the bottom
-        background: blueGradient,
+        background: frostedFront,
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
         borderRadius: '16px',
+        border: '1px solid rgba(255,255,255,0.35)', // Subtle glass edge
         zIndex: 20, // High z-index to cover images initially
         display: 'flex',
         flexDirection: 'column',
@@ -180,12 +185,12 @@ const FolderIcon = ({
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between',
+        justifyContent: title ? 'space-between' : 'flex-end', // Keep subtitle at its original bottom position when there's no title
     };
 
     const textStyle = {
         fontFamily: '"Inter", sans-serif',
-        color: '#FFFFFF',
+        color: colors.grey[9],
     };
 
     return (
@@ -220,21 +225,25 @@ const FolderIcon = ({
             {/* Front Body */}
             <div style={frontBodyStyle}>
                 <div style={textContainerStyle}>
-                    <div style={{
-                        ...textStyle,
-                        fontSize: '16px',
-                        fontWeight: 'normal',
-                        textAlign: 'center',
-                        width: '100%',
-                        opacity: 0.4
-                    }}>
-                        {title}
-                    </div>
+                    {title && (
+                        <div style={{
+                            ...textStyle,
+                            fontSize: '16px',
+                            fontWeight: 'normal',
+                            textAlign: 'center',
+                            width: '100%',
+                            opacity: 0.4
+                        }}>
+                            {title}
+                        </div>
+                    )}
                     <div style={{
                         ...textStyle,
                         fontSize: '18px',
                         opacity: 0.9,
                         fontWeight: 500,
+                        textAlign: 'center',
+                        width: '100%',
                         whiteSpace: 'nowrap',
                         overflow: 'hidden',
                         textOverflow: 'ellipsis'

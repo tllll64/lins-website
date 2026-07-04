@@ -100,8 +100,8 @@ export const Home = () => {
     const pageStyle = {
         minHeight: '100vh',
         background: colors.grey[98],
-        backgroundImage: `radial-gradient(${colors.grey[92]} 1px, transparent 1px)`,
-        backgroundSize: '18px 18px',
+        backgroundImage: `url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='80'%20height='80'%3E%3Crect%20width='1.5'%20height='1.5'%20fill='%23000'/%3E%3C/svg%3E")`,
+        backgroundSize: '80px 80px',
         backgroundPosition: 'center',
         backgroundRepeat: 'repeat'
     };
@@ -148,9 +148,9 @@ export const Home = () => {
                     userSelect: 'none',
                     WebkitUserSelect: 'none'
                 }}>
-                    <FolderIcon 
-                        title="12 Projects"
-                        subtitle="Internship, AI-Driven, Digital"
+                    <FolderIcon
+                        title=""
+                        subtitle="Internship Projects"
                         scale={0.6}
                         folderImages={[PromoteLogo, TakoLogo, LingxiLogo]}
                         onClick={() => document.getElementById('works')?.scrollIntoView({ behavior: 'smooth' })}
@@ -168,11 +168,11 @@ export const Home = () => {
                         cursor: 'pointer',
                         userSelect: 'none',
                         WebkitUserSelect: 'none',
-                        transform: 'translateY(72px)'
+                        transform: 'translate(-12px, 84px)'
                     }}
                     onClick={() => navigate('/about')}
                 >
-                    <PolaroidDecoration images={[null, profileImg]} scale={1.1} />
+                    <PolaroidDecoration images={[null, profileImg]} scale={0.92} />
                 </div>
 
                 {/* NothingWordClock in bottom-right corner */}
@@ -208,7 +208,9 @@ export const Home = () => {
                         textAlign: 'center',
                         color: colors.black.solid, // Changed to black for visibility
                         maxWidth: '800px',
-                        padding: '0 20px',
+                        padding: '28px 20px',
+                        background: colors.grey[98], // Same as page base — masks the dot grid behind the text
+                        borderRadius: '16px',
                         transform: 'translateY(40px)'
                     }}>
                          <h1 style={{
@@ -241,7 +243,7 @@ export const Home = () => {
                 title="Internship Projects"
                 subtitle="2023-2026 年实习项目产出和复盘思考"
                 id="works"
-                style={{ paddingTop: '60px', paddingBottom: layoutSpacing.section['2xl'] }}
+                style={{ paddingTop: '180px', paddingBottom: layoutSpacing.section['2xl'] }}
             >
                 <div style={{
                     display: 'flex',
