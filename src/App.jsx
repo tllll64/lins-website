@@ -5,6 +5,7 @@ import { LanguageProvider } from './contexts/LanguageContext';
 const Home = lazy(() => import('./pages/Home').then(module => ({ default: module.Home })));
 const About = lazy(() => import('./pages/About').then(module => ({ default: module.About })));
 const Research = lazy(() => import('./pages/Research').then(module => ({ default: module.Research })));
+const Echo = lazy(() => import('./pages/Echo').then(module => ({ default: module.Echo })));
 const ZhiXiaoBao = lazy(() => import('./pages/works/zhi-xiao-bao').then(module => ({ default: module.ZhiXiaoBao })));
 const XiaoMi = lazy(() => import('./pages/works/xiao-mi').then(module => ({ default: module.XiaoMi })));
 const ColeanDetail = lazy(() => import('./pages/ColeanDetail').then(module => ({ default: module.ColeanDetail })));
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/sandbox" element={<Research />} />
+            <Route path="/echo" element={<Echo />} />
             <Route path="/works/zhi-xiao-bao" element={<ZhiXiaoBao />} />
             <Route path="/works/xiao-mi" element={<XiaoMi />} />
             <Route path="/works/colean" element={<ColeanDetail />} />

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MessageCircle, Copy, Check, ArrowUpRight } from 'lucide-react';
-import { colors, spacing, typography, fontWeight, stackSpacing, layoutSpacing, fontSize } from '../design-system/tokens';
+import { colors, spacing, typography, stackSpacing, layoutSpacing, fontSize } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 
-export const ContactSection = () => {
+export const ContactSection = React.forwardRef((props, ref) => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     const [copiedField, setCopiedField] = useState(null);
     const [hoveredField, setHoveredField] = useState(null);
@@ -123,7 +123,7 @@ export const ContactSection = () => {
     };
 
     return (
-        <footer style={footerStyle}>
+        <footer style={footerStyle} ref={ref} id="about">
             <div style={footerContentStyle}>
                 <div style={{ gridArea: 'title' }}>
                     <h2 style={footerTitleStyle}>Contact Me</h2>
@@ -206,4 +206,6 @@ export const ContactSection = () => {
             </div>
         </footer>
     );
-};
+});
+
+ContactSection.displayName = 'ContactSection';

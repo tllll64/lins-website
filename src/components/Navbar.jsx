@@ -1,16 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { colors, spacing, typography, fontWeight } from '../design-system/tokens';
-import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
-import { useLanguage } from '../contexts/LanguageContext';
 
 export const Navbar = ({ theme = 'light' }) => {
-    const isMobile = useMediaQuery('(max-width: 768px)');
     const location = useLocation();
     const [isHidden, setIsHidden] = useState(false);
     const lastScrollYRef = useRef(0);
     const isHiddenRef = useRef(false);
-    const { language, toggleLanguage } = useLanguage();
 
     useEffect(() => {
         const hideThreshold = 8;
@@ -95,46 +91,25 @@ export const Navbar = ({ theme = 'light' }) => {
     const THUMB_SIZE = 38;
     const BUBBLE_PAD = 5;
 
-    const langBubbleStyle = {
+    const isEchoActive = location.pathname === '/echo';
+
+    const echoBubbleStyle = {
         ...pillBase,
         height: `${THUMB_SIZE + BUBBLE_PAD * 2}px`,
-        padding: `${BUBBLE_PAD}px`,
-        display: 'flex',
-        alignItems: 'center',
-        position: 'relative',
-        cursor: 'pointer',
-        userSelect: 'none',
-        overflow: 'hidden',
-    };
-
-    const langThumbStyle = {
-        position: 'absolute',
-        top: `${BUBBLE_PAD}px`,
-        left: language === 'en' ? `${BUBBLE_PAD}px` : `${BUBBLE_PAD + THUMB_SIZE}px`,
-        width: `${THUMB_SIZE}px`,
-        height: `${THUMB_SIZE}px`,
-        borderRadius: '9999px',
-        background: isDark ? 'rgba(255,255,255,0.15)' : colors.white.solid,
-        boxShadow: isDark ? 'none' : '0 1px 3px rgba(0,0,0,0.12)',
-        transition: 'left 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
-        zIndex: 0,
-    };
-
-    const getLangOptionStyle = (isActive) => ({
-        width: `${THUMB_SIZE}px`,
-        height: `${THUMB_SIZE}px`,
+        paddingLeft: spacing.lg,
+        paddingRight: spacing.lg,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        position: 'relative',
-        zIndex: 1,
-        color: isActive ? highlightColor : baseColor,
+        cursor: 'pointer',
+        userSelect: 'none',
         fontFamily: typography.body.fontFamily,
         fontSize: typography.body.fontSize,
         fontWeight: fontWeight.medium,
         letterSpacing: '0.05em',
-        transition: 'color 0.25s ease',
-    });
+        color: isEchoActive ? highlightColor : baseColor,
+        transition: 'color 0.2s ease, background 0.3s ease, border-color 0.3s ease',
+    };
 
     const getLinkStyle = (isActive) => ({
         color: isActive ? highlightColor : baseColor,
@@ -168,14 +143,6 @@ export const Navbar = ({ theme = 'light' }) => {
                         Works
                     </Link>
                     <Link
-                        to="/about"
-                        style={getLinkStyle(isAboutActive)}
-                        onMouseEnter={(e) => handleMouseEnter(e, isAboutActive)}
-                        onMouseLeave={(e) => handleMouseLeave(e, isAboutActive)}
-                    >
-                        About
-                    </Link>
-                    <Link
                         to="/sandbox"
                         style={getLinkStyle(isSandboxActive)}
                         onMouseEnter={(e) => handleMouseEnter(e, isSandboxActive)}
@@ -183,14 +150,28 @@ export const Navbar = ({ theme = 'light' }) => {
                     >
                         Creative
                     </Link>
+                    <Link
+                        to="/about"
+                        style={getLinkStyle(isAboutActive)}
+                        onMouseEnter={(e) => handleMouseEnter(e, isAboutActive)}
+                        onMouseLeave={(e) => handleMouseLeave(e, isAboutActive)}
+                    >
+                        About
+                    </Link>
                 </div>
             </nav>
 
-            <div style={langBubbleStyle} onClick={toggleLanguage}>
-                <div style={langThumbStyle} />
-                <span style={getLangOptionStyle(language === 'en')}>EN</span>
-                <span style={getLangOptionStyle(language === 'zh')}>CN</span>
-            </div>
+            {/* Echo — standalone pill on the right */}
+            <Link to="/echo" style={{ textDecoration: 'none' }}>
+                <div
+                    style={echoBubbleStyle}
+                    onMouseEnter={(e) => { if (!isEchoActive) e.currentTarget.style.color = highlightColor; }}
+                    onMouseLeave={(e) => { if (!isEchoActive) e.currentTarget.style.color = baseColor; }}
+                >
+                    Echo
+                </div>
+            </Link>
+
         </div>
     );
 };
