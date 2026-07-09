@@ -23,6 +23,7 @@ import LingxiLogo from '../assets/Home/Lingxi_logo.png';
 import RedLogo from '../assets/Home/red.png';
 import TikTokAppLogo from '../assets/Home/TikTok.png';
 import PolaroidDecoration from '../components/PolaroidDecoration';
+import AsciiTrail from '../components/AsciiTrail';
 import profileImg from '../assets/about/profile2.png';
 import TencentLogo from '../assets/Home/tencent-color.svg';
 
@@ -99,8 +100,8 @@ export const Home = () => {
     const pageStyle = {
         minHeight: '100vh',
         background: colors.grey[98],
-        backgroundImage: `radial-gradient(${colors.grey[92]} 1px, transparent 1px)`,
-        backgroundSize: '18px 18px',
+        backgroundImage: `url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='80'%20height='80'%3E%3Crect%20width='1.5'%20height='1.5'%20fill='%23000'/%3E%3C/svg%3E")`,
+        backgroundSize: '80px 80px',
         backgroundPosition: 'center',
         backgroundRepeat: 'repeat'
     };
@@ -113,7 +114,7 @@ export const Home = () => {
             <Section
                 style={{
                     position: 'relative',
-                    minHeight: '85vh',
+                    minHeight: '100vh',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
@@ -122,12 +123,26 @@ export const Home = () => {
                     paddingBottom: layoutSpacing.section.md,
                 }}
             >
+                {/* Vertical top→middle→bottom gradient wash (sits above the dot grid, below content) */}
+                <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    zIndex: 0,
+                    pointerEvents: 'none',
+                    background: 'linear-gradient(180deg, rgba(206,212,222,0.65) 0%, rgba(206,212,222,0) 24%, rgba(206,212,222,0) 76%, rgba(206,212,222,0.5) 100%)'
+                }} />
+
+                {/* ASCII cursor-trail effect across the hero */}
+                <AsciiTrail />
+
                 {/* NothingDotClock in top-left corner */}
                 <div style={{
                     position: 'absolute',
-                    top: layoutSpacing.section.xl,
+                    top: '135px',
                     left: isMobile ? layoutSpacing.page.mobile : layoutSpacing.section.xl,
-                    zIndex: 10
+                    zIndex: 10,
+                    userSelect: 'none',
+                    WebkitUserSelect: 'none'
                 }}>
                     <NothingDotClock />
                 </div>
@@ -135,14 +150,16 @@ export const Home = () => {
                 {/* FolderIcon in top-right corner */}
                 <div style={{
                     position: 'absolute',
-                    top: layoutSpacing.section.xl,
+                    top: '150px',
                     right: isMobile ? layoutSpacing.page.mobile : layoutSpacing.section.xl,
                     zIndex: 10,
-                    display: isMobile ? 'none' : 'block' // Hide on mobile if too crowded, or adjust
+                    display: isMobile ? 'none' : 'block',
+                    userSelect: 'none',
+                    WebkitUserSelect: 'none'
                 }}>
-                    <FolderIcon 
-                        title="12 Projects"
-                        subtitle="Internship, AI-Driven, Digital"
+                    <FolderIcon
+                        title=""
+                        subtitle="Internship Projects"
                         scale={0.6}
                         folderImages={[PromoteLogo, TakoLogo, LingxiLogo]}
                         onClick={() => document.getElementById('works')?.scrollIntoView({ behavior: 'smooth' })}
@@ -157,11 +174,14 @@ export const Home = () => {
                         left: isMobile ? layoutSpacing.page.mobile : layoutSpacing.section.xl,
                         zIndex: 10,
                         display: isMobile ? 'none' : 'block',
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        userSelect: 'none',
+                        WebkitUserSelect: 'none',
+                        transform: 'translate(-12px, -61px)'
                     }}
                     onClick={() => navigate('/about')}
                 >
-                    <PolaroidDecoration images={[null, profileImg]} scale={1.1} />
+                    <PolaroidDecoration images={[null, profileImg]} scale={0.92} />
                 </div>
 
                 {/* NothingWordClock in bottom-right corner */}
@@ -171,7 +191,10 @@ export const Home = () => {
                         bottom: spacing[4],
                         right: isMobile ? layoutSpacing.page.mobile : layoutSpacing.section.xl,
                         zIndex: 10,
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        userSelect: 'none',
+                        WebkitUserSelect: 'none',
+                        transform: 'translateY(-73px)'
                     }}
                     onClick={() => navigate('/sandbox')}
                 >
@@ -194,55 +217,21 @@ export const Home = () => {
                         textAlign: 'center',
                         color: colors.black.solid, // Changed to black for visibility
                         maxWidth: '800px',
-                        padding: '0 20px',
-                        transform: 'translateY(40px)'
+                        padding: '28px 20px',
+                        background: colors.grey[98], // Same as page base — masks the dot grid behind the text
+                        borderRadius: '16px',
+                        transform: 'translateY(4px)'
                     }}>
-                         <h3 
-                            onMouseEnter={() => setShowNameTooltip(true)}
-                            onMouseLeave={() => setShowNameTooltip(false)}
-                            style={{
-                                fontFamily: '"Inter", sans-serif',
-                                fontSize: isMobile ? '16px' : '20px',
-                                fontWeight: 500,
-                                marginBottom: '16px',
-                                letterSpacing: '0.02em',
-                                color: colors.grey[40], // Slightly lighter for subhead
-                                cursor: 'default',
-                                width: 'fit-content',
-                                margin: '0 auto 16px auto',
-                                position: 'relative'
-                         }}>
-                            Hi, I'm Lynn Tian
-                            
-                            {/* Hover Annotation */}
-                            <div style={{
-                                position: 'absolute',
-                                top: '-10px',
-                                left: 'calc(100% + 5px)',
-                                width: 'max-content',
-                                opacity: showNameTooltip ? 1 : 0,
-                                transition: 'opacity 0.3s ease-out',
-                                pointerEvents: 'none',
-                                fontFamily: '"Noto Sans SC", "PingFang SC", sans-serif',
-                                fontSize: '16px',
-                                color: '#000',
-                                fontWeight: 'normal',
-                                zIndex: 20
-                            }}>
-                                [田琳]
-                            </div>
-                         </h3>
-                         
                          <h1 style={{
                             fontFamily: 'Lora, "Times New Roman", Georgia, serif',
-                            fontSize: isMobile ? '54px' : '84px',
+                            fontSize: isMobile ? '32px' : '62px',
                             fontWeight: 400,
                             lineHeight: 1.1,
                             marginBottom: '24px',
                             letterSpacing: '-0.02em'
                          }}>
-                            Design Engineer <br/>
-                            Problem Solver
+                            Design Engineer
+                            <span style={{ display: 'block', marginTop: '8px' }}>With Research Mindset</span>
                          </h1>
 
                          <p style={{
@@ -253,8 +242,7 @@ export const Home = () => {
                             margin: '0 auto',
                             opacity: 0.9
                          }}>
-                            I’m dedicated to merging human-centered design with cutting-edge technology. <br />
-                            Lately, I’ve been focused on human-AI collaboration and seamless integration.
+                            I’m dedicated to merging human-centered design with cutting-edge technology. Lately, I’ve been focused on human-AI collaboration and seamless integration.
                          </p>
                     </div>
                 </div>
@@ -264,7 +252,7 @@ export const Home = () => {
                 title="Internship Projects"
                 subtitle="2023-2026 年实习项目产出和复盘思考"
                 id="works"
-                style={{ paddingTop: '60px', paddingBottom: layoutSpacing.section['2xl'] }}
+                style={{ paddingTop: '40px', paddingBottom: layoutSpacing.section['2xl'] }}
             >
                 <div style={{
                     display: 'flex',

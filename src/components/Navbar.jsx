@@ -5,6 +5,7 @@ import { colors, spacing, typography, fontWeight } from '../design-system/tokens
 export const Navbar = ({ theme = 'light' }) => {
     const location = useLocation();
     const [isHidden, setIsHidden] = useState(false);
+    const [hasScrolled, setHasScrolled] = useState(false);
     const lastScrollYRef = useRef(0);
     const isHiddenRef = useRef(false);
 
@@ -16,6 +17,8 @@ export const Navbar = ({ theme = 'light' }) => {
         const onScroll = () => {
             const currentY = window.scrollY;
             const delta = currentY - lastScrollYRef.current;
+
+            setHasScrolled(currentY > 10);
 
             if (currentY < topRevealOffset) {
                 if (isHiddenRef.current) {
@@ -50,18 +53,17 @@ export const Navbar = ({ theme = 'light' }) => {
     const highlightColor = isDark ? colors.white.solid : colors.grey[9];
 
     const pillBase = {
-        background: isDark ? 'rgba(30, 30, 30, 0.7)' : `${colors.grey[98]}80`,
+        background: isDark ? 'rgba(30, 30, 30, 0.7)' : '#FFFFFF',
         backdropFilter: 'blur(16px)',
         WebkitBackdropFilter: 'blur(16px)',
-        border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : colors.grey[92]}`,
-        borderRadius: '9999px',
-        boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
+        border: isDark ? '1px solid rgba(255,255,255,0.1)' : 'none',
+        borderRadius: '6px',
         transition: 'background 0.3s ease, border-color 0.3s ease',
     };
 
     const wrapperStyle = {
         position: 'fixed',
-        top: spacing.lg,
+        top: '24px',
         left: '50%',
         transform: `translateX(-50%) translateY(${isHidden ? '-120%' : '0'})`,
         zIndex: 50,
@@ -75,7 +77,7 @@ export const Navbar = ({ theme = 'light' }) => {
     const containerStyle = {
         paddingLeft: spacing.xl,
         paddingRight: spacing.xl,
-        height: '48px',
+        height: '44px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -88,7 +90,7 @@ export const Navbar = ({ theme = 'light' }) => {
         transition: 'color 0.3s ease'
     };
 
-    const THUMB_SIZE = 38;
+    const THUMB_SIZE = 34;
     const BUBBLE_PAD = 5;
 
     const isEchoActive = location.pathname === '/echo';
@@ -130,7 +132,24 @@ export const Navbar = ({ theme = 'light' }) => {
     const isWorksActive = location.pathname === '/' && location.hash === '';
     const isSandboxActive = location.pathname === '/sandbox';
 
+    const backdropStyle = {
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        height: `${24 + 44 + 24}px`,
+        zIndex: 49,
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        background: isDark ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.3)',
+        opacity: (hasScrolled && !isHidden) ? 1 : 0,
+        pointerEvents: 'none',
+        transition: 'opacity 0.28s ease',
+    };
+
     return (
+        <>
+        <div style={backdropStyle} />
         <div style={wrapperStyle}>
             <nav style={pillBase}>
                 <div style={containerStyle}>
@@ -173,5 +192,6 @@ export const Navbar = ({ theme = 'light' }) => {
             </Link>
 
         </div>
+        </>
     );
 };

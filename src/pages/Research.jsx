@@ -18,9 +18,9 @@ const SandboxCard = ({ title, date, preview, button, span = 1 }) => {
             {/* Media area — preview with title + date overlaid at top */}
             <div style={{
                 position: 'relative',
-                background: colors.grey[95],
+                background: '#fff',
                 borderRadius: '8px',
-                aspectRatio: span > 1 ? '2/1' : '4/3',
+                aspectRatio: '2 / 1',
                 overflow: 'hidden',
             }}>
                 {/* Title + date overlaid on top of the image */}
@@ -49,7 +49,7 @@ const SandboxCard = ({ title, date, preview, button, span = 1 }) => {
                     {date && (
                         <span style={{
                             fontFamily: typography.body.fontFamily,
-                            fontSize: '13px',
+                            fontSize: '15px',
                             color: colors.grey[56],
                             whiteSpace: 'nowrap',
                             flexShrink: 0,
@@ -67,15 +67,7 @@ const SandboxCard = ({ title, date, preview, button, span = 1 }) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                 }}>
-                    {preview || (
-                        <span style={{
-                            fontFamily: typography.body.fontFamily,
-                            fontSize: '13px',
-                            color: colors.grey[63],
-                        }}>
-                            —
-                        </span>
-                    )}
+                    {preview}
                 </div>
             </div>
 
@@ -114,32 +106,32 @@ const SandboxCard = ({ title, date, preview, button, span = 1 }) => {
 const sandboxItems = [
     {
         title: 'GenFaceUI: Meta-Design Tool',
-        date: 'Feb 2025',
+        date: '2025.02',
         button: { label: 'View Paper →', onClick: () => window.open('https://arxiv.org/abs/2602.11055', '_blank') },
     },
     {
         title: 'Jokeasy: Human-AI Joke Collaboration',
-        date: 'Nov 2024',
+        date: '2024.11',
         button: { label: 'View Paper →' },
     },
     {
         title: 'NothingOS Word Clock',
-        date: 'Dec 2024',
+        date: '2024.12',
         button: { label: 'View Live →' },
     },
     {
         title: '支小宝周边出行探索',
-        date: 'Oct 2024',
+        date: '2024.10',
         button: { label: 'Case Study →', onClick: () => window.open('https://lynntian.framer.website/works/zhi-xiao-bao', '_blank') },
     },
     {
         title: 'Dark Patterns in Screen Reader Accessibility',
-        date: 'Sep 2024',
+        date: '2024.09',
         button: { label: 'View Paper →' },
     },
     {
         title: 'Facial Expression Interface for AI Agents',
-        date: 'Mar 2025',
+        date: '2025.03',
         button: { label: 'View Paper →' },
     },
 ];
@@ -150,8 +142,8 @@ export const Research = () => {
     const pageStyle = {
         minHeight: '100vh',
         background: colors.grey[98],
-        backgroundImage: `radial-gradient(${colors.grey[92]} 1px, transparent 1px)`,
-        backgroundSize: '18px 18px',
+        backgroundImage: `url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='80'%20height='80'%3E%3Crect%20width='1.5'%20height='1.5'%20fill='%23000'/%3E%3C/svg%3E")`,
+        backgroundSize: '80px 80px',
         backgroundPosition: 'center',
         backgroundRepeat: 'repeat',
     };
@@ -171,49 +163,20 @@ export const Research = () => {
             </div>
 
             <div style={containerStyle}>
-                {/* Header */}
+                {/* Header — content removed, area reserved for future content */}
                 <div style={{
-                    display: 'flex',
-                    alignItems: 'baseline',
-                    justifyContent: 'space-between',
+                    minHeight: isMobile ? '54px' : '62px',
                     marginBottom: '40px',
-                }}>
-                    <div>
-                        <h1 style={{
-                            fontFamily: 'Lora, "Times New Roman", Georgia, serif',
-                            fontSize: isMobile ? '28px' : '36px',
-                            fontWeight: 400,
-                            letterSpacing: '-0.02em',
-                            color: colors.grey[9],
-                            margin: 0,
-                            marginBottom: '6px',
-                        }}>
-                            Creative
-                        </h1>
-                        <p style={{
-                            fontFamily: typography.body.fontFamily,
-                            fontSize: '14px',
-                            color: colors.grey[50],
-                            margin: 0,
-                        }}>
-                            生成式 AI 方向的探索与实验
-                        </p>
-                    </div>
-                    <span style={{
-                        fontFamily: typography.body.fontFamily,
-                        fontSize: '13px',
-                        color: colors.grey[60],
-                    }}>
-                        {sandboxItems.length} projects
-                    </span>
-                </div>
+                }} />
 
-                {/* Grid */}
+                {/* Grid — breaks out of the container padding to sit flush against the screen edges */}
                 <div style={{
                     display: 'grid',
                     gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
-                    gap: '16px',
+                    gap: '8px',
                     alignItems: 'start',
+                    marginLeft: isMobile ? `calc(-${layoutSpacing.page.mobile} + 8px)` : `calc(-${layoutSpacing.page.desktop} + 8px)`,
+                    marginRight: isMobile ? `calc(-${layoutSpacing.page.mobile} + 8px)` : `calc(-${layoutSpacing.page.desktop} + 8px)`,
                 }}>
                     {sandboxItems.map((item, i) => (
                         <SandboxCard key={i} {...item} />

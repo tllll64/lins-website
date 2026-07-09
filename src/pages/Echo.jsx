@@ -117,8 +117,8 @@ export const Echo = () => {
     const pageStyle = {
         minHeight: '100vh',
         background: colors.grey[98],
-        backgroundImage: `radial-gradient(${colors.grey[92]} 1px, transparent 1px)`,
-        backgroundSize: '18px 18px',
+        backgroundImage: `url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='80'%20height='80'%3E%3Crect%20width='1.5'%20height='1.5'%20fill='%23000'/%3E%3C/svg%3E")`,
+        backgroundSize: '80px 80px',
         backgroundPosition: 'center',
         backgroundRepeat: 'repeat',
     };
