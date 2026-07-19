@@ -1,9 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Navbar } from '../components/Navbar';
+import { ASSETS } from '../constants/assets';
 import { colors, layoutSpacing, typography } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 
-const SandboxCard = ({ title, date, preview, button, span = 1 }) => {
+const SandboxCard = ({ title, date, preview, image, button, span = 1 }) => {
+    const navigate = useNavigate();
+    const handleClick = button?.to ? () => navigate(button.to) : button?.onClick;
     return (
         <div style={{
             gridColumn: span > 1 ? `span ${span}` : undefined,
@@ -36,6 +40,10 @@ const SandboxCard = ({ title, date, preview, button, span = 1 }) => {
                     justifyContent: 'space-between',
                     gap: '12px',
                     pointerEvents: 'none',
+                    background: image
+                        ? 'linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.75) 55%, rgba(255,255,255,0) 100%)'
+                        : 'transparent',
+                    paddingBottom: image ? '20px' : '10px',
                 }}>
                     <span style={{
                         fontFamily: typography.body.fontFamily,
@@ -67,14 +75,25 @@ const SandboxCard = ({ title, date, preview, button, span = 1 }) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                 }}>
-                    {preview}
+                    {image ? (
+                        <img
+                            src={image}
+                            alt={title}
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'cover',
+                                display: 'block',
+                            }}
+                        />
+                    ) : preview}
                 </div>
             </div>
 
             {/* Full-width button inside card */}
             {button && (
                 <button
-                    onClick={button.onClick}
+                    onClick={handleClick}
                     style={{
                         width: '100%',
                         padding: '9px 16px',
@@ -85,12 +104,12 @@ const SandboxCard = ({ title, date, preview, button, span = 1 }) => {
                         fontSize: '15px',
                         fontWeight: 500,
                         color: colors.grey[16],
-                        cursor: button.onClick ? 'pointer' : 'default',
+                        cursor: handleClick ? 'pointer' : 'default',
                         transition: 'background 0.15s',
                         textAlign: 'center',
                     }}
                     onMouseEnter={e => {
-                        if (button.onClick) e.currentTarget.style.background = colors.grey[92];
+                        if (handleClick) e.currentTarget.style.background = colors.grey[92];
                     }}
                     onMouseLeave={e => {
                         e.currentTarget.style.background = colors.grey[95];
@@ -105,19 +124,45 @@ const SandboxCard = ({ title, date, preview, button, span = 1 }) => {
 
 const sandboxItems = [
     {
-        title: 'GenFaceUI: Meta-Design Tool',
-        date: '2025.02',
-        button: { label: 'View Paper →', onClick: () => window.open('https://arxiv.org/abs/2602.11055', '_blank') },
+        title: '给阿嬷的情书 AI侨批活动',
+        date: '2026.07',
+        button: { label: 'View Demo →', to: '/works/qiaopi' },
     },
     {
-        title: 'Jokeasy: Human-AI Joke Collaboration',
-        date: '2024.11',
-        button: { label: 'View Paper →' },
+        title: 'Sidetation',
+        button: { label: 'View Demo →' },
     },
     {
-        title: 'NothingOS Word Clock',
-        date: '2024.12',
-        button: { label: 'View Live →' },
+        title: 'gen-icon-skill',
+        button: { label: 'View Demo →' },
+    },
+    {
+        title: '抖音互动弹幕探索',
+        button: { label: 'View Demo →' },
+    },
+    {
+        title: '小米汽车智驾学堂',
+        date: '小米实习产出',
+        image: ASSETS.digital1,
+        button: { label: 'View Case →', onClick: () => window.open('https://lynntian.framer.website/works/xiao-mi', '_blank') },
+    },
+    {
+        title: 'NIO Roam 城市漫游座舱',
+        date: '校级&院级优秀毕设',
+        image: ASSETS.digital2,
+        button: { label: 'View Prototype →', onClick: () => window.open('https://www.figma.com/proto/KerAYedbweEAHVc4pEWPak/%E5%8E%86%E5%8F%B2%E4%BD%9C%E5%93%81%E9%9B%86%E5%90%88?page-id=0%3A1&node-id=3-5&viewport=320%2C317%2C0.02&t=TNvKH6ruKYJgjx1i-1&scaling=scale-down-width&content-scaling=fixed', '_blank') },
+    },
+    {
+        title: '方由: 国学教育玩具设计',
+        date: '智能硬件产品设计',
+        image: ASSETS.digital3,
+        button: { label: 'View Prototype →', onClick: () => window.open('https://www.figma.com/proto/KerAYedbweEAHVc4pEWPak/%E5%8E%86%E5%8F%B2%E4%BD%9C%E5%93%81%E9%9B%86%E5%90%88?page-id=0%3A1&node-id=12-2901&viewport=-92%2C894%2C0.05&t=Xxpwcogo7FOPPPgJ-1&scaling=scale-down-width&content-scaling=fixed', '_blank') },
+    },
+    {
+        title: 'Colean: 未来家务 AR 游戏',
+        date: 'AR 应用探索',
+        image: ASSETS.digital4,
+        button: { label: 'View Prototype →', onClick: () => window.open('https://www.figma.com/proto/KerAYedbweEAHVc4pEWPak/%E5%8E%86%E5%8F%B2%E4%BD%9C%E5%93%81%E9%9B%86%E5%90%88?page-id=0%3A1&node-id=12-973&viewport=-92%2C894%2C0.05&t=G7M5N4g1HM6V495R-1&scaling=scale-down-width&content-scaling=fixed', '_blank') },
     },
     {
         title: '支小宝周边出行探索',
@@ -133,6 +178,11 @@ const sandboxItems = [
         title: 'Facial Expression Interface for AI Agents',
         date: '2025.03',
         button: { label: 'View Paper →' },
+    },
+    {
+        title: 'Coming Soon',
+        date: '2026',
+        button: { label: 'Stay Tuned →' },
     },
 ];
 
