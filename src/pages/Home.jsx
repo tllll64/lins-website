@@ -23,7 +23,6 @@ import LingxiLogo from '../assets/Home/Lingxi_logo.png';
 import RedLogo from '../assets/Home/red.png';
 import TikTokAppLogo from '../assets/Home/TikTok.png';
 import PolaroidDecoration from '../components/PolaroidDecoration';
-import AsciiTrail from '../components/AsciiTrail';
 import profileImg from '../assets/about/profile2.png';
 import TencentLogo from '../assets/Home/tencent-color.svg';
 
@@ -131,9 +130,6 @@ export const Home = () => {
                     pointerEvents: 'none',
                     background: 'linear-gradient(180deg, rgba(206,212,222,0.65) 0%, rgba(206,212,222,0) 24%, rgba(206,212,222,0) 76%, rgba(206,212,222,0.5) 100%)'
                 }} />
-
-                {/* ASCII cursor-trail effect across the hero */}
-                <AsciiTrail />
 
                 {/* NothingDotClock in top-left corner */}
                 <div style={{
@@ -261,13 +257,6 @@ export const Home = () => {
                 }}>
                     <ProjectCard
                         date="2026"
-                        title="跨境汇款·微汇款首页升级"
-                        tags={['2026', '产设共建']}
-                        logo={TencentLogo}
-                        locked={true}
-                    />
-                    <ProjectCard
-                        date="2026"
                         title="全球汇入 Sharelink 体验优化"
                         tags={['2026', '设计自驱']}
                         logo={TencentLogo}
@@ -297,6 +286,7 @@ export const Home = () => {
                             "薯条加热权益保障放心投"
                         )}
                     />
+                    {/* 灵犀 AURA 卡片暂时隐藏，需要时取消注释恢复
                     <ProjectCard
                         date="Mar - May 2024"
                         title="灵犀 AURA 营销结案升级"
@@ -307,6 +297,7 @@ export const Home = () => {
                         customCursor={xhsCursor}
                         pixelPattern={<PixelLock size={6} gap={2} />}
                     />
+                    */}
                 </div>
             </Section>
 
