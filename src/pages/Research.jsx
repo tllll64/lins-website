@@ -5,9 +5,38 @@ import { ASSETS } from '../constants/assets';
 import { colors, layoutSpacing, typography } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 
-const SandboxCard = ({ title, date, preview, image, button, span = 1 }) => {
+const SandboxCard = ({ title, date, preview, image, button, previewAction, span = 1 }) => {
     const navigate = useNavigate();
+    const [isDarkImage, setIsDarkImage] = React.useState(false);
     const handleClick = button?.to ? () => navigate(button.to) : button?.onClick;
+    const handlePreviewClick = previewAction?.to ? () => navigate(previewAction.to) : previewAction?.onClick;
+
+    const handleImageLoad = (event) => {
+        if (!image) return;
+
+        const loadedImage = event.currentTarget;
+        const canvas = document.createElement('canvas');
+        const sampleWidth = 32;
+        const sampleHeight = 16;
+        canvas.width = sampleWidth;
+        canvas.height = sampleHeight;
+
+        try {
+            const context = canvas.getContext('2d', { willReadFrequently: true });
+            context.drawImage(loadedImage, 0, 0, sampleWidth, sampleHeight);
+            const pixels = context.getImageData(0, 0, sampleWidth, sampleHeight).data;
+            let luminanceTotal = 0;
+
+            for (let index = 0; index < pixels.length; index += 4) {
+                luminanceTotal += (0.299 * pixels[index]) + (0.587 * pixels[index + 1]) + (0.114 * pixels[index + 2]);
+            }
+
+            setIsDarkImage(luminanceTotal / (pixels.length / 4) < 145);
+        } catch {
+            setIsDarkImage(false);
+        }
+    };
+
     return (
         <div style={{
             gridColumn: span > 1 ? `span ${span}` : undefined,
@@ -24,9 +53,20 @@ const SandboxCard = ({ title, date, preview, image, button, span = 1 }) => {
                 position: 'relative',
                 background: '#fff',
                 borderRadius: '8px',
-                aspectRatio: '2 / 1',
+                aspectRatio: image ? undefined : '2 / 1',
                 overflow: 'hidden',
-            }}>
+                cursor: handlePreviewClick ? 'pointer' : 'default',
+            }}
+                role={handlePreviewClick ? 'link' : undefined}
+                tabIndex={handlePreviewClick ? 0 : undefined}
+                onClick={handlePreviewClick}
+                onKeyDown={event => {
+                    if (handlePreviewClick && (event.key === 'Enter' || event.key === ' ')) {
+                        event.preventDefault();
+                        handlePreviewClick();
+                    }
+                }}
+            >
                 {/* Title + date overlaid on top of the image */}
                 <div style={{
                     position: 'absolute',
@@ -40,17 +80,15 @@ const SandboxCard = ({ title, date, preview, image, button, span = 1 }) => {
                     justifyContent: 'space-between',
                     gap: '12px',
                     pointerEvents: 'none',
-                    background: image
-                        ? 'linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.75) 55%, rgba(255,255,255,0) 100%)'
-                        : 'transparent',
-                    paddingBottom: image ? '20px' : '10px',
+                    paddingBottom: '10px',
                 }}>
                     <span style={{
                         fontFamily: typography.body.fontFamily,
                         fontSize: '15px',
                         fontWeight: 600,
-                        color: colors.grey[9],
+                        color: isDarkImage ? '#fff' : colors.grey[9],
                         lineHeight: 1.3,
+                        textShadow: isDarkImage ? '0 1px 3px rgba(0, 0, 0, 0.35)' : 'none',
                     }}>
                         {title}
                     </span>
@@ -58,9 +96,10 @@ const SandboxCard = ({ title, date, preview, image, button, span = 1 }) => {
                         <span style={{
                             fontFamily: typography.body.fontFamily,
                             fontSize: '15px',
-                            color: colors.grey[56],
+                            color: isDarkImage ? 'rgba(255, 255, 255, 0.8)' : colors.grey[56],
                             whiteSpace: 'nowrap',
                             flexShrink: 0,
+                            textShadow: isDarkImage ? '0 1px 3px rgba(0, 0, 0, 0.35)' : 'none',
                         }}>
                             {date}
                         </span>
@@ -70,7 +109,7 @@ const SandboxCard = ({ title, date, preview, image, button, span = 1 }) => {
                 {/* Preview content */}
                 <div style={{
                     width: '100%',
-                    height: '100%',
+                    height: image ? 'auto' : '100%',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -79,10 +118,10 @@ const SandboxCard = ({ title, date, preview, image, button, span = 1 }) => {
                         <img
                             src={image}
                             alt={title}
+                            onLoad={handleImageLoad}
                             style={{
                                 width: '100%',
-                                height: '100%',
-                                objectFit: 'cover',
+                                height: 'auto',
                                 display: 'block',
                             }}
                         />
@@ -126,7 +165,8 @@ const sandboxItems = [
     {
         title: '给阿嬷的情书 AI侨批活动',
         date: '2026.07',
-        button: { label: 'View Demo →', to: '/works/qiaopi' },
+        previewAction: { to: '/works/qiaopi' },
+        button: { label: 'View Demo →', to: '/works/qiaopi/demo' },
     },
     {
         title: 'Sidetation',

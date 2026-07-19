@@ -10,6 +10,7 @@ const ZhiXiaoBao = lazy(() => import('./pages/works/zhi-xiao-bao').then(module =
 const XiaoMi = lazy(() => import('./pages/works/xiao-mi').then(module => ({ default: module.XiaoMi })));
 const ColeanDetail = lazy(() => import('./pages/ColeanDetail').then(module => ({ default: module.ColeanDetail })));
 const Qiaopi = lazy(() => import('./pages/works/qiaopi').then(module => ({ default: module.Qiaopi })));
+const QiaopiDemo = lazy(() => import('./pages/works/qiaopi-demo').then(module => ({ default: module.QiaopiDemo })));
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/works/xiao-mi" element={<XiaoMi />} />
             <Route path="/works/colean" element={<ColeanDetail />} />
             <Route path="/works/qiaopi" element={<Qiaopi />} />
+            <Route path="/works/qiaopi/demo" element={<QiaopiDemo />} />
           </Routes>
         </Suspense>
       </Router>
