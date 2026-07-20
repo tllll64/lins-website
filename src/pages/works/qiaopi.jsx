@@ -1,15 +1,132 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { motion as Motion, useReducedMotion } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {
+    motion as Motion,
+    useMotionValueEvent,
+    useReducedMotion,
+    useScroll,
+} from 'framer-motion';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 import { Navbar } from '../../components/Navbar';
-import { colors, layoutSpacing, width, typography } from '../../design-system/tokens';
+import { colors, typography } from '../../design-system/tokens';
 import { useMediaQuery } from '../../design-system/hooks/useMediaQuery';
 import heroBanner from '../../assets/works/qiaopi/hero-banner.png';
 import materialsFrame from '../../assets/works/qiaopi/frame-materials.png';
 import landingUiFrame from '../../assets/works/qiaopi/frame-landing-ui.png';
 import sharePromptFrame from '../../assets/works/qiaopi/frame-share-prompt.png';
+
+const NextProjectProgress = ({ isMobile, shouldReduceMotion }) => {
+    const navigate = useNavigate();
+    const sectionRef = useRef(null);
+    const navigationTimerRef = useRef(null);
+    const hasNavigatedRef = useRef(false);
+    const { scrollYProgress } = useScroll({
+        target: sectionRef,
+        offset: ['start end', 'end end'],
+    });
+
+    const goToNextProject = () => {
+        if (hasNavigatedRef.current) return;
+        hasNavigatedRef.current = true;
+        navigate('/works/colean');
+    };
+
+    useMotionValueEvent(scrollYProgress, 'change', (progress) => {
+        if (shouldReduceMotion || hasNavigatedRef.current) return;
+
+        if (progress >= 0.999 && !navigationTimerRef.current) {
+            navigationTimerRef.current = window.setTimeout(goToNextProject, 300);
+        } else if (progress < 0.95 && navigationTimerRef.current) {
+            window.clearTimeout(navigationTimerRef.current);
+            navigationTimerRef.current = null;
+        }
+    });
+
+    useEffect(() => () => {
+        if (navigationTimerRef.current) {
+            window.clearTimeout(navigationTimerRef.current);
+        }
+    }, []);
+
+    return (
+        <section
+            ref={sectionRef}
+            aria-label="Next project"
+            style={{
+                height: isMobile ? '364px' : '416px',
+                position: 'relative',
+                marginLeft: isMobile ? '-20px' : '-40px',
+                marginRight: isMobile ? '-20px' : '-40px',
+                paddingLeft: isMobile ? '20px' : '40px',
+                paddingRight: isMobile ? '20px' : '40px',
+                boxSizing: 'border-box',
+                background: colors.grey[98],
+            }}
+        >
+            <button
+                type="button"
+                onClick={goToNextProject}
+                aria-label="View next project: Colean"
+                style={{
+                    position: 'sticky',
+                    top: 'calc(100svh - 96px)',
+                    width: '100%',
+                    height: '96px',
+                    padding: 0,
+                    border: 0,
+                    background: colors.grey[98],
+                    display: 'grid',
+                    gridTemplateColumns: isMobile ? '1fr auto' : 'auto auto minmax(120px, 1fr)',
+                    gridTemplateRows: isMobile ? 'auto auto' : '1fr',
+                    alignItems: 'center',
+                    columnGap: isMobile ? '16px' : '28px',
+                    rowGap: '12px',
+                    cursor: 'pointer',
+                    textAlign: 'left',
+                }}
+            >
+                <span style={{
+                    fontFamily: 'Lora, "Times New Roman", Georgia, serif',
+                    fontSize: isMobile ? '18px' : '24px',
+                    fontWeight: 400,
+                    color: colors.grey[56],
+                    whiteSpace: 'nowrap',
+                }}>
+                    Next Project
+                </span>
+                <span style={{
+                    fontFamily: 'Lora, "Times New Roman", Georgia, serif',
+                    fontSize: isMobile ? '18px' : '24px',
+                    fontWeight: 400,
+                    color: colors.black.solid,
+                    whiteSpace: 'nowrap',
+                }}>
+                    Colean
+                </span>
+                <span style={{
+                    gridColumn: isMobile ? '1 / -1' : undefined,
+                    position: 'relative',
+                    width: '100%',
+                    height: '1px',
+                    overflow: 'hidden',
+                    background: colors.grey[92],
+                }}>
+                    <Motion.span
+                        aria-hidden="true"
+                        style={{
+                            position: 'absolute',
+                            inset: 0,
+                            background: colors.black.solid,
+                            scaleX: shouldReduceMotion ? 0 : scrollYProgress,
+                            transformOrigin: '0 50%',
+                        }}
+                    />
+                </span>
+            </button>
+        </section>
+    );
+};
 
 export const Qiaopi = () => {
     const isMobile = useMediaQuery('(max-width: 768px)');
@@ -36,19 +153,8 @@ export const Qiaopi = () => {
     const revealInitial = shouldReduceMotion ? false : { opacity: 0, y: 24 };
     const mediaViewport = { once: true, amount: 0.08, margin: '0px 0px -6% 0px' };
 
-    const containerStyle = {
-        maxWidth: width.container.xl,
-        margin: '0 auto',
-        paddingBottom: layoutSpacing.section.xl
-    };
-
-    const sectionStyle = {
-        marginTop: isMobile ? '60px' : '80px',
-        marginBottom: isMobile ? '60px' : '80px'
-    };
-
     return (
-        <div style={{ background: colors.white.solid, minHeight: '100vh', paddingBottom: '100px' }}>
+        <div style={{ background: colors.white.solid, minHeight: '100vh', paddingBottom: 0 }}>
             <Navbar theme="light" />
 
             <div style={{
@@ -60,13 +166,13 @@ export const Qiaopi = () => {
             {/* Project introduction */}
             <div style={{
                 width: '100%',
-                minHeight: isMobile ? '70svh' : '50svh',
+                height: isMobile ? '180px' : '200px',
                 background: colors.white.solid,
-                display: 'grid',
-                gridTemplateRows: '1fr auto',
+                display: 'flex',
+                alignItems: 'flex-end',
                 position: 'relative',
                 overflow: 'hidden',
-                padding: isMobile ? '24px 0 28px' : '24px 0 32px',
+                padding: isMobile ? '20px 0' : '20px 0 32px',
                 boxSizing: 'border-box',
             }}>
                 <Motion.div
@@ -74,13 +180,11 @@ export const Qiaopi = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={revealTransition}
                     style={{
-                    alignSelf: 'center',
                     maxWidth: isMobile ? '100%' : '1080px',
-                    paddingTop: isMobile ? '48px' : '36px',
-                    paddingBottom: isMobile ? '40px' : '36px',
+                    width: '100%',
                 }}>
                     <h1 style={{
-                        fontFamily: 'PingFang SC, sans-serif',
+                        fontFamily: '"Noto Serif SC", "Songti SC", serif',
                         fontWeight: 400,
                         fontSize: isMobile ? '36px' : '52px',
                         lineHeight: 1.18,
@@ -92,64 +196,61 @@ export const Qiaopi = () => {
                     </h1>
                 </Motion.div>
 
-                <Motion.div
-                    initial={shouldReduceMotion ? false : 'hidden'}
-                    animate="visible"
-                    variants={{
-                        hidden: {},
-                        visible: {
-                            transition: shouldReduceMotion
-                                ? { staggerChildren: 0 }
-                                : { delayChildren: 0.16, staggerChildren: 0.08 },
-                        },
-                    }}
-                    style={{
+            </div>
+
+            <Motion.div
+                initial={shouldReduceMotion ? false : 'hidden'}
+                animate="visible"
+                variants={{
+                    hidden: {},
+                    visible: {
+                        transition: shouldReduceMotion
+                            ? { staggerChildren: 0 }
+                            : { delayChildren: 0.16, staggerChildren: 0.08 },
+                    },
+                }}
+                style={{
                     display: 'grid',
                     gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, minmax(180px, 260px))',
                     gap: isMobile ? '28px' : '64px',
+                    paddingBottom: isMobile ? '32px' : '40px',
                     fontFamily: typography.body.fontFamily,
-                }}>
+                }}
+            >
+                {[
+                    { label: 'Context', lines: ['Campaign Design', 'July 2026'] },
+                    { label: 'My Role', lines: ['Design Engineer', 'Prompt Designer'] },
+                    { label: 'Team', lines: ['Tencent CDG'] },
+                ].map((item) => (
                     <Motion.div
+                        key={item.label}
                         variants={{
                             hidden: { opacity: 0, y: 16 },
                             visible: { opacity: 1, y: 0, transition: revealTransition },
                         }}
                     >
-                        <div style={{ fontSize: '15px', color: colors.grey[16], marginBottom: '14px' }}>
-                            Context
+                        <div style={{
+                            fontFamily: 'Lora, "Times New Roman", Georgia, serif',
+                            fontSize: isMobile ? '16px' : '18px',
+                            fontWeight: 400,
+                            color: colors.grey[16],
+                            marginBottom: '14px',
+                        }}>
+                            {item.label}
                         </div>
-                        <div style={{ fontSize: isMobile ? '17px' : '18px', lineHeight: 1.35, color: colors.grey[56] }}>
-                            Campaign Design<br />July 2026
-                        </div>
-                    </Motion.div>
-                    <Motion.div
-                        variants={{
-                            hidden: { opacity: 0, y: 16 },
-                            visible: { opacity: 1, y: 0, transition: revealTransition },
-                        }}
-                    >
-                        <div style={{ fontSize: '15px', color: colors.grey[16], marginBottom: '14px' }}>
-                            My Role
-                        </div>
-                        <div style={{ fontSize: isMobile ? '17px' : '18px', lineHeight: 1.35, color: colors.grey[56] }}>
-                            Design Engineer<br />Prompt Designer
-                        </div>
-                    </Motion.div>
-                    <Motion.div
-                        variants={{
-                            hidden: { opacity: 0, y: 16 },
-                            visible: { opacity: 1, y: 0, transition: revealTransition },
-                        }}
-                    >
-                        <div style={{ fontSize: '15px', color: colors.grey[16], marginBottom: '14px' }}>
-                            Team
-                        </div>
-                        <div style={{ fontSize: isMobile ? '17px' : '18px', lineHeight: 1.35, color: colors.grey[56] }}>
-                            Tencent CDG
+                        <div style={{
+                            fontSize: isMobile ? '17px' : '18px',
+                            lineHeight: 1.35,
+                            color: colors.grey[56],
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: item.lines.length > 1 ? '8px' : 0,
+                        }}>
+                            {item.lines.map((line) => <span key={line}>{line}</span>)}
                         </div>
                     </Motion.div>
-                </Motion.div>
-            </div>
+                ))}
+            </Motion.div>
 
             <Motion.img
                 src={heroBanner}
@@ -191,28 +292,10 @@ export const Qiaopi = () => {
                 />
             ))}
 
-            <div style={containerStyle}>
-                {/* Back link */}
-                <div style={{ ...sectionStyle, textAlign: 'center' }}>
-                    <Link
-                        to="/sandbox"
-                        style={{
-                            display: 'inline-block',
-                            padding: '12px 32px',
-                            background: colors.grey[95],
-                            borderRadius: '100px',
-                            fontFamily: typography.body.fontFamily,
-                            fontSize: '16px',
-                            fontWeight: 500,
-                            color: colors.grey[16],
-                            textDecoration: 'none',
-                        }}
-                    >
-                        ← Back to Craft
-                    </Link>
-                </div>
-
-            </div>
+            <NextProjectProgress
+                isMobile={isMobile}
+                shouldReduceMotion={shouldReduceMotion}
+            />
             </div>
         </div>
     );

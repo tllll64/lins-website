@@ -8,7 +8,7 @@ const Research = lazy(() => import('./pages/Research').then(module => ({ default
 const Echo = lazy(() => import('./pages/Echo').then(module => ({ default: module.Echo })));
 const ZhiXiaoBao = lazy(() => import('./pages/works/zhi-xiao-bao').then(module => ({ default: module.ZhiXiaoBao })));
 const XiaoMi = lazy(() => import('./pages/works/xiao-mi').then(module => ({ default: module.XiaoMi })));
-const ColeanDetail = lazy(() => import('./pages/ColeanDetail').then(module => ({ default: module.ColeanDetail })));
+const ColeanDetail = lazy(() => import('./pages/ColeanDetail'));
 const Qiaopi = lazy(() => import('./pages/works/qiaopi').then(module => ({ default: module.Qiaopi })));
 const QiaopiDemo = lazy(() => import('./pages/works/qiaopi-demo').then(module => ({ default: module.QiaopiDemo })));
 

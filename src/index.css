@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+    font-family: "Noto Serif SC";
+    src: url("./assets/fonts/NotoSerifSC-Regular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
 @theme {
     --color-ds-cararra: #F6F6F2;
     --color-ds-cod: #1A1A1A;
