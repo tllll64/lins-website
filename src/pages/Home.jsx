@@ -23,7 +23,6 @@ import LingxiLogo from '../assets/Home/Lingxi_logo.png';
 import RedLogo from '../assets/Home/red.png';
 import TikTokAppLogo from '../assets/Home/TikTok.png';
 import PolaroidDecoration from '../components/PolaroidDecoration';
-import AsciiTrail from '../components/AsciiTrail';
 import profileImg from '../assets/about/profile2.png';
 import TencentLogo from '../assets/Home/tencent-color.svg';
 
@@ -131,9 +130,6 @@ export const Home = () => {
                     pointerEvents: 'none',
                     background: 'linear-gradient(180deg, rgba(206,212,222,0.65) 0%, rgba(206,212,222,0) 24%, rgba(206,212,222,0) 76%, rgba(206,212,222,0.5) 100%)'
                 }} />
-
-                {/* ASCII cursor-trail effect across the hero */}
-                <AsciiTrail />
 
                 {/* NothingDotClock in top-left corner */}
                 <div style={{
