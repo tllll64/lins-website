@@ -12,6 +12,7 @@ import FolderIcon from '../components/FolderIcon';
 import PDFViewer from '../components/PDFViewer';
 import IframeModal from '../components/IframeModal';
 import PixelLock from '../components/PixelLock';
+import PixelEye from '../components/PixelEye';
 import { ASSETS } from '../constants/assets';
 import { colors, spacing, typography, stackSpacing, layoutSpacing } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
@@ -255,6 +256,14 @@ export const Home = () => {
                     flexDirection: 'column',
                     gap: isMobile ? stackSpacing.xl : layoutSpacing.section.md
                 }}>
+                    <ProjectCard
+                        date="2026"
+                        title="跨境汇款 AI 侨批生成活动"
+                        tags={['2026', 'AI 设计工程']}
+                        logo={TencentLogo}
+                        pixelPattern={<PixelEye size={6} gap={2} />}
+                        onClick={() => navigate('/works/qiaopi')}
+                    />
                     <ProjectCard
                         date="2026"
                         title="全球汇入 Sharelink 体验优化"
