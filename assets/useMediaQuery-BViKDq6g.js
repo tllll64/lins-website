@@ -1,0 +1,1 @@
+import{r as n}from"./index-B9_uBYoP.js";const o=s=>{const[t,a]=n.useState(!1);return n.useEffect(()=>{const e=window.matchMedia(s);e.matches!==t&&a(e.matches);const c=()=>a(e.matches);return e.addEventListener("change",c),()=>e.removeEventListener("change",c)},[t,s]),t};export{o as u};
