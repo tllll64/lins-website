@@ -13,7 +13,7 @@ export const XiaoMi = () => {
                 paddingLeft: layoutSpacing.page.desktop,
                 paddingRight: layoutSpacing.page.desktop
             }}>
-                <h1>Xiao Mi</h1>
+                <h1 style={{ fontFamily: 'Lora, "Times New Roman", Georgia, serif' }}>Xiao Mi</h1>
                 <p>Work in progress...</p>
             </div>
         </div>

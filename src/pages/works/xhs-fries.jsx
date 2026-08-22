@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar } from '../../components/Navbar';
 import { typography } from '../../design-system/tokens';
 import { useMediaQuery } from '../../design-system/hooks/useMediaQuery';
-import qiaopiCover from '../../assets/works/qiaopi/qiaopi.png';
+import xhsCover from '../../assets/works/xhs-fries/cover.png';
 import { FIGMA_EMBEDS } from '../../constants/figmaEmbeds';
 
 /* ------------------------------------------------------------------ */
@@ -21,13 +21,13 @@ const V = {
     radius: '8px',
 };
 
-const FIGMA_EMBED_URL = FIGMA_EMBEDS.qiaopi;
+const FIGMA_EMBED_URL = FIGMA_EMBEDS.xhsFries;
 
 const projectFacts = [
-    { label: 'Context', value: 'TenPay Global' },
+    { label: 'Context', value: '小红书 薯条' },
     { label: 'Status', value: '已上线' },
-    { label: 'My Role', value: '设计负责人' },
-    { label: 'Year', value: '2026.07' },
+    { label: 'My Role', value: 'UX Lead' },
+    { label: 'Year', value: '2025.06–08' },
 ];
 
 /* Micro label — the signature Vercel "eyebrow" */
@@ -59,8 +59,8 @@ const Cover = () => (
         borderRadius: V.radius,
     }}>
         <img
-            src={qiaopiCover}
-            alt="跨境汇款 AI 侨批生成活动 封面"
+            src={xhsCover}
+            alt="薯条加热权益保障放心投 封面"
             style={{
                 width: '100%',
                 height: '100%',
@@ -74,7 +74,7 @@ const Cover = () => (
 /* ------------------------------------------------------------------ */
 /*  Page                                                               */
 /* ------------------------------------------------------------------ */
-export const Qiaopi = () => {
+export const XhsFries = () => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     const isUltraWide = useMediaQuery('(min-width: 1728px)');
     const isDesktop = useMediaQuery('(min-width: 1400px)');
@@ -83,18 +83,6 @@ export const Qiaopi = () => {
     // Framer-style tiered content width (mirrors diana.lu/tiktok):
     // ≥1728 → near full-bleed · ≥1400 → 1400px · ≥1100 → 1100px · smaller → fill padded area
     const containerMax = isUltraWide ? 'calc(100vw - 48px)' : isDesktop ? '1400px' : isLaptop ? '1100px' : '100%';
-
-    // Prototype iframe 自适应高度：监听 weremit 活动页（dev 模式）postMessage 的高度同步
-    const [protoHeight, setProtoHeight] = useState(isMobile ? 1040 : 1090);
-    useEffect(() => {
-        const onMessage = (e) => {
-            if (e.data && e.data.source === 'dearyou-letter' && typeof e.data.height === 'number') {
-                setProtoHeight(Math.max(420, e.data.height));
-            }
-        };
-        window.addEventListener('message', onMessage);
-        return () => window.removeEventListener('message', onMessage);
-    }, []);
 
     return (
         <div style={{
@@ -110,7 +98,7 @@ export const Qiaopi = () => {
                 <section style={{ padding: isMobile ? '112px 24px 48px' : '150px 32px 80px' }}>
                     <div style={{ maxWidth: containerMax, margin: '0 auto' }}>
                         <Eyebrow style={{ marginBottom: '24px' }}>
-                            AI Design Engineering
+                            Product Design
                         </Eyebrow>
                         <h1 style={{
                             fontFamily: 'Lora, "Times New Roman", Georgia, serif',
@@ -121,31 +109,12 @@ export const Qiaopi = () => {
                         }}>
                             <span style={{
                                 display: 'block',
-                                fontSize: isMobile ? '20px' : '34px',
-                                lineHeight: isMobile ? '28px' : '44px',
-                                fontWeight: 500,
-                                letterSpacing: '0.02em',
-                                marginBottom: isMobile ? '8px' : '16px',
-                            }}>
-                                新加坡《给阿嬷的情书》线下观影
-                            </span>
-                            <span style={{
-                                display: 'block',
-                                fontSize: isMobile ? '45px' : '90px',
-                                lineHeight: isMobile ? '68px' : '122px',
+                                fontSize: isMobile ? '32px' : '64px',
+                                lineHeight: isMobile ? '40px' : '72px',
                                 letterSpacing: '-0.03em',
                                 whiteSpace: 'nowrap',
                             }}>
-                                <span style={{
-                                    fontSize: isMobile ? '56px' : '112px',
-                                    lineHeight: 1,
-                                    fontWeight: 600,
-                                    letterSpacing: '-0.04em',
-                                    marginRight: isMobile ? '6px' : '12px',
-                                }}>
-                                    AI
-                                </span>
-                                <span style={{ fontWeight: 600 }}>侨批生成活动</span>
+                                薯条加热权益保障放心投
                             </span>
                         </h1>
                     </div>
@@ -219,48 +188,11 @@ export const Qiaopi = () => {
                             color: V.inkSoft,
                             margin: 0,
                             marginLeft: 'auto',
-                            maxWidth: '640px',
+                            maxWidth: '680px',
+                            paddingRight: isMobile ? '8px' : '16px',
                         }}>
-                            AI 侨批生成活动作为 TenPay Global 《给阿嬷的情书》新加坡线下观影活动的映前环节之一，通过将 AI 能力融入侨批书写场景，降低用户手写真挚情感书信的表达门槛，结合分享裂变机制，升温海内外用户之间的情感链接。
+                            针对投放效果差的首要问题，薯条加热业务推出「放心投」权益，设计侧平衡业务诉求与用户痛点，帮助客户发现、理解、决策、感知权益，提升投放意愿。
                         </p>
-                    </div>
-                </section>
-
-                {/* Prototype — 线上活动页（本地 weremit dev server，仅本地预览有效） */}
-                <section style={{
-                    maxWidth: containerMax,
-                    margin: '0 auto',
-                    padding: isMobile ? '80px 24px 0' : '120px 32px 0',
-                }}>
-                    <div style={{ marginBottom: '20px' }}>
-                        <Eyebrow>Prototype</Eyebrow>
-                    </div>
-                    <div style={{
-                        width: '100%',
-                        background: '#000',
-                        border: `1px solid ${V.line}`,
-                        borderRadius: V.radius,
-                        height: protoHeight + 60,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        overflow: 'hidden',
-                        transition: 'height 0.2s ease',
-                    }}>
-                        <iframe
-                            title="给阿嬷的情书 活动页 Prototype"
-                            src="http://127.0.0.1:5173/dearyou_letter/?skipLogin=1"
-                            style={{
-                                width: isMobile ? '100%' : '460px', // ≥441px 触发桌面 mock 模式：高度由内容决定，不撑开
-                                maxWidth: '460px',
-                                height: protoHeight,
-                                border: 0,
-                                borderRadius: '12px',
-                                display: 'block',
-                                flexShrink: 0,
-                                transition: 'height 0.2s ease',
-                            }}
-                        />
                     </div>
                 </section>
 
@@ -280,7 +212,6 @@ export const Qiaopi = () => {
                         position: 'relative',
                         width: '100%',
                         aspectRatio: '16 / 9',
-                        maxHeight: isMobile ? 'calc(100vh - 80px)' : undefined,
                         minHeight: '420px',
                         background: V.surface,
                         border: `1px solid ${V.line}`,
@@ -288,7 +219,7 @@ export const Qiaopi = () => {
                         overflow: 'hidden',
                     }}>
                         <iframe
-                            title="跨境汇款 AI 侨批生成活动 Figma prototype"
+                            title="薯条加热权益保障放心投 Figma prototype"
                             src={FIGMA_EMBED_URL}
                             allowFullScreen
                             style={{

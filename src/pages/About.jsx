@@ -9,6 +9,7 @@ import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 import { Twitter, Github, Mail, MessageCircle, Copy, Check, Phone } from 'lucide-react';
 
 import profileImage from '../assets/about/profile.jpg';
+import TencentLogo from '../assets/Home/tencent-color.svg';
 import PolaroidGallery from '../components/PolaroidGallery';
 import StackedCards from '../components/StackedCards';
 import AboutContact from '../components/AboutContact';
@@ -73,9 +74,9 @@ export const About = () => {
     };
 
     const profileTitleStyle = {
-        fontFamily: typography.heading1.fontFamily,
+        fontFamily: 'Lora, "Times New Roman", Georgia, serif',
         fontSize: isMobile ? '36px' : typography.heading1.fontSize,
-        fontWeight: 200,
+        fontWeight: 400,
         lineHeight: typography.heading1.lineHeight,
         letterSpacing: typography.heading1.letterSpacing,
         color: colors.grey[9]
@@ -285,9 +286,9 @@ export const About = () => {
                     gap: isMobile ? stackSpacing.md : '6.66px' // Reduced to ~1/3 of 20px
                 }}>
                     <h2 style={{
-                        fontFamily: typography.heading1.fontFamily,
+                        fontFamily: 'Lora, "Times New Roman", Georgia, serif',
                         fontSize: isMobile ? '28px' : `calc(${typography.heading1.fontSize} - 8px)`, // Reduced by 8px
-                        fontWeight: 200,
+                        fontWeight: 400,
                         lineHeight: typography.heading1.lineHeight,
                         letterSpacing: typography.heading1.letterSpacing,
                         color: colors.grey[9],
@@ -300,12 +301,12 @@ export const About = () => {
                         <StackedCards 
                             assets={ASSETS} 
                             images={[
+                                TencentLogo,
                                 ASSETS.tiktokWork,
                                 ASSETS.red,
                                 ASSETS.mi,
                                 ASSETS.ant,
                                 ASSETS.bmw,
-                                ASSETS.huawei,
                                 ASSETS.nio,
                                 ASSETS.zeekr
                             ]}
@@ -315,7 +316,7 @@ export const About = () => {
             </Section>
 
             <Section title="Latest News" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
-                <div style={newsContainerStyle}>
+                <div style={newsContainerStyle} data-lenis-prevent>
                     {newsData.map((item, index) => (
                         <div key={`${index}-updated`} style={newsItemStyle}>
                             <span style={newsDateStyle}>{item.emoji} {item.date}</span>

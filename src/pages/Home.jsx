@@ -1,16 +1,17 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLenis } from 'lenis/react';
 import { Modal } from '@arco-design/web-react';
 import { IconLaunch } from '@arco-design/web-react/icon';
 import { Section } from '../components/Section';
 import { ProjectCard } from '../components/ProjectCard';
 import { Navbar } from '../components/Navbar';
 import { ContactSection } from '../components/ContactSection';
+import ReflectionList from '../components/ReflectionList';
 import NothingWordClock from '../components/NothingWordClock';
 import NothingDotClock from '../components/NothingDotClock';
 import FolderIcon from '../components/FolderIcon';
 import PDFViewer from '../components/PDFViewer';
-import IframeModal from '../components/IframeModal';
 import PixelLock from '../components/PixelLock';
 import PixelEye from '../components/PixelEye';
 import { ASSETS } from '../constants/assets';
@@ -19,37 +20,48 @@ import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 import xhsCursor from '../assets/cursor/xhs-cursor.png';
 import PromoteLogo from '../assets/Home/Promote_logo.png';
 import TakoLogo from '../assets/Home/Tako_logo.png';
-import TakoImg from '../assets/Home/Tako.png';
+import TakoImg from '../assets/works/tako/Tako.png';
 import LingxiLogo from '../assets/Home/Lingxi_logo.png';
 import RedLogo from '../assets/Home/red.png';
 import TikTokAppLogo from '../assets/Home/TikTok.png';
 import PolaroidDecoration from '../components/PolaroidDecoration';
 import profileImg from '../assets/about/profile2.png';
 import TencentLogo from '../assets/Home/tencent-color.svg';
+import QiaopiCover from '../assets/works/qiaopi/qiaopi.png';
+import XhsFriesCover from '../assets/works/xhs-fries/cover.png';
+import FigmaPreloader from '../components/FigmaPreloader';
+
+const blogItems = [
+    { title: "Harness 原则层：提取、验证与收敛", category: "[Harness]", image: ASSETS.blog2, locked: true },
+    { title: "理想态英文阅读体验在 Tako 的应用", category: "[AI]  [Reflection]", image: ASSETS.blog1, locked: true },
+    { title: "国内外用户 AI 使用差异调研", category: "[AI]  [Research]", image: ASSETS.blog2, locked: true },
+    {
+        title: "“AIGC+模板化”融入 B 端业务实践反思",
+        category: "[AI]  [Reflection]",
+        image: ASSETS.blog2,
+        onClick: () => window.open('https://jq6o8oyx72u.feishu.cn/wiki/UjhQwPnBcidQbLkNU3Kc2grMn8b?from=from_copylink', '_blank')
+    },
+    {
+        title: "商业化产品引导体系建设调研",
+        category: "[Research]",
+        image: ASSETS.blog1,
+        onClick: () => window.open('https://jq6o8oyx72u.feishu.cn/wiki/ZZ8pwx83ViGdyokZKJOcDfj6nFe?from=from_copylink', '_blank')
+    },
+    {
+        title: "华为问界智驾教学产品分析",
+        category: "[Research]",
+        image: ASSETS.blog2,
+        onClick: () => window.open('https://jq6o8oyx72u.feishu.cn/wiki/MpeAwuUoxiDpy3ktZ0ocOPKIngb?from=from_copylink', '_blank')
+    }
+];
 
 export const Home = () => {
     const navigate = useNavigate();
+    const lenis = useLenis();
     const isMobile = useMediaQuery('(max-width: 768px)');
     const footerRef = useRef(null);
     const [navTheme, setNavTheme] = useState('light');
     const [showPDF, setShowPDF] = useState(false);
-    const [iframeModal, setIframeModal] = useState({
-        isOpen: false,
-        url: '',
-        title: ''
-    });
-    
-    const openFigmaModal = (url, title) => {
-        setIframeModal({
-            isOpen: true,
-            url,
-            title
-        });
-    };
-
-    const closeFigmaModal = () => {
-        setIframeModal(prev => ({ ...prev, isOpen: false }));
-    };
     
     // State for name tooltip
     const [showNameTooltip, setShowNameTooltip] = useState(false);
@@ -83,7 +95,11 @@ export const Home = () => {
             if (hash) {
                 const element = document.querySelector(hash);
                 if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
+                    if (lenis) {
+                        lenis.scrollTo(element);
+                    } else {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                    }
                 }
             }
         };
@@ -95,7 +111,7 @@ export const Home = () => {
         window.addEventListener('hashchange', handleHashChange);
 
         return () => window.removeEventListener('hashchange', handleHashChange);
-    }, []);
+    }, [lenis]);
 
     const pageStyle = {
         minHeight: '100vh',
@@ -106,10 +122,21 @@ export const Home = () => {
         backgroundRepeat: 'repeat'
     };
 
+    const footerStyle = {
+        background: 'rgba(0, 0, 0, 0.9)',
+        color: colors.white.solid,
+        paddingTop: layoutSpacing.section['2xl'],
+        paddingBottom: `calc(${spacing[20]} + 20px)`,
+        WebkitFontSmoothing: 'antialiased',
+        MozOsxFontSmoothing: 'grayscale'
+    };
+
 
     return (
         <div style={pageStyle}>
             <Navbar theme={navTheme} />
+            {/* 进入首页即开始预加载三个项目的 Figma prototype */}
+            <FigmaPreloader />
 
             <Section
                 style={{
@@ -159,7 +186,15 @@ export const Home = () => {
                         subtitle="Internship Projects"
                         scale={0.6}
                         folderImages={[PromoteLogo, TakoLogo, LingxiLogo]}
-                        onClick={() => document.getElementById('works')?.scrollIntoView({ behavior: 'smooth' })}
+                        onClick={() => {
+                            const target = document.getElementById('works');
+                            if (!target) return;
+                            if (lenis) {
+                                lenis.scrollTo(target);
+                            } else {
+                                target.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        }}
                     />
                 </div>
 
@@ -193,7 +228,7 @@ export const Home = () => {
                         WebkitUserSelect: 'none',
                         transform: 'translateY(-73px)'
                     }}
-                    onClick={() => navigate('/sandbox')}
+                    onClick={() => navigate('/craft')}
                 >
                     <NothingWordClock />
                 </div>
@@ -227,7 +262,7 @@ export const Home = () => {
                             marginBottom: '24px',
                             letterSpacing: '-0.02em'
                          }}>
-                            Design Engineer
+                            Product Designer
                             <span style={{ display: 'block', marginTop: '8px' }}>With Research Mindset</span>
                          </h1>
 
@@ -247,7 +282,7 @@ export const Home = () => {
 
             <Section 
                 title="Internship Projects"
-                subtitle="2023-2026 年实习项目产出和复盘思考"
+                subtitle="2023-2026 年实习产出和复盘思考"
                 id="works"
                 style={{ paddingTop: '40px', paddingBottom: layoutSpacing.section['2xl'] }}
             >
@@ -261,6 +296,7 @@ export const Home = () => {
                         title="跨境汇款 AI 侨批生成活动"
                         tags={['2026', 'AI 设计工程']}
                         logo={TencentLogo}
+                        image={QiaopiCover}
                         pixelPattern={<PixelEye size={6} gap={2} />}
                         onClick={() => navigate('/works/qiaopi')}
                     />
@@ -274,26 +310,24 @@ export const Home = () => {
                     />
                     <ProjectCard
                         date="Mar - May 2024"
-                        title="TikTok Tako 图片发布优化"
+                        title="TikTok Tako AI 生图发布优化"
                         description="A deep dive into mobile creative tools, analyzing interaction patterns and recreating key workflows for iOS."
                         tags={['2025', '设计自驱']}
                         image={TakoImg}
                         logo={TikTokAppLogo}
                         customCursor={xhsCursor}
-                        pixelPattern={<PixelLock size={6} gap={2} />}
+                        pixelPattern={<PixelEye size={6} gap={2} />}
+                        onClick={() => navigate('/works/tako')}
                     />
                     <ProjectCard
                         date="June - Aug 2023"
                         title="薯条加热权益保障放心投"
                         description="Designed data visualization tools for enterprise analytics, improving data readability and decision-making efficiency."
                         tags={['2025', '需求支持']}
-                        image={ASSETS.tiktok}
+                        image={XhsFriesCover}
                         logo={RedLogo}
                         reversed={true}
-                        onClick={() => openFigmaModal(
-                            "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FMCyWIWjYNBpVUUdqlRdAGw%2F%25E6%259A%2591%25E6%259C%259F%25E4%25BD%259C%25E5%2593%2581%25E9%259B%2586%3Fpage-id%3D738%253A15009%26node-id%3D738-22150%26viewport%3D232%252C293%252C0.25%26t%3DPGqmJzHbhJK8ZgKg-1%26scaling%3Dscale-down-width%26content-scaling%3Dfixed",
-                            "薯条加热权益保障放心投"
-                        )}
+                        onClick={() => navigate('/works/xhs-fries')}
                     />
                     {/* 灵犀 AURA 卡片暂时隐藏，需要时取消注释恢复
                     <ProjectCard
@@ -310,7 +344,16 @@ export const Home = () => {
                 </div>
             </Section>
 
-            <ContactSection ref={footerRef} />
+            {/* Reflection Blog (dark) */}
+            <section style={footerStyle} ref={footerRef}>
+                <Section title="Reflection Blog" dark className="!py-0 !px-0" style={{ background: 'transparent', paddingTop: 0, paddingBottom: 0 }}>
+                    <div>
+                        <ReflectionList items={blogItems} />
+                    </div>
+                </Section>
+            </section>
+
+            <ContactSection />
 
             <Modal
                 title={
@@ -351,14 +394,6 @@ export const Home = () => {
                     />
                 </div>
             </Modal>
-
-            {/* Figma Preview Modal */}
-            <IframeModal
-                isOpen={iframeModal.isOpen}
-                onClose={closeFigmaModal}
-                url={iframeModal.url}
-                title={iframeModal.title}
-            />
         </div>
     );
 };

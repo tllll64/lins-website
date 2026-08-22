@@ -3,9 +3,7 @@ import { Navbar } from '../components/Navbar';
 import { Section } from '../components/Section';
 import { PublicationCard } from '../components/PublicationCard';
 import { ContactSection } from '../components/ContactSection';
-import ReflectionList from '../components/ReflectionList';
-import { ASSETS } from '../constants/assets';
-import { colors, spacing, layoutSpacing, gridGap } from '../design-system/tokens';
+import { colors, layoutSpacing, gridGap } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 
 const RESEARCH_ASSETS = {
@@ -64,35 +62,6 @@ const demoItems = [
     { type: 'video', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
 ];
 
-const blogItems = [
-    { title: "理想态英文阅读体验在Tako的应用", category: "[AI]  [Reflection]", image: ASSETS.blog1, locked: true },
-    { title: "国内外用户 AI 使用差异调研", category: "[AI]  [Research]", image: ASSETS.blog2, locked: true },
-    {
-        title: "“AIGC+模板化”融入B端业务实践反思",
-        category: "[AI]  [Reflection]",
-        image: ASSETS.blog2,
-        onClick: () => window.open('https://jq6o8oyx72u.feishu.cn/wiki/UjhQwPnBcidQbLkNU3Kc2grMn8b?from=from_copylink', '_blank')
-    },
-    {
-        title: "商业化产品引导体系建设调研",
-        category: "[Research]",
-        image: ASSETS.blog1,
-        onClick: () => window.open('https://jq6o8oyx72u.feishu.cn/wiki/ZZ8pwx83ViGdyokZKJOcDfj6nFe?from=from_copylink', '_blank')
-    },
-    {
-        title: "B 端 AI 应用设计框架调研",
-        category: "[AI]  [Research]",
-        image: ASSETS.blog1,
-        onClick: () => window.open('https://jq6o8oyx72u.feishu.cn/wiki/TR2VwiuV5iinuckFMdic7iuAnJg?from=from_copylink', '_blank')
-    },
-    {
-        title: "华为问界智驾教学产品分析",
-        category: "[Research]",
-        image: ASSETS.blog2,
-        onClick: () => window.open('https://jq6o8oyx72u.feishu.cn/wiki/MpeAwuUoxiDpy3ktZ0ocOPKIngb?from=from_copylink', '_blank')
-    }
-];
-
 export const Echo = () => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     const footerRef = useRef(null);
@@ -123,24 +92,15 @@ export const Echo = () => {
         backgroundRepeat: 'repeat',
     };
 
-    const footerStyle = {
-        background: 'rgba(0, 0, 0, 0.9)',
-        color: colors.white.solid,
-        paddingTop: layoutSpacing.section['2xl'],
-        paddingBottom: `calc(${spacing[20]} + 20px)`,
-        WebkitFontSmoothing: 'antialiased',
-        MozOsxFontSmoothing: 'grayscale'
-    };
-
     return (
         <div style={pageStyle}>
             <Navbar theme={navTheme} />
 
-            {/* AI-Driven Papers */}
+            {/* AI-Driven Research */}
             <Section
-                id="ai-driven-papers"
-                title="AI-Driven Papers"
-                subtitle="研究生期间的 HAI 相关研究论文"
+                id="ai-driven-research"
+                title="AI-Driven Research"
+                subtitle="读研期间在 [生成式交互] 和 [人机协同] 方向的研究"
                 style={{ paddingTop: '160px', paddingBottom: layoutSpacing.section.xl }}
             >
                 <div style={{ marginBottom: layoutSpacing.section.xl }}>
@@ -186,16 +146,7 @@ export const Echo = () => {
                 </div>
             </Section>
 
-            {/* Reflection Blog (dark) */}
-            <section style={footerStyle} ref={footerRef}>
-                <Section title="Reflection Blog" dark className="!py-0 !px-0" style={{ background: 'transparent', paddingTop: 0, paddingBottom: 0 }}>
-                    <div>
-                        <ReflectionList items={blogItems} />
-                    </div>
-                </Section>
-            </section>
-
-            <ContactSection />
+            <ContactSection ref={footerRef} />
         </div>
     );
 };

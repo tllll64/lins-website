@@ -14,6 +14,16 @@ export const ASSETS = {
     digital3: new URL('../assets/Home/fangyou.png', import.meta.url).href,
     digital4: new URL('../assets/Home/Colean.png', import.meta.url).href,
 
+    // Craft Projects
+    craft1: new URL('../assets/Craft/douyin.png', import.meta.url).href, // 抖音弹幕互动玩法创新
+    craft2: new URL('../assets/Craft/qiaopi2.png', import.meta.url).href, // AI 侨批生成
+    craft3: new URL('../assets/Craft/gen-icon-skill.png', import.meta.url).href, // gen-icon-skill
+    craft4: new URL('../assets/Craft/banner1.png', import.meta.url).href, // AIGC Banner 1
+    craft5: new URL('../assets/Craft/banner2.png', import.meta.url).href, // AIGC Banner 2
+    craft6: new URL('../assets/Craft/banner3.png', import.meta.url).href, // AIGC Banner 3
+    craft7: new URL('../assets/Craft/cowart.png', import.meta.url).href, // cowart_workbuddy
+    craft8: new URL('../assets/Craft/Sidetation.png', import.meta.url).href, // Sidetation
+
     // Blog
     blog1: new URL('../assets/Home/Colean.png', import.meta.url).href, // Placeholder
     blog2: new URL('../assets/Home/Colean.png', import.meta.url).href, // Placeholder
