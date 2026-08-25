@@ -257,7 +257,7 @@ export const About = () => {
 
                         <div style={profileBodyStyle}>
                             <p>
-                                嗨，我是 Lynn Tian。作为一名产品设计师和 AI 工程师，我致力于将以人为本的设计与前沿技术相融合。
+                                嗨，我是田琳，一名连接产品、设计与工程，具备深度研究思维和自驱成长力的 AI-Native 产品设计师。
                             </p>
                             <p>
                                 目前在上海，就读于 <span style={{ fontWeight: fontWeight.semibold }}>同济大学 </span><span style={{ fontWeight: fontWeight.semibold, textDecoration: 'underline', textDecorationThickness: '2px', textDecorationColor: colors.black[40] }}>D&I</span> 交互设计专业，专注于生成式交互与人机协同研究。
