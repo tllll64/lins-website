@@ -5,7 +5,7 @@ import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 import PixelEye from './PixelEye';
 import PixelLock from './PixelLock';
 
-export const ProjectCard = ({ date, title, description, tags, image, link, className = "", customCursor, onClick, logo, pixelPattern, reversed = false, locked = false }) => {
+export const ProjectCard = ({ date, title, description, tags, image, link, className = "", customCursor, onClick, logo, pixelPattern, reversed = false, locked = false, imageScale = 1 }) => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     const [isHovered, setIsHovered] = useState(false);
 
@@ -158,6 +158,7 @@ export const ProjectCard = ({ date, title, description, tags, image, link, class
                             backgroundImage: `url(${image})`,
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
+                            transform: imageScale !== 1 ? `scale(${imageScale})` : undefined,
                             transition: 'transform 0.5s ease'
                         }} />
                     )}

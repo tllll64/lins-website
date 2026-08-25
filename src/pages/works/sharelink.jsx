@@ -3,17 +3,18 @@ import { Link } from 'react-router-dom';
 import { useLenis } from 'lenis/react';
 import { Navbar } from '../../components/Navbar';
 import ZoomableImage from '../../components/ZoomableImage';
+import { useZoom } from '../../contexts/ZoomContext';
 import { typography } from '../../design-system/tokens';
 import { useMediaQuery } from '../../design-system/hooks/useMediaQuery';
-import sharelinkCover from '../../assets/works/sharelink/cover.svg';
+import sharelinkCover from '../../assets/works/sharelink/sharelink.png';
 
 /* 汇款人链路 Before / After 对比素材 */
-import huikuanrenBefore from '../../assets/works/sharelink/汇款人-Before-opt.png';
-import huikuanrenAfter from '../../assets/works/sharelink/汇款人-After-opt.png';
+import huikuanrenBefore from '../../assets/works/sharelink/汇款人-Before.webp';
+import huikuanrenAfter from '../../assets/works/sharelink/汇款人-After.webp';
 
 /* 收款人链路 Before / After 对比素材 */
-import shoukuanrenBefore from '../../assets/works/sharelink/收款人-Before-opt.png';
-import shoukuanrenAfter from '../../assets/works/sharelink/收款人-After-opt.png';
+import shoukuanrenBefore from '../../assets/works/sharelink/收款人-Before.webp';
+import shoukuanrenAfter from '../../assets/works/sharelink/收款人-After.webp';
 
 /* 用户调研：用户链路图（高分辨率 WebP，保证放大后清晰） */
 import yonghulianlutu from '../../assets/works/sharelink/用户链路图-6000.webp';
@@ -49,6 +50,15 @@ import tongzhiKapiaBefore from '../../assets/works/sharelink/通知卡片-Before
 import tongzhiKapiaAfter from '../../assets/works/sharelink/通知卡片-After.webp';
 import shoukuanBefore from '../../assets/works/sharelink/收款页-Before.webp';
 import shoukuanAfter from '../../assets/works/sharelink/收款页-After.webp';
+
+/* 封面样式 */
+import fengmianyangshi from '../../assets/works/sharelink/封面样式-6000.webp';
+
+/* AI 原型 */
+import aiyuanxing from '../../assets/works/sharelink/AI 原型.webp';
+
+/* 设计原则 */
+import yuanze from '../../assets/works/sharelink/原则.webp';
 
 /* ------------------------------------------------------------------ */
 /*  Vercel designmd — monochrome token set                             */
@@ -114,6 +124,12 @@ const beforeAfterCases = [
         note: '设计目标：提升收款信息的场景关联性 激发收款操作（现状转化率 52%）',
         before: shoukuanBefore,
         after: shoukuanAfter,
+    },
+    {
+        title: '封面样式',
+        description:
+            '收款入口的封面样式设计，通过场景化的视觉呈现建立用户认知，引导用户进入收款流程。',
+        image: fengmianyangshi,
     },
 ];
 
@@ -406,25 +422,89 @@ const BeforeAfterSlider = ({ beforeSrc, afterSrc, alt = 'Before / After 对比' 
 };
 
 /* ------------------------------------------------------------------ */
-/*  PanoramaViewer — 横向全景浏览：图片放大 2 倍，左右按钮切换           */
-/*  默认停在左侧；点右侧按钮平滑滚动到右侧，点左侧按钮滚回              */
+/*  PanoramaViewer — 横向全景浏览 + hover 局部放大镜                    */
+/*  全景：图片放大 1.5 倍，左右按钮切换；hover：圆形放大镜 2x            */
 /* ------------------------------------------------------------------ */
-const PanoramaViewer = ({ src, alt, leftHint = '左侧', rightHint = '右侧' }) => {
+const PanoramaViewer = ({ src, alt, leftHint = '左侧', rightHint = '右侧', zoom = 2, lensSize = 180 }) => {
+    const { zoomEnabled } = useZoom();
     const [atRight, setAtRight] = useState(false);
+    const containerRef = React.useRef(null);
     const trackRef = React.useRef(null);
+    const lensRef = React.useRef(null);
+    const lensImgRef = React.useRef(null);
+    const rafRef = React.useRef(null);
+    const lastXRef = React.useRef(null);
+    const lastYRef = React.useRef(null);
 
     const scrollTo = (right) => {
         setAtRight(right);
     };
 
+    // hover 放大镜：镜头内放大图按轨道实际坐标 × zoom 计算
+    const writeLens = () => {
+        rafRef.current = null;
+        const container = containerRef.current;
+        const lens = lensRef.current;
+        const lensImg = lensImgRef.current;
+        const x = lastXRef.current;
+        const y = lastYRef.current;
+        if (!container || !lens || !lensImg || x == null || y == null) return;
+
+        const rect = container.getBoundingClientRect();
+        const px = x - rect.left; // 指针相对容器坐标
+        const py = y - rect.top;
+        // 轨道实际位移：atRight 时 translateX(-33.333%) of 轨道(150%容器宽) = -0.5 容器宽
+        const offset = atRight ? -rect.width * 0.5 : 0;
+        const imgX = px + offset; // 指针在轨道图中的实际横坐标
+
+        // 镜头内放大图尺寸 = 轨道图宽(1.5×容器) × zoom
+        lensImg.style.width = `${rect.width * 1.5 * zoom}px`;
+        lensImg.style.height = `${rect.height * zoom}px`;
+        // 镜头圆心对准指针
+        lens.style.transform = `translate(${px - lensSize / 2}px, ${py - lensSize / 2}px)`;
+        // 放大图位移：指针处内容对准镜头中心
+        lensImg.style.transform = `translate(${-imgX * zoom + lensSize / 2}px, ${-py * zoom + lensSize / 2}px)`;
+    };
+
+    const onPointerMove = (e) => {
+        if (!zoomEnabled || e.pointerType !== 'mouse') return;
+        lastXRef.current = e.clientX;
+        lastYRef.current = e.clientY;
+        if (lensRef.current) lensRef.current.style.opacity = '1';
+        if (!rafRef.current) {
+            rafRef.current = requestAnimationFrame(writeLens);
+        }
+    };
+
+    const onPointerLeave = () => {
+        if (lensRef.current) lensRef.current.style.opacity = '0';
+    };
+
+    React.useEffect(() => {
+        if (!zoomEnabled && lensRef.current) {
+            lensRef.current.style.opacity = '0';
+        }
+    }, [zoomEnabled]);
+
+    React.useEffect(() => {
+        return () => {
+            if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        };
+    }, []);
+
     return (
-        <div style={{
-            position: 'relative',
-            width: '100%',
-            overflow: 'hidden',
-            background: V.surface2,
-            borderRadius: V.radius,
-        }}>
+        <div
+            ref={containerRef}
+            onPointerMove={onPointerMove}
+            onPointerLeave={onPointerLeave}
+            style={{
+                position: 'relative',
+                width: '100%',
+                overflow: 'hidden',
+                background: V.surface2,
+                borderRadius: V.radius,
+            }}
+        >
             {/* 图片轨道：宽 150%，图片占满轨道（= 容器宽 1.5 倍，放大显示） */}
             <div
                 ref={trackRef}
@@ -444,6 +524,44 @@ const PanoramaViewer = ({ src, alt, leftHint = '左侧', rightHint = '右侧' })
                         width: '100%',
                         height: 'auto',
                         display: 'block',
+                    }}
+                />
+            </div>
+
+            {/* 圆形放大镜镜头 */}
+            <div
+                ref={lensRef}
+                style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: `${lensSize}px`,
+                    height: `${lensSize}px`,
+                    borderRadius: '50%',
+                    overflow: 'hidden',
+                    pointerEvents: 'none',
+                    opacity: 0,
+                    zIndex: 4,
+                    boxShadow: '0 0 0 2px rgba(255,255,255,0.95), 0 8px 24px rgba(0,0,0,0.28)',
+                    transition: 'opacity 0.15s ease',
+                    willChange: 'transform',
+                }}
+            >
+                <img
+                    ref={lensImgRef}
+                    src={src}
+                    alt=""
+                    draggable={false}
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        maxWidth: 'none',
+                        objectFit: 'cover',
+                        display: 'block',
+                        willChange: 'transform',
                     }}
                 />
             </div>
@@ -670,9 +788,16 @@ export const Sharelink = () => {
                                     borderBottom: isMobile && index < 2 ? `1px solid ${V.line}` : 'none',
                                 }}
                             >
-                                <Eyebrow style={{ marginBottom: '12px' }}>
+                                <div style={{
+                                    fontFamily: typography.body.fontFamily,
+                                    fontSize: '12px',
+                                    fontWeight: 500,
+                                    letterSpacing: '0.08em',
+                                    color: V.inkMuted,
+                                    marginBottom: '12px',
+                                }}>
                                     {item.label}
-                                </Eyebrow>
+                                </div>
                                 <div style={{
                                     fontFamily: typography.body.fontFamily,
                                     fontSize: isMobile ? '16px' : '19px',
@@ -1027,39 +1152,58 @@ export const Sharelink = () => {
                                 </p>
                             </div>
 
-                            {/* Before / After 并排展示 */}
-                            <div style={{
-                                display: 'grid',
-                                gridTemplateColumns: '1fr 1fr',
-                                gap: isMobile ? '10px' : '16px',
-                            }}>
-                                <ZoomableImage
-                                    src={item.before}
-                                    alt={`${item.title} 改版前`}
-                                />
-                                {item.afterGallery ? (
-                                    <ImageCarousel
-                                        images={item.afterGallery}
-                                        alt={`${item.title} 改版后`}
-                                        showArrows={false}
+                            {/* Before / After 并排展示；单图 case 直接整幅展示 */}
+                            {item.image ? (
+                                <div style={{
+                                    overflow: 'hidden',
+                                    background: V.surface2,
+                                    borderRadius: V.radius,
+                                }}>
+                                    <img
+                                        src={item.image}
+                                        alt={item.title}
+                                        loading="lazy"
+                                        style={{
+                                            width: '100%',
+                                            height: 'auto',
+                                            display: 'block',
+                                        }}
                                     />
-                                ) : (
+                                </div>
+                            ) : (
+                                <div style={{
+                                    display: 'grid',
+                                    gridTemplateColumns: '1fr 1fr',
+                                    gap: isMobile ? '10px' : '16px',
+                                }}>
                                     <ZoomableImage
-                                        src={item.after}
-                                        alt={`${item.title} 改版后`}
+                                        src={item.before}
+                                        alt={`${item.title} 改版前`}
                                     />
-                                )}
-                            </div>
+                                    {item.afterGallery ? (
+                                        <ImageCarousel
+                                            images={item.afterGallery}
+                                            alt={`${item.title} 改版后`}
+                                            showArrows={false}
+                                        />
+                                    ) : (
+                                        <ZoomableImage
+                                            src={item.after}
+                                            alt={`${item.title} 改版后`}
+                                        />
+                                    )}
+                                </div>
+                            )}
 
-                            {/* 图片下方居中小字 */}
+                            {/* 图片下方居中标注小字 */}
                             {item.note && (
                                 <div style={{
                                     marginTop: '14px',
                                     textAlign: 'center',
                                     fontFamily: typography.body.fontFamily,
-                                    fontSize: '13px',
-                                    lineHeight: isMobile ? '20px' : '22px',
-                                    color: V.inkMuted,
+                                    fontSize: '12px',
+                                    lineHeight: isMobile ? '18px' : '20px',
+                                    color: 'rgba(0, 0, 0, 0.4)',
                                 }}>
                                     {item.note}
                                 </div>
@@ -1077,7 +1221,7 @@ export const Sharelink = () => {
                 }}>
                     {/* 标题 + 描述（描述在标题下方） */}
                     <div style={{
-                        marginBottom: '28px',
+                        marginBottom: isMobile ? '56px' : '72px',
                         maxWidth: '800px',
                     }}>
                         <Eyebrow style={{ marginBottom: '10px' }}>
@@ -1107,12 +1251,99 @@ export const Sharelink = () => {
                         </p>
                     </div>
 
-                    {/* 灰色占位配图：无文字、无描边，后续替换为真实素材 */}
+                    {/* 子板块 1：提炼设计原则（标题与配图左右放置） */}
                     <div style={{
-                        aspectRatio: '16 / 9',
-                        background: V.surface2,
-                        borderRadius: V.radius,
-                    }} />
+                        marginBottom: isMobile ? '72px' : '104px',
+                        display: 'grid',
+                        gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+                        gap: isMobile ? '24px' : '56px',
+                        alignItems: 'start',
+                    }}>
+                        <div>
+                            <Eyebrow style={{ marginBottom: '10px' }}>
+                                06-1
+                            </Eyebrow>
+                            <h3 style={{
+                                fontFamily: '"Tencent Sans", "Lora", "Times New Roman", Georgia, serif',
+                                fontSize: isMobile ? '22px' : '30px',
+                                fontWeight: 600,
+                                lineHeight: isMobile ? '30px' : '38px',
+                                letterSpacing: '-0.02em',
+                                color: V.ink,
+                                margin: 0,
+                                marginBottom: '28px',
+                            }}>
+                                提炼设计原则
+                            </h3>
+                            <p style={{
+                                fontFamily: typography.body.fontFamily,
+                                fontSize: isMobile ? '15px' : '16px',
+                                lineHeight: isMobile ? '24px' : '28px',
+                                color: V.inkSoft,
+                                margin: 0,
+                            }}>
+                                在项目推进中沉淀的设计方法与实践原则（占位描述，可替换）。
+                            </p>
+                        </div>
+                        {/* 配图：设计原则（横图整幅展示） */}
+                        <div style={{
+                            overflow: 'hidden',
+                            borderRadius: V.radius,
+                        }}>
+                            <img
+                                src={yuanze}
+                                alt="设计原则"
+                                loading="lazy"
+                                style={{
+                                    width: '100%',
+                                    height: 'auto',
+                                    display: 'block',
+                                }}
+                            />
+                        </div>
+                    </div>
+
+                    {/* 子板块 2：AI 在设计自驱中的有用性（标题与配图左右放置） */}
+                    <div style={{
+                        marginBottom: isMobile ? '72px' : '104px',
+                        display: 'grid',
+                        gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+                        gap: isMobile ? '24px' : '56px',
+                        alignItems: 'start',
+                    }}>
+                        <div>
+                            <Eyebrow style={{ marginBottom: '10px' }}>
+                                06-2
+                            </Eyebrow>
+                            <h3 style={{
+                                fontFamily: '"Tencent Sans", "Lora", "Times New Roman", Georgia, serif',
+                                fontSize: isMobile ? '22px' : '30px',
+                                fontWeight: 600,
+                                lineHeight: isMobile ? '30px' : '38px',
+                                letterSpacing: '-0.02em',
+                                color: V.ink,
+                                margin: 0,
+                                marginBottom: '28px',
+                            }}>
+                                AI 原型在设计自驱中的有用性
+                            </h3>
+                            <p style={{
+                                fontFamily: typography.body.fontFamily,
+                                fontSize: isMobile ? '15px' : '16px',
+                                lineHeight: isMobile ? '24px' : '28px',
+                                color: V.inkSoft,
+                                margin: 0,
+                            }}>
+                                AI 工具如何支撑设计自驱的探索与落地（占位描述，可替换）。
+                            </p>
+                        </div>
+                        {/* 配图：AI 原型（支持放大镜，无灰底边框） */}
+                        <ZoomableImage
+                            src={aiyuanxing}
+                            alt="AI 原型"
+                            showFrame={false}
+                        />
+                    </div>
                 </section>
 
                 {/* Back */}

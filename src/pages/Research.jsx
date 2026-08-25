@@ -1,5 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Lock } from 'lucide-react';
 import { Navbar } from '../components/Navbar';
 import { ContactSection } from '../components/ContactSection';
 import { ASSETS } from '../constants/assets';
@@ -178,7 +179,7 @@ const CarouselCard = ({ title, images }) => (
     </div>
 );
 
-const SandboxCard = ({ title, date, preview, image, button, span = 1 }) => {
+const SandboxCard = ({ title, date, preview, image, button, locked = false, span = 1 }) => {
     const navigate = useNavigate();
     const handleClick = button?.to ? () => navigate(button.to) : button?.onClick;
     return (
@@ -260,8 +261,26 @@ const SandboxCard = ({ title, date, preview, image, button, span = 1 }) => {
                 </div>
             </div>
 
-            {/* Full-width button inside card */}
-            {button && (
+            {/* Full-width button inside card；locked 时显示锁 + NDA（不可点击） */}
+            {locked ? (
+                <div style={{
+                    width: '100%',
+                    padding: '9px 16px',
+                    background: colors.grey[95],
+                    borderRadius: '8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px',
+                    fontFamily: typography.body.fontFamily,
+                    fontSize: '15px',
+                    fontWeight: 500,
+                    color: colors.grey[56],
+                }}>
+                    <Lock size={15} />
+                    NDA
+                </div>
+            ) : button && (
                 <button
                     onClick={handleClick}
                     style={{
@@ -310,7 +329,7 @@ const featuredItems = [
         title: 'GenFaceUI: Meta-Design Tool',
         date: 'CHI 产品原型',
         image: ASSETS.ai1,
-        button: { label: 'View Demo →', onClick: () => window.open('https://arxiv.org/abs/2602.11055', '_blank') },
+        locked: true,
     },
 ];
 

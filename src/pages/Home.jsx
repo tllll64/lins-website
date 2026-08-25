@@ -21,7 +21,7 @@ import xhsCursor from '../assets/cursor/xhs-cursor.png';
 import PromoteLogo from '../assets/Home/Promote_logo.png';
 import TakoLogo from '../assets/Home/Tako_logo.png';
 import TakoImg from '../assets/works/tako/Tako.png';
-import LingxiLogo from '../assets/Home/Lingxi_logo.png';
+import FitLogo from '../assets/Home/FiT_logo.png';
 import RedLogo from '../assets/Home/red.png';
 import TikTokAppLogo from '../assets/Home/TikTok.png';
 import PolaroidDecoration from '../components/PolaroidDecoration';
@@ -29,7 +29,7 @@ import profileImg from '../assets/about/profile2.png';
 import TencentLogo from '../assets/Home/tencent-color.svg';
 import QiaopiCover from '../assets/works/qiaopi/qiaopi.png';
 import XhsFriesCover from '../assets/works/xhs-fries/cover.png';
-import SharelinkCover from '../assets/works/sharelink/cover.svg';
+import SharelinkCover from '../assets/works/sharelink/sharelink.png';
 import FigmaPreloader from '../components/FigmaPreloader';
 
 const blogItems = [
@@ -187,7 +187,7 @@ export const Home = () => {
                         title=""
                         subtitle="Internship Projects"
                         scale={0.6}
-                        folderImages={[PromoteLogo, TakoLogo, LingxiLogo]}
+                        folderImages={[PromoteLogo, TakoLogo, FitLogo]}
                         onClick={() => {
                             const target = document.getElementById('works');
                             if (!target) return;
@@ -310,6 +310,7 @@ export const Home = () => {
                         logo={TencentLogo}
                         image={SharelinkCover}
                         reversed={true}
+                        imageScale={1.12}
                         pixelPattern={<PixelLock size={6} gap={2} />}
                         onClick={() => navigate('/works/sharelink')}
                     />
