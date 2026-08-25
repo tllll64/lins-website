@@ -789,7 +789,7 @@ export const Sharelink = () => {
                                 }}
                             >
                                 <div style={{
-                                    fontFamily: typography.body.fontFamily,
+                                    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
                                     fontSize: '12px',
                                     fontWeight: 500,
                                     letterSpacing: '0.08em',
@@ -799,11 +799,11 @@ export const Sharelink = () => {
                                     {item.label}
                                 </div>
                                 <div style={{
-                                    fontFamily: typography.body.fontFamily,
+                                    fontFamily: '"Tencent Sans", "Lora", "Times New Roman", Georgia, serif',
                                     fontSize: isMobile ? '16px' : '19px',
                                     lineHeight: isMobile ? '24px' : '28px',
                                     color: V.ink,
-                                    fontWeight: 500,
+                                    fontWeight: 700,
                                 }}>
                                     {item.value}
                                 </div>
