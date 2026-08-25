@@ -263,7 +263,7 @@ export const About = () => {
                                 目前在上海，就读于 <span style={{ fontWeight: fontWeight.semibold }}>同济大学 </span><span style={{ fontWeight: fontWeight.semibold, textDecoration: 'underline', textDecorationThickness: '2px', textDecorationColor: colors.black[40] }}>D&I</span> 交互设计专业，专注于生成式交互与人机协同研究。
                             </p>
                             <p>
-                                我热衷于重新定义我们与技术互动的方式，使其更加直观、流畅，并无缝融入我们的日常生活。
+                                我的关键词有 {大胆突破 细心验证} {深度研究思维} {主动推进落地} {好奇心&问题驱动成长}。
                             </p>
                         </div>
 
