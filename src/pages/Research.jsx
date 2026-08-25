@@ -233,8 +233,8 @@ const SandboxCard = ({ title, date, preview, image, button, locked = false, span
                     overflow: 'hidden',
                     cursor: handleClick && image ? 'pointer' : 'default',
                     transition: 'opacity 0.15s',
-                    // Only keep a fixed placeholder ratio when there is no image
-                    ...(!image ? { aspectRatio: '2 / 1' } : {}),
+                    // 用图片真实比例预留高度：未加载时显示纯白，加载后无跳动、不裁剪
+                    aspectRatio: image ? (IMAGE_RATIOS[image] || 4 / 3) : '2 / 1',
                 }}
                 onMouseEnter={e => { if (handleClick && image) e.currentTarget.style.opacity = 0.88; }}
                 onMouseLeave={e => { if (handleClick && image) e.currentTarget.style.opacity = 1; }}

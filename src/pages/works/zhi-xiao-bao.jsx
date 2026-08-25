@@ -753,7 +753,7 @@ export const ZhiXiaoBao = () => {
                             color: 'rgba(0, 0, 0, 0.4)',
                             marginTop: '40px'
                         }}>
-                            Designed and Coded by Chloe Tian • 2025
+                            Designed and Coded by Lynn Tian • 2025
                         </div>
 
                         <div style={{

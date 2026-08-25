@@ -257,7 +257,7 @@ export const About = () => {
 
                         <div style={profileBodyStyle}>
                             <p>
-                                嗨，我是 Chloe Tian。作为一名数字设计师和 AI 工程师，我致力于将以人为本的设计与前沿技术相融合。
+                                嗨，我是 Lynn Tian。作为一名产品设计师和 AI 工程师，我致力于将以人为本的设计与前沿技术相融合。
                             </p>
                             <p>
                                 目前在上海，就读于 <span style={{ fontWeight: fontWeight.semibold }}>同济大学 </span><span style={{ fontWeight: fontWeight.semibold, textDecoration: 'underline', textDecorationThickness: '2px', textDecorationColor: colors.black[40] }}>D&I</span> 交互设计专业，专注于 🤖 人机交互（HAI）研究 @ <span style={{ fontWeight: fontWeight.semibold, textDecoration: 'underline', textDecorationThickness: '2px', textDecorationColor: colors.black[40] }}>CDI</span>。
