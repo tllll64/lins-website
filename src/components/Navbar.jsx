@@ -93,7 +93,7 @@ export const Navbar = ({ theme = 'light' }) => {
     const THUMB_SIZE = 34;
     const BUBBLE_PAD = 5;
 
-    const isEchoActive = location.pathname === '/echo';
+    const isEchoActive = location.pathname === '/research';
     const isAboutActive = location.pathname === '/about';
 
     const aboutBubbleStyle = {
@@ -170,7 +170,7 @@ export const Navbar = ({ theme = 'light' }) => {
                         Craft
                     </Link>
                     <Link
-                        to="/echo"
+                        to="/research"
                         style={getLinkStyle(isEchoActive)}
                         onMouseEnter={(e) => handleMouseEnter(e, isEchoActive)}
                         onMouseLeave={(e) => handleMouseLeave(e, isEchoActive)}

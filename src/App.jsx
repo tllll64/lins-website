@@ -79,6 +79,7 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/craft" element={<Research />} />
                 <Route path="/echo" element={<Research />} />
+                <Route path="/research" element={<Research />} />
                 <Route path="/works/zhi-xiao-bao" element={<ZhiXiaoBao />} />
                 <Route path="/works/xiao-mi" element={<XiaoMi />} />
                 <Route path="/works/colean" element={<ColeanDetail />} />
