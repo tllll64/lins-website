@@ -29,12 +29,14 @@ import profileImg from '../assets/about/profile2.png';
 import TencentLogo from '../assets/Home/tencent-color.svg';
 import QiaopiCover from '../assets/works/qiaopi/qiaopi.png';
 import XhsFriesCover from '../assets/works/xhs-fries/cover.png';
+import SharelinkCover from '../assets/works/sharelink/cover.svg';
 import FigmaPreloader from '../components/FigmaPreloader';
 
 const blogItems = [
-    { title: "Harness 原则层：提取、验证与收敛", category: "[Harness]", image: ASSETS.blog2, locked: true },
+    { title: "Harness 原则层：提炼、验证与融入", category: "[Harness]", image: ASSETS.blog2, locked: true, tag: "NEW" },
+    { title: "Tako 特型卡原则与规范制定", category: "[AI]  [Reflection]", image: ASSETS.blog1, locked: true },
     { title: "理想态英文阅读体验在 Tako 的应用", category: "[AI]  [Reflection]", image: ASSETS.blog1, locked: true },
-    { title: "国内外用户 AI 使用差异调研", category: "[AI]  [Research]", image: ASSETS.blog2, locked: true },
+    { title: "国内外用户 AI 使用差异观察", category: "[AI]  [Research]", image: ASSETS.blog2, locked: true },
     {
         title: "“AIGC+模板化”融入 B 端业务实践反思",
         category: "[AI]  [Reflection]",
@@ -303,10 +305,13 @@ export const Home = () => {
                     <ProjectCard
                         date="2026"
                         title="全球汇入 Sharelink 体验优化"
+                        description="TenPay Global 面向海外用户的资金汇入产品体验优化，覆盖从发起汇款到资金到账的全流程。"
                         tags={['2026', '设计自驱']}
                         logo={TencentLogo}
-                        locked={true}
+                        image={SharelinkCover}
                         reversed={true}
+                        pixelPattern={<PixelLock size={6} gap={2} />}
+                        onClick={() => navigate('/works/sharelink')}
                     />
                     <ProjectCard
                         date="Mar - May 2024"

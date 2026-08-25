@@ -85,7 +85,8 @@ const BannerCarousel = ({ images, title }) => {
                     background: '#fff',
                     borderRadius: '8px',
                     overflow: 'hidden',
-                    aspectRatio: '12 / 7',
+                    // 12:7 基础上卡片加高约 12px（2020px 视口下媒体区 +12px；23:14 基础上减小约 4px）
+                    aspectRatio: '1.66',
                     touchAction: 'pan-y',
                     cursor: dragging ? 'grabbing' : 'grab',
                     userSelect: 'none',
@@ -297,7 +298,7 @@ const featuredItems = [
         title: 'AI 侨批生成',
         date: 'AI 产品原型',
         image: ASSETS.craft2,
-        button: { label: 'View Demo →', to: '/works/qiaopi/demo' },
+        button: { label: 'View Demo →', to: '/works/qiaopi#prototype' },
     },
     {
         title: '抖音弹幕互动玩法创新',
@@ -335,7 +336,7 @@ const estimateCardHeight = (item, colWidth) => {
     const chrome = 24;
     let mediaH;
     if (item.type === 'carousel') {
-        mediaH = colWidth / (12 / 7) + 16; // 12:7 视口 + 圆点行（使三列高度基本一致）
+        mediaH = colWidth / 1.66 + 16; // banner 视口（≈23:14 减小 4px）+ 圆点行
     } else if (item.image) {
         const ratio = IMAGE_RATIOS[item.image] || 4 / 3;
         mediaH = colWidth / ratio;
@@ -424,9 +425,9 @@ export const Research = () => {
     // 数字为 allItems 下标：0-2 为固定首行（侨批/抖音/GenFaceUI），3 起为 sandboxItems 顺序。
     // 若新增/删除/重排卡片，需同步更新此表。
     const FIXED_COLUMN_INDICES = [
-        [0, 5, 8, 11], // 列1: 侨批 / AIGC Banner / 小米 / 支小宝
+        [0, 5, 6, 11], // 列1: 侨批 / AIGC Banner / cowart / 支小宝
         [1, 3, 7, 10], // 列2: 抖音 / Sidetation / 方由 / Colean
-        [2, 4, 6, 9],  // 列3: GenFaceUI / gen-icon / cowart / NIO
+        [2, 4, 8, 9],  // 列3: GenFaceUI / gen-icon / 小米 / NIO
     ];
 
     const allItems = [...featuredItems, ...sandboxItems];

@@ -1,5 +1,23 @@
 @import "tailwindcss";
 
+/* ===== Tencent Sans 品牌字体（标题专用） ===== */
+@font-face {
+    font-family: 'Tencent Sans';
+    src: url('./assets/fonts/TencentSans-W3.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Tencent Sans';
+    src: url('./assets/fonts/TencentSans-W7.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+/* ===== End Tencent Sans ===== */
+
 /* ===== Lenis smooth scroll (haoqi.design style) ===== */
 html.lenis,
 html.lenis body {

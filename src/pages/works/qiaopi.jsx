@@ -227,7 +227,7 @@ export const Qiaopi = () => {
                 </section>
 
                 {/* Prototype — 线上活动页（本地 weremit dev server，仅本地预览有效） */}
-                <section style={{
+                <section id="prototype" style={{
                     maxWidth: containerMax,
                     margin: '0 auto',
                     padding: isMobile ? '80px 24px 0' : '120px 32px 0',

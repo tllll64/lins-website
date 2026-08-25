@@ -12,7 +12,7 @@ const ReflectionList = ({ items }) => {
       {/* Header Row */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: isMobile ? '1fr auto' : '2fr 1fr 150px',
+        gridTemplateColumns: isMobile ? '1fr auto' : '2fr 1fr 190px',
         padding: '16px 0',
         borderBottom: `1px solid ${colors.grey[18]}`,
         color: colors.grey[56],
@@ -34,7 +34,7 @@ const ReflectionList = ({ items }) => {
             onClick={item.onClick}
             style={{
               display: 'grid',
-              gridTemplateColumns: isMobile ? '1fr auto' : '2fr 1fr 150px',
+              gridTemplateColumns: isMobile ? '1fr auto' : '2fr 1fr 190px',
               padding: '32px 0',
               borderBottom: `1px solid ${colors.grey[18]}`,
               alignItems: 'center',
@@ -44,15 +44,43 @@ const ReflectionList = ({ items }) => {
             }}
           >
             <div style={{ 
-              ...typography.heading5,
-              color: colors.white.solid 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '10px',
+              minWidth: 0,
             }}>
-              {item.title}
+              <div style={{ 
+                ...typography.heading5,
+                color: colors.white.solid 
+              }}>
+                {item.title}
+              </div>
+              {item.tag && (
+                <span style={{
+                  background: '#FE2C55',
+                  color: colors.white.solid,
+                  fontSize: '13px',
+                  fontWeight: 800,
+                  letterSpacing: '0.05em',
+                  textTransform: 'uppercase',
+                  padding: '5px 7px 5px 9px',
+                  borderRadius: '4px',
+                  whiteSpace: 'nowrap',
+                  flexShrink: 0,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  lineHeight: 1,
+                }}>
+                  {item.tag}
+                </span>
+              )}
             </div>
             
             {!isMobile && (
               <div style={{ 
-                fontSize: '16px', 
+                fontSize: typography.heading5.fontSize,
+                fontWeight: 400,
                 color: activeIndex === index ? colors.white.solid : colors.grey[66],
                 transition: 'color 0.3s ease'
               }}>
@@ -68,16 +96,19 @@ const ReflectionList = ({ items }) => {
               gap: '8px',
               color: activeIndex === index ? colors.white.solid : colors.grey[66],
               transition: 'color 0.3s ease',
-              fontSize: '16px'
+              fontSize: '16px',
+              fontWeight: 400
             }}>
               <span style={{ 
                 opacity: activeIndex === index ? 1 : 0, 
                 transition: 'opacity 0.2s ease',
-                display: isMobile ? 'none' : 'inline'
+                display: isMobile ? 'none' : 'inline',
+                whiteSpace: 'nowrap',
+                flexShrink: 0
               }}>
                 {item.locked ? 'Coming Soon' : 'See More'}
               </span>
-              {item.locked ? <Lock size={16} /> : <ArrowUpRight size={20} />}
+              {item.locked ? <Lock size={20} /> : <ArrowUpRight size={24} />}
             </div>
           </div>
         ))}

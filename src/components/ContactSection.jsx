@@ -190,7 +190,7 @@ export const ContactSection = React.forwardRef((props, ref) => {
                 </div>
 
                 <a 
-                    href="https://jq6o8oyx72u.feishu.cn/wiki/R2XrwQooKiYVk1kF4facXBtdnkd"
+                    href="https://jq6o8oyx72u.feishu.cn/wiki/MgB2wTodOiaRghkivCFcXiNTn06?from=from_copylink"
                     target="_blank"
                     rel="noopener noreferrer"
                     style={resumeButtonStyle}
