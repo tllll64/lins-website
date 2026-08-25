@@ -69,7 +69,7 @@ const AboutContact = () => {
 
     return (
         <div style={containerStyle}>
-            <h3 style={titleStyle}>寻找 27 届暑期实习中，欢迎联系🙋🏻‍♀️</h3>
+            <h3 style={titleStyle}>准备 27 届校招中，欢迎联系 🙋🏻‍♀️</h3>
             <div style={listStyle}>
                 {contactItems.map((item) => (
                     <div
