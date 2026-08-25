@@ -212,6 +212,7 @@ export const About = () => {
     };
 
     const newsData = [
+        { date: "[05/2026]", emoji: "🐧", text: "来腾讯 CDG 暑期实习啦，这次将面向跨境汇款这个很有挑战性的业务，同时进一步探索 AI 融入设计工作流的可能性。" },
         { date: "[02/2026]", emoji: "💻", text: "寒假 vibe coding 重新装修了自己的个人网站，新域名：lynntian.com 🍩" },
         { date: "[02/2026]", emoji: "🎵", text: "结束了在字节的产品设计实习，这是一次对 AI 落地业务的全方位了解，我仍然会保持眼里有光，保持 passion ✨" },
         { date: "[01/2026]", emoji: "🇪🇸", text: "My first CHI! 四月份西班牙巴塞罗那见！感谢学术之途的每一位引路人，给世界贡献一份 contribution（本 N 人的终极梦想）正在一步步实现中 ✨" },
