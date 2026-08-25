@@ -39,7 +39,7 @@ export const ASSETS = {
     photo2: new URL('../assets/about/截屏2026-02-16 17.31.51.png', import.meta.url).href,
     photo3: new URL('../assets/about/截屏2026-02-16 17.14.19.png', import.meta.url).href,
     photo4: new URL('../assets/about/IMG_3790.JPG', import.meta.url).href,
-    photo5: new URL('../assets/about/IMG_4621.jpg', import.meta.url).href,
+    photo5: new URL('../assets/about/自拍.png', import.meta.url).href,
     photo6: new URL('../assets/about/IMG_4958.jpg', import.meta.url).href,
 
     // Work With
