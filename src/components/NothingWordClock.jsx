@@ -69,22 +69,20 @@ const NothingWordClock = () => {
     // Constraint: Start from Row 3 (index 2), avoid last row (index 7)
     // Available Rows: 2, 3, 4, 5, 6
     const wordSets = [
-      // Set 0: CURIO SITY DRIVEN
+      // Set 0: CRAFT WORK (左上 → 右下)
       [
-        { text: "CURIO", row: 2, col: 0 },     // Row 3, Left (5 chars -> cols 0-4)
-        { text: "SITY", row: 3, col: 4 },      // Row 4, Right (4 chars -> cols 4-7)
-        { text: "DRIVEN", row: 6, col: 2 }     // Row 7 (Index 6), Centered (6 chars -> cols 2-7)
+        { text: "CRAFT", row: 2, col: 0 },     // Row 3, Left (5 chars -> cols 0-4)
+        { text: "WORK", row: 3, col: 4 }       // Row 4, Right (4 chars -> cols 4-7)
       ],
-      // Set 1: HANDS ON
+      // Set 1: CRAFT WORK (左上 → 底部右侧)
       [
-        { text: "HANDS", row: 3, col: 0 },     // Row 4 (5 chars)
-        { text: "ON", row: 6, col: 6 }         // Row 7 (Index 6), Bottom Right
+        { text: "CRAFT", row: 3, col: 0 },     // Row 4 (5 chars)
+        { text: "WORK", row: 6, col: 4 }       // Row 7 (Index 6), Bottom Right
       ],
-      // Set 2: TECH FOR ALL
+      // Set 2: CRAFT WORK (顶部 → 中右)
       [
-        { text: "TECH", row: 2, col: 0 },      // Row 3 (4 chars)
-        { text: "FOR", row: 4, col: 3 },       // Row 5, Middle (3 chars)
-        { text: "ALL", row: 6, col: 5 }        // Row 7 (Index 6), Right (3 chars)
+        { text: "CRAFT", row: 2, col: 0 },     // Row 3 (5 chars)
+        { text: "WORK", row: 4, col: 4 }       // Row 5, Middle (4 chars)
       ]
     ];
 
@@ -168,7 +166,7 @@ const NothingWordClock = () => {
                 fontWeight: 'normal',
                 pointerEvents: 'none'
             }}>
-                Human-AI Sandbox
+                Craft Work
             </div>
         </div>
 

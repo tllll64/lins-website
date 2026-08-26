@@ -141,7 +141,7 @@ const INDEX_ITEMS = [
     { id: 'user-research', label: '用户体验问题' },
     { id: 'design-goals', label: '设计目标' },
     { id: 'design-execution', label: '设计执行' },
-    { id: 'project-reflection', label: 'AI native 应用' },
+    { id: 'project-reflection', label: 'AI-Native 应用' },
 ];
 
 /* Micro label — the signature Vercel "eyebrow" */
@@ -1345,7 +1345,7 @@ export const Sharelink = () => {
                             margin: 0,
                             marginBottom: '28px',
                         }}>
-                            AI-Native 思路在项目中的应用
+                            AI-Native 应用
                         </h2>
                     </div>
 

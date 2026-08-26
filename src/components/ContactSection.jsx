@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MessageCircle, Copy, Check, ArrowUpRight } from 'lucide-react';
+import { Mail, Phone, Copy, Check, ArrowUpRight } from 'lucide-react';
+import WeChatIcon from './WeChatIcon';
 import { colors, spacing, typography, stackSpacing, layoutSpacing, fontSize } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 
@@ -160,7 +161,7 @@ export const ContactSection = React.forwardRef((props, ref) => {
                         onMouseLeave={() => setHoveredField(null)}
                         onClick={() => handleCopy('LittleLionTOP', 'wechat')}
                     >
-                        <MessageCircle size={16} /> <span>LittleLionTOP</span>
+                        <WeChatIcon size={16} /> <span>LittleLionTOP</span>
                         <div style={iconContainerStyle}>
                             {copiedField === 'wechat' ? (
                                 <Check size={14} color={colors.white.solid} />

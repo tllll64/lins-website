@@ -17,7 +17,7 @@ const publicationsData = [
     {
         title: "GenFaceUI: Meta-Design of Generative Personalized Facial Expression Interfaces for Intelligent Agents",
         authors: "Yate Ge, Lin Tian, Yi Dai, Shuhan Pan, Yiwen Zhang, Qi Wang, Weiwei Guo, Xiaohua Sun*",
-        venue: "CHI'26 (full paper)",
+        venue: "CHI'26 (Full Paper)",
         links: [
             { label: "ACM DL", url: "https://dl.acm.org/doi/10.1145/3772318.3790653" },
             { label: "PDF", url: "https://dl.acm.org/doi/epdf/10.1145/3772318.3790653" },
@@ -27,7 +27,7 @@ const publicationsData = [
     {
         title: "Jokeasy: Exploring Human-AI Collaboration in Thematic Joke Generation",
         authors: "Yate Ge, Lin Tian, Chiqian Xu, Luyao Xu, Meiying Li, Yuanda Hu, Weiwei Guo*",
-        venue: "iasdr'25 (full paper)",
+        venue: "iasdr'25 (Full Paper)",
         links: [
             { label: "PDF", url: "https://dl.designresearchsociety.org/cgi/viewcontent.cgi?article=1762&context=iasdr" },
         ],
@@ -36,7 +36,7 @@ const publicationsData = [
     {
         title: "Exploring Generative Personalized Facial Expression Interfaces for Intelligent Agents",
         authors: "Yate Ge, Lin Tian, Ge Chen, Shuhan Pan, Weiwei Guo, Xiaohua Sun*",
-        venue: "UIST'25 (poster)",
+        venue: "UIST'25 (Poster)",
         links: [
             { label: "ACM DL", url: "https://dl.acm.org/doi/10.1145/3746058.3758382" },
             { label: "PDF", url: "https://dl.acm.org/doi/epdf/10.1145/3746058.3758382" },
@@ -46,7 +46,7 @@ const publicationsData = [
     {
         title: "When Accessibility Becomes a Trap: A User-Centric Characterization of Dark Patterns Arising from Screen Reader Users' Perceived Deception in Mobile Interfaces",
         authors: "Dai Shi, Lin Tian, Jiaxun Sun, TOMOMI KAWAKAMI, Nuo Cheng, Shuchang Xu, Guanhong L",
-        venue: "CSCW'25 (poster)",
+        venue: "CSCW'25 (Poster)",
         links: [
             { label: "ACM DL", url: "https://dl.acm.org/doi/10.1145/3715070.3749249" },
             { label: "PDF", url: "https://dl.acm.org/doi/epdf/10.1145/3715070.3749249" }
