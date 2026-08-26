@@ -78,8 +78,8 @@ const V = {
 const projectFacts = [
     { label: '业务', value: 'TenPay Global 跨境汇款' },
     { label: '状态', value: '待开发' },
-    { label: '我的角色', value: '设计自驱 UX Lead' },
-    { label: '年份', value: '2026.06–2026.08' },
+    { label: '角色', value: '设计自驱 UX Lead' },
+    { label: '时间', value: '2026.06–2026.08' },
 ];
 
 /* Before / After 对比案例（顺序：机构通知页 → 中转 H5 → 通知收款页 → 通知卡片 → 收款页） */
@@ -87,7 +87,7 @@ const beforeAfterCases = [
     {
         title: '机构通知页',
         description:
-            '机构收款后的首条触达页面。优化了信息层级与关键金额的呈现，让用户一眼确认款项状态，减少理解成本。',
+            '改前，通知按钮只在到达通知节点时才出现，用户容易错过最佳通知时机（比如看到按钮前就退出机构页）。\n\n改后，将按钮常驻于页面底部，通过 tooltip 主动引导用户关注，并以「前往微信通知、对方一键收款」的文案传递利益点。',
         note: '设计目标：建立场景认知 引导用户进入通知流程（现状转化率 58%）',
         before: jigouBefore,
         after: jigouAfter,
@@ -96,7 +96,7 @@ const beforeAfterCases = [
     {
         title: '中转 H5',
         description:
-            '资金在途阶段的中转页面。重构了进度反馈与状态说明，缓解等待期的不确定感，明确下一步动作。',
+            '中转 H5 作为衔接页，用户停留时间极短，但仍然需要对齐前后页面的预期与目标。\n\n改前，行动目标文案冗长、自收与他收混淆、兜底操作抢占视觉焦点；改后，通过跳转图示与收敛文案，明确「跳转微信」的方向与「通知收款人」的目标，将兜底操作收敛为精简文字链，把视觉重心留给「打开微信」这一核心行动项。',
         note: '设计目标：建立场景认知 引导用户进入通知流程（现状转化率 58%）',
         before: zhongzhuanBefore,
         after: zhongzhuanAfter,
@@ -104,7 +104,7 @@ const beforeAfterCases = [
     {
         title: '通知收款页',
         description:
-            '通知用户查收款项的落地页。梳理了核心信息与操作路径，降低用户从通知到收款的跳转阻力。',
+            '这是用户从机构跳转至微信的落地页，仍须围绕「通知收款人」这一核心目标展开。\n\n改前，最关键的「通知收款人」行动项被淹没在汇款信息与封面样式中，用户注意力被大量分散，行动迟疑。改后，页面层级更清晰，聚焦首要的通知任务——顶部以一句文案点明目标；中部将「看选封面」一体化展示，并带入收款人视角收敛必要信息；底部将「提醒收款人」行动项区隔出来展示。',
         note: '设计目标：聚焦通知任务 减少非核心信息干扰（现状转化率 72%）',
         before: tongzhiShoukuanBefore,
         after: tongzhiShoukuanAfter,
@@ -112,7 +112,7 @@ const beforeAfterCases = [
     {
         title: '通知卡片',
         description:
-            '系统通知中的收款提醒卡片。精简文案与排版，突出金额与时效信息，让重要信息不被淹没。',
+            '在收款人视角下，通知卡片的信息与样式直接决定其是否愿意打开。\n\n改前，通知文案带有明显的负向催促与机械指令感，基本信息重复，且露出非关键的汇款信息，削弱了打开意愿。改后，文案转向正向、情感化的牵引，仅保留「谁向我汇了多少钱」这一核心汇款信息，同时呈现平台的官方背书感，建立用户收款的信任。',
         note: '设计目标：激发打开意愿 提升收款通知有效触达（现状转化率 54%）',
         before: tongzhiKapiaBefore,
         after: tongzhiKapiaAfter,
@@ -120,15 +120,15 @@ const beforeAfterCases = [
     {
         title: '收款页',
         description:
-            '用户完成收款的核心页面。强化金额确认与到账反馈，建立资金安全的信任感，同时为后续链路埋下引导。',
+            '收款用户打开通知卡片后，核心目标是查看收款信息，并及时完成收款。\n\n改前，信息传递低效、冗余信息干扰，收款行动被拖延。改后，有用的收款信息分层传递：第一级重点展示最核心的汇款信息（谁向我汇了多少钱）；第二级补充汇款背景（对方通过什么机构汇出了多少原币种金额）。同时将「我要收款」按钮区隔展示，行动点更加明确。',
         note: '设计目标：提升收款信息的场景关联性 激发收款操作（现状转化率 52%）',
         before: shoukuanBefore,
         after: shoukuanAfter,
     },
     {
-        title: '封面样式',
+        title: '收款封面样式',
         description:
-            '收款入口的封面样式设计，通过场景化的视觉呈现建立用户认知，引导用户进入收款流程。',
+            '改前，收款封面提供 3 个通用模板（默认「元气满满」「财源滚滚」），与业务关联弱，用户场景化的需求未被真正满足（非默认封面选择率仅 0.93%）。\n\n改后，封面选择与真实的汇款目的和场景相关联，提供两种样式：（1）赡家款目的——面向亲人问候，以饱含真情的家书问候形式呈现；（2）服货贸目的——面向跨境贸易，以商务、可信赖的回执形式呈现。',
         image: fengmianyangshi,
     },
 ];
@@ -141,7 +141,7 @@ const INDEX_ITEMS = [
     { id: 'user-research', label: '用户体验问题' },
     { id: 'design-goals', label: '设计目标' },
     { id: 'design-execution', label: '设计执行' },
-    { id: 'project-reflection', label: '项目反思' },
+    { id: 'project-reflection', label: 'AI native 应用' },
 ];
 
 /* Micro label — the signature Vercel "eyebrow" */
@@ -186,25 +186,83 @@ const Cover = () => (
 );
 
 /* ------------------------------------------------------------------ */
-/*  ImageCarousel — 多图轮播（左右箭头 + 指示点，1:1 正方形）            */
+/*  ImageCarousel — 多图轮播（左右箭头 + 指示点 + hover 放大镜）          */
 /*  showArrows=false 时隐藏左右箭头，仅保留指示点切换                    */
 /* ------------------------------------------------------------------ */
-const ImageCarousel = ({ images, alt = '图片', showArrows = true }) => {
+const ImageCarousel = ({ images, alt = '图片', showArrows = true, zoom = 1.8, lensSize = 180 }) => {
+    const { zoomEnabled } = useZoom();
     const [active, setActive] = useState(0);
+    const containerRef = React.useRef(null);
+    const lensRef = React.useRef(null);
+    const lensImgRef = React.useRef(null);
+    const rafRef = React.useRef(null);
+    const lastXRef = React.useRef(null);
+    const lastYRef = React.useRef(null);
 
     const prev = () => setActive(prev => (prev - 1 + images.length) % images.length);
     const next = () => setActive(prev => (prev + 1) % images.length);
 
+    // hover 放大镜
+    const writeLens = () => {
+        rafRef.current = null;
+        const container = containerRef.current;
+        const lens = lensRef.current;
+        const lensImg = lensImgRef.current;
+        const x = lastXRef.current;
+        const y = lastYRef.current;
+        if (!container || !lens || !lensImg || x == null || y == null) return;
+
+        const rect = container.getBoundingClientRect();
+        const px = x - rect.left;
+        const py = y - rect.top;
+
+        lensImg.style.width = `${rect.width * zoom}px`;
+        lensImg.style.height = `${rect.height * zoom}px`;
+        lens.style.transform = `translate(${px - lensSize / 2}px, ${py - lensSize / 2}px)`;
+        lensImg.style.transform = `translate(${-px * zoom + lensSize / 2}px, ${-py * zoom + lensSize / 2}px)`;
+    };
+
+    const onPointerMove = (e) => {
+        if (!zoomEnabled || e.pointerType !== 'mouse') return;
+        lastXRef.current = e.clientX;
+        lastYRef.current = e.clientY;
+        if (lensRef.current) lensRef.current.style.opacity = '1';
+        if (!rafRef.current) {
+            rafRef.current = requestAnimationFrame(writeLens);
+        }
+    };
+
+    const onPointerLeave = () => {
+        if (lensRef.current) lensRef.current.style.opacity = '0';
+    };
+
+    React.useEffect(() => {
+        if (!zoomEnabled && lensRef.current) {
+            lensRef.current.style.opacity = '0';
+        }
+    }, [zoomEnabled]);
+
+    React.useEffect(() => {
+        return () => {
+            if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        };
+    }, []);
+
     return (
-        <div style={{
-            position: 'relative',
-            width: '100%',
-            aspectRatio: '1 / 1',
-            overflow: 'hidden',
-            background: V.surface2,
-            border: `1px solid ${V.line}`,
-            borderRadius: V.radius,
-        }}>
+        <div
+            ref={containerRef}
+            onPointerMove={onPointerMove}
+            onPointerLeave={onPointerLeave}
+            style={{
+                position: 'relative',
+                width: '100%',
+                aspectRatio: '1 / 1',
+                overflow: 'hidden',
+                background: V.surface2,
+                border: `1px solid ${V.line}`,
+                borderRadius: V.radius,
+            }}
+        >
             <img
                 src={images[active]}
                 alt={`${alt} ${active + 1}`}
@@ -217,6 +275,44 @@ const ImageCarousel = ({ images, alt = '图片', showArrows = true }) => {
                     display: 'block',
                 }}
             />
+
+            {/* 圆形放大镜镜头 */}
+            <div
+                ref={lensRef}
+                style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: `${lensSize}px`,
+                    height: `${lensSize}px`,
+                    borderRadius: '50%',
+                    overflow: 'hidden',
+                    pointerEvents: 'none',
+                    opacity: 0,
+                    zIndex: 4,
+                    boxShadow: '0 0 0 2px rgba(255,255,255,0.95), 0 8px 24px rgba(0,0,0,0.28)',
+                    transition: 'opacity 0.15s ease',
+                    willChange: 'transform',
+                }}
+            >
+                <img
+                    ref={lensImgRef}
+                    src={images[active]}
+                    alt=""
+                    draggable={false}
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        maxWidth: 'none',
+                        objectFit: 'contain',
+                        display: 'block',
+                        willChange: 'transform',
+                    }}
+                />
+            </div>
 
             {/* 左箭头 */}
             {showArrows && (
@@ -425,7 +521,7 @@ const BeforeAfterSlider = ({ beforeSrc, afterSrc, alt = 'Before / After 对比' 
 /*  PanoramaViewer — 横向全景浏览 + hover 局部放大镜                    */
 /*  全景：图片放大 1.5 倍，左右按钮切换；hover：圆形放大镜 2x            */
 /* ------------------------------------------------------------------ */
-const PanoramaViewer = ({ src, alt, leftHint = '左侧', rightHint = '右侧', zoom = 2, lensSize = 180 }) => {
+const PanoramaViewer = ({ src, alt, leftHint = '左侧', rightHint = '右侧', zoom = 1.8, lensSize = 180 }) => {
     const { zoomEnabled } = useZoom();
     const [atRight, setAtRight] = useState(false);
     const containerRef = React.useRef(null);
@@ -453,8 +549,9 @@ const PanoramaViewer = ({ src, alt, leftHint = '左侧', rightHint = '右侧', z
         const rect = container.getBoundingClientRect();
         const px = x - rect.left; // 指针相对容器坐标
         const py = y - rect.top;
-        // 轨道实际位移：atRight 时 translateX(-33.333%) of 轨道(150%容器宽) = -0.5 容器宽
-        const offset = atRight ? -rect.width * 0.5 : 0;
+        // 轨道实际位移：atRight 时 translateX(-33.333%) of 轨道(150%容器宽) = 轨道左移 0.5 容器宽，
+        // 可见区域显示轨道 [0.5W, 1.5W]，指针对应轨道实际横坐标 = px + 0.5W
+        const offset = atRight ? rect.width * 0.5 : 0;
         const imgX = px + offset; // 指针在轨道图中的实际横坐标
 
         // 镜头内放大图尺寸 = 轨道图宽(1.5×容器) × zoom
@@ -789,7 +886,7 @@ export const Sharelink = () => {
                                 }}
                             >
                                 <div style={{
-                                    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+                                    fontFamily: '"Tencent Sans", "Lora", "Times New Roman", Georgia, serif',
                                     fontSize: '12px',
                                     fontWeight: 500,
                                     letterSpacing: '0.08em',
@@ -842,11 +939,9 @@ export const Sharelink = () => {
                             color: V.inkSoft,
                             margin: 0,
                             marginLeft: 'auto',
-                            maxWidth: '800px',
+                            maxWidth: '960px',
                         }}>
-                            Sharelink 全球汇入是 TenPay Global 面向海外用户的资金汇入产品。作为设计自驱项目，
-                            围绕用户从发起汇款到资金到账的全流程体验进行梳理与优化，聚焦信息传达的清晰度、
-                            进度反馈的确定性，以及异常场景下的引导，降低跨境汇款的认知与操作成本，提升用户的信任感与完成率。
+                            Sharelink 是 TenPay Global 跨境汇款一站式链接汇款机构和微信生态的端到端体验方案。本次设计自驱聚焦自汇他收场景和目标用户，帮助汇款人高效完成通知、收款人顺畅完成收款，进而提升收款成功率。
                         </p>
                     </div>
                 </section>
@@ -857,27 +952,27 @@ export const Sharelink = () => {
                         id: 'project-background',
                         title: 'Sharelink 是什么',
                         description:
-                            'Sharelink 是财付通 TenPay Global 面向跨境汇款场景的一项功能：每笔汇款会生成一个专属 URL 链接，汇款人可将它分享给收款人，收款人点击链接即可在清晰引导下核对款项并完成收款。\n\n相比短信、邮件等传统通知方式，Sharelink 依托微信社交能力，让通知发生在汇款人与收款人最自然的对话场景中——通知触达率更高、收款路径更短、理解成本更低，从而提升收款转化率。',
+                            'Sharelink 是 Tenpay Global 跨境汇款的一项亮点功能，通过简单的 API 集成，实现从汇款机构到微信平台的端到端跳转方案。\n\n相比于短信、邮件等传统的通知方式，Sharelink 依托微信原生的社交分享能力，打造出「汇完款发微信，点一下就能收」的顺畅用户体验，让消息触达更高效、收款路径更顺畅。',
                         image: jieshaoSharelink,
                     },
                     {
                         id: 'business-value',
                         title: '业务遇到了什么问题',
                         description:
-                            '通过本次体验改版，期望在提升用户收款完成率的基础上，同步改善通知触达与转化链路的关键指标，让 Sharelink 在跨境汇款业务中发挥更大的增长价值。',
+                            '尽管 Sharelink 已历经多次改版，整体收款成功率仍偏低（仅 12%）。随着业务发展，Sharelink 链路不再融合「自汇自收」场景，但页面中仍残留相关字段信息。\n\n因此，本轮设计自驱面向的首要业务目标是提升「自汇他收」场景下的收款成功率。',
                     },
                     {
                         id: 'user-research',
                         title: '理想态用户体验与现状问题',
                         description:
-                            '通过用户访谈与行为走查，还原用户从发起汇款到资金到账的完整旅程，定位「看不懂、等得慌、出错了不知道怎么办」等核心痛点，为后续设计方向提供依据。',
+                            'Sharelink 主要面向「首次自汇他收」场景。对照理想态用户体验，当前链路仍存在明显问题或提升空间。',
                         image: yonghulianlutu,
                     },
                     {
                         id: 'design-goals',
                         title: '设计目标',
                         description:
-                            '围绕「信息清晰、进度确定、异常可引导」三个目标展开设计：让关键信息一眼可见，让在途状态持续可预期，让异常场景有明确的下一步指引，从而降低跨境汇款的认知与操作成本。',
+                            '设计目标的导出，围绕业务整体目标、理想态用户体验与现存问题展开推导，最终提升收款转化率。\n\n（1）汇款人视角：建立从机构页跳转至微信通知收款人的认知，全程聚焦通知任务，减少页面中非核心信息的干扰。（2）收款人视角：激发收款人对通知卡片的打开意愿，提升通知的有效触达；收款环节则让收款信息更有用、更高效，正向促进收款动作完成。',
                         image: shejimubiao,
                     },
                 ].map((item, index) => (
@@ -894,7 +989,7 @@ export const Sharelink = () => {
                         {/* 标题 + 描述（描述在标题下方） */}
                         <div style={{
                             marginBottom: '28px',
-                            maxWidth: '800px',
+                            maxWidth: '960px',
                         }}>
                             <Eyebrow style={{ marginBottom: '10px' }}>
                                 {String(index + 1).padStart(2, '0')}
@@ -911,14 +1006,14 @@ export const Sharelink = () => {
                             }}>
                                 {item.title}
                             </h2>
-                            {item.description.split('\n\n').map((para, i) => (
+                            {item.description && item.description.split('\n\n').map((para, i) => (
                                 <p key={i} style={{
                                     fontFamily: typography.body.fontFamily,
                                     fontSize: isMobile ? '15px' : '16px',
                                     lineHeight: isMobile ? '24px' : '28px',
                                     color: V.inkSoft,
                                     margin: 0,
-                                    marginTop: i === 0 ? 0 : '16px',
+                                    marginTop: i === 0 ? 0 : '8px',
                                 }}>
                                     {para}
                                 </p>
@@ -1047,6 +1142,16 @@ export const Sharelink = () => {
                         }}>
                             设计执行
                         </h2>
+                        <p style={{
+                            fontFamily: typography.body.fontFamily,
+                            fontSize: isMobile ? '15px' : '16px',
+                            lineHeight: isMobile ? '24px' : '28px',
+                            color: V.inkSoft,
+                            margin: '20px 0 0',
+                            maxWidth: '960px',
+                        }}>
+                            这个改版项目中，我放弃了「发现问题-解决问题」的常规设计思路，而是从最本质的用户的目标出发，以理想态的用户体验为基准，对页面进行整体重构。
+                        </p>
                     </div>
 
                     {/* Design Execution 首个板块：链路展示（无标题无文字，Tab 切换 + 单图 mock） */}
@@ -1099,14 +1204,14 @@ export const Sharelink = () => {
                             />
                         )}
 
-                        {/* 提示小字：左右滑动查看 Before/After 对比 */}
+                        {/* 提示小字：左右滑动查看 Before/After 对比（与设计目标标注同款样式） */}
                         <div style={{
                             marginTop: '14px',
                             textAlign: 'center',
                             fontFamily: typography.body.fontFamily,
-                            fontSize: '13px',
-                            color: V.inkMuted,
-                            letterSpacing: '0.02em',
+                            fontSize: '14px',
+                            lineHeight: isMobile ? '20px' : '22px',
+                            color: 'rgba(0, 0, 0, 0.5)',
                         }}>
                             左右滑动查看 Before / After 页面对比
                         </div>
@@ -1124,7 +1229,7 @@ export const Sharelink = () => {
                             {/* 标题 + 描述（描述在标题下方） */}
                             <div style={{
                                 marginBottom: '28px',
-                                maxWidth: '800px',
+                                maxWidth: '960px',
                             }}>
                                 <Eyebrow style={{ marginBottom: '10px' }}>
                                     05-{index + 1}
@@ -1141,15 +1246,18 @@ export const Sharelink = () => {
                                 }}>
                                     {item.title}
                                 </h2>
-                                <p style={{
-                                    fontFamily: typography.body.fontFamily,
-                                    fontSize: isMobile ? '15px' : '16px',
-                                    lineHeight: isMobile ? '24px' : '28px',
-                                    color: V.inkSoft,
-                                    margin: 0,
-                                }}>
-                                    {item.description}
-                                </p>
+                                {item.description.split('\n\n').map((para, i) => (
+                                    <p key={i} style={{
+                                        fontFamily: typography.body.fontFamily,
+                                        fontSize: isMobile ? '15px' : '16px',
+                                        lineHeight: isMobile ? '24px' : '28px',
+                                        color: V.inkSoft,
+                                        margin: 0,
+                                        marginTop: i === 0 ? 0 : '8px',
+                                    }}>
+                                        {para}
+                                    </p>
+                                ))}
                             </div>
 
                             {/* Before / After 并排展示；单图 case 直接整幅展示 */}
@@ -1201,9 +1309,9 @@ export const Sharelink = () => {
                                     marginTop: '14px',
                                     textAlign: 'center',
                                     fontFamily: typography.body.fontFamily,
-                                    fontSize: '12px',
-                                    lineHeight: isMobile ? '18px' : '20px',
-                                    color: 'rgba(0, 0, 0, 0.4)',
+                                    fontSize: '14px',
+                                    lineHeight: isMobile ? '20px' : '22px',
+                                    color: 'rgba(0, 0, 0, 0.5)',
                                 }}>
                                     {item.note}
                                 </div>
@@ -1212,7 +1320,7 @@ export const Sharelink = () => {
                     ))}
                 </section>
 
-                {/* 6 — 项目反思 */}
+                {/* 6 — AI-Native 思路在项目中的应用 */}
                 <section id="project-reflection" style={{
                     maxWidth: containerMax,
                     margin: '0 auto',
@@ -1222,7 +1330,7 @@ export const Sharelink = () => {
                     {/* 标题 + 描述（描述在标题下方） */}
                     <div style={{
                         marginBottom: isMobile ? '56px' : '72px',
-                        maxWidth: '800px',
+                        maxWidth: '960px',
                     }}>
                         <Eyebrow style={{ marginBottom: '10px' }}>
                             06
@@ -1237,18 +1345,8 @@ export const Sharelink = () => {
                             margin: 0,
                             marginBottom: '28px',
                         }}>
-                            项目反思
+                            AI-Native 思路在项目中的应用
                         </h2>
-                        <p style={{
-                            fontFamily: typography.body.fontFamily,
-                            fontSize: isMobile ? '15px' : '16px',
-                            lineHeight: isMobile ? '24px' : '28px',
-                            color: V.inkSoft,
-                            margin: 0,
-                        }}>
-                            在推进过程中沉淀的方法与思考：如何以设计自驱的方式定位体验问题、
-                            如何在跨团队协作中推动方案落地、以及验证设计价值的度量方式，作为后续项目的经验积累。
-                        </p>
                     </div>
 
                     {/* 子板块 1：提炼设计原则（标题与配图左右放置） */}
@@ -1273,7 +1371,7 @@ export const Sharelink = () => {
                                 margin: 0,
                                 marginBottom: '28px',
                             }}>
-                                提炼设计原则
+                                提炼 Harness 设计原则
                             </h3>
                             <p style={{
                                 fontFamily: typography.body.fontFamily,
@@ -1282,7 +1380,7 @@ export const Sharelink = () => {
                                 color: V.inkSoft,
                                 margin: 0,
                             }}>
-                                在项目推进中沉淀的设计方法与实践原则（占位描述，可替换）。
+                                Sharelink 链路是全球汇入收款端的核心链路之一，也是 Harness 项目提炼设计原则的重点对象。项目中沉淀了「通知触达」「前置指引」相关的 L3-业务原则，用于辅助 AI 理解并生成好设计方案。
                             </p>
                         </div>
                         {/* 配图：设计原则（横图整幅展示） */}
@@ -1325,7 +1423,7 @@ export const Sharelink = () => {
                                 margin: 0,
                                 marginBottom: '28px',
                             }}>
-                                AI 原型在设计自驱中的有用性
+                                AI 原型辅助设计
                             </h3>
                             <p style={{
                                 fontFamily: typography.body.fontFamily,
@@ -1334,7 +1432,7 @@ export const Sharelink = () => {
                                 color: V.inkSoft,
                                 margin: 0,
                             }}>
-                                AI 工具如何支撑设计自驱的探索与落地（占位描述，可替换）。
+                                对于适合 AI 进行设计探索的节点（如通知卡片），我们尝试以 AI 生成原型的方式发散思路。其中，融入了情感化文案表达的方案尤为打动我，也成为最终项目呈现的重要借鉴。
                             </p>
                         </div>
                         {/* 配图：AI 原型（支持放大镜，无灰底边框） */}

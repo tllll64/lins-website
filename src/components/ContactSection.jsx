@@ -107,10 +107,10 @@ export const ContactSection = React.forwardRef((props, ref) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: spacing.xs,
+        gap: `calc(${spacing.xs} - 2px)`,
         background: colors.white.solid,
         color: colors.black.solid,
-        padding: `${spacing.xs} ${spacing.md}`,
+        padding: `${spacing.xs} ${spacing.md} ${spacing.xs} calc(${spacing.md} + 4px)`,
         borderRadius: '100px',
         textDecoration: 'none',
         fontSize: typography.body.fontSize,
@@ -197,7 +197,7 @@ export const ContactSection = React.forwardRef((props, ref) => {
                     onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                     onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                 >
-                    Resume <ArrowUpRight size={16} />
+                    Resume <ArrowUpRight size={18} style={{ transform: 'translateY(1px)' }} />
                 </a>
                 
                 <div style={copyrightStyle}>

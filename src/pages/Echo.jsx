@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { Navbar } from '../components/Navbar';
 import { Section } from '../components/Section';
 import { PublicationCard } from '../components/PublicationCard';
@@ -15,12 +15,12 @@ const RESEARCH_ASSETS = {
 
 const publicationsData = [
     {
-        title: "Exploring Generative Personalized Facial Expression Interfaces for Intelligent Agents",
-        authors: "Yate Ge, Lin Tian, Ge Chen, Shuhan Pan, Weiwei Guo, Xiaohua Sun*",
+        title: "GenFaceUI: Meta-Design of Generative Personalized Facial Expression Interfaces for Intelligent Agents",
+        authors: "Yate Ge, Lin Tian, Yi Dai, Shuhan Pan, Yiwen Zhang, Qi Wang, Weiwei Guo, Xiaohua Sun*",
         venue: "CHI'26 (full paper)",
         links: [
-            { label: "ACM DL", url: "#" },
-            { label: "PDF", url: "#" },
+            { label: "ACM DL", url: "https://dl.acm.org/doi/10.1145/3772318.3790653" },
+            { label: "PDF", url: "https://dl.acm.org/doi/epdf/10.1145/3772318.3790653" },
         ],
         image: RESEARCH_ASSETS.chi
     },
@@ -29,8 +29,7 @@ const publicationsData = [
         authors: "Yate Ge, Lin Tian, Chiqian Xu, Luyao Xu, Meiying Li, Yuanda Hu, Weiwei Guo*",
         venue: "iasdr'25 (full paper)",
         links: [
-            { label: "xxx", url: "#" },
-            { label: "PDF", url: "#" },
+            { label: "PDF", url: "https://dl.designresearchsociety.org/cgi/viewcontent.cgi?article=1762&context=iasdr" },
         ],
         image: RESEARCH_ASSETS.iasdr
     },
@@ -39,8 +38,8 @@ const publicationsData = [
         authors: "Yate Ge, Lin Tian, Ge Chen, Shuhan Pan, Weiwei Guo, Xiaohua Sun*",
         venue: "UIST'25 (poster)",
         links: [
-            { label: "ACM DL", url: "#" },
-            { label: "PDF", url: "#" },
+            { label: "ACM DL", url: "https://dl.acm.org/doi/10.1145/3746058.3758382" },
+            { label: "PDF", url: "https://dl.acm.org/doi/epdf/10.1145/3746058.3758382" },
         ],
         image: RESEARCH_ASSETS.uist
     },
@@ -49,44 +48,27 @@ const publicationsData = [
         authors: "Dai Shi, Lin Tian, Jiaxun Sun, TOMOMI KAWAKAMI, Nuo Cheng, Shuchang Xu, Guanhong L",
         venue: "CSCW'25 (poster)",
         links: [
-            { label: "ACM DL", url: "#" },
-            { label: "PDF", url: "#" }
+            { label: "ACM DL", url: "https://dl.acm.org/doi/10.1145/3715070.3749249" },
+            { label: "PDF", url: "https://dl.acm.org/doi/epdf/10.1145/3715070.3749249" }
         ],
         image: RESEARCH_ASSETS.cscw
     }
 ];
 
 const demoItems = [
-    { type: 'video', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
-    { type: 'video', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
-    { type: 'video', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
+    { type: 'video', src: 'https://www.youtube.com/embed/oBq4iC_T-Yk' },
+    { type: 'video', src: 'https://www.youtube.com/embed/5nUYwufk3-U' },
+    { type: 'video', src: 'https://www.youtube.com/embed/dMuGlI-wrhQ' },
 ];
 
 export const Echo = () => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     const footerRef = useRef(null);
-    const [navTheme, setNavTheme] = useState('light');
-
-    useEffect(() => {
-        const handleScroll = () => {
-            if (footerRef.current) {
-                const footerRect = footerRef.current.getBoundingClientRect();
-                if (footerRect.top <= 72) {
-                    setNavTheme('dark');
-                } else {
-                    setNavTheme('light');
-                }
-            }
-        };
-        window.addEventListener('scroll', handleScroll);
-        handleScroll();
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
 
     const pageStyle = {
         minHeight: '100vh',
-        background: colors.grey[98],
-        backgroundImage: `url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='80'%20height='80'%3E%3Crect%20width='1.5'%20height='1.5'%20fill='%23000'/%3E%3C/svg%3E")`,
+        background: colors.grey[4],
+        backgroundImage: `url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='80'%20height='80'%3E%3Crect%20width='1.5'%20height='1.5'%20fill='%23ffffff'%20fill-opacity='0.12'/%3E%3C/svg%3E")`,
         backgroundSize: '80px 80px',
         backgroundPosition: 'center',
         backgroundRepeat: 'repeat',
@@ -94,14 +76,16 @@ export const Echo = () => {
 
     return (
         <div style={pageStyle}>
-            <Navbar theme={navTheme} />
+            <Navbar theme="dark" />
 
             {/* AI-Driven Research */}
             <Section
                 id="ai-driven-research"
                 title="AI-Driven Research"
-                subtitle="读研期间在 [生成式交互] 和 [人机协同] 方向的研究"
-                style={{ paddingTop: '160px', paddingBottom: layoutSpacing.section.xl }}
+                subtitle="读研期间在生成式交互和人机协同方向的研究"
+                dark
+                headerStyle={{ marginBottom: '56px' }}
+                style={{ background: 'transparent', paddingTop: '160px', paddingBottom: layoutSpacing.section.xl }}
             >
                 <div style={{ marginBottom: layoutSpacing.section.xl }}>
                     {publicationsData.map((pub, index) => (

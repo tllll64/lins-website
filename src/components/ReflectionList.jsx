@@ -93,13 +93,14 @@ const ReflectionList = ({ items }) => {
               display: 'flex', 
               justifyContent: 'flex-end', 
               alignItems: 'center', 
-              gap: '8px',
+              gap: '10px',
               color: activeIndex === index ? colors.white.solid : colors.grey[66],
               transition: 'color 0.3s ease',
               fontSize: '16px',
               fontWeight: 400
             }}>
               <span style={{ 
+                fontSize: typography.heading5.fontSize,
                 opacity: activeIndex === index ? 1 : 0, 
                 transition: 'opacity 0.2s ease',
                 display: isMobile ? 'none' : 'inline',
@@ -108,7 +109,7 @@ const ReflectionList = ({ items }) => {
               }}>
                 {item.locked ? 'Coming Soon' : 'See More'}
               </span>
-              {item.locked ? <Lock size={20} /> : <ArrowUpRight size={24} />}
+              {item.locked ? <Lock size={24} /> : <ArrowUpRight size={30} />}
             </div>
           </div>
         ))}
