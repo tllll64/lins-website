@@ -311,7 +311,7 @@ export const Home = () => {
                         image={SharelinkCover}
                         reversed={true}
                         imageScale={1.12}
-                        pixelPattern={<PixelLock size={6} gap={2} />}
+                        pixelPattern={<PixelEye size={6} gap={2} />}
                         onClick={() => navigate('/works/sharelink')}
                     />
                     <ProjectCard

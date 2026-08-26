@@ -23,7 +23,7 @@ import yonghulianlutu from '../../assets/works/sharelink/用户链路图-6000.we
 /* import loudou from '../../assets/works/sharelink/漏斗.webp'; */
 
 /* 业务遇到的问题 1 */
-import yewuwenti1 from '../../assets/works/sharelink/业务问题 1.webp';
+import yewuwenti1 from '../../assets/works/sharelink/业务问题 1-隐藏数据.webp';
 /* 业务遇到的问题 2 */
 import yewuwenti2 from '../../assets/works/sharelink/业务问题 2.webp';
 /* 业务遇到的问题 3 */
@@ -31,8 +31,8 @@ import yewuwenti3 from '../../assets/works/sharelink/业务问题 3.webp';
 /* 业务目标（当前未使用，后续如需再启用） */
 /* import yewumubiao from '../../assets/works/sharelink/业务目标.webp'; */
 
-/* 设计目标 */
-import shejimubiao from '../../assets/works/sharelink/设计目标-6000.webp';
+/* 设计目标（隐藏数据版） */
+import shejimubiao from '../../assets/works/sharelink/设计目标-隐藏数据-6000.webp';
 
 /* Sharelink 是什么：介绍图 */
 import jieshaoSharelink from '../../assets/works/sharelink/介绍 Sharelink-6000.webp';
