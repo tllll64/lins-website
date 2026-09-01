@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Navbar } from '../../components/Navbar';
 import { typography } from '../../design-system/tokens';
 import { useMediaQuery } from '../../design-system/hooks/useMediaQuery';
-import takoCover from '../../assets/works/tako/Tako.png';
+import takoCover from '../../assets/works/tako/Tako.webp';
 import { FIGMA_EMBEDS } from '../../constants/figmaEmbeds';
 
 /* ------------------------------------------------------------------ */

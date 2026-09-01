@@ -6,15 +6,17 @@ import ZoomableImage from '../../components/ZoomableImage';
 import { useZoom } from '../../contexts/ZoomContext';
 import { typography } from '../../design-system/tokens';
 import { useMediaQuery } from '../../design-system/hooks/useMediaQuery';
-import sharelinkCover from '../../assets/works/sharelink/sharelink.png';
+import sharelinkCover from '../../assets/works/sharelink/sharelink.webp';
 
 /* 汇款人链路 Before / After 对比素材 */
 import huikuanrenBefore from '../../assets/works/sharelink/汇款人-Before.webp';
 import huikuanrenAfter from '../../assets/works/sharelink/汇款人-After.webp';
+import huikuanrenDuibi from '../../assets/works/sharelink/汇款人前后对比-5000.webp';
 
 /* 收款人链路 Before / After 对比素材 */
 import shoukuanrenBefore from '../../assets/works/sharelink/收款人-Before.webp';
 import shoukuanrenAfter from '../../assets/works/sharelink/收款人-After.webp';
+import shoukuanrenDuibi from '../../assets/works/sharelink/收款人前后对比-5000.webp';
 
 /* 用户调研：用户链路图（高分辨率 WebP，保证放大后清晰） */
 import yonghulianlutu from '../../assets/works/sharelink/用户链路图-6000.webp';
@@ -57,8 +59,8 @@ import fengmianyangshi from '../../assets/works/sharelink/封面样式-6000.webp
 /* AI 原型 */
 import aiyuanxing from '../../assets/works/sharelink/AI 原型.webp';
 
-/* 设计原则 */
-import yuanze from '../../assets/works/sharelink/原则.webp';
+/* 通知收款页变体 */
+import tongzhiBianti from '../../assets/works/sharelink/通知收款页变体-8000.webp';
 
 /* ------------------------------------------------------------------ */
 /*  Vercel designmd — monochrome token set                             */
@@ -108,6 +110,10 @@ const beforeAfterCases = [
         note: '设计目标：聚焦通知任务 减少非核心信息干扰（现状转化率 72%）',
         before: tongzhiShoukuanBefore,
         after: tongzhiShoukuanAfter,
+        expandable: {
+            title: '历史方案迭代',
+            image: tongzhiBianti,
+        },
     },
     {
         title: '通知卡片',
@@ -116,6 +122,11 @@ const beforeAfterCases = [
         note: '设计目标：激发打开意愿 提升收款通知有效触达（现状转化率 54%）',
         before: tongzhiKapiaBefore,
         after: tongzhiKapiaAfter,
+        expandableContent: {
+            title: 'AI 原型辅助设计',
+            text: '过程中我们尝试以 AI 生成原型的方式发散思路。其中，融入了情感化文案表达的方案尤为打动我，也成为最终项目呈现的重要借鉴。',
+            image: aiyuanxing,
+        },
     },
     {
         title: '收款页',
@@ -141,7 +152,6 @@ const INDEX_ITEMS = [
     { id: 'user-research', label: '用户体验问题' },
     { id: 'design-goals', label: '设计目标' },
     { id: 'design-execution', label: '设计执行' },
-    { id: 'project-reflection', label: 'AI-Native 应用' },
 ];
 
 /* Micro label — the signature Vercel "eyebrow" */
@@ -184,6 +194,104 @@ const Cover = () => (
         />
     </div>
 );
+
+/* ------------------------------------------------------------------ */
+/*  ExpandableImage — 可展开/收起的图片：收起时仅显示标题条，点击展开     */
+/*  展开内容：纯图片（src）或 左文右图（text + image）                   */
+/* ------------------------------------------------------------------ */
+const ExpandableImage = ({ title, src, alt = title, text }) => {
+    const [expanded, setExpanded] = useState(false);
+    const isMobile = useMediaQuery('(max-width: 768px)');
+
+    return (
+        <div style={{
+            marginTop: '20px',
+            width: '100%',
+            border: `1px solid ${V.line}`,
+            borderRadius: '12px',
+            background: V.bg,
+            overflow: 'hidden',
+        }}>
+            {/* 标题条：始终可见，点击切换展开/收起 */}
+            <button
+                onClick={() => setExpanded(prev => !prev)}
+                aria-expanded={expanded}
+                style={{
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: '12px',
+                    padding: '20px 24px',
+                    border: 'none',
+                    background: 'transparent',
+                    cursor: 'pointer',
+                    fontFamily: '"Tencent Sans", "Lora", "Times New Roman", Georgia, serif',
+                    fontSize: '16px',
+                    fontWeight: 600,
+                    color: V.ink,
+                    textAlign: 'left',
+                }}
+            >
+                <span style={{
+                    transform: 'translateY(-2px)',
+                }}>{title}</span>
+                <span style={{
+                    fontFamily: typography.body.fontFamily,
+                    fontSize: '13px',
+                    color: V.inkMuted,
+                    flexShrink: 0,
+                }}>
+                    {expanded ? '收起' : '展开'}
+                </span>
+            </button>
+
+            {/* 展开区：左文右图（text 存在时）或纯图片（无灰色承接） */}
+            {expanded && (
+                text ? (
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: isMobile ? '1fr' : '2fr 3fr',
+                        gap: isMobile ? '20px' : '40px',
+                        alignItems: 'stretch',
+                        padding: '28px 24px',
+                    }}>
+                        <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                        }}>
+                            <p style={{
+                                fontFamily: typography.body.fontFamily,
+                                fontSize: isMobile ? '15px' : '16px',
+                                lineHeight: isMobile ? '24px' : '28px',
+                                color: V.inkSoft,
+                                margin: 0,
+                                transform: 'translateY(-24px)',
+                            }}>
+                                {text}
+                            </p>
+                        </div>
+                        {/* 右侧图片：支持放大镜，高度随图片自适应 */}
+                        <ZoomableImage
+                            src={src}
+                            alt={alt}
+                            showFrame={false}
+                            autoHeight
+                            style={{ borderRadius: V.radius }}
+                        />
+                    </div>
+                ) : (
+                    <ZoomableImage
+                        src={src}
+                        alt={alt}
+                        showFrame={false}
+                        autoHeight
+                    />
+                )
+            )}
+        </div>
+    );
+};
 
 /* ------------------------------------------------------------------ */
 /*  ImageCarousel — 多图轮播（左右箭头 + 指示点 + hover 放大镜）          */
@@ -738,6 +846,8 @@ export const Sharelink = () => {
 
     // 设计执行首个板块：链路 Tab（汇款人链路 / 收款人链路）
     const [activeLinkTab, setActiveLinkTab] = useState(0);
+    // 对比模式：开启时显示滑动对比，关闭时平铺展示两张对比图
+    const [compareMode, setCompareMode] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -1154,67 +1264,160 @@ export const Sharelink = () => {
                         </p>
                     </div>
 
-                    {/* Design Execution 首个板块：链路展示（无标题无文字，Tab 切换 + 单图 mock） */}
+                    {/* Design Execution 首个板块：链路展示（Tab 切换 + 平铺/对比模式） */}
                     <div style={{
                         marginBottom: isMobile ? '72px' : '104px',
                     }}>
-                        {/* Tab 切换：汇款人链路 / 收款人链路 */}
+                        {/* Tab 切换 + 对比模式按钮 */}
                         <div style={{
                             display: 'flex',
-                            gap: '8px',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            flexWrap: 'wrap',
+                            gap: '12px',
                             marginBottom: '28px',
                         }}>
-                            {['汇款人链路', '收款人链路'].map((tab, i) => {
-                                const isActive = i === activeLinkTab;
-                                return (
-                                    <button
-                                        key={tab}
-                                        onClick={() => setActiveLinkTab(i)}
-                                        style={{
-                                            padding: '9px 18px',
-                                            border: 'none',
-                                            borderRadius: '100px',
-                                            background: isActive ? V.ink : V.surface2,
-                                            color: isActive ? '#fff' : V.inkMuted,
-                                            fontFamily: typography.body.fontFamily,
-                                            fontSize: '14px',
-                                            fontWeight: isActive ? 600 : 400,
-                                            cursor: 'pointer',
-                                            transition: 'background 0.2s ease, color 0.2s ease',
-                                        }}
-                                    >
-                                        {tab}
-                                    </button>
-                                );
-                            })}
+                            <div style={{
+                                display: 'flex',
+                                gap: '8px',
+                            }}>
+                                {['汇款人链路', '收款人链路'].map((tab, i) => {
+                                    const isActive = i === activeLinkTab;
+                                    return (
+                                        <button
+                                            key={tab}
+                                            onClick={() => setActiveLinkTab(i)}
+                                            style={{
+                                                padding: '9px 18px',
+                                                border: 'none',
+                                                borderRadius: '100px',
+                                                background: isActive ? V.ink : V.surface2,
+                                                color: isActive ? '#fff' : V.inkMuted,
+                                                fontFamily: typography.body.fontFamily,
+                                                fontSize: '14px',
+                                                fontWeight: isActive ? 600 : 400,
+                                                cursor: 'pointer',
+                                                transition: 'background 0.2s ease, color 0.2s ease',
+                                            }}
+                                        >
+                                            {tab}
+                                        </button>
+                                    );
+                                })}
+                            </div>
+
+                            {/* 对比模式开关（与左侧 Tab 同款灰度） */}
+                            <button
+                                onClick={() => setCompareMode(prev => !prev)}
+                                aria-label={compareMode ? '关闭对比模式' : '开启对比模式'}
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '10px',
+                                    padding: '9px 18px',
+                                    border: 'none',
+                                    borderRadius: '100px',
+                                    background: V.surface2,
+                                    cursor: 'pointer',
+                                    fontFamily: typography.body.fontFamily,
+                                    fontSize: '14px',
+                                    fontWeight: 400,
+                                    color: V.inkMuted,
+                                    letterSpacing: '0.02em',
+                                    whiteSpace: 'nowrap',
+                                    transition: 'background 0.2s ease',
+                                }}
+                            >
+                                <span>对比模式</span>
+                                {/* 开关状态点 */}
+                                <span style={{
+                                    width: '20px',
+                                    height: '12px',
+                                    borderRadius: '6px',
+                                    background: '#E5E5E5',
+                                    position: 'relative',
+                                    transition: 'background 0.2s ease',
+                                }}>
+                                    <span style={{
+                                        position: 'absolute',
+                                        top: '2px',
+                                        left: compareMode ? '10px' : '2px',
+                                        width: '8px',
+                                        height: '8px',
+                                        borderRadius: '50%',
+                                        background: '#A1A1A1',
+                                        transition: 'left 0.2s ease',
+                                    }} />
+                                </span>
+                            </button>
                         </div>
 
-                        {/* 展示区：汇款人 / 收款人链路各自用真实对比图（hover 滑动查看） */}
+                        {/* 展示区：平铺展示前后对比图（默认） / 滑动对比（对比模式开启） */}
                         {activeLinkTab === 0 ? (
-                            <BeforeAfterSlider
-                                beforeSrc={huikuanrenBefore}
-                                afterSrc={huikuanrenAfter}
-                                alt="汇款人链路 Before/After 对比"
-                            />
+                            compareMode ? (
+                                <BeforeAfterSlider
+                                    beforeSrc={huikuanrenBefore}
+                                    afterSrc={huikuanrenAfter}
+                                    alt="汇款人链路 Before/After 对比"
+                                />
+                            ) : (
+                                <div style={{
+                                    background: V.surface2,
+                                    borderRadius: V.radius,
+                                    overflow: 'hidden',
+                                }}>
+                                    <img
+                                        src={huikuanrenDuibi}
+                                        alt="汇款人链路前后对比"
+                                        loading="lazy"
+                                        style={{
+                                            width: '100%',
+                                            height: 'auto',
+                                            display: 'block',
+                                        }}
+                                    />
+                                </div>
+                            )
                         ) : (
-                            <BeforeAfterSlider
-                                beforeSrc={shoukuanrenBefore}
-                                afterSrc={shoukuanrenAfter}
-                                alt="收款人链路 Before/After 对比"
-                            />
+                            compareMode ? (
+                                <BeforeAfterSlider
+                                    beforeSrc={shoukuanrenBefore}
+                                    afterSrc={shoukuanrenAfter}
+                                    alt="收款人链路 Before/After 对比"
+                                />
+                            ) : (
+                                <div style={{
+                                    background: V.surface2,
+                                    borderRadius: V.radius,
+                                    overflow: 'hidden',
+                                }}>
+                                    <img
+                                        src={shoukuanrenDuibi}
+                                        alt="收款人链路前后对比"
+                                        loading="lazy"
+                                        style={{
+                                            width: '100%',
+                                            height: 'auto',
+                                            display: 'block',
+                                        }}
+                                    />
+                                </div>
+                            )
                         )}
 
-                        {/* 提示小字：左右滑动查看 Before/After 对比（与设计目标标注同款样式） */}
-                        <div style={{
-                            marginTop: '14px',
-                            textAlign: 'center',
-                            fontFamily: typography.body.fontFamily,
-                            fontSize: '14px',
-                            lineHeight: isMobile ? '20px' : '22px',
-                            color: 'rgba(0, 0, 0, 0.5)',
-                        }}>
-                            左右滑动查看 Before / After 页面对比
-                        </div>
+                        {/* 提示小字：仅在对比模式开启时显示 */}
+                        {compareMode && (
+                            <div style={{
+                                marginTop: '14px',
+                                textAlign: 'center',
+                                fontFamily: typography.body.fontFamily,
+                                fontSize: '14px',
+                                lineHeight: isMobile ? '20px' : '22px',
+                                color: 'rgba(0, 0, 0, 0.5)',
+                            }}>
+                                左右滑动查看 Before / After 页面对比
+                            </div>
+                        )}
                     </div>
 
                     {beforeAfterCases.map((item, index) => (
@@ -1316,132 +1519,25 @@ export const Sharelink = () => {
                                     {item.note}
                                 </div>
                             )}
+
+                            {/* 可展开区：历史方案迭代（纯图片） / AI 原型辅助设计（左文右图） */}
+                            {item.expandable && (
+                                <ExpandableImage
+                                    title={item.expandable.title}
+                                    src={item.expandable.image}
+                                    alt={item.expandable.title}
+                                />
+                            )}
+                            {item.expandableContent && (
+                                <ExpandableImage
+                                    title={item.expandableContent.title}
+                                    src={item.expandableContent.image}
+                                    alt={item.expandableContent.title}
+                                    text={item.expandableContent.text}
+                                />
+                            )}
                         </div>
                     ))}
-                </section>
-
-                {/* 6 — AI-Native 思路在项目中的应用 */}
-                <section id="project-reflection" style={{
-                    maxWidth: containerMax,
-                    margin: '0 auto',
-                    padding: isMobile ? '80px 24px 0' : '120px 32px 0',
-                    scrollMarginTop: '90px',
-                }}>
-                    {/* 标题 + 描述（描述在标题下方） */}
-                    <div style={{
-                        marginBottom: isMobile ? '56px' : '72px',
-                        maxWidth: '960px',
-                    }}>
-                        <Eyebrow style={{ marginBottom: '10px' }}>
-                            06
-                        </Eyebrow>
-                        <h2 style={{
-                            fontFamily: '"Tencent Sans", "Lora", "Times New Roman", Georgia, serif',
-                            fontSize: isMobile ? '28px' : '36px',
-                            fontWeight: 600,
-                            lineHeight: isMobile ? '36px' : '44px',
-                            letterSpacing: '-0.02em',
-                            color: V.ink,
-                            margin: 0,
-                            marginBottom: '28px',
-                        }}>
-                            AI-Native 应用
-                        </h2>
-                    </div>
-
-                    {/* 子板块 1：提炼设计原则（标题与配图左右放置） */}
-                    <div style={{
-                        marginBottom: isMobile ? '72px' : '104px',
-                        display: 'grid',
-                        gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
-                        gap: isMobile ? '24px' : '56px',
-                        alignItems: 'start',
-                    }}>
-                        <div>
-                            <Eyebrow style={{ marginBottom: '10px' }}>
-                                06-1
-                            </Eyebrow>
-                            <h3 style={{
-                                fontFamily: '"Tencent Sans", "Lora", "Times New Roman", Georgia, serif',
-                                fontSize: isMobile ? '22px' : '30px',
-                                fontWeight: 600,
-                                lineHeight: isMobile ? '30px' : '38px',
-                                letterSpacing: '-0.02em',
-                                color: V.ink,
-                                margin: 0,
-                                marginBottom: '28px',
-                            }}>
-                                提炼 Harness 设计原则
-                            </h3>
-                            <p style={{
-                                fontFamily: typography.body.fontFamily,
-                                fontSize: isMobile ? '15px' : '16px',
-                                lineHeight: isMobile ? '24px' : '28px',
-                                color: V.inkSoft,
-                                margin: 0,
-                            }}>
-                                Sharelink 链路是全球汇入收款端的核心链路之一，也是 Harness 项目提炼设计原则的重点对象。项目中沉淀了「通知触达」「前置指引」相关的 L3-业务原则，用于辅助 AI 理解并生成好设计方案。
-                            </p>
-                        </div>
-                        {/* 配图：设计原则（横图整幅展示） */}
-                        <div style={{
-                            overflow: 'hidden',
-                            borderRadius: V.radius,
-                        }}>
-                            <img
-                                src={yuanze}
-                                alt="设计原则"
-                                loading="lazy"
-                                style={{
-                                    width: '100%',
-                                    height: 'auto',
-                                    display: 'block',
-                                }}
-                            />
-                        </div>
-                    </div>
-
-                    {/* 子板块 2：AI 在设计自驱中的有用性（标题与配图左右放置） */}
-                    <div style={{
-                        marginBottom: isMobile ? '72px' : '104px',
-                        display: 'grid',
-                        gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
-                        gap: isMobile ? '24px' : '56px',
-                        alignItems: 'start',
-                    }}>
-                        <div>
-                            <Eyebrow style={{ marginBottom: '10px' }}>
-                                06-2
-                            </Eyebrow>
-                            <h3 style={{
-                                fontFamily: '"Tencent Sans", "Lora", "Times New Roman", Georgia, serif',
-                                fontSize: isMobile ? '22px' : '30px',
-                                fontWeight: 600,
-                                lineHeight: isMobile ? '30px' : '38px',
-                                letterSpacing: '-0.02em',
-                                color: V.ink,
-                                margin: 0,
-                                marginBottom: '28px',
-                            }}>
-                                AI 原型辅助设计
-                            </h3>
-                            <p style={{
-                                fontFamily: typography.body.fontFamily,
-                                fontSize: isMobile ? '15px' : '16px',
-                                lineHeight: isMobile ? '24px' : '28px',
-                                color: V.inkSoft,
-                                margin: 0,
-                            }}>
-                                对于适合 AI 进行设计探索的节点（如通知卡片），我们尝试以 AI 生成原型的方式发散思路。其中，融入了情感化文案表达的方案尤为打动我，也成为最终项目呈现的重要借鉴。
-                            </p>
-                        </div>
-                        {/* 配图：AI 原型（支持放大镜，无灰底边框） */}
-                        <ZoomableImage
-                            src={aiyuanxing}
-                            alt="AI 原型"
-                            showFrame={false}
-                        />
-                    </div>
                 </section>
 
                 {/* Back */}

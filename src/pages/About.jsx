@@ -8,7 +8,7 @@ import { colors, spacing, typography, fontWeight, stackSpacing, gridGap, layoutS
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 import { Twitter, Github, Mail, MessageCircle, Copy, Check, Phone } from 'lucide-react';
 
-import profileImage from '../assets/about/profile.jpg';
+import profileImage from '../assets/about/profile.webp';
 import TencentLogo from '../assets/Home/tencent-color.svg';
 import PolaroidGallery from '../components/PolaroidGallery';
 import StackedCards from '../components/StackedCards';

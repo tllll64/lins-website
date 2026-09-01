@@ -7,10 +7,10 @@ import { colors, layoutSpacing, gridGap } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 
 const RESEARCH_ASSETS = {
-    chi: new URL('../assets/Research/CHI@3x.png', import.meta.url).href,
-    iasdr: new URL('../assets/Research/iasdr@3x.png', import.meta.url).href,
-    uist: new URL('../assets/Research/UIST@3x.png', import.meta.url).href,
-    cscw: new URL('../assets/Research/CSCW@3x.png', import.meta.url).href,
+    chi: new URL('../assets/Research/CHI@3x.webp', import.meta.url).href,
+    iasdr: new URL('../assets/Research/iasdr@3x.webp', import.meta.url).href,
+    uist: new URL('../assets/Research/UIST@3x.webp', import.meta.url).href,
+    cscw: new URL('../assets/Research/CSCW@3x.webp', import.meta.url).href,
 };
 
 const publicationsData = [

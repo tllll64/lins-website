@@ -6,7 +6,7 @@ import { useZoom } from '../contexts/ZoomContext';
 /*  事件只记录坐标；rAF 每帧统一写 DOM（不丢帧、不强制布局）             */
 /*  是否启用由全局 ZoomContext 控制（右下角开关 / Shift+F4）            */
 /* ------------------------------------------------------------------ */
-const ZoomableImage = ({ src, alt, zoom = 1.8, lensSize = 180, showFrame = true, style = {} }) => {
+const ZoomableImage = ({ src, alt, zoom = 1.8, lensSize = 180, showFrame = true, autoHeight = false, style = {} }) => {
     const { zoomEnabled } = useZoom();
     const containerRef = useRef(null);
     const lensRef = useRef(null);
@@ -73,7 +73,7 @@ const ZoomableImage = ({ src, alt, zoom = 1.8, lensSize = 180, showFrame = true,
             style={{
                 position: 'relative',
                 width: '100%',
-                aspectRatio: '1 / 1',
+                aspectRatio: autoHeight ? 'auto' : '1 / 1',
                 overflow: 'hidden',
                 background: showFrame ? '#F5F5F5' : 'transparent',
                 border: showFrame ? '1px solid #E8E8E8' : 'none',
@@ -88,7 +88,7 @@ const ZoomableImage = ({ src, alt, zoom = 1.8, lensSize = 180, showFrame = true,
                 draggable={false}
                 style={{
                     width: '100%',
-                    height: '100%',
+                    height: autoHeight ? 'auto' : '100%',
                     objectFit: 'contain',
                     display: 'block',
                 }}
