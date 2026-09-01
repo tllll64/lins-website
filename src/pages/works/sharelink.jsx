@@ -853,8 +853,8 @@ export const Sharelink = () => {
 
     // 设计执行首个板块：链路 Tab（汇款人链路 / 收款人链路）
     const [activeLinkTab, setActiveLinkTab] = useState(0);
-    // 对比模式：开启时显示滑动对比，关闭时平铺展示两张对比图
-    const [compareMode, setCompareMode] = useState(false);
+    // 对比模式：开启时显示滑动对比，关闭时平铺展示两张对比图（默认开启）
+    const [compareMode, setCompareMode] = useState(true);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -973,8 +973,7 @@ export const Sharelink = () => {
                                 letterSpacing: '-0.03em',
                                 whiteSpace: 'nowrap',
                             }}>
-                                <span style={{ fontWeight: 600 }}>Sharelink</span>
-                                <span style={{ fontWeight: 700 }}> 体验优化</span>
+                                <span style={{ fontWeight: 600 }}>Sharelink 收款体验优化</span>
                             </span>
                         </h1>
                     </div>
