@@ -312,7 +312,7 @@ export const Home = () => {
                         reversed={true}
                         imageScale={1.12}
                         pixelPattern={<PixelEye size={6} gap={2} />}
-                        onClick={() => navigate('/works/sharelink')}
+                        onClick={() => navigate('/works/sharelink?data=hidden')}
                     />
                     <ProjectCard
                         date="Mar - May 2024"

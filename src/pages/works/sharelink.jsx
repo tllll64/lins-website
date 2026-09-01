@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useLenis } from 'lenis/react';
 import { Navbar } from '../../components/Navbar';
 import ZoomableImage from '../../components/ZoomableImage';
@@ -20,12 +20,14 @@ import shoukuanrenDuibi from '../../assets/works/sharelink/收款人前后对比
 
 /* 用户调研：用户链路图（高分辨率 WebP，保证放大后清晰） */
 import yonghulianlutu from '../../assets/works/sharelink/用户链路图-6000.webp';
+import yonghulianlutuHidden from '../../assets/works/sharelink/用户链路图-隐藏数据-6000.webp';
 
 /* 业务遇到问题：转化漏斗图（当前未使用，后续如需配图再启用） */
 /* import loudou from '../../assets/works/sharelink/漏斗.webp'; */
 
-/* 业务遇到的问题 1 */
-import yewuwenti1 from '../../assets/works/sharelink/业务问题 1-隐藏数据.webp';
+/* 业务遇到的问题 1（含数据版 / 隐藏数据版） */
+import yewuwenti1 from '../../assets/works/sharelink/业务问题 1.webp';
+import yewuwenti1Hidden from '../../assets/works/sharelink/业务问题 1-隐藏数据.webp';
 /* 业务遇到的问题 2 */
 import yewuwenti2 from '../../assets/works/sharelink/业务问题 2.webp';
 /* 业务遇到的问题 3 */
@@ -33,8 +35,9 @@ import yewuwenti3 from '../../assets/works/sharelink/业务问题 3.webp';
 /* 业务目标（当前未使用，后续如需再启用） */
 /* import yewumubiao from '../../assets/works/sharelink/业务目标.webp'; */
 
-/* 设计目标（隐藏数据版） */
-import shejimubiao from '../../assets/works/sharelink/设计目标-隐藏数据-6000.webp';
+/* 设计目标（含数据版 / 隐藏数据版） */
+import shejimubiao from '../../assets/works/sharelink/设计目标-6000.webp';
+import shejimubiaoHidden from '../../assets/works/sharelink/设计目标-隐藏数据-6000.webp';
 
 /* Sharelink 是什么：介绍图 */
 import jieshaoSharelink from '../../assets/works/sharelink/介绍 Sharelink-6000.webp';
@@ -841,6 +844,10 @@ export const Sharelink = () => {
     const showIndex = useMediaQuery('(min-width: 1500px)');
     const lenis = useLenis();
 
+    // URL 参数：?data=hidden 展示隐藏数据版用户链路图，默认展示含数据版
+    const [searchParams] = useSearchParams();
+    const hideData = searchParams.get('data') === 'hidden';
+
     // 右侧索引：当前高亮章节（scroll-spy）
     const [activeIndex, setActiveIndex] = useState(0);
 
@@ -1085,7 +1092,14 @@ export const Sharelink = () => {
                             '设计目标的导出，围绕业务整体目标、理想态用户体验与现存问题展开推导，最终提升收款转化率。\n\n（1）汇款人视角：建立从机构页跳转至微信通知收款人的认知，全程聚焦通知任务，减少页面中非核心信息的干扰。（2）收款人视角：激发收款人对通知卡片的打开意愿，提升通知的有效触达；收款环节则让收款信息更有用、更高效，正向促进收款动作完成。',
                         image: shejimubiao,
                     },
-                ].map((item, index) => (
+                ].map((item, index) => {
+                    // ?data=hidden 时，用户链路图 / 业务问题 1 / 设计目标 展示隐藏数据版
+                    let displayImage = item.image;
+                    if (hideData) {
+                        if (item.id === 'user-research') displayImage = yonghulianlutuHidden;
+                        else if (item.id === 'design-goals') displayImage = shejimubiaoHidden;
+                    }
+                    return (
                     <section
                         key={item.id}
                         id={item.id}
@@ -1133,7 +1147,7 @@ export const Sharelink = () => {
                         {/* 配图：用户调研用横向全景（左右切换） */}
                         {item.id === 'user-research' && item.image ? (
                             <PanoramaViewer
-                                src={item.image}
+                                src={displayImage}
                                 alt={item.title}
                                 leftHint="汇款人链路"
                                 rightHint="收款人链路"
@@ -1153,7 +1167,7 @@ export const Sharelink = () => {
                                         overflow: 'hidden',
                                     }}>
                                         <img
-                                            src={yewuwenti1}
+                                            src={hideData ? yewuwenti1Hidden : yewuwenti1}
                                             alt="业务问题 1"
                                             loading="lazy"
                                             style={{
@@ -1208,7 +1222,7 @@ export const Sharelink = () => {
                                 margin: item.imageMaxWidth ? '0 auto' : undefined,
                             }}>
                                 <img
-                                    src={item.image}
+                                    src={displayImage}
                                     alt={item.title}
                                     loading="lazy"
                                     style={{
@@ -1226,7 +1240,8 @@ export const Sharelink = () => {
                             }} />
                         )}
                     </section>
-                ))}
+                    );
+                })}
 
                 {/* 6 — 设计执行对比案例 */}
                 <section id="design-execution" style={{
