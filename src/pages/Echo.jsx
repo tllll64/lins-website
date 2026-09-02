@@ -21,6 +21,7 @@ const publicationsData = [
         links: [
             { label: "ACM DL", url: "https://dl.acm.org/doi/10.1145/3772318.3790653" },
             { label: "PDF", url: "https://dl.acm.org/doi/epdf/10.1145/3772318.3790653" },
+            { label: "Project", url: "/works/genfaceui" },
         ],
         image: RESEARCH_ASSETS.chi
     },
@@ -30,6 +31,7 @@ const publicationsData = [
         venue: "iasdr'25 (Full Paper)",
         links: [
             { label: "PDF", url: "https://dl.designresearchsociety.org/cgi/viewcontent.cgi?article=1762&context=iasdr" },
+            { label: "Project", url: "/works/jokeasy" },
         ],
         image: RESEARCH_ASSETS.iasdr
     },

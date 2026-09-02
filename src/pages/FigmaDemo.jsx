@@ -203,7 +203,7 @@ export const FigmaDemo = () => {
                     marginTop: isMobile ? '64px' : '88px',
                 }}>
                     <Link
-                        to="/craft"
+                        to="/creative"
                         style={{
                             display: 'inline-flex',
                             alignItems: 'center',
@@ -219,7 +219,7 @@ export const FigmaDemo = () => {
                         onMouseEnter={e => { e.currentTarget.style.borderColor = colors.grey[16]; e.currentTarget.style.color = colors.grey[16]; }}
                         onMouseLeave={e => { e.currentTarget.style.borderColor = colors.grey[92]; e.currentTarget.style.color = colors.grey[56]; }}
                     >
-                        ← Back to Craft
+                        ← Back to Creative
                     </Link>
                 </div>
             </main>

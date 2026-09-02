@@ -179,9 +179,10 @@ const CarouselCard = ({ title, images }) => (
     </div>
 );
 
-const SandboxCard = ({ title, date, preview, image, button, locked = false, span = 1 }) => {
+const SandboxCard = ({ title, date, preview, image, button, secondaryButton, locked = false, span = 1 }) => {
     const navigate = useNavigate();
     const handleClick = button?.to ? () => navigate(button.to) : button?.onClick;
+    const handleSecondary = secondaryButton?.to ? () => navigate(secondaryButton.to) : secondaryButton?.onClick;
     return (
         <div style={{
             gridColumn: span > 1 ? `span ${span}` : undefined,
@@ -261,7 +262,7 @@ const SandboxCard = ({ title, date, preview, image, button, locked = false, span
                 </div>
             </div>
 
-            {/* Full-width button inside card；locked 时显示锁 + Coming Soon（不可点击） */}
+            {/* 按钮区：locked 显示锁条；有 secondaryButton 时左右并排，否则全宽 */}
             {locked ? (
                 <div style={{
                     width: '100%',
@@ -280,32 +281,63 @@ const SandboxCard = ({ title, date, preview, image, button, locked = false, span
                     <Lock size={15} />
                     Coming Soon
                 </div>
-            ) : button && (
-                <button
-                    onClick={handleClick}
-                    style={{
-                        width: '100%',
-                        padding: '9px 16px',
-                        background: colors.grey[95],
-                        border: 'none',
-                        borderRadius: '8px',
-                        fontFamily: typography.body.fontFamily,
-                        fontSize: '15px',
-                        fontWeight: 500,
-                        color: colors.grey[16],
-                        cursor: handleClick ? 'pointer' : 'default',
-                        transition: 'background 0.15s',
-                        textAlign: 'center',
-                    }}
-                    onMouseEnter={e => {
-                        if (handleClick) e.currentTarget.style.background = colors.grey[92];
-                    }}
-                    onMouseLeave={e => {
-                        e.currentTarget.style.background = colors.grey[95];
-                    }}
-                >
-                    {button.label}
-                </button>
+            ) : (
+                <div style={{ display: 'flex', flexDirection: 'row', gap: '4px' }}>
+                    {button && (
+                        <button
+                            onClick={handleClick}
+                            style={{
+                                flex: 1,
+                                padding: '9px 16px',
+                                background: colors.grey[95],
+                                border: 'none',
+                                borderRadius: '8px',
+                                fontFamily: typography.body.fontFamily,
+                                fontSize: '15px',
+                                fontWeight: 500,
+                                color: colors.grey[16],
+                                cursor: handleClick ? 'pointer' : 'default',
+                                transition: 'background 0.15s',
+                                textAlign: 'center',
+                            }}
+                            onMouseEnter={e => {
+                                if (handleClick) e.currentTarget.style.background = colors.grey[92];
+                            }}
+                            onMouseLeave={e => {
+                                e.currentTarget.style.background = colors.grey[95];
+                            }}
+                        >
+                            {button.label}
+                        </button>
+                    )}
+                    {secondaryButton && (
+                        <button
+                            onClick={handleSecondary}
+                            style={{
+                                flex: 1,
+                                padding: '9px 16px',
+                                background: colors.grey[95],
+                                border: 'none',
+                                borderRadius: '8px',
+                                fontFamily: typography.body.fontFamily,
+                                fontSize: '15px',
+                                fontWeight: 500,
+                                color: colors.grey[16],
+                                cursor: handleSecondary ? 'pointer' : 'default',
+                                transition: 'background 0.15s',
+                                textAlign: 'center',
+                            }}
+                            onMouseEnter={e => {
+                                if (handleSecondary) e.currentTarget.style.background = colors.grey[92];
+                            }}
+                            onMouseLeave={e => {
+                                e.currentTarget.style.background = colors.grey[95];
+                            }}
+                        >
+                            {secondaryButton.label}
+                        </button>
+                    )}
+                </div>
             )}
         </div>
     );
@@ -318,9 +350,9 @@ const demoPage = (url) => `/demo?url=${encodeURIComponent(url)}`;
 const featuredItems = [
     {
         title: 'AI 侨批生成',
-        date: 'AI 产品原型',
+        date: 'AI 设计工程',
         image: ASSETS.craft2,
-        locked: true,
+        button: { label: 'View Demo →', onClick: () => window.open('https://lynntian.com/qiaopi/', '_blank') },
     },
     {
         title: '抖音弹幕互动玩法创新',
@@ -330,9 +362,10 @@ const featuredItems = [
     },
     {
         title: 'GenFaceUI: Meta-Design Tool',
-        date: "AI 产品原型（CHI'26）",
+        date: "AI 设计工程（CHI'26）",
         image: ASSETS.ai1,
-        locked: true,
+        button: { label: 'Research Project →', to: '/works/genfaceui' },
+        secondaryButton: { label: 'View Demo →', onClick: () => window.open('https://genfaceui.lynntian.com/', '_blank') },
     },
 ];
 
@@ -434,9 +467,9 @@ const sandboxItems = [
     },
     {
         title: 'Jokeasy: Human-AI Joke Collaboration',
-        date: 'AI 产品原型',
+        date: "AI 产品原型（iasdr'25）",
         image: ASSETS.jokeasy,
-        button: { label: 'View Paper →', onClick: () => window.open('https://dl.designresearchsociety.org/cgi/viewcontent.cgi?article=1762&context=iasdr', '_blank') },
+        button: { label: 'Research Project →', to: '/works/jokeasy' },
     },
     {
         title: '微信红包语音祝福玩法设计',
@@ -469,9 +502,9 @@ export const Research = () => {
     // 数字为 allItems 下标：0-2 为固定首行（侨批/抖音/GenFaceUI），3 起为 sandboxItems 顺序。
     // 若新增/删除/重排卡片，需同步更新此表。
     const FIXED_COLUMN_INDICES = [
-        [0, 5, 6, 11, 7], // 列1: 侨批 / AIGC Banner / cowart / 支小宝 / 方由
-        [1, 13, 12, 3, 10], // 列2: 抖音 / Jokeasy / Tako 特型卡 / Sidetation / Colean
-        [2, 14, 4, 8, 9], // 列3: GenFaceUI / 微信红包 / gen-icon / 小米 / NIO
+        [0, 5, 4, 11, 7], // 列1: 侨批 / AIGC Banner / gen-icon / 支小宝 / 方由
+        [1, 3, 6, 10, 12], // 列2: 抖音 / Sidetation / cowart / Colean / Tako 特型卡
+        [2, 13, 14, 9, 8], // 列3: GenFaceUI / Jokeasy / 微信红包 / NIO / 小米
     ];
 
     const allItems = [...featuredItems, ...sandboxItems];
@@ -533,7 +566,7 @@ export const Research = () => {
                         margin: 0,
                         marginBottom: '12px',
                     }}>
-                        Craft Works
+                        Creative Works
                     </h2>
                     <p style={{
                         fontFamily: typography.body.fontFamily,

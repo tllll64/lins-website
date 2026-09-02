@@ -130,7 +130,7 @@ export const Navbar = ({ theme = 'light' }) => {
     };
 
     const isWorksActive = location.pathname === '/' && location.hash === '';
-    const isSandboxActive = location.pathname === '/craft';
+    const isSandboxActive = location.pathname === '/creative';
 
     const backdropStyle = {
         position: 'fixed',
@@ -162,12 +162,12 @@ export const Navbar = ({ theme = 'light' }) => {
                         Design
                     </Link>
                     <Link
-                        to="/craft"
+                        to="/creative"
                         style={getLinkStyle(isSandboxActive)}
                         onMouseEnter={(e) => handleMouseEnter(e, isSandboxActive)}
                         onMouseLeave={(e) => handleMouseLeave(e, isSandboxActive)}
                     >
-                        Craft
+                        Creative
                     </Link>
                     <Link
                         to="/research"

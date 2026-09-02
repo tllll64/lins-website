@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { colors, spacing, typography, stackSpacing, fontWeight } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 
@@ -112,19 +113,27 @@ export const PublicationCard = ({ title, authors, venue, links, image }) => {
                 <p style={authorsStyle}>{renderAuthors(authors)}</p>
                 {links && links.length > 0 && (
                     <div style={linksStyle}>
-                        {links.map((link, index) => (
-                            <React.Fragment key={index}>
-                                <a 
-                                    href={link.url} 
-                                    style={linkStyle}
-                                    onMouseEnter={(e) => e.currentTarget.style.opacity = '0.6'}
-                                    onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
-                                >
-                                    {link.label}
-                                </a>
-                                {index < links.length - 1 && <span style={{ color: 'rgba(255, 255, 255, 0.25)' }}>|</span>}
-                            </React.Fragment>
-                        ))}
+                        {links.map((link, index) => {
+                            const internal = link.url && link.url.startsWith('/');
+                            const hoverProps = {
+                                onMouseEnter: (e) => e.currentTarget.style.opacity = '0.6',
+                                onMouseLeave: (e) => e.currentTarget.style.opacity = '1'
+                            };
+                            return (
+                                <React.Fragment key={index}>
+                                    {internal ? (
+                                        <Link to={link.url} style={linkStyle} {...hoverProps}>
+                                            {link.label}
+                                        </Link>
+                                    ) : (
+                                        <a href={link.url} style={linkStyle} {...hoverProps}>
+                                            {link.label}
+                                        </a>
+                                    )}
+                                    {index < links.length - 1 && <span style={{ color: 'rgba(255, 255, 255, 0.25)' }}>|</span>}
+                                </React.Fragment>
+                            );
+                        })}
                     </div>
                 )}
             </div>

@@ -33,9 +33,19 @@ import SharelinkCover from '../assets/works/sharelink/sharelink.webp';
 import FigmaPreloader from '../components/FigmaPreloader';
 
 const blogItems = [
-    { title: "Harness 原则层：提炼、验证与融入", category: "[Harness]", image: ASSETS.blog2, locked: true, tag: "NEW" },
-    { title: "理想态英文阅读体验在 Tako 的应用", category: "[AI]  [Reflection]", image: ASSETS.blog1, locked: true },
-    { title: "国内外用户 AI 使用差异观察", category: "[AI]  [Research]", image: ASSETS.blog2, locked: true },
+    { title: "Harness 设计原则层：提炼、验证与融入", category: "[Harness]", image: ASSETS.blog2, locked: true, tag: "NEW" },
+    {
+        title: "理想态英文阅读体验在 Tako 的应用",
+        category: "[AI]  [Reflection]",
+        image: ASSETS.blog1,
+        onClick: () => window.open('https://jq6o8oyx72u.feishu.cn/wiki/WrwpwM7yIiMxrQkl91IcgqHgnDe?from=from_copylink', '_blank')
+    },
+    {
+        title: "国内外用户 AI 使用差异分析",
+        category: "[AI]  [Research]",
+        image: ASSETS.blog2,
+        onClick: () => window.open('https://jq6o8oyx72u.feishu.cn/wiki/YNCew9eAcizaBfkDYsUcROI5nwd?from=from_copylink', '_blank')
+    },
     {
         title: "“AIGC+模板化”融入 B 端业务实践反思",
         category: "[AI]  [Reflection]",
@@ -229,7 +239,7 @@ export const Home = () => {
                         WebkitUserSelect: 'none',
                         transform: 'translateY(-73px)'
                     }}
-                    onClick={() => navigate('/craft')}
+                    onClick={() => navigate('/creative')}
                 >
                     <NothingWordClock />
                 </div>

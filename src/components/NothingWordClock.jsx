@@ -166,7 +166,7 @@ const NothingWordClock = () => {
                 fontWeight: 'normal',
                 pointerEvents: 'none'
             }}>
-                Craft Work
+                Creative Work
             </div>
         </div>
 

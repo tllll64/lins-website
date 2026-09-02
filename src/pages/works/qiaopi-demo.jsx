@@ -41,7 +41,7 @@ export const QiaopiDemo = () => {
                 paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
             }}>
                 <Link
-                    to="/craft"
+                    to="/creative"
                     style={{
                         display: 'inline-flex',
                         alignItems: 'center',
@@ -57,7 +57,7 @@ export const QiaopiDemo = () => {
                     onMouseEnter={e => { e.currentTarget.style.borderColor = colors.grey[16]; e.currentTarget.style.color = colors.grey[16]; }}
                     onMouseLeave={e => { e.currentTarget.style.borderColor = colors.grey[92]; e.currentTarget.style.color = colors.grey[56]; }}
                 >
-                    ← Back to Craft
+                    ← Back to Creative
                 </Link>
 
                 {/* Prototype — 与侨批详情页一致的展示方式 */}

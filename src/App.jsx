@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { ReactLenis, useLenis } from 'lenis/react';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { ZoomProvider } from './contexts/ZoomContext';
@@ -17,6 +17,8 @@ const XhsFries = lazy(() => import('./pages/works/xhs-fries').then(module => ({ 
 const Tako = lazy(() => import('./pages/works/tako').then(module => ({ default: module.Tako })));
 const Sharelink = lazy(() => import('./pages/works/sharelink').then(module => ({ default: module.Sharelink })));
 const FigmaDemo = lazy(() => import('./pages/FigmaDemo').then(module => ({ default: module.FigmaDemo })));
+const GenFaceUI = lazy(() => import('./pages/works/genfaceui').then(module => ({ default: module.GenFaceUI })));
+const Jokeasy = lazy(() => import('./pages/works/jokeasy').then(module => ({ default: module.Jokeasy })));
 
 // 路由切换时回到页面顶部；带 hash 时精确定位到锚点。
 // 轮询等元素出现后瞬时定位一次（不经过中间内容、不二次跳变）；
@@ -79,7 +81,8 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/craft" element={<Research />} />
+                <Route path="/creative" element={<Research />} />
+                <Route path="/craft" element={<Navigate to="/creative" replace />} />
                 <Route path="/echo" element={<Echo />} />
                 <Route path="/research" element={<Echo />} />
                 <Route path="/works/zhi-xiao-bao" element={<ZhiXiaoBao />} />
@@ -90,6 +93,8 @@ function App() {
                 <Route path="/works/xhs-fries" element={<XhsFries />} />
                 <Route path="/works/tako" element={<Tako />} />
                 <Route path="/works/sharelink" element={<Sharelink />} />
+                <Route path="/works/genfaceui" element={<GenFaceUI />} />
+                <Route path="/works/jokeasy" element={<Jokeasy />} />
                 <Route path="/demo" element={<FigmaDemo />} />
               </Routes>
             </Suspense>
