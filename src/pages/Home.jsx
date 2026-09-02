@@ -34,7 +34,6 @@ import FigmaPreloader from '../components/FigmaPreloader';
 
 const blogItems = [
     { title: "Harness 原则层：提炼、验证与融入", category: "[Harness]", image: ASSETS.blog2, locked: true, tag: "NEW" },
-    { title: "Tako 特型卡原则与规范制定", category: "[AI]  [Reflection]", image: ASSETS.blog1, locked: true },
     { title: "理想态英文阅读体验在 Tako 的应用", category: "[AI]  [Reflection]", image: ASSETS.blog1, locked: true },
     { title: "国内外用户 AI 使用差异观察", category: "[AI]  [Research]", image: ASSETS.blog2, locked: true },
     {

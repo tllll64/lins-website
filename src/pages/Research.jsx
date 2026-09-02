@@ -261,7 +261,7 @@ const SandboxCard = ({ title, date, preview, image, button, locked = false, span
                 </div>
             </div>
 
-            {/* Full-width button inside card；locked 时显示锁 + NDA（不可点击） */}
+            {/* Full-width button inside card；locked 时显示锁 + Coming Soon（不可点击） */}
             {locked ? (
                 <div style={{
                     width: '100%',
@@ -278,7 +278,7 @@ const SandboxCard = ({ title, date, preview, image, button, locked = false, span
                     color: colors.grey[56],
                 }}>
                     <Lock size={15} />
-                    NDA
+                    Coming Soon
                 </div>
             ) : button && (
                 <button
@@ -311,23 +311,26 @@ const SandboxCard = ({ title, date, preview, image, button, locked = false, span
     );
 };
 
+/* Figma 原型 → 站内承接页（页面内 iframe 嵌入，不直接外跳 figma） */
+const demoPage = (url) => `/demo?url=${encodeURIComponent(url)}`;
+
 /* 固定首行 — 侨批、抖音、GenFaceUI */
 const featuredItems = [
     {
         title: 'AI 侨批生成',
         date: 'AI 产品原型',
         image: ASSETS.craft2,
-        button: { label: 'View Demo →', to: '/works/qiaopi#prototype' },
+        locked: true,
     },
     {
         title: '抖音弹幕互动玩法创新',
         date: 'Vibe Coding 原型',
         image: ASSETS.craft1,
-        button: { label: 'View Demo →', onClick: () => window.open('https://tiktok-y27.lynntian.com/', '_blank') },
+        button: { label: 'View Demo →', to: demoPage('https://www.figma.com/proto/XtidjNlm6Zbb8FSDBYhxeq/%E7%BD%91%E7%AB%99%E4%BD%9C%E5%93%81-Link?node-id=2631-8655&viewport=463%2C138%2C0.05&t=KVvZWaY1zoGgLOvi-1&scaling=scale-down-width&content-scaling=fixed&page-id=2631%3A6206') },
     },
     {
         title: 'GenFaceUI: Meta-Design Tool',
-        date: 'CHI 产品原型',
+        date: "AI 产品原型（CHI'26）",
         image: ASSETS.ai1,
         locked: true,
     },
@@ -346,6 +349,9 @@ const IMAGE_RATIOS = {
     [ASSETS.digital3]: 1503 / 1128,
     [ASSETS.digital4]: 1503 / 1128,
     [ASSETS.ai2]: 1002 / 752,
+    [ASSETS.craft9]: 2400 / 1800, // Tako 特型卡原则与规范制定（4:3）
+    [ASSETS.jokeasy]: 2502 / 1602, // Jokeasy (iasdr)
+    [ASSETS.craft10]: 2400 / 1800, // 微信红包语音祝福玩法设计（4:3）
 };
 
 /* 估算卡片高度（title + 媒体区 + 按钮 + 卡片留白） */
@@ -368,7 +374,7 @@ const estimateCardHeight = (item, colWidth) => {
 const sandboxItems = [
     {
         title: 'Sidetation',
-        date: '拖拽交互编辑工具',
+        date: 'HTML 拖拽交互编辑工具',
         image: ASSETS.craft8,
         button: { label: 'Chrome Extension →', onClick: () => window.open('https://chromewebstore.google.com/detail/sidetation/amefimkabccfbfpijnmgbdojnnihoalh', '_blank') },
     },
@@ -393,7 +399,7 @@ const sandboxItems = [
         title: '方由: 国学教育玩具设计',
         date: '硬件产品设计',
         image: ASSETS.digital3,
-        button: { label: 'Case Study →', onClick: () => window.open('https://www.figma.com/proto/KerAYedbweEAHVc4pEWPak/%E5%8E%86%E5%8F%B2%E4%BD%9C%E5%93%81%E9%9B%86%E5%90%88?page-id=0%3A1&node-id=12-2901&viewport=-92%2C894%2C0.05&t=Xxpwcogo7FOPPPgJ-1&scaling=scale-down-width&content-scaling=fixed', '_blank') },
+        button: { label: 'Case Study →', to: demoPage('https://www.figma.com/proto/XtidjNlm6Zbb8FSDBYhxeq/%E7%BD%91%E7%AB%99%E4%BD%9C%E5%93%81-Link?node-id=2701-6804&viewport=910%2C207%2C0.15&t=huiVDyIzY24XddHZ-1&scaling=scale-down-width&content-scaling=fixed&page-id=2701%3A2947') + '&youtube=Cxhs8KX5Kq4' },
     },
     {
         title: '小米汽车智驾学堂产品设计',
@@ -405,19 +411,38 @@ const sandboxItems = [
         title: 'NIO Roam 城市漫游座舱',
         date: '本科校级&院级优秀毕设',
         image: ASSETS.digital2,
-        button: { label: 'Case Study →', onClick: () => window.open('https://www.figma.com/proto/KerAYedbweEAHVc4pEWPak/%E5%8E%86%E5%8F%B2%E4%BD%9C%E5%93%81%E9%9B%86%E5%90%88?page-id=0%3A1&node-id=3-5&viewport=320%2C317%2C0.02&t=TNvKH6ruKYJgjx1i-1&scaling=scale-down-width&content-scaling=fixed', '_blank') },
+        button: { label: 'Case Study →', onClick: () => window.open('https://www.behance.net/gallery/207126507/City-Roaming-2035', '_blank') },
     },
     {
         title: 'Colean: 未来家务 AR 游戏',
         date: 'AR 应用探索',
         image: ASSETS.digital4,
-        button: { label: 'Case Study →', onClick: () => window.open('https://www.figma.com/proto/KerAYedbweEAHVc4pEWPak/%E5%8E%86%E5%8F%B2%E4%BD%9C%E5%93%81%E9%9B%86%E5%90%88?page-id=0%3A1&node-id=12-973&viewport=-92%2C894%2C0.05&t=G7M5N4g1HM6V495R-1&scaling=scale-down-width&content-scaling=fixed', '_blank') },
+        // TODO: 新 Figma 原型链接 + YouTube 链接稍后提供，届时替换下方链接与 &youtube= 参数
+        button: { label: 'Case Study →', to: demoPage('https://www.figma.com/proto/XtidjNlm6Zbb8FSDBYhxeq/%E7%BD%91%E7%AB%99%E4%BD%9C%E5%93%81-Link?node-id=2701-6791&viewport=829%2C217%2C0.16&t=vVwzoRmWvazi1SOm-1&scaling=scale-down-width&content-scaling=fixed&page-id=2631%3A12137') + '&youtube=rztcpdhsJlo' },
     },
     {
         title: '基础周边出行场景的支小宝 AI 体验创新',
         date: '校企合作项目',
         image: ASSETS.ai2,
-        button: { label: 'Case Study →', to: '/works/zhi-xiao-bao' },
+        button: { label: 'Case Study →', onClick: () => window.open('https://lynntian.framer.website/works/zhi-xiao-bao', '_blank') },
+    },
+    {
+        title: 'Tako 特型卡原则与规范制定',
+        date: 'AI 设计原则与规范',
+        image: ASSETS.craft9,
+        button: { label: 'Case Study →', to: demoPage('https://www.figma.com/proto/XtidjNlm6Zbb8FSDBYhxeq/%E7%BD%91%E7%AB%99%E4%BD%9C%E5%93%81-Link?node-id=2724-18899&viewport=269%2C312%2C0.22&t=U9DhGPvzcQz1va4A-1&scaling=scale-down-width&content-scaling=fixed&page-id=2723%3A6805') },
+    },
+    {
+        title: 'Jokeasy: Human-AI Joke Collaboration',
+        date: 'AI 产品原型',
+        image: ASSETS.jokeasy,
+        button: { label: 'View Paper →', onClick: () => window.open('https://dl.designresearchsociety.org/cgi/viewcontent.cgi?article=1762&context=iasdr', '_blank') },
+    },
+    {
+        title: '微信红包语音祝福玩法设计',
+        date: '设计探索',
+        image: ASSETS.craft10,
+        locked: true,
     },
 ];
 
@@ -444,9 +469,9 @@ export const Research = () => {
     // 数字为 allItems 下标：0-2 为固定首行（侨批/抖音/GenFaceUI），3 起为 sandboxItems 顺序。
     // 若新增/删除/重排卡片，需同步更新此表。
     const FIXED_COLUMN_INDICES = [
-        [0, 5, 6, 11], // 列1: 侨批 / AIGC Banner / cowart / 支小宝
-        [1, 3, 7, 10], // 列2: 抖音 / Sidetation / 方由 / Colean
-        [2, 4, 8, 9],  // 列3: GenFaceUI / gen-icon / 小米 / NIO
+        [0, 5, 6, 11, 7], // 列1: 侨批 / AIGC Banner / cowart / 支小宝 / 方由
+        [1, 13, 12, 3, 10], // 列2: 抖音 / Jokeasy / Tako 特型卡 / Sidetation / Colean
+        [2, 14, 4, 8, 9], // 列3: GenFaceUI / 微信红包 / gen-icon / 小米 / NIO
     ];
 
     const allItems = [...featuredItems, ...sandboxItems];
@@ -485,7 +510,7 @@ export const Research = () => {
         width: '100%',
         paddingLeft: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
         paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop,
-        paddingTop: '100px',
+        paddingTop: '160px',
         paddingBottom: layoutSpacing.section.xl,
     };
 

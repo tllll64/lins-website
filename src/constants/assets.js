@@ -23,6 +23,9 @@ export const ASSETS = {
     craft6: new URL('../assets/Craft/banner3.webp', import.meta.url).href, // AIGC Banner 3
     craft7: new URL('../assets/Craft/cowart.webp', import.meta.url).href, // cowart_workbuddy
     craft8: new URL('../assets/Craft/Sidetation.webp', import.meta.url).href, // Sidetation
+    craft9: new URL('../assets/Craft/takocard.webp', import.meta.url).href, // Tako 特型卡原则与规范制定
+    craft10: new URL('../assets/Craft/wxg.webp', import.meta.url).href, // 微信红包语音祝福玩法设计
+    jokeasy: new URL('../assets/Research/iasdr@3x.webp', import.meta.url).href, // Jokeasy (iasdr)
 
     // Blog
     blog1: new URL('../assets/Home/Colean.webp', import.meta.url).href, // Placeholder

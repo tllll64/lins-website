@@ -86,6 +86,21 @@ export const PublicationCard = ({ title, authors, venue, links, image }) => {
         transition: 'opacity 0.2s ease'
     };
 
+    const highlightName = 'Lin Tian';
+
+    const renderAuthors = (authors) => {
+        const parts = String(authors).split(highlightName);
+        if (parts.length <= 1) return authors;
+        return parts.map((part, i) => (
+            <React.Fragment key={i}>
+                {part}
+                {i < parts.length - 1 && (
+                    <span style={{ textDecoration: 'underline', textDecorationThickness: '1.5px' }}>{highlightName}</span>
+                )}
+            </React.Fragment>
+        ));
+    };
+
     return (
         <div style={containerStyle}>
             <div style={imageContainerStyle}>
@@ -94,7 +109,7 @@ export const PublicationCard = ({ title, authors, venue, links, image }) => {
             <div style={contentStyle}>
                 <div style={venueTagStyle}>{venue}</div>
                 <h3 style={titleStyle}>{title}</h3>
-                <p style={authorsStyle}>{authors}</p>
+                <p style={authorsStyle}>{renderAuthors(authors)}</p>
                 {links && links.length > 0 && (
                     <div style={linksStyle}>
                         {links.map((link, index) => (

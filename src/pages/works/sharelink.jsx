@@ -309,9 +309,44 @@ const ImageCarousel = ({ images, alt = '图片', showArrows = true, zoom = 1.8, 
     const rafRef = React.useRef(null);
     const lastXRef = React.useRef(null);
     const lastYRef = React.useRef(null);
+    // 滑动切换状态
+    const dragStartXRef = React.useRef(null);
+    const dragStartYRef = React.useRef(null);
+    const draggingRef = React.useRef(false);
 
     const prev = () => setActive(prev => (prev - 1 + images.length) % images.length);
     const next = () => setActive(prev => (prev + 1) % images.length);
+
+    // 按下：记录起点
+    const onPointerDown = (e) => {
+        dragStartXRef.current = e.clientX;
+        dragStartYRef.current = e.clientY;
+        draggingRef.current = false;
+    };
+
+    // 移动：跟踪水平位移，超过阈值视为拖拽（隐藏放大镜）
+    const onPointerMoveForSwipe = (e) => {
+        if (dragStartXRef.current == null) return;
+        const dx = e.clientX - dragStartXRef.current;
+        const dy = e.clientY - dragStartYRef.current;
+        if (Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy)) {
+            draggingRef.current = true;
+            if (lensRef.current) lensRef.current.style.opacity = '0';
+        }
+    };
+
+    // 松开：水平滑动超过阈值则切换
+    const onPointerUp = (e) => {
+        if (dragStartXRef.current == null) return;
+        const dx = e.clientX - dragStartXRef.current;
+        dragStartXRef.current = null;
+        dragStartYRef.current = null;
+        if (draggingRef.current && Math.abs(dx) > 40) {
+            if (dx < 0) next();
+            else prev();
+        }
+        draggingRef.current = false;
+    };
 
     // hover 放大镜
     const writeLens = () => {
@@ -362,7 +397,13 @@ const ImageCarousel = ({ images, alt = '图片', showArrows = true, zoom = 1.8, 
     return (
         <div
             ref={containerRef}
-            onPointerMove={onPointerMove}
+            onPointerDown={onPointerDown}
+            onPointerMove={(e) => {
+                onPointerMoveForSwipe(e);
+                onPointerMove(e);
+            }}
+            onPointerUp={onPointerUp}
+            onPointerCancel={onPointerUp}
             onPointerLeave={onPointerLeave}
             style={{
                 position: 'relative',
@@ -372,6 +413,9 @@ const ImageCarousel = ({ images, alt = '图片', showArrows = true, zoom = 1.8, 
                 background: V.surface2,
                 border: `1px solid ${V.line}`,
                 borderRadius: V.radius,
+                touchAction: 'pan-y',
+                userSelect: 'none',
+                WebkitUserSelect: 'none',
             }}
         >
             <img
