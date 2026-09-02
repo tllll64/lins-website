@@ -4,7 +4,6 @@ import { Navbar } from '../../components/Navbar';
 import { typography } from '../../design-system/tokens';
 import { useMediaQuery } from '../../design-system/hooks/useMediaQuery';
 import teaser from '../../assets/works/jokeasy/jokeasy_teaser.webp'; // 原头图：置于 Overview 下方
-import interfaceImg from '../../assets/works/jokeasy/jokeasy_interface.webp';
 import inspirationImg from '../../assets/works/jokeasy/jokeasy_inspiration.webp';
 import jokemapImg from '../../assets/works/jokeasy/jokeasy_jokemap.webp';
 import pipelineImg from '../../assets/works/jokeasy/jokeasy_pipeline.webp';
@@ -167,9 +166,6 @@ export const Jokeasy = () => {
                 {/* 1 — Project name */}
                 <section style={{ padding: isMobile ? '112px 24px 48px' : '150px 32px 80px' }}>
                     <div style={{ maxWidth: containerMax, margin: '0 auto' }}>
-                        <Eyebrow style={{ marginBottom: '24px' }}>
-                            AI Design Engineering
-                        </Eyebrow>
                         <h1 style={{
                             fontFamily: 'Lora, "Times New Roman", Georgia, serif',
                             fontWeight: 600,
@@ -275,23 +271,6 @@ export const Jokeasy = () => {
                     </TwoCols>
                 </section>
 
-                {/* 4.5 — Teaser（Overview 下方，居中于文字区域） */}
-                <section style={{
-                    maxWidth: containerMax,
-                    margin: '0 auto',
-                    padding: isMobile ? '60px 24px 0' : '88px 32px 0',
-                    display: 'grid',
-                    gridTemplateColumns: isMobile ? '1fr' : '340px 1fr',
-                    gap: isMobile ? '20px' : '72px',
-                    alignItems: 'start',
-                }}>
-                    {!isMobile && <div />}
-                    <Figure
-                        src={interfaceImg}
-                        caption="The main interface of Jokeasy: (A) Topic Ideation Panel, (B) Joke Generation Results with three parallel joke maps, (C) Echo Assistant Panel."
-                    />
-                </section>
-
                 {/* 5 — System Overview */}
                 <Section eyebrow="System Overview">
                     <TwoCols>
@@ -336,7 +315,10 @@ export const Jokeasy = () => {
                             ))}
                         </div>
                     </TwoCols>
-                    <Figure src={teaser} />
+                    <Figure
+                        src={teaser}
+                        caption="The main interface of Jokeasy: (A) Topic Ideation Panel, (B) Joke Generation Results with three parallel joke maps, (C) Echo Assistant Panel."
+                    />
                 </Section>
 
                 {/* 6 — Multistage Workflow */}

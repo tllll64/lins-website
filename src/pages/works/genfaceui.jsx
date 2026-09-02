@@ -29,7 +29,7 @@ const projectFacts = [
     { label: 'Team', value: 'Yate Ge, Lin Tian, Yi Dai, Shuhan Pan, Yiwen Zhang, Qi Wang, Weiwei Guo*, Xiaohua Sun*' },
     { label: 'My Role', value: 'System Design\nFrontend Development\nUser Study\nPaper Writing' },
     { label: 'Time', value: '2025.06-2025.09' },
-    { label: 'Publication', value: "CHI'26 Full Paper (CCF-A)" },
+    { label: 'Publication', value: "CHI'26 Full Paper (CCF-A)\nUIST'25 Poster" },
 ];
 
 /* Micro label — 与侨批页一致的 Eyebrow */
@@ -191,7 +191,7 @@ export const GenFaceUI = () => {
                         borderTop: `1px solid ${V.line}`,
                         borderBottom: `1px solid ${V.line}`,
                         display: 'grid',
-                        gridTemplateColumns: isMobile ? '1fr 1fr' : '1.2fr 1.2fr 0.7fr 1fr',
+                        gridTemplateColumns: isMobile ? '1fr 1fr' : '2fr 1fr 1fr 1fr',
                     }}>
                         {projectFacts.map((item, index) => (
                             <div
