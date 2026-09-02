@@ -304,7 +304,7 @@ const FolderIcon = ({
                     fontWeight: 'normal',
                     pointerEvents: 'none'
                 }}>
-                    My Projects
+                    Internship Projects
                 </div>
             </div>
         </div>
