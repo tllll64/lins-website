@@ -358,7 +358,7 @@ const featuredItems = [
         title: '抖音弹幕互动玩法创新',
         date: 'Vibe Coding 原型',
         image: ASSETS.craft1,
-        button: { label: 'View Demo →', to: demoPage('https://www.figma.com/proto/XtidjNlm6Zbb8FSDBYhxeq/%E7%BD%91%E7%AB%99%E4%BD%9C%E5%93%81-Link?node-id=2631-8655&viewport=463%2C138%2C0.05&t=KVvZWaY1zoGgLOvi-1&scaling=scale-down-width&content-scaling=fixed&page-id=2631%3A6206') },
+        button: { label: 'View Demo →', onClick: () => window.open('https://tiktok-y27.lynntian.com/', '_blank') },
     },
     {
         title: 'GenFaceUI: Meta-Design Tool',
