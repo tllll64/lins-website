@@ -329,7 +329,7 @@ export const About = () => {
                 </div>
             </Section>
 
-            <Section title="Extra Extra" subtitle="不工作的时候，我会 🏃 Citywalk，🧘 旅行，🎵 听音乐&播客，💪 健身，🩵 追星，🍮 享用甜点，以及 👧 照顾我的小侄子（德华带娃）。" subtitleStyle={{ color: colors.grey[9] }} style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
+            <Section title="Extra Extra!" subtitle="不工作的时候，我会 🏃 Citywalk，🧘 旅行，🎵 听音乐&播客，💪 健身，🩵 追星，🍮 享用甜点，以及 👧 照顾我的小侄子（德华带娃）。" subtitleStyle={{ color: colors.grey[9] }} style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
                 <PolaroidGallery images={[ASSETS.photo1, ASSETS.photo2, ASSETS.photo3, ASSETS.photo4, ASSETS.photo5, ASSETS.photo6].filter(Boolean)} />
             </Section>
 

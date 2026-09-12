@@ -344,18 +344,17 @@ export const Home = () => {
                         reversed={true}
                         onClick={() => navigate('/works/xhs-fries')}
                     />
-                    {/* 灵犀 AURA 卡片暂时隐藏，需要时取消注释恢复
+                    {/* 小红书 B端 · 灵犀数据产品，接在 C端薯条卡片下方 */}
                     <ProjectCard
-                        date="Mar - May 2024"
+                        date="Mar - Aug 2025"
                         title="灵犀 AURA 营销结案升级"
-                        description="A deep dive into mobile creative tools, analyzing interaction patterns and recreating key workflows for iOS."
-                        tags={['Web', '需求支持']}
+                        description="参与灵犀数据产品 0-1 AI 能力接入，从应用框架、对话交互、视觉表现三大维度推进 5 个 MVP 需求落地，线上 AI 能力页面覆盖率提升 23.6%。"
+                        tags={['2025', 'B端 · 需求支持']}
                         image={ASSETS.pro}
                         logo={RedLogo}
                         customCursor={xhsCursor}
                         pixelPattern={<PixelLock size={6} gap={2} />}
                     />
-                    */}
                 </div>
             </Section>
 
