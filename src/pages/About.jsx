@@ -8,11 +8,11 @@ import { colors, spacing, typography, fontWeight, stackSpacing, gridGap, layoutS
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 import { Twitter, Github, Mail, MessageCircle, Copy, Check, Phone } from 'lucide-react';
 
-import profileImage from '../assets/about/profile.jpg';
+import profileImage from '../assets/about/profile.webp';
+import TencentLogo from '../assets/Home/tencent-color.svg';
 import PolaroidGallery from '../components/PolaroidGallery';
 import StackedCards from '../components/StackedCards';
 import AboutContact from '../components/AboutContact';
-import { GitHubCalendar } from 'react-github-calendar';
 export const About = () => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     const footerRef = useRef(null);
@@ -74,9 +74,9 @@ export const About = () => {
     };
 
     const profileTitleStyle = {
-        fontFamily: typography.heading1.fontFamily,
+        fontFamily: 'Lora, "Times New Roman", Georgia, serif',
         fontSize: isMobile ? '36px' : typography.heading1.fontSize,
-        fontWeight: 200,
+        fontWeight: 400,
         lineHeight: typography.heading1.lineHeight,
         letterSpacing: typography.heading1.letterSpacing,
         color: colors.grey[9]
@@ -212,6 +212,7 @@ export const About = () => {
     };
 
     const newsData = [
+        { date: "[05/2026]", emoji: "🐧", text: "来腾讯 CDG 暑期实习啦，这次将面向跨境汇款这个很有挑战性的业务，同时进一步探索 AI 融入设计工作流的可能性" },
         { date: "[02/2026]", emoji: "💻", text: "寒假 vibe coding 重新装修了自己的个人网站，新域名：lynntian.com 🍩" },
         { date: "[02/2026]", emoji: "🎵", text: "结束了在字节的产品设计实习，这是一次对 AI 落地业务的全方位了解，我仍然会保持眼里有光，保持 passion ✨" },
         { date: "[01/2026]", emoji: "🇪🇸", text: "My first CHI! 四月份西班牙巴塞罗那见！感谢学术之途的每一位引路人，给世界贡献一份 contribution（本 N 人的终极梦想）正在一步步实现中 ✨" },
@@ -257,13 +258,13 @@ export const About = () => {
 
                         <div style={profileBodyStyle}>
                             <p>
-                                嗨，我是 Chloe Tian。作为一名数字设计师和 AI 工程师，我致力于将以人为本的设计与前沿技术相融合。
+                                嗨，我是田琳，一名连接产品、设计与工程，具备深度研究思维和自驱成长力的 AI-Native 产品设计师。
                             </p>
                             <p>
-                                目前在上海，就读于 <span style={{ fontWeight: fontWeight.semibold }}>同济大学 </span><span style={{ fontWeight: fontWeight.semibold, textDecoration: 'underline', textDecorationThickness: '2px', textDecorationColor: colors.black[40] }}>D&I</span> 交互设计专业，专注于 🤖 人机交互（HAI）研究 @ <span style={{ fontWeight: fontWeight.semibold, textDecoration: 'underline', textDecorationThickness: '2px', textDecorationColor: colors.black[40] }}>CDI</span>。
+                                目前在上海，就读于 <span style={{ fontWeight: fontWeight.semibold }}>同济大学 </span><span style={{ fontWeight: fontWeight.semibold, textDecoration: 'underline', textDecorationThickness: '2px', textDecorationColor: colors.black[40] }}>D&I</span> <span style={{ fontWeight: fontWeight.semibold }}>交互设计</span> 专业，专注于生成式交互与人机协同研究。
                             </p>
                             <p>
-                                我热衷于重新定义我们与技术互动的方式，使其更加直观、流畅，并无缝融入我们的日常生活。
+                                我的关键词有 {'{大胆突破 细心验证}'} {'{深度研究思维}'} {'{主动推进落地}'} {'{好奇心 & 问题驱动成长}'}。
                             </p>
                         </div>
 
@@ -279,45 +280,6 @@ export const About = () => {
             </div>
 
             <Section style={{ paddingTop: layoutSpacing.section.xs, paddingBottom: layoutSpacing.section.xs }}>
-                {/* GitHub contributions calendar */}
-                <div className="github-calendar-fill" style={{
-                    background: '#fff',
-                    border: `1px solid ${colors.grey[92]}`,
-                    borderRadius: '16px',
-                    padding: isMobile ? '20px' : '28px',
-                    overflowX: 'auto',
-                    marginBottom: isMobile ? stackSpacing.xl : layoutSpacing.section.md,
-                }}>
-                    <style>{`
-                        .github-calendar-fill .react-activity-calendar {
-                            width: 100%;
-                        }
-                        .github-calendar-fill .react-activity-calendar__scroll-container {
-                            width: 100%;
-                            overflow: visible;
-                        }
-                        .github-calendar-fill .react-activity-calendar svg.react-activity-calendar__calendar {
-                            width: 100%;
-                            height: auto;
-                        }
-                    `}</style>
-                    <GitHubCalendar
-                        username="tllll64"
-                        colorScheme="light"
-                        blockSize={isMobile ? 11 : 14}
-                        blockMargin={isMobile ? 3 : 5}
-                        fontSize={isMobile ? 12 : 15}
-                        theme={{
-                            light: ['#f2f2f2', '#c6c6c6', '#8f8f8f', '#4d4d4d', '#171717'],
-                        }}
-                        style={{
-                            color: colors.grey[40],
-                            fontFamily: typography.body.fontFamily,
-                            width: '100%',
-                        }}
-                    />
-                </div>
-
                 <div style={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -325,9 +287,9 @@ export const About = () => {
                     gap: isMobile ? stackSpacing.md : '6.66px' // Reduced to ~1/3 of 20px
                 }}>
                     <h2 style={{
-                        fontFamily: typography.heading1.fontFamily,
+                        fontFamily: 'Lora, "Times New Roman", Georgia, serif',
                         fontSize: isMobile ? '28px' : `calc(${typography.heading1.fontSize} - 8px)`, // Reduced by 8px
-                        fontWeight: 200,
+                        fontWeight: 400,
                         lineHeight: typography.heading1.lineHeight,
                         letterSpacing: typography.heading1.letterSpacing,
                         color: colors.grey[9],
@@ -340,12 +302,12 @@ export const About = () => {
                         <StackedCards 
                             assets={ASSETS} 
                             images={[
+                                TencentLogo,
                                 ASSETS.tiktokWork,
                                 ASSETS.red,
                                 ASSETS.mi,
                                 ASSETS.ant,
                                 ASSETS.bmw,
-                                ASSETS.huawei,
                                 ASSETS.nio,
                                 ASSETS.zeekr
                             ]}
@@ -355,7 +317,7 @@ export const About = () => {
             </Section>
 
             <Section title="Latest News" style={{ paddingTop: layoutSpacing.section.xl, paddingBottom: layoutSpacing.section.xl }}>
-                <div style={newsContainerStyle}>
+                <div style={newsContainerStyle} data-lenis-prevent>
                     {newsData.map((item, index) => (
                         <div key={`${index}-updated`} style={newsItemStyle}>
                             <span style={newsDateStyle}>{item.emoji} {item.date}</span>

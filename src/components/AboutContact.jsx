@@ -1,6 +1,7 @@
 import React from 'react';
-import { Phone, MessageCircle, Mail } from 'lucide-react';
-import { colors, spacing, typography, fontWeight, stackSpacing } from '../design-system/tokens';
+import { Phone, Mail } from 'lucide-react';
+import WeChatIcon from './WeChatIcon';
+import { colors, spacing, typography, fontWeight } from '../design-system/tokens';
 
 const AboutContact = () => {
     const containerStyle = {
@@ -57,7 +58,7 @@ const AboutContact = () => {
         },
         {
             id: 'wechat',
-            icon: <MessageCircle size={18} />,
+            icon: <WeChatIcon size={18} />,
             text: 'LittleLionTOP',
         },
         {
@@ -69,7 +70,7 @@ const AboutContact = () => {
 
     return (
         <div style={containerStyle}>
-            <h3 style={titleStyle}>寻找 27 届暑期实习中，欢迎联系🙋🏻‍♀️</h3>
+            <h3 style={titleStyle}>准备 27 届校招中，欢迎联系 🙋🏻‍♀️</h3>
             <div style={listStyle}>
                 {contactItems.map((item) => (
                     <div

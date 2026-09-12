@@ -93,7 +93,7 @@ export const Navbar = ({ theme = 'light' }) => {
     const THUMB_SIZE = 34;
     const BUBBLE_PAD = 5;
 
-    const isEchoActive = location.pathname === '/echo';
+    const isEchoActive = location.pathname === '/research';
     const isAboutActive = location.pathname === '/about';
 
     const aboutBubbleStyle = {
@@ -130,7 +130,7 @@ export const Navbar = ({ theme = 'light' }) => {
     };
 
     const isWorksActive = location.pathname === '/' && location.hash === '';
-    const isSandboxActive = location.pathname === '/sandbox';
+    const isSandboxActive = location.pathname === '/creative';
 
     const backdropStyle = {
         position: 'fixed',
@@ -162,15 +162,15 @@ export const Navbar = ({ theme = 'light' }) => {
                         Design
                     </Link>
                     <Link
-                        to="/sandbox"
+                        to="/creative"
                         style={getLinkStyle(isSandboxActive)}
                         onMouseEnter={(e) => handleMouseEnter(e, isSandboxActive)}
                         onMouseLeave={(e) => handleMouseLeave(e, isSandboxActive)}
                     >
-                        Craft
+                        Creative
                     </Link>
                     <Link
-                        to="/echo"
+                        to="/research"
                         style={getLinkStyle(isEchoActive)}
                         onMouseEnter={(e) => handleMouseEnter(e, isEchoActive)}
                         onMouseLeave={(e) => handleMouseLeave(e, isEchoActive)}

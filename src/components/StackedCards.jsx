@@ -77,6 +77,7 @@ const StackedCards = ({ assets, images }) => {
           overflowX: isExpanded ? 'auto' : 'visible', // Allow scrolling when expanded
           // overflowY: 'hidden', // Removed to prevent shadow clipping
         }}
+        data-lenis-prevent
       >
         {/* Cards Container */}
         <motion.div 

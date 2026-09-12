@@ -2,7 +2,7 @@ import React from 'react';
 import { colors, spacing, typography, stackSpacing, width, layoutSpacing, fontSize } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 
-export const Section = ({ id, title, subtitle, children, className = "", dark = false, style = {}, subtitleStyle = {} }) => {
+export const Section = ({ id, title, subtitle, children, className = "", dark = false, style = {}, subtitleStyle = {}, headerStyle = {} }) => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     const isTablet = useMediaQuery('(max-width: 1024px)');
 
@@ -22,14 +22,15 @@ export const Section = ({ id, title, subtitle, children, className = "", dark = 
         paddingRight: isMobile ? layoutSpacing.page.mobile : layoutSpacing.page.desktop
     };
 
-    const headerStyle = {
-        marginBottom: stackSpacing.xl
+    const headerStyleMerged = {
+        marginBottom: stackSpacing.xl,
+        ...headerStyle
     };
 
     const titleStyle = {
         fontFamily: 'Lora, "Times New Roman", Georgia, serif',
         fontSize: isMobile ? '36px' : isTablet ? fontSize[48] : typography.heading1.fontSize,
-        fontWeight: typography.heading1.fontWeight,
+        fontWeight: 400,
         lineHeight: typography.heading1.lineHeight,
         letterSpacing: '0px',
         color: dark ? colors.white.solid : colors.grey[9],
@@ -50,7 +51,7 @@ export const Section = ({ id, title, subtitle, children, className = "", dark = 
         <section id={id} style={sectionStyle} className={className} data-theme={dark ? 'dark' : undefined}>
             <div style={containerStyle}>
                 {(title || subtitle) && (
-                    <div style={headerStyle}>
+                    <div style={headerStyleMerged}>
                         {title && (
                             <h2 style={titleStyle}>
                                 {title}

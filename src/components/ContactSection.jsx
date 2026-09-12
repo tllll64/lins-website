@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MessageCircle, Copy, Check, ArrowUpRight } from 'lucide-react';
+import { Mail, Phone, Copy, Check, ArrowUpRight } from 'lucide-react';
+import WeChatIcon from './WeChatIcon';
 import { colors, spacing, typography, stackSpacing, layoutSpacing, fontSize } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
-import DotField from './DotField';
 
 export const ContactSection = React.forwardRef((props, ref) => {
     const isMobile = useMediaQuery('(max-width: 768px)');
@@ -44,9 +44,9 @@ export const ContactSection = React.forwardRef((props, ref) => {
     };
 
     const footerTitleStyle = {
-        fontFamily: typography.heading1.fontFamily,
+        fontFamily: 'Lora, "Times New Roman", Georgia, serif',
         fontSize: isMobile ? fontSize[24] : fontSize[32],
-        fontWeight: typography.heading1.fontWeight,
+        fontWeight: 400,
         lineHeight: typography.heading1.lineHeight,
         letterSpacing: typography.heading1.letterSpacing,
         color: colors.white.solid,
@@ -108,10 +108,10 @@ export const ContactSection = React.forwardRef((props, ref) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: spacing.xs,
+        gap: `calc(${spacing.xs} - 2px)`,
         background: colors.white.solid,
         color: colors.black.solid,
-        padding: `${spacing.xs} ${spacing.md}`,
+        padding: `${spacing.xs} ${spacing.md} ${spacing.xs} calc(${spacing.md} + 4px)`,
         borderRadius: '100px',
         textDecoration: 'none',
         fontSize: typography.body.fontSize,
@@ -125,14 +125,6 @@ export const ContactSection = React.forwardRef((props, ref) => {
 
     return (
         <footer style={footerStyle} ref={ref} id="about" data-theme="dark">
-            {/* Interactive dot-field background (react-bits) */}
-            <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
-                <DotField
-                    dotRadius={3.75}
-                    gradientFrom="rgba(255,255,255,0.12)"
-                    gradientTo="rgba(255,255,255,0.12)"
-                />
-            </div>
             <div style={footerContentStyle}>
                 <div style={{ gridArea: 'title' }}>
                     <h2 style={footerTitleStyle}>Contact Me</h2>
@@ -169,7 +161,7 @@ export const ContactSection = React.forwardRef((props, ref) => {
                         onMouseLeave={() => setHoveredField(null)}
                         onClick={() => handleCopy('LittleLionTOP', 'wechat')}
                     >
-                        <MessageCircle size={16} /> <span>LittleLionTOP</span>
+                        <WeChatIcon size={16} /> <span>LittleLionTOP</span>
                         <div style={iconContainerStyle}>
                             {copiedField === 'wechat' ? (
                                 <Check size={14} color={colors.white.solid} />
@@ -199,14 +191,14 @@ export const ContactSection = React.forwardRef((props, ref) => {
                 </div>
 
                 <a 
-                    href="https://jq6o8oyx72u.feishu.cn/wiki/R2XrwQooKiYVk1kF4facXBtdnkd"
+                    href="https://jq6o8oyx72u.feishu.cn/wiki/MgB2wTodOiaRghkivCFcXiNTn06?from=from_copylink"
                     target="_blank"
                     rel="noopener noreferrer"
                     style={resumeButtonStyle}
                     onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                     onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                 >
-                    Resume <ArrowUpRight size={16} />
+                    Resume <ArrowUpRight size={18} style={{ transform: 'translateY(1px)' }} />
                 </a>
                 
                 <div style={copyrightStyle}>
