@@ -23,3 +23,5 @@ dist-ssr
 *.sln
 *.sw?
 deploy-dearyou_letter/
+.vercel
+.env*.local

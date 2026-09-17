@@ -14,6 +14,7 @@ const ColeanDetail = lazy(() => import('./pages/ColeanDetail').then(module => ({
 const Qiaopi = lazy(() => import('./pages/works/qiaopi').then(module => ({ default: module.Qiaopi })));
 const QiaopiDemo = lazy(() => import('./pages/works/qiaopi-demo').then(module => ({ default: module.QiaopiDemo })));
 const XhsFries = lazy(() => import('./pages/works/xhs-fries').then(module => ({ default: module.XhsFries })));
+const XhsLingxi = lazy(() => import('./pages/works/xhs-lingxi').then(module => ({ default: module.XhsLingxi })));
 const Tako = lazy(() => import('./pages/works/tako').then(module => ({ default: module.Tako })));
 const Sharelink = lazy(() => import('./pages/works/sharelink').then(module => ({ default: module.Sharelink })));
 const FigmaDemo = lazy(() => import('./pages/FigmaDemo').then(module => ({ default: module.FigmaDemo })));
@@ -91,6 +92,7 @@ function App() {
                 <Route path="/works/qiaopi" element={<Qiaopi />} />
                 <Route path="/works/qiaopi/demo" element={<QiaopiDemo />} />
                 <Route path="/works/xhs-fries" element={<XhsFries />} />
+                <Route path="/works/xhs-lingxi" element={<XhsLingxi />} />
                 <Route path="/works/tako" element={<Tako />} />
                 <Route path="/works/sharelink" element={<Sharelink />} />
                 <Route path="/works/genfaceui" element={<GenFaceUI />} />

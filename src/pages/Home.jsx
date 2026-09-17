@@ -12,7 +12,6 @@ import NothingWordClock from '../components/NothingWordClock';
 import NothingDotClock from '../components/NothingDotClock';
 import FolderIcon from '../components/FolderIcon';
 import PDFViewer from '../components/PDFViewer';
-import PixelLock from '../components/PixelLock';
 import PixelEye from '../components/PixelEye';
 import { ASSETS } from '../constants/assets';
 import { colors, spacing, typography, stackSpacing, layoutSpacing } from '../design-system/tokens';
@@ -29,6 +28,7 @@ import profileImg from '../assets/about/profile2.webp';
 import TencentLogo from '../assets/Home/tencent-color.svg';
 import QiaopiCover from '../assets/works/qiaopi/qiaopi.webp';
 import XhsFriesCover from '../assets/works/xhs-fries/cover.webp';
+import XhsLingxiCover from '../assets/works/xhs-lingxi/cover.webp';
 import SharelinkCover from '../assets/works/sharelink/sharelink.webp';
 import FigmaPreloader from '../components/FigmaPreloader';
 
@@ -320,8 +320,7 @@ export const Home = () => {
                         image={SharelinkCover}
                         reversed={true}
                         imageScale={1.12}
-                        pixelPattern={<PixelEye size={6} gap={2} />}
-                        onClick={() => navigate('/works/sharelink?data=hidden')}
+                        locked={true}
                     />
                     <ProjectCard
                         date="Mar - May 2024"
@@ -350,10 +349,11 @@ export const Home = () => {
                         title="灵犀 AURA 营销结案升级"
                         description="参与灵犀数据产品 0-1 AI 能力接入，从应用框架、对话交互、视觉表现三大维度推进 5 个 MVP 需求落地，线上 AI 能力页面覆盖率提升 23.6%。"
                         tags={['2025', 'B端 · 需求支持']}
-                        image={ASSETS.pro}
+                        image={XhsLingxiCover}
                         logo={RedLogo}
                         customCursor={xhsCursor}
-                        pixelPattern={<PixelLock size={6} gap={2} />}
+                        pixelPattern={<PixelEye size={6} gap={2} />}
+                        onClick={() => navigate('/works/xhs-lingxi')}
                     />
                 </div>
             </Section>
