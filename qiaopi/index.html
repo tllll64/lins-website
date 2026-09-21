@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>侨批 — 见字如面，写一封侨批给家人</title>
+  <meta name="theme-color" content="#000000" />
+
+  <!-- 封面要用的 4 张图在解析 HTML 时就开始下载，不再等 JS 执行完 -->
+  <link rel="preload" as="image" href="./assets/img/cover-bg.webp" fetchpriority="high" />
+  <link rel="preload" as="image" href="./assets/img/cover-title.webp" />
+  <link rel="preload" as="image" href="./assets/img/cover-deco.webp" />
+  <link rel="preload" as="image" href="./assets/img/cover-logo.webp" />
+  <!-- 字体不跟封面抢带宽：低优先级，排在图片之后 -->
+  <link rel="preload" as="font" type="font/woff2" href="./assets/font/noto-serif-sc.woff2" crossorigin fetchpriority="low" />
+  <link rel="dns-prefetch" href="https://weremit-static.tenpay.com" />
+
+  <link rel="stylesheet" crossorigin href="./assets/index-BOI8giLP.css" />
+
+  <!-- 静态首屏：与 CoverPage 同尺寸的骨架，先让封面可见；
+       Vue 挂载后 #app 非空，骨架由下方 CSS 规则自动隐藏，视觉上无跳变 -->
+  <style>
+    #boot-cover {
+      width: 100%;
+      min-height: 100cqw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      background: #000;
+    }
+
+    #boot-cover .b-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      aspect-ratio: 750 / 1624;
+      margin: auto;
+      overflow: hidden;
+      background: #C8B58C;
+    }
+
+    #boot-cover img {
+      display: block;
+    }
+
+    #boot-cover .b-bg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 121.87%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    #boot-cover .b-logo {
+      position: absolute;
+      left: 6.67%;
+      top: 3.08%;
+      width: 22.55%;
+      z-index: 4;
+    }
+
+    #boot-cover .b-logo img {
+      width: 100%;
+      height: auto;
+    }
+
+    #boot-cover .b-deco {
+      position: absolute;
+      left: 17.67%;
+      top: 10.77%;
+      width: 45.47%;
+      height: 12.6%;
+      overflow: visible;
+      pointer-events: none;
+      z-index: 5;
+      transform: rotate(20deg) scale(1.1);
+    }
+
+    #boot-cover .b-deco img {
+      position: absolute;
+      left: -8.85%;
+      top: 19.35%;
+      width: 95.11%;
+      height: auto;
+      transform: rotate(-25deg);
+      transform-origin: top left;
+    }
+
+    #boot-cover .b-center {
+      position: absolute;
+      left: 33.53%;
+      top: 19.83%;
+      width: 32.96%;
+      height: 52.09%;
+    }
+
+    #boot-cover .b-bar {
+      position: absolute;
+      left: 8.34%;
+      top: 0;
+      width: 83.20%;
+      height: 100%;
+      background: #AC4838;
+    }
+
+    #boot-cover .b-title {
+      position: absolute;
+      left: 0;
+      top: 18.67%;
+      width: 100%;
+      height: auto;
+    }
+
+    #boot-cover .b-btn {
+      position: absolute;
+      left: 29.07%;
+      top: 82.27%;
+      width: 41.73%;
+      height: 5.42%;
+      background: transparent;
+      border: 2px solid #000;
+      border-radius: 4px;
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(18px, 4.8cqw, 21px);
+      font-weight: 900;
+      color: #000;
+      letter-spacing: 0.05em;
+      z-index: 5;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Vue 接管后骨架自动让位 */
+    #app:not(:empty)+#boot-cover {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <div id="boot-cover" aria-hidden="true">
+    <div class="b-wrap">
+      <img class="b-bg" src="./assets/img/cover-bg.webp" alt="" fetchpriority="high" />
+      <div class="b-logo"><img src="./assets/img/cover-logo.webp" alt="TenPay" /></div>
+      <div class="b-deco"><img src="./assets/img/cover-deco.webp" alt="" /></div>
+      <div class="b-center">
+        <div class="b-bar"></div>
+        <img class="b-title" src="./assets/img/cover-title.webp" alt="侨批" />
+      </div>
+      <div class="b-btn">提笔写信</div>
+    </div>
+  </div>
+
+  <script type="module" crossorigin src="./assets/index-CmFAueBN.js"></script>
+</body>
+
+</html>
