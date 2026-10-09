@@ -384,7 +384,7 @@ const IMAGE_RATIOS = {
     [ASSETS.ai2]: 1002 / 752,
     [ASSETS.craft9]: 2400 / 1800, // Tako 特型卡原则与规范制定（4:3）
     [ASSETS.jokeasy]: 2502 / 1602, // Jokeasy (iasdr)
-    [ASSETS.craft10]: 2400 / 1800, // 微信红包语音祝福玩法设计（4:3）
+    [ASSETS.craft11]: 2400 / 1800, // BoaBite（4:3）
 };
 
 /* 估算卡片高度（title + 媒体区 + 按钮 + 卡片留白） */
@@ -472,10 +472,10 @@ const sandboxItems = [
         button: { label: 'Research Project →', to: '/works/jokeasy' },
     },
     {
-        title: '微信红包语音祝福玩法设计',
-        date: '设计探索',
-        image: ASSETS.craft10,
-        locked: true,
+        title: 'BoaBite',
+        date: '0-1 AI-Native 产品',
+        image: ASSETS.craft11,
+        button: { label: 'Case Study →', to: '/works/boabite' },
     },
 ];
 
@@ -504,7 +504,7 @@ export const Research = () => {
     const FIXED_COLUMN_INDICES = [
         [0, 5, 4, 11, 7], // 列1: 侨批 / AIGC Banner / gen-icon / 支小宝 / 方由
         [1, 3, 6, 10, 12], // 列2: 抖音 / Sidetation / cowart / Colean / Tako 特型卡
-        [2, 13, 14, 9, 8], // 列3: GenFaceUI / Jokeasy / 微信红包 / NIO / 小米
+        [2, 13, 14, 9, 8], // 列3: GenFaceUI / Jokeasy / BoaBite / NIO / 小米
     ];
 
     const allItems = [...featuredItems, ...sandboxItems];

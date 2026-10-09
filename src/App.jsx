@@ -20,6 +20,7 @@ const Sharelink = lazy(() => import('./pages/works/sharelink').then(module => ({
 const FigmaDemo = lazy(() => import('./pages/FigmaDemo').then(module => ({ default: module.FigmaDemo })));
 const GenFaceUI = lazy(() => import('./pages/works/genfaceui').then(module => ({ default: module.GenFaceUI })));
 const Jokeasy = lazy(() => import('./pages/works/jokeasy').then(module => ({ default: module.Jokeasy })));
+const BoaBite = lazy(() => import('./pages/works/boabite').then(module => ({ default: module.BoaBite })));
 
 // 路由切换时回到页面顶部；带 hash 时精确定位到锚点。
 // 轮询等元素出现后瞬时定位一次（不经过中间内容、不二次跳变）；
@@ -97,6 +98,7 @@ function App() {
                 <Route path="/works/sharelink" element={<Sharelink />} />
                 <Route path="/works/genfaceui" element={<GenFaceUI />} />
                 <Route path="/works/jokeasy" element={<Jokeasy />} />
+                <Route path="/works/boabite" element={<BoaBite />} />
                 <Route path="/demo" element={<FigmaDemo />} />
               </Routes>
             </Suspense>

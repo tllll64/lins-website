@@ -24,7 +24,7 @@ export const ASSETS = {
     craft7: new URL('../assets/Craft/cowart.webp', import.meta.url).href, // cowart_workbuddy
     craft8: new URL('../assets/Craft/Sidetation.webp', import.meta.url).href, // Sidetation
     craft9: new URL('../assets/Craft/takocard.webp', import.meta.url).href, // Tako 特型卡原则与规范制定
-    craft10: new URL('../assets/Craft/wxg.webp', import.meta.url).href, // 微信红包语音祝福玩法设计
+    craft11: new URL('../assets/Craft/BoaBite.webp', import.meta.url).href, // BoaBite
     jokeasy: new URL('../assets/Research/iasdr@3x.webp', import.meta.url).href, // Jokeasy (iasdr)
 
     // Blog
