@@ -204,7 +204,6 @@ const IMAGE_RATIOS = {
     [ASSETS.craft2]: 2400 / 2068, // AI 侨批生成（竖图）
     [ASSETS.craft1]: 2548 / 1911, // 抖音
     [ASSETS.ai1]: 3600 / 2700,    // GenFaceUI
-    [ASSETS.craft3]: 2400 / 1600, // gen-icon-skill
     [ASSETS.craft8]: 2400 / 1600, // Sidetation
     [ASSETS.digital1]: 1503 / 1128,
     [ASSETS.digital2]: 1503 / 1128,
@@ -236,13 +235,6 @@ const sandboxItems = [
         category: 'ai',
         image: ASSETS.craft1,
         button: { label: 'View Demo →', onClick: () => window.open('https://tiktok-y27.lynntian.com/', '_blank') },
-    },
-    {
-        title: 'gen-icon-skill',
-        date: '业务图标生成 Skill',
-        category: 'ai',
-        image: ASSETS.craft3,
-        button: { label: 'GitHub Repo →', onClick: () => window.open('https://github.com/tllll64/gen-icon-skill', '_blank') },
     },
     {
         title: '方由: 国学教育玩具设计',
@@ -313,9 +305,9 @@ export const Research = () => {
     // 数字为 allItems 下标：0-2 为固定首行（侨批/BoaBite/支小宝），3 起为 sandboxItems 顺序。
     // 若新增/删除/重排卡片，需同步更新此表。
     const FIXED_COLUMN_INDICES = [
-        [0, 4, 5], // 列1: 侨批 / gen-icon / 方由
-        [1, 3, 8], // 列2: BoaBite / 抖音 / Colean
-        [2, 9, 10, 7, 6], // 列3: 支小宝 / GenFaceUI / Sidetation / NIO / 小米
+        [0, 4], // 列1: 侨批 / 方由
+        [1, 3, 7], // 列2: BoaBite / 抖音 / Colean
+        [2, 8, 9, 6, 5], // 列3: 支小宝 / GenFaceUI / Sidetation / NIO / 小米
     ];
 
     const allItems = [...featuredItems, ...sandboxItems];
