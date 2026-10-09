@@ -19,9 +19,7 @@ export const ASSETS = {
     craft2: new URL('../assets/Craft/qiaopi2.webp', import.meta.url).href, // AI 侨批生成
     craft3: new URL('../assets/Craft/gen-icon-skill.webp', import.meta.url).href, // gen-icon-skill
     craft8: new URL('../assets/Craft/Sidetation.webp', import.meta.url).href, // Sidetation
-    craft9: new URL('../assets/Craft/takocard.webp', import.meta.url).href, // Tako 特型卡原则与规范制定
     craft11: new URL('../assets/Craft/BoaBite.webp', import.meta.url).href, // BoaBite
-    jokeasy: new URL('../assets/Research/iasdr@3x.webp', import.meta.url).href, // Jokeasy (iasdr)
 
     // Blog
     blog1: new URL('../assets/Home/Colean.webp', import.meta.url).href, // Placeholder

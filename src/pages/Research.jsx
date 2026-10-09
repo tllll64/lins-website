@@ -212,8 +212,6 @@ const IMAGE_RATIOS = {
     [ASSETS.digital3]: 1503 / 1128,
     [ASSETS.digital4]: 1503 / 1128,
     [ASSETS.ai2]: 1002 / 752,
-    [ASSETS.craft9]: 2400 / 1800, // Tako 特型卡原则与规范制定（4:3）
-    [ASSETS.jokeasy]: 2502 / 1602, // Jokeasy (iasdr)
     [ASSETS.craft11]: 2400 / 1800, // BoaBite（4:3）
 };
 
@@ -277,20 +275,6 @@ const sandboxItems = [
         button: { label: 'Case Study →', to: demoPage('https://www.figma.com/proto/XtidjNlm6Zbb8FSDBYhxeq/%E7%BD%91%E7%AB%99%E4%BD%9C%E5%93%81-Link?node-id=2701-6791&viewport=829%2C217%2C0.16&t=vVwzoRmWvazi1SOm-1&scaling=scale-down-width&content-scaling=fixed&page-id=2631%3A12137') + '&youtube=rztcpdhsJlo' },
     },
     {
-        title: 'Jokeasy: Human-AI Joke Collaboration',
-        date: "AI 产品原型（iasdr'25）",
-        category: 'ai',
-        image: ASSETS.jokeasy,
-        button: { label: 'Research Project →', to: '/works/jokeasy' },
-    },
-    {
-        title: 'Tako 特型卡原则与规范制定',
-        date: 'AI 设计原则与规范',
-        category: 'ai',
-        image: ASSETS.craft9,
-        button: { label: 'Case Study →', to: demoPage('https://www.figma.com/proto/XtidjNlm6Zbb8FSDBYhxeq/%E7%BD%91%E7%AB%99%E4%BD%9C%E5%93%81-Link?node-id=2724-18899&viewport=269%2C312%2C0.22&t=U9DhGPvzcQz1va4A-1&scaling=scale-down-width&content-scaling=fixed&page-id=2723%3A6805') },
-    },
-    {
         title: '基础周边出行场景的支小宝 AI 体验创新',
         date: '校企合作项目',
         category: 'ai',
@@ -329,9 +313,9 @@ export const Research = () => {
     // 数字为 allItems 下标：0-2 为固定首行（侨批/抖音/GenFaceUI），3 起为 sandboxItems 顺序。
     // 若新增/删除/重排卡片，需同步更新此表。
     const FIXED_COLUMN_INDICES = [
-        [0, 4, 9, 5], // 列1: 侨批 / gen-icon / Jokeasy / 方由
-        [1, 3, 8, 10], // 列2: 抖音 / BoaBite / Colean / Tako 特型卡
-        [2, 11, 12, 7, 6], // 列3: GenFaceUI / 支小宝 / Sidetation / NIO / 小米
+        [0, 4, 5], // 列1: 侨批 / gen-icon / 方由
+        [1, 3, 8], // 列2: 抖音 / BoaBite / Colean
+        [2, 9, 10, 7, 6], // 列3: GenFaceUI / 支小宝 / Sidetation / NIO / 小米
     ];
 
     const allItems = [...featuredItems, ...sandboxItems];
