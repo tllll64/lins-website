@@ -17,6 +17,7 @@ const XhsFries = lazy(() => import('./pages/works/xhs-fries').then(module => ({ 
 const XhsLingxi = lazy(() => import('./pages/works/xhs-lingxi').then(module => ({ default: module.XhsLingxi })));
 const Tako = lazy(() => import('./pages/works/tako').then(module => ({ default: module.Tako })));
 const Sharelink = lazy(() => import('./pages/works/sharelink').then(module => ({ default: module.Sharelink })));
+const SharelinkAfter = lazy(() => import('./pages/works/sharelink-after').then(module => ({ default: module.SharelinkAfter })));
 const FigmaDemo = lazy(() => import('./pages/FigmaDemo').then(module => ({ default: module.FigmaDemo })));
 const GenFaceUI = lazy(() => import('./pages/works/genfaceui').then(module => ({ default: module.GenFaceUI })));
 const Jokeasy = lazy(() => import('./pages/works/jokeasy').then(module => ({ default: module.Jokeasy })));
@@ -96,6 +97,7 @@ function App() {
                 <Route path="/works/xhs-lingxi" element={<XhsLingxi />} />
                 <Route path="/works/tako" element={<Tako />} />
                 <Route path="/works/sharelink" element={<Sharelink />} />
+                <Route path="/works/sharelink/after" element={<SharelinkAfter />} />
                 <Route path="/works/genfaceui" element={<GenFaceUI />} />
                 <Route path="/works/jokeasy" element={<Jokeasy />} />
                 <Route path="/works/boabite" element={<BoaBite />} />
