@@ -316,7 +316,6 @@ export const Home = () => {
                         logo={TencentLogo}
                         image={SharelinkCover}
                         reversed={true}
-                        imageScale={1.12}
                         pixelPattern={<PixelEye size={6} gap={2} />}
                         onClick={() => navigate('/works/sharelink/after')}
                     />
