@@ -7,5 +7,5 @@ export const FIGMA_EMBEDS = {
     // 薯条加热权益保障放心投
     xhsFries: 'https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FXtidjNlm6Zbb8FSDBYhxeq%2FInternship-Projects%3Fnode-id%3D93-9593%26viewport%3D652%252C656%252C0.06%26t%3Dz6MJg81gEn0bqGzA-1%26scaling%3Dscale-down-width%26content-scaling%3Dfixed%26page-id%3D93%253A2753',
     // Sharelink 收款体验优化（after 版本）
-    sharelinkAfter: 'https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FXtidjNlm6Zbb8FSDBYhxeq%2F%25E7%25BD%2591%25E7%25AB%2599%25E4%25BD%259C%25E5%2593%2581-Link%3Fnode-id%3D4503-9621%26t%3DhNmeAiutJVqlCVFA-1',
+    sharelinkAfter: 'https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FXtidjNlm6Zbb8FSDBYhxeq%2F%25E7%25BD%2591%25E7%25AB%2599%25E4%25BD%259C%25E5%2593%2581-Link%3Fpage-id%3D4503%253A2405%26node-id%3D4503-9621%26viewport%3D171%252C294%252C0.14%26t%3DgR9jjSx2wKnWcdYK-1%26scaling%3Dscale-down-width%26content-scaling%3Dfixed',
 };

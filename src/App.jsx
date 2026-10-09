@@ -6,7 +6,7 @@ import { ZoomProvider } from './contexts/ZoomContext';
 
 const Home = lazy(() => import('./pages/Home').then(module => ({ default: module.Home })));
 const About = lazy(() => import('./pages/About').then(module => ({ default: module.About })));
-const Research = lazy(() => import('./pages/Research').then(module => ({ default: module.Research })));
+const Creative = lazy(() => import('./pages/Creative').then(module => ({ default: module.Creative })));
 const Echo = lazy(() => import('./pages/Echo').then(module => ({ default: module.Echo })));
 const ZhiXiaoBao = lazy(() => import('./pages/works/zhi-xiao-bao').then(module => ({ default: module.ZhiXiaoBao })));
 const XiaoMi = lazy(() => import('./pages/works/xiao-mi').then(module => ({ default: module.XiaoMi })));
@@ -84,7 +84,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/creative" element={<Research />} />
+                <Route path="/creative" element={<Creative />} />
                 <Route path="/craft" element={<Navigate to="/creative" replace />} />
                 <Route path="/echo" element={<Echo />} />
                 <Route path="/research" element={<Echo />} />
