@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Navbar } from '../../components/Navbar';
 import { typography } from '../../design-system/tokens';
 import { useMediaQuery } from '../../design-system/hooks/useMediaQuery';
-import sharelinkCover from '../../assets/works/sharelink/sharelink.webp';
+import sharelinkCover from '../../assets/works/sharelink/sharelink_2.webp';
 import { FIGMA_EMBEDS } from '../../constants/figmaEmbeds';
 
 /* ------------------------------------------------------------------ */

@@ -21,7 +21,6 @@ export const ASSETS = {
     craft4: new URL('../assets/Craft/banner1.webp', import.meta.url).href, // AIGC Banner 1
     craft5: new URL('../assets/Craft/banner2.webp', import.meta.url).href, // AIGC Banner 2
     craft6: new URL('../assets/Craft/banner3.webp', import.meta.url).href, // AIGC Banner 3
-    craft7: new URL('../assets/Craft/cowart.webp', import.meta.url).href, // cowart_workbuddy
     craft8: new URL('../assets/Craft/Sidetation.webp', import.meta.url).href, // Sidetation
     craft9: new URL('../assets/Craft/takocard.webp', import.meta.url).href, // Tako 特型卡原则与规范制定
     craft11: new URL('../assets/Craft/BoaBite.webp', import.meta.url).href, // BoaBite

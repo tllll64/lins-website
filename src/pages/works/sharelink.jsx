@@ -6,7 +6,7 @@ import ZoomableImage from '../../components/ZoomableImage';
 import { useZoom } from '../../contexts/ZoomContext';
 import { typography } from '../../design-system/tokens';
 import { useMediaQuery } from '../../design-system/hooks/useMediaQuery';
-import sharelinkCover from '../../assets/works/sharelink/sharelink.webp';
+import sharelinkCover from '../../assets/works/sharelink/sharelink_2.webp';
 
 /* 汇款人链路 Before / After 对比素材 */
 import huikuanrenBefore from '../../assets/works/sharelink/汇款人-Before.webp';

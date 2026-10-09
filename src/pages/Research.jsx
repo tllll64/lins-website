@@ -375,7 +375,6 @@ const IMAGE_RATIOS = {
     [ASSETS.craft1]: 2548 / 1911, // 抖音
     [ASSETS.ai1]: 3600 / 2700,    // GenFaceUI
     [ASSETS.craft3]: 2400 / 1600, // gen-icon-skill
-    [ASSETS.craft7]: 2400 / 1800, // cowart_workbuddy
     [ASSETS.craft8]: 2400 / 1600, // Sidetation
     [ASSETS.digital1]: 1503 / 1128,
     [ASSETS.digital2]: 1503 / 1128,
@@ -421,12 +420,6 @@ const sandboxItems = [
         type: 'carousel',
         title: 'AIGC Banner',
         images: [ASSETS.craft4, ASSETS.craft5, ASSETS.craft6],
-    },
-    {
-        title: 'cowart_workbuddy',
-        date: 'fork 画布插件',
-        image: ASSETS.craft7,
-        button: { label: 'GitHub Repo →', onClick: () => window.open('https://github.com/tllll64/cowart_workbuddy', '_blank') },
     },
     {
         title: '方由: 国学教育玩具设计',
@@ -502,9 +495,9 @@ export const Research = () => {
     // 数字为 allItems 下标：0-2 为固定首行（侨批/抖音/GenFaceUI），3 起为 sandboxItems 顺序。
     // 若新增/删除/重排卡片，需同步更新此表。
     const FIXED_COLUMN_INDICES = [
-        [0, 5, 4, 11, 7], // 列1: 侨批 / AIGC Banner / gen-icon / 支小宝 / 方由
-        [1, 3, 6, 10, 12], // 列2: 抖音 / Sidetation / cowart / Colean / Tako 特型卡
-        [2, 13, 14, 9, 8], // 列3: GenFaceUI / Jokeasy / BoaBite / NIO / 小米
+        [0, 5, 4, 10, 6], // 列1: 侨批 / AIGC Banner / gen-icon / 支小宝 / 方由
+        [1, 3, 9, 11], // 列2: 抖音 / Sidetation / Colean / Tako 特型卡
+        [2, 12, 13, 8, 7], // 列3: GenFaceUI / Jokeasy / BoaBite / NIO / 小米
     ];
 
     const allItems = [...featuredItems, ...sandboxItems];
