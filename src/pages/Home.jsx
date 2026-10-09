@@ -21,14 +21,11 @@ import PromoteLogo from '../assets/Home/Promote_logo.webp';
 import TakoLogo from '../assets/Home/Tako_logo.webp';
 import TakoImg from '../assets/works/tako/Tako.webp';
 import FitLogo from '../assets/Home/FiT_logo.webp';
-import RedLogo from '../assets/Home/red.webp';
 import TikTokAppLogo from '../assets/Home/TikTok.webp';
 import PolaroidDecoration from '../components/PolaroidDecoration';
 import profileImg from '../assets/about/profile2.webp';
 import TencentLogo from '../assets/Home/tencent-color.svg';
 import QiaopiCover from '../assets/works/qiaopi/qiaopi.webp';
-import XhsFriesCover from '../assets/works/xhs-fries/cover.webp';
-import XhsLingxiCover from '../assets/works/xhs-lingxi/cover.webp';
 import SharelinkCover from '../assets/works/sharelink/sharelink.webp';
 import FigmaPreloader from '../components/FigmaPreloader';
 
@@ -320,7 +317,8 @@ export const Home = () => {
                         image={SharelinkCover}
                         reversed={true}
                         imageScale={1.12}
-                        locked={true}
+                        pixelPattern={<PixelEye size={6} gap={2} />}
+                        onClick={() => navigate('/works/sharelink')}
                     />
                     <ProjectCard
                         date="Mar - May 2024"
@@ -332,28 +330,6 @@ export const Home = () => {
                         customCursor={xhsCursor}
                         pixelPattern={<PixelEye size={6} gap={2} />}
                         onClick={() => navigate('/works/tako')}
-                    />
-                    <ProjectCard
-                        date="June - Aug 2023"
-                        title="薯条加热权益保障放心投"
-                        description="Designed data visualization tools for enterprise analytics, improving data readability and decision-making efficiency."
-                        tags={['2025', '需求支持']}
-                        image={XhsFriesCover}
-                        logo={RedLogo}
-                        reversed={true}
-                        onClick={() => navigate('/works/xhs-fries')}
-                    />
-                    {/* 小红书 B端 · 灵犀数据产品，接在 C端薯条卡片下方 */}
-                    <ProjectCard
-                        date="Mar - Aug 2025"
-                        title="灵犀 AURA 营销结案升级"
-                        description="参与灵犀数据产品 0-1 AI 能力接入，从应用框架、对话交互、视觉表现三大维度推进 5 个 MVP 需求落地，线上 AI 能力页面覆盖率提升 23.6%。"
-                        tags={['2025', 'B端 · 需求支持']}
-                        image={XhsLingxiCover}
-                        logo={RedLogo}
-                        customCursor={xhsCursor}
-                        pixelPattern={<PixelEye size={6} gap={2} />}
-                        onClick={() => navigate('/works/xhs-lingxi')}
                     />
                 </div>
             </Section>
