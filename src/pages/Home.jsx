@@ -302,7 +302,7 @@ export const Home = () => {
                     <ProjectCard
                         date="2026"
                         title="跨境汇款 AI 侨批生成活动"
-                        tags={['2026', 'AI 设计工程']}
+                        tags={['2026', 'AI 产品设计工程']}
                         logo={TencentLogo}
                         image={QiaopiCover}
                         pixelPattern={<PixelEye size={6} gap={2} />}
@@ -312,7 +312,7 @@ export const Home = () => {
                         date="2026"
                         title="全球汇入 Sharelink 体验优化"
                         description="TenPay Global 面向海外用户的资金汇入产品体验优化，覆盖从发起汇款到资金到账的全流程。"
-                        tags={['2026', '设计自驱']}
+                        tags={['2026', '产品体验设计']}
                         logo={TencentLogo}
                         image={SharelinkCover}
                         reversed={true}
@@ -324,7 +324,7 @@ export const Home = () => {
                         date="Mar - May 2024"
                         title="TikTok Tako AI 生图发布优化"
                         description="A deep dive into mobile creative tools, analyzing interaction patterns and recreating key workflows for iOS."
-                        tags={['2025', '设计自驱']}
+                        tags={['2025', 'AI 产品设计']}
                         image={TakoImg}
                         logo={TikTokAppLogo}
                         customCursor={xhsCursor}

@@ -405,10 +405,10 @@ const estimateCardHeight = (item, colWidth) => {
 
 const sandboxItems = [
     {
-        title: 'Sidetation',
-        date: 'HTML 拖拽交互编辑工具',
-        image: ASSETS.craft8,
-        button: { label: 'Chrome Extension →', onClick: () => window.open('https://chromewebstore.google.com/detail/sidetation/amefimkabccfbfpijnmgbdojnnihoalh', '_blank') },
+        title: 'BoaBite',
+        date: '0-1 AI-Native 产品',
+        image: ASSETS.craft11,
+        button: { label: 'Case Study →', to: '/works/boabite' },
     },
     {
         title: 'gen-icon-skill',
@@ -447,10 +447,10 @@ const sandboxItems = [
         button: { label: 'Case Study →', to: demoPage('https://www.figma.com/proto/XtidjNlm6Zbb8FSDBYhxeq/%E7%BD%91%E7%AB%99%E4%BD%9C%E5%93%81-Link?node-id=2701-6791&viewport=829%2C217%2C0.16&t=vVwzoRmWvazi1SOm-1&scaling=scale-down-width&content-scaling=fixed&page-id=2631%3A12137') + '&youtube=rztcpdhsJlo' },
     },
     {
-        title: '基础周边出行场景的支小宝 AI 体验创新',
-        date: '校企合作项目',
-        image: ASSETS.ai2,
-        button: { label: 'Case Study →', onClick: () => window.open('https://lynntian.framer.website/works/zhi-xiao-bao', '_blank') },
+        title: 'Jokeasy: Human-AI Joke Collaboration',
+        date: "AI 产品原型（iasdr'25）",
+        image: ASSETS.jokeasy,
+        button: { label: 'Research Project →', to: '/works/jokeasy' },
     },
     {
         title: 'Tako 特型卡原则与规范制定',
@@ -459,16 +459,16 @@ const sandboxItems = [
         button: { label: 'Case Study →', to: demoPage('https://www.figma.com/proto/XtidjNlm6Zbb8FSDBYhxeq/%E7%BD%91%E7%AB%99%E4%BD%9C%E5%93%81-Link?node-id=2724-18899&viewport=269%2C312%2C0.22&t=U9DhGPvzcQz1va4A-1&scaling=scale-down-width&content-scaling=fixed&page-id=2723%3A6805') },
     },
     {
-        title: 'Jokeasy: Human-AI Joke Collaboration',
-        date: "AI 产品原型（iasdr'25）",
-        image: ASSETS.jokeasy,
-        button: { label: 'Research Project →', to: '/works/jokeasy' },
+        title: '基础周边出行场景的支小宝 AI 体验创新',
+        date: '校企合作项目',
+        image: ASSETS.ai2,
+        button: { label: 'Case Study →', onClick: () => window.open('https://lynntian.framer.website/works/zhi-xiao-bao', '_blank') },
     },
     {
-        title: 'BoaBite',
-        date: '0-1 AI-Native 产品',
-        image: ASSETS.craft11,
-        button: { label: 'Case Study →', to: '/works/boabite' },
+        title: 'Sidetation',
+        date: 'HTML 拖拽交互编辑工具',
+        image: ASSETS.craft8,
+        button: { label: 'Chrome Extension →', onClick: () => window.open('https://chromewebstore.google.com/detail/sidetation/amefimkabccfbfpijnmgbdojnnihoalh', '_blank') },
     },
 ];
 
@@ -495,9 +495,9 @@ export const Research = () => {
     // 数字为 allItems 下标：0-2 为固定首行（侨批/抖音/GenFaceUI），3 起为 sandboxItems 顺序。
     // 若新增/删除/重排卡片，需同步更新此表。
     const FIXED_COLUMN_INDICES = [
-        [0, 5, 4, 10, 6], // 列1: 侨批 / AIGC Banner / gen-icon / 支小宝 / 方由
-        [1, 3, 9, 11], // 列2: 抖音 / Sidetation / Colean / Tako 特型卡
-        [2, 12, 13, 8, 7], // 列3: GenFaceUI / Jokeasy / BoaBite / NIO / 小米
+        [0, 5, 4, 10, 6], // 列1: 侨批 / AIGC Banner / gen-icon / Jokeasy / 方由
+        [1, 3, 9, 11], // 列2: 抖音 / BoaBite / Colean / Tako 特型卡
+        [2, 12, 13, 8, 7], // 列3: GenFaceUI / 支小宝 / Sidetation / NIO / 小米
     ];
 
     const allItems = [...featuredItems, ...sandboxItems];
