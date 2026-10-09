@@ -26,7 +26,7 @@ import PolaroidDecoration from '../components/PolaroidDecoration';
 import profileImg from '../assets/about/profile2.webp';
 import TencentLogo from '../assets/Home/tencent-color.svg';
 import QiaopiCover from '../assets/works/qiaopi/qiaopi.webp';
-import SharelinkCover from '../assets/works/sharelink/sharelink_2.webp';
+import SharelinkCover from '../assets/works/sharelink/sharelink_3.webp';
 import FigmaPreloader from '../components/FigmaPreloader';
 
 const blogItems = [
