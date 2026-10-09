@@ -184,19 +184,18 @@ const featuredItems = [
         button: { label: 'View Demo →', onClick: () => window.open('https://lynntian.com/qiaopi/', '_blank') },
     },
     {
-        title: '抖音弹幕互动玩法创新',
-        date: 'Vibe Coding 原型',
+        title: 'BoaBite',
+        date: '0-1 AI-Native 产品',
         category: 'ai',
-        image: ASSETS.craft1,
-        button: { label: 'View Demo →', onClick: () => window.open('https://tiktok-y27.lynntian.com/', '_blank') },
+        image: ASSETS.craft11,
+        button: { label: 'Case Study →', to: '/works/boabite' },
     },
     {
-        title: 'GenFaceUI: Meta-Design Tool',
-        date: "AI 设计工程（CHI'26）",
+        title: '基础周边出行场景的支小宝 AI 体验创新',
+        date: '校企合作项目',
         category: 'ai',
-        image: ASSETS.ai1,
-        button: { label: 'Research Project →', to: '/works/genfaceui' },
-        secondaryButton: { label: 'View Demo →', onClick: () => window.open('https://genfaceui.lynntian.com/', '_blank') },
+        image: ASSETS.ai2,
+        button: { label: 'Case Study →', onClick: () => window.open('https://lynntian.framer.website/works/zhi-xiao-bao', '_blank') },
     },
 ];
 
@@ -232,11 +231,11 @@ const estimateCardHeight = (item, colWidth) => {
 
 const sandboxItems = [
     {
-        title: 'BoaBite',
-        date: '0-1 AI-Native 产品',
+        title: '抖音弹幕互动玩法创新',
+        date: 'Vibe Coding 原型',
         category: 'ai',
-        image: ASSETS.craft11,
-        button: { label: 'Case Study →', to: '/works/boabite' },
+        image: ASSETS.craft1,
+        button: { label: 'View Demo →', onClick: () => window.open('https://tiktok-y27.lynntian.com/', '_blank') },
     },
     {
         title: 'gen-icon-skill',
@@ -275,11 +274,12 @@ const sandboxItems = [
         button: { label: 'Case Study →', to: demoPage('https://www.figma.com/proto/XtidjNlm6Zbb8FSDBYhxeq/%E7%BD%91%E7%AB%99%E4%BD%9C%E5%93%81-Link?node-id=2701-6791&viewport=829%2C217%2C0.16&t=vVwzoRmWvazi1SOm-1&scaling=scale-down-width&content-scaling=fixed&page-id=2631%3A12137') + '&youtube=rztcpdhsJlo' },
     },
     {
-        title: '基础周边出行场景的支小宝 AI 体验创新',
-        date: '校企合作项目',
+        title: 'GenFaceUI: Meta-Design Tool',
+        date: "AI 设计工程（CHI'26）",
         category: 'ai',
-        image: ASSETS.ai2,
-        button: { label: 'Case Study →', onClick: () => window.open('https://lynntian.framer.website/works/zhi-xiao-bao', '_blank') },
+        image: ASSETS.ai1,
+        button: { label: 'Research Project →', to: '/works/genfaceui' },
+        secondaryButton: { label: 'View Demo →', onClick: () => window.open('https://genfaceui.lynntian.com/', '_blank') },
     },
     {
         title: 'Sidetation',
@@ -310,12 +310,12 @@ export const Research = () => {
     }, []);
 
     // 固定列分布（桌面 3 列，All 视图）— 顺序已永久锁定，不再随高度估算/图片比例变化而重排。
-    // 数字为 allItems 下标：0-2 为固定首行（侨批/抖音/GenFaceUI），3 起为 sandboxItems 顺序。
+    // 数字为 allItems 下标：0-2 为固定首行（侨批/BoaBite/支小宝），3 起为 sandboxItems 顺序。
     // 若新增/删除/重排卡片，需同步更新此表。
     const FIXED_COLUMN_INDICES = [
         [0, 4, 5], // 列1: 侨批 / gen-icon / 方由
-        [1, 3, 8], // 列2: 抖音 / BoaBite / Colean
-        [2, 9, 10, 7, 6], // 列3: GenFaceUI / 支小宝 / Sidetation / NIO / 小米
+        [1, 3, 8], // 列2: BoaBite / 抖音 / Colean
+        [2, 9, 10, 7, 6], // 列3: 支小宝 / GenFaceUI / Sidetation / NIO / 小米
     ];
 
     const allItems = [...featuredItems, ...sandboxItems];
