@@ -21,10 +21,13 @@ const SandboxCard = ({ title, date, preview, image, button, secondaryButton, loc
             display: 'flex',
             flexDirection: 'column',
             gap: '4px',
+            minWidth: 0,
+            height: '100%',
         }}>
             {/* Title + date row — sits above the cover, no gradient overlay */}
             <div style={{
                 padding: '10px 12px',
+                flex: 1,
                 display: 'flex',
                 alignItems: 'baseline',
                 justifyContent: 'space-between',
@@ -52,7 +55,6 @@ const SandboxCard = ({ title, date, preview, image, button, secondaryButton, loc
                 )}
             </div>
 
-            {/* Media area — clickable hotspot (same target as button), image hugs its natural height, no cropping */}
             <div
                 onClick={handleClick && image ? handleClick : undefined}
                 style={{
@@ -62,14 +64,16 @@ const SandboxCard = ({ title, date, preview, image, button, secondaryButton, loc
                     overflow: 'hidden',
                     cursor: handleClick && image ? 'pointer' : 'default',
                     transition: 'opacity 0.15s',
-                    // 用图片真实比例预留高度：未加载时显示纯白，加载后无跳动、不裁剪
-                    aspectRatio: image ? (IMAGE_RATIOS[image] || 4 / 3) : '2 / 1',
+                    aspectRatio: '4 / 3',
+                    flexShrink: 0,
                 }}
                 onMouseEnter={e => { if (handleClick && image) e.currentTarget.style.opacity = 0.88; }}
                 onMouseLeave={e => { if (handleClick && image) e.currentTarget.style.opacity = 1; }}
             >
                 {/* Preview content */}
                 <div style={{
+                    position: 'absolute',
+                    inset: 0,
                     width: '100%',
                     height: '100%',
                     display: 'flex',
@@ -82,7 +86,8 @@ const SandboxCard = ({ title, date, preview, image, button, secondaryButton, loc
                             alt={title}
                             style={{
                                 width: '100%',
-                                height: 'auto',
+                                height: '100%',
+                                objectFit: 'contain',
                                 display: 'block',
                             }}
                         />
@@ -198,20 +203,6 @@ const featuredItems = [
         button: { label: 'Case Study →', onClick: () => window.open('https://lynntian.framer.website/works/zhi-xiao-bao', '_blank') },
     },
 ];
-
-/* 图片宽高比映射 — 用于按原始比例展示封面 */
-const IMAGE_RATIOS = {
-    [ASSETS.craft2]: 2400 / 2068, // AI 侨批生成（竖图）
-    [ASSETS.craft1]: 2548 / 1911, // 抖音
-    [ASSETS.ai1]: 3600 / 2700,    // GenFaceUI
-    [ASSETS.craft8]: 2400 / 1600, // Sidetation
-    [ASSETS.digital1]: 1503 / 1128,
-    [ASSETS.digital2]: 1503 / 1128,
-    [ASSETS.digital3]: 1503 / 1128,
-    [ASSETS.digital4]: 1503 / 1128,
-    [ASSETS.ai2]: 1002 / 752,
-    [ASSETS.craft11]: 2400 / 1800, // BoaBite（4:3）
-};
 
 const sandboxItems = [
     {
@@ -371,7 +362,7 @@ export const Creative = () => {
                 <div style={{
                     display: 'grid',
                     gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
-                    alignItems: 'flex-start',
+                    alignItems: 'stretch',
                     gap: '8px',
                 }}>
                     {visibleItems.map(item => (
