@@ -17,6 +17,9 @@ export const ASSETS = {
     // Craft Projects
     craft1: new URL('../assets/Craft/douyin.webp', import.meta.url).href, // 抖音弹幕互动玩法创新
     craft2: new URL('../assets/Craft/qiaopi2.webp', import.meta.url).href, // AI 侨批生成
+    craft4: new URL('../assets/Craft/banner1.webp', import.meta.url).href, // AIGC Banner 1
+    craft5: new URL('../assets/Craft/banner2.webp', import.meta.url).href, // AIGC Banner 2
+    craft6: new URL('../assets/Craft/banner3.webp', import.meta.url).href, // AIGC Banner 3
     craft8: new URL('../assets/Craft/Sidetation.webp', import.meta.url).href, // Sidetation
     craft11: new URL('../assets/Craft/BoaBite.webp', import.meta.url).href, // BoaBite
 

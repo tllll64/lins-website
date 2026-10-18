@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Lock } from 'lucide-react';
 import { Navbar } from '../components/Navbar';
@@ -7,13 +7,158 @@ import { ASSETS } from '../constants/assets';
 import { colors, layoutSpacing, typography } from '../design-system/tokens';
 import { useMediaQuery } from '../design-system/hooks/useMediaQuery';
 
-const SandboxCard = ({ title, date, preview, image, button, secondaryButton, locked = false, span = 1 }) => {
+/* ------------------------------------------------------------------ */
+/*  BannerCarousel — 拖拽翻页 + 圆点切换 + 无限向前循环的自动轮播        */
+/* ------------------------------------------------------------------ */
+const BannerCarousel = ({ images, title }) => {
+    const [index, setIndex] = useState(0);
+    const [dragging, setDragging] = useState(false);
+    const [startX, setStartX] = useState(0);
+    const [dragX, setDragX] = useState(0);
+    const [paused, setPaused] = useState(false);
+    const [noTransition, setNoTransition] = useState(false);
+
+    const count = images.length;
+    // 末尾克隆第一张，实现“最后一张继续往前翻到第一张”的无限循环
+    const slides = [...images, images[0]];
+    const realIndex = index % count; // 圆点高亮用
+
+    // 到达克隆位后，等过渡结束再无缝跳回真实第一张
+    useEffect(() => {
+        if (index === count) {
+            const t = setTimeout(() => {
+                setNoTransition(true);
+                setIndex(0);
+            }, 300);
+            return () => clearTimeout(t);
+        }
+        if (noTransition) {
+            const t = setTimeout(() => setNoTransition(false), 20);
+            return () => clearTimeout(t);
+        }
+    }, [index, count, noTransition]);
+
+    // 自动轮播 — 每 3.5s 向前切一张（含循环）；拖动或悬停时暂停
+    useEffect(() => {
+        if (paused || dragging || count < 2) return;
+        const timer = setInterval(() => {
+            setIndex(prev => Math.min(prev + 1, count));
+        }, 3500);
+        return () => clearInterval(timer);
+    }, [paused, dragging, count]);
+
+    const onPointerDown = (e) => {
+        setDragging(true);
+        setStartX(e.clientX);
+        setDragX(0);
+        e.currentTarget.setPointerCapture?.(e.pointerId);
+    };
+
+    const onPointerMove = (e) => {
+        if (!dragging) return;
+        setDragX(e.clientX - startX);
+    };
+
+    const onPointerUp = () => {
+        if (!dragging) return;
+        const threshold = 50;
+        setIndex(prev => {
+            if (dragX < -threshold) return Math.min(prev + 1, count); // 向前翻，最后一张可翻到克隆位（即第一张）
+            if (dragX > threshold) return Math.max(prev - 1, 0); // 向后翻，第一张不可再回退
+            return prev;
+        });
+        setDragging(false);
+        setDragX(0);
+    };
+
+    return (
+        <div>
+            <div
+                onPointerDown={onPointerDown}
+                onPointerMove={onPointerMove}
+                onPointerUp={onPointerUp}
+                onPointerCancel={onPointerUp}
+                onPointerLeave={onPointerUp}
+                onMouseEnter={() => setPaused(true)}
+                onMouseLeave={() => setPaused(false)}
+                role="group"
+                aria-label={`${title} 轮播`}
+                style={{
+                    position: 'relative',
+                    background: '#fff',
+                    borderRadius: '8px',
+                    overflow: 'hidden',
+                    // banner 画面本身是 16:10，用 1.66 视口可裁掉周边留白、让画面撑满
+                    aspectRatio: '1.66',
+                    touchAction: 'pan-y',
+                    cursor: dragging ? 'grabbing' : 'grab',
+                    userSelect: 'none',
+                }}
+            >
+                <div style={{
+                    display: 'flex',
+                    height: '100%',
+                    transform: `translateX(calc(${-index * 100}% + ${dragX}px))`,
+                    transition: dragging || noTransition ? 'none' : 'transform 0.3s ease',
+                }}>
+                    {slides.map((src, i) => (
+                        <img
+                            key={i}
+                            src={src}
+                            alt={`${title} ${(i % count) + 1}`}
+                            draggable={false}
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'cover',
+                                flexShrink: 0,
+                                display: 'block',
+                                pointerEvents: 'none',
+                            }}
+                        />
+                    ))}
+                </div>
+            </div>
+
+            {/* Dots — 点击切换 */}
+            <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                gap: '6px',
+                padding: '10px 0 8px',
+            }}>
+                {images.map((_, i) => (
+                    <button
+                        key={i}
+                        onClick={() => setIndex(i)}
+                        aria-label={`${title} 第 ${i + 1} 张`}
+                        aria-current={i === realIndex ? 'true' : undefined}
+                        style={{
+                            width: i === realIndex ? '18px' : '6px',
+                            height: '6px',
+                            borderRadius: '3px',
+                            border: 'none',
+                            padding: 0,
+                            background: i === realIndex ? colors.grey[40] : colors.grey[92],
+                            cursor: 'pointer',
+                            transition: 'width 0.2s ease, background 0.2s ease',
+                        }}
+                    />
+                ))}
+            </div>
+        </div>
+    );
+};
+
+const SandboxCard = ({ title, date, preview, image, images, button, secondaryButton, locked = false, span = 1 }) => {
     const navigate = useNavigate();
     const handleClick = button?.to ? () => navigate(button.to) : button?.onClick;
     const handleSecondary = secondaryButton?.to ? () => navigate(secondaryButton.to) : secondaryButton?.onClick;
     return (
         <div style={{
             gridColumn: span > 1 ? `span ${span}` : undefined,
+            // 轮播卡媒体区比 4:3 卡片矮，保持自然高度、顶部对齐，避免标题行被拉出空隙
+            alignSelf: images?.length ? 'start' : undefined,
             background: '#fff',
             borderRadius: '12px',
             border: `1px solid ${colors.grey[92]}`,
@@ -22,7 +167,8 @@ const SandboxCard = ({ title, date, preview, image, button, secondaryButton, loc
             flexDirection: 'column',
             gap: '4px',
             minWidth: 0,
-            height: '100%',
+            // 轮播卡不参与行高拉伸，保持画面自然高度
+            height: images?.length ? 'auto' : '100%',
         }}>
             {/* Title + date row — sits above the cover, no gradient overlay */}
             <div style={{
@@ -55,45 +201,49 @@ const SandboxCard = ({ title, date, preview, image, button, secondaryButton, loc
                 )}
             </div>
 
-            <div
-                onClick={handleClick && image ? handleClick : undefined}
-                style={{
-                    position: 'relative',
-                    background: '#fff',
-                    borderRadius: '8px',
-                    overflow: 'hidden',
-                    cursor: handleClick && image ? 'pointer' : 'default',
-                    transition: 'opacity 0.15s',
-                    aspectRatio: '4 / 3',
-                    flexShrink: 0,
-                }}
-                onMouseEnter={e => { if (handleClick && image) e.currentTarget.style.opacity = 0.88; }}
-                onMouseLeave={e => { if (handleClick && image) e.currentTarget.style.opacity = 1; }}
-            >
-                {/* Preview content */}
-                <div style={{
-                    position: 'absolute',
-                    inset: 0,
-                    width: '100%',
-                    height: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}>
-                    {image ? (
-                        <img
-                            src={image}
-                            alt={title}
-                            style={{
-                                width: '100%',
-                                height: '100%',
-                                objectFit: 'contain',
-                                display: 'block',
-                            }}
-                        />
-                    ) : preview}
+            {images?.length ? (
+                <BannerCarousel images={images} title={title} />
+            ) : (
+                <div
+                    onClick={handleClick && image ? handleClick : undefined}
+                    style={{
+                        position: 'relative',
+                        background: '#fff',
+                        borderRadius: '8px',
+                        overflow: 'hidden',
+                        cursor: handleClick && image ? 'pointer' : 'default',
+                        transition: 'opacity 0.15s',
+                        aspectRatio: '4 / 3',
+                        flexShrink: 0,
+                    }}
+                    onMouseEnter={e => { if (handleClick && image) e.currentTarget.style.opacity = 0.88; }}
+                    onMouseLeave={e => { if (handleClick && image) e.currentTarget.style.opacity = 1; }}
+                >
+                    {/* Preview content */}
+                    <div style={{
+                        position: 'absolute',
+                        inset: 0,
+                        width: '100%',
+                        height: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}>
+                        {image ? (
+                            <img
+                                src={image}
+                                alt={title}
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    objectFit: 'contain',
+                                    display: 'block',
+                                }}
+                            />
+                        ) : preview}
+                    </div>
                 </div>
-            </div>
+            )}
 
             {/* 按钮区：locked 显示锁条；有 secondaryButton 时左右并排，否则全宽 */}
             {locked ? (
@@ -114,7 +264,7 @@ const SandboxCard = ({ title, date, preview, image, button, secondaryButton, loc
                     <Lock size={15} />
                     Coming Soon
                 </div>
-            ) : (
+            ) : (button || secondaryButton) ? (
                 <div style={{ display: 'flex', flexDirection: 'row', gap: '4px' }}>
                     {button && (
                         <button
@@ -171,7 +321,7 @@ const SandboxCard = ({ title, date, preview, image, button, secondaryButton, loc
                         </button>
                     )}
                 </div>
-            )}
+            ) : null}
         </div>
     );
 };
@@ -258,12 +408,19 @@ const sandboxItems = [
     },
 ];
 
-/* Visual 分类 — 偏视觉相关的内容 */
+/* Visual 分类 — 偏视觉相关的内容（AIGC Banner 轮播卡在此复原） */
 const visualItems = [
+    {
+        type: 'carousel',
+        title: 'AIGC Banner',
+        category: 'visual',
+        images: [ASSETS.craft4, ASSETS.craft5, ASSETS.craft6],
+    },
     // TODO: 添加你的视觉项目卡片，例如：
     // {
     //     title: '项目名',
     //     date: '描述',
+    //     category: 'visual',
     //     image: ASSETS.xxx,
     //     button: { label: 'View →', to: '/works/xxx' },
     // },
@@ -274,11 +431,11 @@ export const Creative = () => {
     const isTablet = useMediaQuery('(max-width: 1024px)');
     const columns = isMobile ? 1 : isTablet ? 2 : 3;
 
-    const allItems = [...featuredItems, ...sandboxItems];
+    const allItems = [...featuredItems, ...sandboxItems, ...visualItems];
 
     // Tab 筛选：All 显示全部；分类视图下所有卡片（含固定首行）一起参与筛选
     const [activeTab, setActiveTab] = useState('ai');
-    const visibleItems = activeTab === 'visual' ? visualItems : activeTab === 'all' ? allItems : allItems.filter(item => item.category === activeTab);
+    const visibleItems = activeTab === 'all' ? allItems : allItems.filter(item => item.category === activeTab);
 
     const pageStyle = {
         minHeight: '100vh',
