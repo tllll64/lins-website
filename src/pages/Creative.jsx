@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Lock, ZoomIn } from 'lucide-react';
+import { Lock } from 'lucide-react';
 import { Navbar } from '../components/Navbar';
 import { ContactSection } from '../components/ContactSection';
 import { ASSETS } from '../constants/assets';
@@ -150,124 +150,15 @@ const BannerCarousel = ({ images, title }) => {
     );
 };
 
-/* ------------------------------------------------------------------ */
-/*  LensSurface — 悬停 / 按住拖动的镜头放大，用来看画面里的细节          */
-/* ------------------------------------------------------------------ */
-const LENS_SIZE = 168;
-const LENS_ZOOM = 3;
-
-const LensSurface = ({ src, alt, style }) => {
-    const [lens, setLens] = useState(null);
-    const [used, setUsed] = useState(false);
-    const pressing = useRef(false);
-    const [canHover] = useState(() => typeof window !== 'undefined' && !!window.matchMedia?.('(hover: hover)').matches);
-
-    const update = (e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        // 镜头尽量不出画：贴边时夹住，同时保持指针下的那一点仍在指针位置
-        const left = Math.min(Math.max(x - LENS_SIZE / 2, 0), Math.max(rect.width - LENS_SIZE, 0));
-        const top = Math.min(Math.max(y - LENS_SIZE / 2, 0), Math.max(rect.height - LENS_SIZE, 0));
-        setLens({ x, y, w: rect.width, h: rect.height, left, top });
-        setUsed(true);
-    };
-
-    return (
-        <div
-            onPointerDown={e => {
-                pressing.current = true;
-                if (e.pointerType !== 'mouse') e.currentTarget.setPointerCapture?.(e.pointerId);
-                update(e);
-            }}
-            onPointerMove={e => {
-                if (e.pointerType === 'mouse' || pressing.current) update(e);
-            }}
-            onPointerUp={() => {
-                // 触屏：松手后保留镜头，方便继续看；鼠标：离开时自然消失
-                pressing.current = false;
-            }}
-            onPointerCancel={() => { pressing.current = false; setLens(null); }}
-            onPointerLeave={e => {
-                pressing.current = false;
-                if (e.pointerType === 'mouse') setLens(null);
-            }}
-            style={{
-                position: 'relative',
-                aspectRatio: '1920 / 1160',
-                overflow: 'hidden',
-                borderRadius: '8px',
-                background: '#fff',
-                cursor: canHover ? 'zoom-in' : 'default',
-                // 触屏上仍然允许纵向滚动页面，横向拖动才交给镜头
-                touchAction: 'pan-y',
-                userSelect: 'none',
-                ...style,
-            }}
-        >
-            <img
-                src={src}
-                alt={alt}
-                draggable={false}
-                style={{ width: '100%', height: '100%', display: 'block', objectFit: 'cover' }}
-            />
-
-            {lens && (
-                <div
-                    aria-hidden="true"
-                    style={{
-                        position: 'absolute',
-                        left: lens.left,
-                        top: lens.top,
-                        width: LENS_SIZE,
-                        height: LENS_SIZE,
-                        borderRadius: '50%',
-                        backgroundImage: `url(${src})`,
-                        backgroundSize: `${lens.w * LENS_ZOOM}px ${lens.h * LENS_ZOOM}px`,
-                        backgroundPosition: `${lens.x - lens.left - lens.x * LENS_ZOOM}px ${lens.y - lens.top - lens.y * LENS_ZOOM}px`,
-                        backgroundRepeat: 'no-repeat',
-                        boxShadow: '0 0 0 1px rgba(0,0,0,0.14), inset 0 0 0 1px rgba(0,0,0,0.06), 0 16px 36px rgba(0,0,0,0.16)',
-                        pointerEvents: 'none',
-                    }}
-                />
-            )}
-
-            {!used && (
-                <div style={{
-                    position: 'absolute',
-                    right: '10px',
-                    bottom: '10px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    padding: '6px 10px',
-                    borderRadius: '100px',
-                    background: 'rgba(0,0,0,0.55)',
-                    color: '#fff',
-                    fontFamily: typography.body.fontFamily,
-                    fontSize: '12px',
-                    lineHeight: 1,
-                    pointerEvents: 'none',
-                    backdropFilter: 'blur(4px)',
-                }}>
-                    <ZoomIn size={13} />
-                    {canHover ? '悬停放大细节' : '按住拖动放大'}
-                </div>
-            )}
-        </div>
-    );
-};
-
-const SandboxCard = ({ title, date, preview, image, images, lens = false, button, secondaryButton, locked = false, span = 1 }) => {
+const SandboxCard = ({ title, date, preview, image, images, button, secondaryButton, locked = false, span = 1 }) => {
     const navigate = useNavigate();
     const handleClick = button?.to ? () => navigate(button.to) : button?.onClick;
     const handleSecondary = secondaryButton?.to ? () => navigate(secondaryButton.to) : secondaryButton?.onClick;
-    const featureMedia = !!images?.length || lens;
     return (
         <div style={{
             gridColumn: span > 1 ? `span ${span}` : undefined,
-            // 轮播 / 镜头卡的媒体区比 4:3 卡片矮，保持自然高度、顶部对齐，避免标题行被拉出空隙
-            alignSelf: featureMedia ? 'start' : undefined,
+            // 轮播卡媒体区比 4:3 卡片矮，保持自然高度、顶部对齐，避免标题行被拉出空隙
+            alignSelf: images?.length ? 'start' : undefined,
             background: '#fff',
             borderRadius: '12px',
             border: `1px solid ${colors.grey[92]}`,
@@ -276,8 +167,8 @@ const SandboxCard = ({ title, date, preview, image, images, lens = false, button
             flexDirection: 'column',
             gap: '4px',
             minWidth: 0,
-            // 轮播 / 镜头卡不参与行高拉伸，保持画面自然高度
-            height: featureMedia ? 'auto' : '100%',
+            // 轮播卡不参与行高拉伸，保持画面自然高度
+            height: images?.length ? 'auto' : '100%',
         }}>
             {/* Title + date row — sits above the cover, no gradient overlay */}
             <div style={{
@@ -310,9 +201,7 @@ const SandboxCard = ({ title, date, preview, image, images, lens = false, button
                 )}
             </div>
 
-            {lens ? (
-                <LensSurface src={image} alt={title} />
-            ) : images?.length ? (
+            {images?.length ? (
                 <BannerCarousel images={images} title={title} />
             ) : (
                 <div
@@ -522,11 +411,10 @@ const sandboxItems = [
 /* Visual 分类 — 偏视觉相关的内容（AIGC Banner / Skill 生成） */
 const visualItems = [
     {
-        title: 'F1 积木赛车',
-        date: 'AI Skill 生成',
+        title: 'Mercedes-AMG F1 Race Car',
+        date: '/anatomy',
         category: 'visual',
         image: ASSETS.visual1,
-        lens: true,
     },
     {
         type: 'carousel',
