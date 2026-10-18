@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar } from '../../components/Navbar';
 import { typography } from '../../design-system/tokens';
@@ -46,6 +46,7 @@ export const BoaBite = () => {
     const isUltraWide = useMediaQuery('(min-width: 1728px)');
     const isDesktop = useMediaQuery('(min-width: 1400px)');
     const isLaptop = useMediaQuery('(min-width: 1100px)');
+    const [demoHover, setDemoHover] = useState(false);
 
     const containerMax = isUltraWide ? 'calc(100vw - 48px)' : isDesktop ? '1400px' : isLaptop ? '1100px' : '100%';
 
@@ -59,48 +60,85 @@ export const BoaBite = () => {
             <Navbar theme="light" />
 
             <main>
-                {/* 0 — 体验地址：页面最上方 */}
+                {/* 0 — 体验地址：页面最上方，整块面状入口 */}
                 <section style={{ padding: isMobile ? '112px 24px 0' : '150px 32px 0' }}>
                     <a
                         href="https://boabite.lynntian.com"
                         target="_blank"
                         rel="noopener noreferrer"
+                        onMouseEnter={() => setDemoHover(true)}
+                        onMouseLeave={() => setDemoHover(false)}
                         style={{
                             maxWidth: containerMax,
                             margin: '0 auto',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'space-between',
-                            gap: '16px',
-                            paddingBottom: isMobile ? '12px' : '14px',
-                            borderBottom: `1px solid ${V.line}`,
+                            gap: isMobile ? '16px' : '32px',
+                            padding: isMobile ? '20px' : '28px 32px',
+                            background: demoHover ? '#F2F2F2' : V.surface,
+                            border: `1px solid ${demoHover ? V.ink : V.line}`,
+                            borderRadius: V.radius,
                             fontFamily: typography.body.fontFamily,
                             color: V.ink,
                             textDecoration: 'none',
-                            transition: 'border-color 0.15s',
+                            transition: 'background 0.2s ease, border-color 0.2s ease',
                         }}
-                        onMouseEnter={e => (e.currentTarget.style.borderColor = V.ink)}
-                        onMouseLeave={e => (e.currentTarget.style.borderColor = V.line)}
                     >
-                        <span style={{
-                            fontSize: '12px',
-                            letterSpacing: '0.08em',
-                            textTransform: 'uppercase',
-                            color: V.inkMuted,
-                            whiteSpace: 'nowrap',
-                        }}>
-                            体验地址
+                        <span style={{ display: 'flex', flexDirection: 'column', gap: isMobile ? '6px' : '8px', minWidth: 0 }}>
+                            <span style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '8px',
+                                fontSize: '12px',
+                                letterSpacing: '0.1em',
+                                color: V.inkMuted,
+                            }}>
+                                体验地址
+                                <span style={{
+                                    padding: '2px 6px',
+                                    border: `1px solid ${V.line}`,
+                                    borderRadius: '100px',
+                                    fontSize: '10px',
+                                    letterSpacing: '0.08em',
+                                    color: V.inkMuted,
+                                }}>
+                                    LIVE
+                                </span>
+                            </span>
+                            <span style={{
+                                fontSize: isMobile ? '20px' : '28px',
+                                fontWeight: 600,
+                                letterSpacing: '-0.01em',
+                                lineHeight: 1.2,
+                                wordBreak: 'break-word',
+                            }}>
+                                boabite.lynntian.com
+                            </span>
+                            <span style={{ fontSize: '13px', color: V.inkMuted }}>
+                                在新窗口打开完整原型
+                            </span>
                         </span>
-                        <span style={{
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '6px',
-                            fontSize: isMobile ? '15px' : '16px',
-                            fontWeight: 500,
-                            whiteSpace: 'nowrap',
-                        }}>
-                            boabite.lynntian.com
-                            <span aria-hidden="true" style={{ fontSize: '13px', color: V.inkMuted }}>↗</span>
+
+                        <span
+                            aria-hidden="true"
+                            style={{
+                                flexShrink: 0,
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                width: isMobile ? '40px' : '52px',
+                                height: isMobile ? '40px' : '52px',
+                                borderRadius: '50%',
+                                border: `1px solid ${demoHover ? V.ink : V.line}`,
+                                background: demoHover ? V.ink : 'transparent',
+                                color: demoHover ? '#FFFFFF' : V.ink,
+                                fontSize: isMobile ? '16px' : '20px',
+                                transition: 'background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease',
+                                transform: demoHover ? 'translate(2px, -2px)' : 'none',
+                            }}
+                        >
+                            ↗
                         </span>
                     </a>
                 </section>
