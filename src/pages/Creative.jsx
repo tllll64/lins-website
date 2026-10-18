@@ -258,6 +258,17 @@ const sandboxItems = [
     },
 ];
 
+/* Visual 分类 — 偏视觉相关的内容 */
+const visualItems = [
+    // TODO: 添加你的视觉项目卡片，例如：
+    // {
+    //     title: '项目名',
+    //     date: '描述',
+    //     image: ASSETS.xxx,
+    //     button: { label: 'View →', to: '/works/xxx' },
+    // },
+];
+
 export const Creative = () => {
     const isMobile = useMediaQuery('(max-width: 768px)');
     const isTablet = useMediaQuery('(max-width: 1024px)');
@@ -267,7 +278,7 @@ export const Creative = () => {
 
     // Tab 筛选：All 显示全部；分类视图下所有卡片（含固定首行）一起参与筛选
     const [activeTab, setActiveTab] = useState('ai');
-    const visibleItems = activeTab === 'all' ? allItems : allItems.filter(item => item.category === activeTab);
+    const visibleItems = activeTab === 'visual' ? visualItems : activeTab === 'all' ? allItems : allItems.filter(item => item.category === activeTab);
 
     const pageStyle = {
         minHeight: '100vh',
@@ -331,6 +342,7 @@ export const Creative = () => {
                         { id: 'all', label: 'All' },
                         { id: 'ai', label: 'AI-Native' },
                         { id: 'digital', label: 'Digital' },
+                        { id: 'visual', label: 'Visual' },
                     ].map(tab => {
                         const active = activeTab === tab.id;
                         return (
