@@ -23,6 +23,11 @@ export const ASSETS = {
     craft8: new URL('../assets/Craft/Sidetation.webp', import.meta.url).href, // Sidetation
     craft11: new URL('../assets/Craft/BoaBite.webp', import.meta.url).href, // BoaBite
 
+    // Visual Projects（AI Skill 生成）
+    visual1: new URL('../assets/Visual/f1-1.webp', import.meta.url).href, // F1 积木赛车 · 白底线稿
+    visual2: new URL('../assets/Visual/f1-2.webp', import.meta.url).href, // F1 积木赛车 · 黑底线稿
+    visual3: new URL('../assets/Visual/f1-3.webp', import.meta.url).href, // F1 积木赛车 · 彩色渲染
+
     // Blog
     blog1: new URL('../assets/Home/Colean.webp', import.meta.url).href, // Placeholder
     blog2: new URL('../assets/Home/Colean.webp', import.meta.url).href, // Placeholder

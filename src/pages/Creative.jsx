@@ -408,8 +408,15 @@ const sandboxItems = [
     },
 ];
 
-/* Visual 分类 — 偏视觉相关的内容（AIGC Banner 轮播卡在此复原） */
+/* Visual 分类 — 偏视觉相关的内容（AIGC Banner / Skill 生成） */
 const visualItems = [
+    {
+        type: 'carousel',
+        title: 'F1 积木赛车',
+        date: 'AI Skill 生成',
+        category: 'visual',
+        images: [ASSETS.visual1, ASSETS.visual2, ASSETS.visual3],
+    },
     {
         type: 'carousel',
         title: 'AIGC Banner',
