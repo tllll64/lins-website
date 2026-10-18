@@ -75,14 +75,13 @@ export const BoaBite = () => {
                             alignItems: 'center',
                             justifyContent: 'space-between',
                             gap: isMobile ? '16px' : '32px',
-                            padding: isMobile ? '20px' : '28px 32px',
+                            padding: isMobile ? '18px' : '24px 28px',
                             background: demoHover ? '#F2F2F2' : V.surface,
-                            border: `1px solid ${demoHover ? V.ink : V.line}`,
                             borderRadius: V.radius,
                             fontFamily: typography.body.fontFamily,
                             color: V.ink,
                             textDecoration: 'none',
-                            transition: 'background 0.2s ease, border-color 0.2s ease',
+                            transition: 'background 0.2s ease',
                         }}
                     >
                         <span style={{ display: 'flex', flexDirection: 'column', gap: isMobile ? '6px' : '8px', minWidth: 0 }}>
@@ -95,28 +94,15 @@ export const BoaBite = () => {
                                 color: V.inkMuted,
                             }}>
                                 体验地址
-                                <span style={{
-                                    padding: '2px 6px',
-                                    border: `1px solid ${V.line}`,
-                                    borderRadius: '100px',
-                                    fontSize: '10px',
-                                    letterSpacing: '0.08em',
-                                    color: V.inkMuted,
-                                }}>
-                                    LIVE
-                                </span>
                             </span>
                             <span style={{
-                                fontSize: isMobile ? '20px' : '28px',
+                                fontSize: isMobile ? '17px' : '23px',
                                 fontWeight: 600,
                                 letterSpacing: '-0.01em',
                                 lineHeight: 1.2,
                                 wordBreak: 'break-word',
                             }}>
                                 boabite.lynntian.com
-                            </span>
-                            <span style={{ fontSize: '13px', color: V.inkMuted }}>
-                                在新窗口打开完整原型
                             </span>
                         </span>
 
@@ -127,14 +113,13 @@ export const BoaBite = () => {
                                 display: 'inline-flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                width: isMobile ? '40px' : '52px',
-                                height: isMobile ? '40px' : '52px',
+                                width: isMobile ? '36px' : '44px',
+                                height: isMobile ? '36px' : '44px',
                                 borderRadius: '50%',
-                                border: `1px solid ${demoHover ? V.ink : V.line}`,
                                 background: demoHover ? V.ink : 'transparent',
                                 color: demoHover ? '#FFFFFF' : V.ink,
-                                fontSize: isMobile ? '16px' : '20px',
-                                transition: 'background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease',
+                                fontSize: isMobile ? '15px' : '18px',
+                                transition: 'background 0.2s ease, color 0.2s ease, transform 0.2s ease',
                                 transform: demoHover ? 'translate(2px, -2px)' : 'none',
                             }}
                         >
