@@ -17,7 +17,6 @@ import img5 from '../../assets/works/boabite/5.webp';
 import img6 from '../../assets/works/boabite/6.webp';
 import img7 from '../../assets/works/boabite/7.webp';
 import img8 from '../../assets/works/boabite/8.webp';
-import img9 from '../../assets/works/boabite/9.webp';
 
 const images = [
     img1,
@@ -28,7 +27,6 @@ const images = [
     img6,
     img7,
     img8,
-    img9,
 ];
 
 /* ------------------------------------------------------------------ */
@@ -61,8 +59,54 @@ export const BoaBite = () => {
             <Navbar theme="light" />
 
             <main>
+                {/* 0 — 体验地址：页面最上方 */}
+                <section style={{ padding: isMobile ? '112px 24px 0' : '150px 32px 0' }}>
+                    <a
+                        href="https://boabite.lynntian.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                            maxWidth: containerMax,
+                            margin: '0 auto',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            gap: '16px',
+                            paddingBottom: isMobile ? '12px' : '14px',
+                            borderBottom: `1px solid ${V.line}`,
+                            fontFamily: typography.body.fontFamily,
+                            color: V.ink,
+                            textDecoration: 'none',
+                            transition: 'border-color 0.15s',
+                        }}
+                        onMouseEnter={e => (e.currentTarget.style.borderColor = V.ink)}
+                        onMouseLeave={e => (e.currentTarget.style.borderColor = V.line)}
+                    >
+                        <span style={{
+                            fontSize: '12px',
+                            letterSpacing: '0.08em',
+                            textTransform: 'uppercase',
+                            color: V.inkMuted,
+                            whiteSpace: 'nowrap',
+                        }}>
+                            体验地址
+                        </span>
+                        <span style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '6px',
+                            fontSize: isMobile ? '15px' : '16px',
+                            fontWeight: 500,
+                            whiteSpace: 'nowrap',
+                        }}>
+                            boabite.lynntian.com
+                            <span aria-hidden="true" style={{ fontSize: '13px', color: V.inkMuted }}>↗</span>
+                        </span>
+                    </a>
+                </section>
+
                 {/* 1 — 图片堆叠：每张按自身比例通栏展示，不裁剪 */}
-                <section style={{ padding: isMobile ? '112px 24px 48px' : '150px 32px 80px' }}>
+                <section style={{ padding: isMobile ? '16px 24px 48px' : '24px 32px 80px' }}>
                     <div style={{ maxWidth: containerMax, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: isMobile ? '16px' : '24px' }}>
                         {images.map((src, i) => (
                             <div key={i} style={{
