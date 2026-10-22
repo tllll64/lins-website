@@ -23,12 +23,23 @@
    字体文件本身仍热链原 CDN，未搬运。
 5. `Noto Serif SC` 的 woff2 本地化到 `assets/font/noto-serif-sc.woff2`（原 ttf 兜底仍走 CDN）。
 6. 顺手补了原来为空的 `<title>`。
+7. **AI 代笔网络兜底**：AI 代理 `qiaopi-ai-proxy.vercel.app` 在 Vercel，
+   国内网络访问 `*.vercel.app` 会被阻断，原来要干等 20 秒再报「AI 代笔超时」。
+   新增 `assets/qiaopi-ai-fallback.js`，在页面脚本前接管 fetch：
+   - 3.5 秒探活代理域名，不可达就直接用本地模板成稿（不再干等），并提示「网络不稳，已用本地代笔成稿」；
+   - 域名可达但 AI 慢时继续等，第 9 秒提示「网络较慢」，第 16 秒给「改用本地代笔」按钮；
+   - 超时 / HTTP 异常 / 业务失败同样回落本地成稿，页面不再停在错误弹窗。
+   本地成稿复用用户原话，只做半文言润色，控制在 110 字内（与 AI 产物同一约束）。
+   **接上国内可达的代理后，删掉 `index.html` 里的这行 `<script>` 即可恢复纯 AI。**
+8. **AI 请求超时 20s → 28s**：`index-CmFAueBN.js` 里的 `bx=2e4` 已改为 `bx=28e3`。
+   中转站（packyapi）正常要 12~19 秒，20 秒卡得太紧，正好卡掉一部分本可成功的请求。
 
 ## 保留为远程的引用
 
 - `XiBao` 手书字体 ttf（商用字体，未重分发）
 - `Noto Serif SC` 的 ttf 兜底
 - 微信分享缩略图 `1783478123604_f38d8402.png`（页面加载不会请求它）
+- AI 代笔代理 `https://qiaopi-ai-proxy.vercel.app/api/ai/rewrite`（Vercel，国内时常不可达，已有本地兜底）
 
 ## 本地预览
 
